@@ -32,13 +32,13 @@ add_action( 'save_post', 'shopper_save_postdata' );
 function shopper_add_custom_box() {
   add_meta_box( 
       'shopper_sectionid',
-      __( 'Make it a product', 'shopper_textdomain' ),
+      __( 'Product info', 'shopper_textdomain' ),
       'shopper_inner_custom_box',
       'post' 
   );
   add_meta_box(
       'shopper_sectionid',
-      __( 'Make it a product', 'shopper_textdomain' ), 
+      __( 'Product info', 'shopper_textdomain' ), 
       'shopper_inner_custom_box',
       'page'
   );
@@ -51,10 +51,67 @@ function shopper_inner_custom_box($post) {
   wp_nonce_field(plugin_basename( __FILE__ ), 'shopper_noncename');
 
   // The actual fields for data entry
-  echo '<label for="myplugin_new_field">';
-       _e("Description for this field", 'myplugin_textdomain' );
+  echo '<label for="shopper_product_name">';
+       _e("Product Name", 'shopper_textdomain' );
+  echo "&nbsp;&nbsp;&nbsp;&nbsp;";
   echo '</label> ';
-  echo '<input type="text" id="myplugin_new_field" name="myplugin_new_field" value="whatever" size="25" />';
+  echo '<input type="text" id="shopper_product_name" name="shopper_product_name" value="" size="25" />';
+  echo '<br/>';
+  
+  echo '<label for="shopper_product_description">';
+       _e("Short description", 'shopper_textdomain' );
+  echo '</label> ';
+  echo '<input type="text" id="shopper_product_description" name="shopper_product_description" value="" size="25" />';
+  echo '<br/>';
+  echo '<br/>';
+  
+  for ($i = 1; $i < 10; $i++) {
+    
+    $default = '';
+    if ($i == 1) {
+      $default = "default";
+    } 
+  
+    echo '<label for="shopper_product_variation_name">';
+    echo 'Variation #' . $i;    
+    echo '</label> ';
+    echo '<input type="text" id="shopper_product_variation_name-'. $i .'" name="shopper_product_variation_name-'. $i .'" value="' . $default . '" size="25" />';
+    
+    echo '<label for="shopper_product_variation_price">';
+    echo "&nbsp;&nbsp;";
+    _e("Price", 'shopper_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" id="shopper_product_variation_price-'. $i .'" name="shopper_product_variation_price-'. $i .'" value="" size="5" />';
+    
+    echo '<label for="shopper_product_variation_saleprice">';
+    echo "&nbsp;&nbsp;";
+    _e("Sale", 'shopper_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" id="shopper_product_variation_saleprice-'. $i .'" name="shopper_product_variation_saleprice-'. $i .'" value="" size="5" />';
+    
+    echo '<label for="shopper_product_variation_delivery">';
+    echo "&nbsp;&nbsp;";
+    _e("Delivery", 'shopper_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" id="shopper_product_variation_delivery-'. $i .'" name="shopper_product_variation_delivery-'. $i .'" value="" size="2" />';
+
+    echo '<label for="shopper_product_variation_image">';
+    echo "&nbsp;&nbsp;";
+    _e("Image #", 'shopper_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" id="shopper_product_variation_image-'. $i .'" name="shopper_product_variation_image-'. $i .'" value="" size="2" />';
+
+    echo '<br/>';
+  }
+  
+  echo '<br/><br/>';
+  echo 'Delivery:';
+  echo '<br/><br/>';
+  echo '  1: 1-2 zile';
+  echo '<br/>';
+  echo '  2: 2-4 zile';
+  echo '<br/>';
+  echo '  not set: 5-7 zile';
 }
 
 
