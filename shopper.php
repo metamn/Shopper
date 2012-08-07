@@ -49,23 +49,36 @@ function shopper_inner_custom_box($post) {
 
   // Use nonce for verification
   wp_nonce_field(plugin_basename( __FILE__ ), 'shopper_noncename');
+  
+  // If this is an Edit action then read data from post meta
+  $product_name = '';
+  $product_description = '';
+  $product_name = get_post_meta($post->ID, 'product_name', true);
+  $product_description = get_post_meta($post->ID, 'product_description', true);
 
   // The actual fields for data entry
   echo '<label for="shopper_product_name">';
        _e("Product Name", 'shopper_textdomain' );
   echo "&nbsp;&nbsp;&nbsp;&nbsp;";
   echo '</label> ';
-  echo '<input type="text" id="shopper_product_name" name="shopper_product_name" value="" size="25" />';
+  echo '<input type="text" id="shopper_product_name" name="shopper_product_name" value="' . $product_name . '" size="25" />';
   echo '<br/>';
   
   echo '<label for="shopper_product_description">';
        _e("Short description", 'shopper_textdomain' );
   echo '</label> ';
-  echo '<input type="text" id="shopper_product_description" name="shopper_product_description" value="" size="25" />';
+  echo '<input type="text" id="shopper_product_description" name="shopper_product_description" value="' . $product_description . '" size="25" />';
   echo '<br/>';
   echo '<br/>';
   
   for ($i = 1; $i < 10; $i++) {
+    
+    // If this is an Edit action then read data from post meta
+    $variation_name = '';
+    $variation_price = '';
+    $variation_saleprice = '';
+    $variation_delivery = '';
+    $variation_image = '';
     
     $default = '';
     if ($i == 1) {
@@ -143,12 +156,32 @@ function shopper_save_postdata( $post_id ) {
 
   // OK, we're authenticated: we need to find and save the data
 
-  $mydata = $_POST['myplugin_new_field'];
-  echo "mydata: $mydata";
-
-  // Do something with $mydata 
-  // probably using add_post_meta(), update_post_meta(), or 
-  // a custom table (see Further Reading section below)
+  $name = sanitize_text_field($_POST['shopper_product_name']);
+  $description = sanitize_text_field($_POST['shopper_product_description']);
+  
+  $variations = array();
+  for ($i = 1; $i < 10; $i++ ) {
+    $variation_name = sanitize_text_field($_POST['shopper_variation_name-' . $i]);
+    if (isset($variation_name) && ($variation_name != '')) {
+      echo 'aaaaaaaaaaaaaa';
+      
+      $v = array();
+      $v['id'] = $i;
+      $v['name'] = $variation_name;
+      $v['price'] = sanitize_text_field($_POST['shopper_variation_price-' . $i]);
+      $v['saleprice'] = sanitize_text_field($_POST['shopper_variation_saleprice-' . $i]);
+      $v['delivery'] = sanitize_text_field($_POST['shopper_variation_delivery-' . $i]);       
+      $v['image'] = sanitize_text_field($_POST['shopper_variation_image-' . $i]);
+      
+      $variations[] = $v;
+    }    
+  }  
+  
+  // Save the data into post meta
+  // TODO there is no flash message in WP so errors are invisible
+  update_post_meta($post_id, 'product_name', $name);
+  update_post_meta($post_id, 'product_description', $description);
+  update_post_meta($post_id, 'product_variations', $variations);
 }
 
 
