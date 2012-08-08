@@ -27,7 +27,8 @@ get_header(); ?>
 					<?php get_template_part( 'content', get_post_format() ); ?>
 					
 					<?php echo shopper_product($post->ID)->name; ?>
-					<?php echo shopper_add_to_cart($post->ID); ?>
+					<?php echo shopper_add_to_cart_form($post->ID); ?>
+					<?php echo shopper_display_cart('short'); ?>
 
 				<?php endwhile; ?>
 

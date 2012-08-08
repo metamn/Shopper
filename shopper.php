@@ -40,7 +40,7 @@ add_action('wp_enqueue_scripts', 'shopper_scripts_method');
 
 
 // Display the add to cart form
-function shopper_add_to_cart($post_id) {
+function shopper_add_to_cart_form($post_id) {
   $product = shopper_product($post_id);
   if (isset($product)) {
   
@@ -77,7 +77,7 @@ function shopper_add_to_cart_ajax() {
     // Create new cart item
     $item = array();
     
-    $item['postid'] = strval( $_POST['id'] );
+    $item['post_id'] = strval( $_POST['id'] );
     $item['title'] = strval( $_POST['title'] );
     $item['qty'] = strval( $_POST['qty'] );
     $item['variation_name'] = strval( $_POST['variation-name'] );
@@ -93,7 +93,7 @@ function shopper_add_to_cart_ajax() {
     if ($items) {
       $counter = 0;
       foreach ($items as $product => $value) {
-        if ( ($item['postid'] == $value['postid']) && 
+        if ( ($item['post_id'] == $value['post_id']) && 
              ($item['variation_id'] == $value['variation_id']) &&
              ($item['price'] == $value['price']) ) {
              
@@ -136,6 +136,61 @@ function shopper_add_to_cart_ajax() {
 add_action('wp_ajax_shopper_add_to_cart_ajax', 'shopper_add_to_cart_ajax');
 add_action( 'wp_ajax_nopriv_shopper_add_to_cart_ajax', 'shopper_add_to_cart_ajax' );
 
+
+
+
+// Display cart contents
+// - 'short' format is '2 products 200 RON'
+function shopper_display_cart($format) {  
+  $items = shopper_get_cart_items();
+  
+  if ($items) {
+    $price = 0;
+    $count = 0;
+    foreach ($items as $item) {
+      $price += $item->qty * $item->price;    
+      $count += $item->qty;
+    }
+    $msg = $count . " cadouri, " . $price . " RON";
+  } else {
+    $msg = "Cosul Dvs. este gol";  
+  }
+  
+  return $msg;
+}
+
+
+// Get cart items from session
+// - returns an array of objects
+function shopper_get_cart_items() {
+  $ret = array();
+  
+  $session = $_SESSION['shopper'];
+  
+  if (!(empty($session))) {
+    foreach ($session as $product => $value) {
+      $item = new stdClass();
+      
+      // from session
+      $item->id = $product;
+      $item->post_id = $value['post_id'];
+      $item->qty = $value['qty'];
+      $item->title = $value['title'];
+      $item->variation_name = $value['variation_name'];
+      $item->variation_id = $value['variation_id'];
+      $item->price = $value['price'];
+      
+      // Add variation to name
+      if ($item->variation_name != 'default') {
+        $item->title .= " (" . $item->variation_name . ")";
+      }
+      
+      $ret[] = $item;
+    }
+  }
+  
+  return $ret;
+}
 
 
 
