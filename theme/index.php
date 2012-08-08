@@ -25,7 +25,9 @@ get_header(); ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
 					<?php get_template_part( 'content', get_post_format() ); ?>
+					
 					<?php echo shopper_product($post->ID)->name; ?>
+					<?php echo shopper_add_to_cart($post->ID); ?>
 
 				<?php endwhile; ?>
 

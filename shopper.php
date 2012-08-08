@@ -14,13 +14,133 @@
 // Admin menu
 function shopper_admin_menu() {  
   add_menu_page('Shopper', 'Shopper', 'delete_others_posts', 'session-manager-menu', 'shopper_main_page' );
-  add_action( 'admin_init', 'shopper_tables' );
+  add_action( 'admin_init', 'shopper_tables' );  
 } 
 add_action('admin_menu', 'shopper_admin_menu');
 
 
 
+
+// Shopping Cart
+// --------------------------------------------------------------------------------
+
+// Init sessions
+// - it is used to access $_SESSION in this plugin 
+if ( !session_id() ) 
+  add_action( 'init', 'session_start' );
+  
+
+// include shopper.js and set up AJAX
+function shopper_scripts_method() {
+	wp_enqueue_script('shopper', plugins_url('shopper.js', __FILE__), array('jquery'));
+	// declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
+  wp_localize_script( 'shopper', 'shopper', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+}  
+add_action('wp_enqueue_scripts', 'shopper_scripts_method');
+
+
+// Display the add to cart form
+function shopper_add_to_cart($post_id) {
+  $product = shopper_product($post_id);
+  if (isset($product)) {
+  
+    echo '<div class="add-to-cart">';
+    echo '<form id="add-to-cart" method="post" data-id="'.$post_id.'" data-title="'.$product->name.'" data-nonce="'. wp_create_nonce('add-to-cart') .'">';
+    
+    echo '<select id="product-variations" name="option">';
+    foreach ($product->variations as $p) {
+      echo "<option value=" . $p['id'] . ">" . $p['name'] . " &mdash; " . $p['price'] . " RON</option>";
+    } 
+    echo "</select>";
+    
+    // cannot get these variables in the <option>, so this is a workaround   
+    foreach ($product->variations as $p) {
+      echo "<input type='hidden' id='variation' name='variation' data-id='" . $p['id'] . "' data-name='" . $p['name'] . "' data-price='" . $p['price'] . "'>";
+    } 
+    
+    echo "<input id='submit' type='submit' value='Adauga la cos'>";    
+    
+    echo '</form>';    
+    echo '<div class="message"></div>';  
+    echo '</div>';
+  } else {
+    return "Produs invalid.";
+  }  
+}
+
+
+// Add to cart (AJAX)
+function shopper_add_to_cart_ajax() {
+  $nonce = $_POST['nonce'];  
+  if ( wp_verify_nonce( $nonce, 'add-to-cart' ) ) {
+    
+    // Create new cart item
+    $item = array();
+    
+    $item['postid'] = strval( $_POST['id'] );
+    $item['title'] = strval( $_POST['title'] );
+    $item['qty'] = strval( $_POST['qty'] );
+    $item['variation_name'] = strval( $_POST['variation-name'] );
+    $item['variation_id'] = strval( $_POST['variation-id'] ) + 1;
+    $item['price'] = strval( $_POST['price'] );
+    
+    // Save item
+    
+    // - check if this item is already added, then increase qty
+    $item_exists = false;
+    
+    $items = $_SESSION['shopper'];
+    if ($items) {
+      $counter = 0;
+      foreach ($items as $product => $value) {
+        if ( ($item['postid'] == $value['postid']) && 
+             ($item['variation_id'] == $value['variation_id']) &&
+             ($item['price'] == $value['price']) ) {
+             
+             $_SESSION['shopper'][$counter]['qty'] += 1;
+             $counter += 1; 
+             
+             $item_exists = true;            
+             }       
+        
+      }    
+    }
+    
+    if (!$item_exists) {
+      $_SESSION['shopper'][] = $item;      
+    }
+    
+    // Register action
+    if (function_exists('manage_session')) {
+      manage_session('cart-a-' . $id);
+    }
+    
+    
+    $ret = array(
+      'success' => true,
+      'message' => 'Ok'
+    );  
+  
+  } else {
+    $ret = array(
+      'success' => false,
+      'message' => 'Nonce error'
+    );
+  }
+    
+  $response = json_encode($ret);
+  header( "Content-Type: application/json" );
+  echo $response;
+  exit;
+}
+add_action('wp_ajax_shopper_add_to_cart_ajax', 'shopper_add_to_cart_ajax');
+add_action( 'wp_ajax_nopriv_shopper_add_to_cart_ajax', 'shopper_add_to_cart_ajax' );
+
+
+
+
 // Product
+// --------------------------------------------------------------------------------
 //
 // - inserts a 'Product info' box in Posts and Pages editor
 // - stores Product Name, Product Description and Product Variations in meta fields
@@ -193,6 +313,7 @@ function shopper_save_postdata( $post_id ) {
 
 
 // Get the product
+// - this function is available in the theme
 function shopper_product($post_id) {
   $product = new stdClass();
   
@@ -211,6 +332,8 @@ function shopper_product($post_id) {
 
 
 // Dashboard
+// --------------------------------------------------------------------------------
+
 function shopper_main_page() {
   if (!current_user_can('delete_others_posts'))  {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
