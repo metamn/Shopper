@@ -20,8 +20,12 @@ add_action('admin_menu', 'shopper_admin_menu');
 
 
 
-// Product creation form
+// Product
 //
+// - inserts a 'Product info' box in Posts and Pages editor
+// - stores Product Name, Product Description and Product Variations in meta fields
+// - retrieves complete Product information
+
 
 // insert Product box into Posts and Page
 add_action( 'add_meta_boxes', 'shopper_add_custom_box' );
@@ -51,11 +55,7 @@ function shopper_inner_custom_box($post) {
   wp_nonce_field(plugin_basename( __FILE__ ), 'shopper_noncename');
   
   // If this is an Edit action then read data from post meta
-  $product_name = '';
-  $product_description = '';
-  $product_name = get_post_meta($post->ID, 'product_name', true);
-  $product_description = get_post_meta($post->ID, 'product_description', true);
-  $product_variations = get_post_meta($post->ID, 'product_variations', true);
+  $product = shopper_product($post->ID);
   
  
   // The actual fields for data entry
@@ -63,25 +63,25 @@ function shopper_inner_custom_box($post) {
        _e("Product Name", 'shopper_textdomain' );
   echo "&nbsp;&nbsp;&nbsp;&nbsp;";
   echo '</label> ';
-  echo '<input type="text" id="shopper_product_name" name="shopper_product_name" value="' . $product_name . '" size="25" />';
+  echo '<input type="text" id="shopper_product_name" name="shopper_product_name" value="' . $product->name . '" size="25" />';
   echo '<br/>';
   
   echo '<label for="shopper_product_description">';
        _e("Short description", 'shopper_textdomain' );
   echo '</label> ';
-  echo '<input type="text" id="shopper_product_description" name="shopper_product_description" value="' . $product_description . '" size="25" />';
+  echo '<input type="text" id="shopper_product_description" name="shopper_product_description" value="' . $product->description . '" size="25" />';
   echo '<br/>';
   echo '<br/>';
   
   for ($i = 1; $i < 10; $i++) {
     
     // If this is an Edit action then read data from post meta
-    if (isset($product_variations[$i-1])) {
-      $variation_name = $product_variations[$i-1]['name'];
-      $variation_price = $product_variations[$i-1]['price'];
-      $variation_saleprice = $product_variations[$i-1]['saleprice'];
-      $variation_delivery = $product_variations[$i-1]['delivery'];
-      $variation_image = $product_variations[$i-1]['image'];
+    if (isset($product->variations[$i-1])) {
+      $variation_name = $product->variations[$i-1]['name'];
+      $variation_price = $product->variations[$i-1]['price'];
+      $variation_saleprice = $product->variations[$i-1]['saleprice'];
+      $variation_delivery = $product->variations[$i-1]['delivery'];
+      $variation_image = $product->variations[$i-1]['image'];
     } else {
       $variation_name = '';
       $variation_price = '';
@@ -192,7 +192,20 @@ function shopper_save_postdata( $post_id ) {
 }
 
 
-
+// Get the product
+function shopper_product($post_id) {
+  $product = new stdClass();
+  
+  $product->name = '';
+  $product->description = '';
+  $product->variations = '';
+  
+  $product->name = get_post_meta($post_id, 'product_name', true);
+  $product->description = get_post_meta($post_id, 'product_description', true);
+  $product->variations = get_post_meta($post_id, 'product_variations', true);
+  
+  return $product;
+}
 
 
 
