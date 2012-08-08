@@ -20,7 +20,7 @@ add_action('admin_menu', 'shopper_admin_menu');
 
 
 
-// Product creation
+// Product creation form
 //
 
 // insert Product box into Posts and Page
@@ -55,7 +55,9 @@ function shopper_inner_custom_box($post) {
   $product_description = '';
   $product_name = get_post_meta($post->ID, 'product_name', true);
   $product_description = get_post_meta($post->ID, 'product_description', true);
-
+  $product_variations = get_post_meta($post->ID, 'product_variations', true);
+  
+ 
   // The actual fields for data entry
   echo '<label for="shopper_product_name">';
        _e("Product Name", 'shopper_textdomain' );
@@ -74,45 +76,52 @@ function shopper_inner_custom_box($post) {
   for ($i = 1; $i < 10; $i++) {
     
     // If this is an Edit action then read data from post meta
-    $variation_name = '';
-    $variation_price = '';
-    $variation_saleprice = '';
-    $variation_delivery = '';
-    $variation_image = '';
+    if (isset($product_variations[$i-1])) {
+      $variation_name = $product_variations[$i-1]['name'];
+      $variation_price = $product_variations[$i-1]['price'];
+      $variation_saleprice = $product_variations[$i-1]['saleprice'];
+      $variation_delivery = $product_variations[$i-1]['delivery'];
+      $variation_image = $product_variations[$i-1]['image'];
+    } else {
+      $variation_name = '';
+      $variation_price = '';
+      $variation_saleprice = '';
+      $variation_delivery = '';
+      $variation_image = '';      
+    }   
     
-    $default = '';
-    if ($i == 1) {
-      $default = "default";
+    if (($i == 1) && ($variation_name == '')) {
+      $variation_name = "default";
     } 
   
     echo '<label for="shopper_product_variation_name">';
     echo 'Variation #' . $i;    
     echo '</label> ';
-    echo '<input type="text" id="shopper_product_variation_name-'. $i .'" name="shopper_product_variation_name-'. $i .'" value="' . $default . '" size="25" />';
+    echo '<input type="text" id="shopper_product_variation_name-'. $i .'" name="shopper_product_variation_name-'. $i .'" value="' . $variation_name . '" size="25" />';
     
     echo '<label for="shopper_product_variation_price">';
     echo "&nbsp;&nbsp;";
     _e("Price", 'shopper_textdomain' );
     echo '</label> ';
-    echo '<input type="text" id="shopper_product_variation_price-'. $i .'" name="shopper_product_variation_price-'. $i .'" value="" size="5" />';
+    echo '<input type="text" id="shopper_product_variation_price-'. $i .'" name="shopper_product_variation_price-'. $i .'" value="' . $variation_price . '" size="5" />';
     
     echo '<label for="shopper_product_variation_saleprice">';
     echo "&nbsp;&nbsp;";
     _e("Sale", 'shopper_textdomain' );
     echo '</label> ';
-    echo '<input type="text" id="shopper_product_variation_saleprice-'. $i .'" name="shopper_product_variation_saleprice-'. $i .'" value="" size="5" />';
+    echo '<input type="text" id="shopper_product_variation_saleprice-'. $i .'" name="shopper_product_variation_saleprice-'. $i .'" value="' . $variation_saleprice . '" size="5" />';
     
     echo '<label for="shopper_product_variation_delivery">';
     echo "&nbsp;&nbsp;";
     _e("Delivery", 'shopper_textdomain' );
     echo '</label> ';
-    echo '<input type="text" id="shopper_product_variation_delivery-'. $i .'" name="shopper_product_variation_delivery-'. $i .'" value="" size="2" />';
+    echo '<input type="text" id="shopper_product_variation_delivery-'. $i .'" name="shopper_product_variation_delivery-'. $i .'" value="' . $variation_delivery . '" size="2" />';
 
     echo '<label for="shopper_product_variation_image">';
     echo "&nbsp;&nbsp;";
     _e("Image #", 'shopper_textdomain' );
     echo '</label> ';
-    echo '<input type="text" id="shopper_product_variation_image-'. $i .'" name="shopper_product_variation_image-'. $i .'" value="" size="2" />';
+    echo '<input type="text" id="shopper_product_variation_image-'. $i .'" name="shopper_product_variation_image-'. $i .'" value="' . $variation_image . '" size="2" />';
 
     echo '<br/>';
   }
@@ -158,20 +167,18 @@ function shopper_save_postdata( $post_id ) {
 
   $name = sanitize_text_field($_POST['shopper_product_name']);
   $description = sanitize_text_field($_POST['shopper_product_description']);
-  
+    
   $variations = array();
   for ($i = 1; $i < 10; $i++ ) {
-    $variation_name = sanitize_text_field($_POST['shopper_variation_name-' . $i]);
-    if (isset($variation_name) && ($variation_name != '')) {
-      echo 'aaaaaaaaaaaaaa';
-      
+    $variation_name = sanitize_text_field($_POST['shopper_product_variation_name-' . $i]);
+    if (isset($variation_name) && ($variation_name != '')) {      
       $v = array();
       $v['id'] = $i;
       $v['name'] = $variation_name;
-      $v['price'] = sanitize_text_field($_POST['shopper_variation_price-' . $i]);
-      $v['saleprice'] = sanitize_text_field($_POST['shopper_variation_saleprice-' . $i]);
-      $v['delivery'] = sanitize_text_field($_POST['shopper_variation_delivery-' . $i]);       
-      $v['image'] = sanitize_text_field($_POST['shopper_variation_image-' . $i]);
+      $v['price'] = sanitize_text_field($_POST['shopper_product_variation_price-' . $i]);
+      $v['saleprice'] = sanitize_text_field($_POST['shopper_product_variation_saleprice-' . $i]);
+      $v['delivery'] = sanitize_text_field($_POST['shopper_product_variation_delivery-' . $i]);       
+      $v['image'] = sanitize_text_field($_POST['shopper_product_variation_image-' . $i]);
       
       $variations[] = $v;
     }    
