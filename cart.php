@@ -3,6 +3,13 @@
  
 // Shopping Cart
 // --------------------------------------------------------------------------------
+//
+//  - displays a form
+//  - add items via AJAX
+//  - displays cart contents
+//
+
+
 
 // Init sessions
 // - it is used to access $_SESSION in this plugin 

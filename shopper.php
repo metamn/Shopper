@@ -10,6 +10,29 @@
   */
 
 
+// How it works?
+//
+// - product info is metadata / custom fields added to posts and pages
+// - shopping cart is persistent using cookies and database
+//
+
+
+// Global variables
+//
+// the slug of the shopping cart page
+define("CART", 'cos-cumparaturi');
+define("CHECKOUT", 'confirmare-comanda');
+
+// in how many hours a session expires
+define("NEW_SESSION_HRS", 3);
+
+// visitor types
+define("PASSIVE", 1);
+define("INTERACTIVE", 2);
+define("CONTACTABLE", 3);
+
+
+
 
 // Admin menu
 function shopper_admin_menu() {  
@@ -20,7 +43,7 @@ add_action('admin_menu', 'shopper_admin_menu');
 
 
 
-
+include_once(plugin_dir_path( __FILE__ ) . 'session.php');
 include_once(plugin_dir_path( __FILE__ ) . 'cart.php');
 include_once(plugin_dir_path( __FILE__ ) . 'product.php');
 
@@ -51,24 +74,21 @@ function shopper_main_page() {
 
 // Create database tables
 function shopper_tables() {
-  /*
   global $wpdb;
   
   // Main table
-  $table = $wpdb->prefix . "shopper";
+  $table = $wpdb->prefix . "shopper_sessions";
   $sql = "CREATE TABLE $table (
       id INT(9) NOT NULL AUTO_INCREMENT,
       cookie VARCHAR(80) NOT NULL,      
       visits VARCHAR(1200),
       clicks VARCHAR(1200),
-      type VARCHAR(80),
-      PRIMARY KEY(id),
+      cart VARCHAR(1200),
       UNIQUE KEY cookie (cookie)
   );";
   
   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
   dbDelta($sql);
-  */
 }
 
 ?>
