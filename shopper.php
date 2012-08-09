@@ -14,7 +14,9 @@
 //
 // - product info is metadata / custom fields added to posts and pages
 // - shopping cart is persistent using cookies and database
-//
+// - all user actions and clicks is registered into db to analyze behaviour
+
+
 
 
 // Global variables
@@ -34,7 +36,10 @@ define("CONTACTABLE", 3);
 
 
 
-// Admin menu
+
+
+// Admin menu & Plugin init
+//
 function shopper_admin_menu() {  
   add_menu_page('Shopper', 'Shopper', 'delete_others_posts', 'session-manager-menu', 'shopper_main_page' );
   add_action( 'admin_init', 'shopper_tables' );  
@@ -43,6 +48,9 @@ add_action('admin_menu', 'shopper_admin_menu');
 
 
 
+
+// Include parts of the plugin
+//
 include_once(plugin_dir_path( __FILE__ ) . 'session.php');
 include_once(plugin_dir_path( __FILE__ ) . 'cart.php');
 include_once(plugin_dir_path( __FILE__ ) . 'product.php');
@@ -69,7 +77,8 @@ function shopper_main_page() {
 }
 
 
-
+// Database tables
+// --------------------------------------------------------------------------------
 
 
 // Create database tables
