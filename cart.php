@@ -68,13 +68,12 @@ function shopper_add_to_cart_ajax() {
     $item['title'] = strval( $_POST['title'] );
     $item['qty'] = strval( $_POST['qty'] );
     $item['variation_name'] = strval( $_POST['variation-name'] );
-    $item['variation_id'] = strval( $_POST['variation-id'] ) + 1;
+    $item['variation_id'] = strval( $_POST['variation-id'] );
     $item['price'] = strval( $_POST['price'] );
     
     // Save item
     
-    $id = $_COOKIE['shopper'];
-    $session = shopper_db_get_session($id);
+    $session = shopper_load_session();
     $items = $session->cart;
     
     // - check if this item is already added, then increase qty
@@ -82,26 +81,22 @@ function shopper_add_to_cart_ajax() {
     
     if ($items) {
       $counter = 0;
-      foreach ($items as $product => $value) {
-        if ( ($item['post_id'] == $value['post_id']) && 
-             ($item['variation_id'] == $value['variation_id']) &&
-             ($item['price'] == $value['price']) ) {
+      foreach ($items as $i) {
+        if ( ($item['post_id'] == $i['post_id']) && 
+             ($item['variation_id'] == $i['variation_id']) &&
+             ($item['price'] == $i['price']) ) {
              
              $items[$counter]['qty'] += 1;
-             $counter += 1; 
-             
              $item_exists = true;            
-             }       
-        
-      }    
+             }
+        $counter += 1;
+      }         
     }
     
     if (!$item_exists) {
       $items[] = $item;      
     }
     
-    echo "items: ";
-    print_r($items);
     
     // Register action
     if (function_exists('shopper_manage_session')) {
@@ -135,14 +130,15 @@ add_action( 'wp_ajax_nopriv_shopper_add_to_cart_ajax', 'shopper_add_to_cart_ajax
 // Display cart contents
 // - 'short' format is '2 products 200 RON'
 function shopper_display_cart($format) {  
-  $items = shopper_get_cart_items();
+  $session = shopper_load_session();
+  $items = $session->cart;
   
   if ($items) {
     $price = 0;
     $count = 0;
     foreach ($items as $item) {
-      $price += $item->qty * $item->price;    
-      $count += $item->qty;
+      $price += $item['qty'] * $item['price'];    
+      $count += $item['qty'];
     }
     $msg = $count . " cadouri, " . $price . " RON";
   } else {
@@ -152,45 +148,5 @@ function shopper_display_cart($format) {
   return $msg;
 }
 
-
-// Get cart items from session
-// - returns an array of objects
-function shopper_get_cart_items() {
-  $ret = array();
-  
-  // Check the cookie/db
-  $cookie = shopper_load_session();
-  if (isset($cookie)) {
-    // Try load cart
-    if (isset($cookie->cart)) {
-      $cart = $cookie->cart;
-    }
-  }
-  
-  
-  if (!(empty($cart))) {
-    foreach ($cart as $product => $value) {
-      $item = new stdClass();
-      
-      // from session
-      $item->id = $product;
-      $item->post_id = $value['post_id'];
-      $item->qty = $value['qty'];
-      $item->title = $value['title'];
-      $item->variation_name = $value['variation_name'];
-      $item->variation_id = $value['variation_id'];
-      $item->price = $value['price'];
-      
-      // Add variation to name
-      if ($item->variation_name != 'default') {
-        $item->title .= " (" . $item->variation_name . ")";
-      }
-      
-      $ret[] = $item;
-    }
-  } 
-  
-  return $ret;
-}
 
 ?>
