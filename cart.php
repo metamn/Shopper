@@ -73,10 +73,13 @@ function shopper_add_to_cart_ajax() {
     
     // Save item
     
-    // - check if this item is already added, then increase qty
-    $item_exists = false;
+    $id = $_COOKIE['shopper'];
+    $session = shopper_db_get_session($id);
+    $items = $session->cart;
     
-    $items = $_SESSION['shopper'];
+    // - check if this item is already added, then increase qty
+    $item_exists = false;   
+    
     if ($items) {
       $counter = 0;
       foreach ($items as $product => $value) {
@@ -84,7 +87,7 @@ function shopper_add_to_cart_ajax() {
              ($item['variation_id'] == $value['variation_id']) &&
              ($item['price'] == $value['price']) ) {
              
-             $_SESSION['shopper'][$counter]['qty'] += 1;
+             $items[$counter]['qty'] += 1;
              $counter += 1; 
              
              $item_exists = true;            
@@ -94,12 +97,15 @@ function shopper_add_to_cart_ajax() {
     }
     
     if (!$item_exists) {
-      $_SESSION['shopper'][] = $item;      
+      $items[] = $item;      
     }
+    
+    echo "items: ";
+    print_r($items);
     
     // Register action
     if (function_exists('shopper_manage_session')) {
-      shopper_manage_session('cart-a-' . $id);
+      shopper_manage_session($items);
     }
     
     
@@ -152,22 +158,18 @@ function shopper_display_cart($format) {
 function shopper_get_cart_items() {
   $ret = array();
   
-  $session = $_SESSION['shopper'];
-  if (!isset($session)) {
-    // Check the cookie/db
-    $cookie = shopper_load_session();
-    if (isset($cookie)) {
-      // Try load cart
-      if (isset($cookie->cart)) {
-        $_SESSION['shopper'] = $cookie->cart;
-      }
+  // Check the cookie/db
+  $cookie = shopper_load_session();
+  if (isset($cookie)) {
+    // Try load cart
+    if (isset($cookie->cart)) {
+      $cart = $cookie->cart;
     }
   }
-  $session = $_SESSION['shopper'];
   
   
-  if (!(empty($session))) {
-    foreach ($session as $product => $value) {
+  if (!(empty($cart))) {
+    foreach ($cart as $product => $value) {
       $item = new stdClass();
       
       // from session

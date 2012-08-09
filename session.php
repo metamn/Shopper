@@ -25,19 +25,13 @@
 
 
 // Arguments
-// - $action: which url/event to save into the browsing history
-// - it is used only to identify AJAX calls like add to cart etc 
-function shopper_manage_session($action = '') {  
+// - $cart: cart items to store 
+function shopper_manage_session($cart = array()) {  
   $session = new stdClass();
   
   $id = $_COOKIE['shopper'];
-  if ($action == '') {
-    $action = shopper_get_post_id();
-  }
-  $now = current_time('timestamp');
-    
-  // create new session id, if necessary
-  if (!($id)) {
+  if (!($id)) {    
+    // create new session id, if necessary
     $session->returning = false;
            
     setcookie('shopper', shopper_generateRandomString(), time()+60*60*24*500, '/');
@@ -46,9 +40,19 @@ function shopper_manage_session($action = '') {
     $session->returning = true;
   }    
   
-  // save cart
-  $cart = maybe_serialize($_SESSION['shopper']);
-      
+  // Determine what action to save  
+  if (empty($cart)) {
+    $action = shopper_get_post_id();
+    // load the cart contents
+    $old = shopper_load_session();
+    $cart = maybe_serialize($old->cart);
+  } else {
+    $action = 'cart-a-';
+    $cart = maybe_serialize($cart);
+  }
+  $now = current_time('timestamp');
+    
+        
   // save to db
   shopper_db_save_session($id, $action, $cart, $now); 
     
