@@ -6,8 +6,8 @@
 //
 //  - displays a form
 //  - add items via AJAX
-//  - displays cart contents
-//
+//  - displays cart contents, the short way
+//  - saves shopping history into cookie / db
 
 
 
@@ -98,8 +98,8 @@ function shopper_add_to_cart_ajax() {
     }
     
     // Register action
-    if (function_exists('manage_session')) {
-      manage_session('cart-a-' . $id);
+    if (function_exists('shopper_manage_session')) {
+      shopper_manage_session('cart-a-' . $id);
     }
     
     
@@ -153,6 +153,18 @@ function shopper_get_cart_items() {
   $ret = array();
   
   $session = $_SESSION['shopper'];
+  if (!isset($session)) {
+    // Check the cookie/db
+    $cookie = shopper_load_session();
+    if (isset($cookie)) {
+      // Try load cart
+      if (isset($cookie->cart)) {
+        $_SESSION['shopper'] = $cookie->cart;
+      }
+    }
+  }
+  $session = $_SESSION['shopper'];
+  
   
   if (!(empty($session))) {
     foreach ($session as $product => $value) {
@@ -174,7 +186,7 @@ function shopper_get_cart_items() {
       
       $ret[] = $item;
     }
-  }
+  } 
   
   return $ret;
 }

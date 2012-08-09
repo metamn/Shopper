@@ -25,14 +25,14 @@
 
 
 // Arguments
-// - $post_id: which url/event to save into the browsing history
+// - $action: which url/event to save into the browsing history
 // - it is used only to identify AJAX calls like add to cart etc 
-function shopper_manage_session($post_id = '') {  
+function shopper_manage_session($action = '') {  
   $session = new stdClass();
   
   $id = $_COOKIE['shopper'];
-  if ($post_id == '') {
-    $post_id = shopper_get_post_id();
+  if ($action == '') {
+    $action = shopper_get_post_id();
   }
   $now = current_time('timestamp');
     
@@ -45,17 +45,21 @@ function shopper_manage_session($post_id = '') {
   } else {
     $session->returning = true;
   }    
+  
+  // save cart
+  $cart = maybe_serialize($_SESSION['shopper']);
       
   // save to db
-  shopper_db_save_session($id, $post_id, $now); 
+  shopper_db_save_session($id, $action, $cart, $now); 
     
   // load info from DB
   $s = shopper_db_get_session($id);
   if ($s) {
     $session->visits = $s->visits;
     $session->clicks = $s->clicks;
+    $session->cart = maybe_unserialize($s->cart);
     $session->type = 'aaa';
-  }    
+  }   
   
   return $session;
 }
@@ -70,6 +74,7 @@ function shopper_load_session() {
   if ($s) {
     $session->visits = $s->visits;
     $session->clicks = $s->clicks;
+    $session->cart = maybe_unserialize($s->cart);
     $session->type = CONTACTABLE;
   }    
   
@@ -78,7 +83,7 @@ function shopper_load_session() {
 
 
 // Save or create session to DB
-function shopper_db_save_session($id, $post_id, $timestamp) {  
+function shopper_db_save_session($id, $post_id, $cart, $timestamp) {  
   global $wpdb;
   $wpdb->show_errors();
   
@@ -101,10 +106,10 @@ function shopper_db_save_session($id, $post_id, $timestamp) {
       $wpdb->prepare( 
       "
 	      INSERT INTO wp_shopper_sessions
-	      (cookie, visits, clicks)
-	      VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE visits=VALUES(visits), clicks=VALUES(clicks)
+	      (cookie, visits, clicks, cart)
+	      VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE visits=VALUES(visits), clicks=VALUES(clicks), cart=VALUES(cart)
       ", 
-      array($id, $visits, $clicks)
+      array($id, $visits, $clicks, $cart)
       )
     );  
   } else {
