@@ -17,13 +17,21 @@ jQuery(document).ready(function() {
     
     // Get query parameters
     var nonce = jQuery(this).parent().attr("data-nonce"); 
+    var email = jQuery(this).parent().children("#email").val();
+    var phone = jQuery(this).parent().children("#phone").val();
+    var delivery = jQuery(this).parent().children("#delivery").val();
+    var discount = jQuery(this).parent().children("#discount").val();
     
     // Do the ajax
     jQuery.post(
       shopper.ajaxurl, 
       {
         'action' : 'shopper_checkout_ajax',
-        'nonce' : nonce
+        'nonce' : nonce,
+        'email' : email,
+        'phone' : phone,
+        'delivery' : delivery,
+        'discount' : discount
       }, 
       function(response) {        
         //alert(response.message);
