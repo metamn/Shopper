@@ -28,6 +28,7 @@ get_header(); ?>
 					
 					<?php echo shopper_product($post->ID)->name; ?>
 					<?php echo shopper_add_to_cart_form($post->ID); ?>
+					<?php echo shopper_checkout_form(); ?>
 					<?php echo shopper_display_cart('short'); ?>
 
 				<?php endwhile; ?>

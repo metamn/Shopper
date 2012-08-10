@@ -14,7 +14,7 @@
 //
 // - product info is metadata / custom fields added to posts and pages
 // - shopping cart is persistent using cookies and database
-// - all user actions and clicks is registered into db to analyze behaviour
+// - all user actions (ajax) and clicks is registered into db to analyze behaviour
 
 
 
@@ -54,6 +54,7 @@ add_action('admin_menu', 'shopper_admin_menu');
 include_once(plugin_dir_path( __FILE__ ) . 'session.php');
 include_once(plugin_dir_path( __FILE__ ) . 'cart.php');
 include_once(plugin_dir_path( __FILE__ ) . 'product.php');
+include_once(plugin_dir_path( __FILE__ ) . 'checkout.php');
 
 
 
@@ -75,6 +76,8 @@ function shopper_main_page() {
   
   <?php
 }
+
+
 
 
 // Database tables

@@ -3,6 +3,38 @@ jQuery(document).ready(function() {
   // Cart
   //
   
+  
+  // Checkout
+  jQuery("#checkout #submit").click(function(event) {
+    // Do not submit the form the classic way, only with AJAX
+    event.preventDefault();
+  
+    // Display Ajax loading spinner
+    // jQuery(this).html(ajaxspinner);
+    
+    // Save this !!!
+    var _this = jQuery(this);
+    
+    // Get query parameters
+    var nonce = jQuery(this).parent().attr("data-nonce"); 
+    
+    // Do the ajax
+    jQuery.post(
+      shopper.ajaxurl, 
+      {
+        'action' : 'shopper_checkout_ajax',
+        'nonce' : nonce
+      }, 
+      function(response) {        
+        //alert(response.message);
+        _this.parent().next().html(response.message);       
+      }
+    );
+    
+  });
+
+  
+  
   // Add to cart
   jQuery("#add-to-cart #submit").click(function(event) {
     // Do not submit the form the classic way, only with AJAX
