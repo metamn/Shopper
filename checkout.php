@@ -87,9 +87,8 @@ function shopper_db_save_order($email, $phone, $delivery, $discount, $items) {
   $wpdb->show_errors();
   
   // Create a new profile
-  $profile_id = shopper_db_save_profile(array('email' => $email, 'phone' => $phone), $_COOKIE['shopper']);
-  
-  echo "profile_id: " . $profile_id;
+  $session_id = shopper_db_get_session($_COOKIE['shopper'])->id;
+  $profile_id = shopper_db_save_profile(array('email' => $email, 'phone' => $phone), $session_id);
   
   if ($profile_id) {
     $status = 1;
@@ -112,7 +111,6 @@ function shopper_db_save_order($email, $phone, $delivery, $discount, $items) {
       if ($items) {
         $order_total = 0;
         foreach ($items as $item) {
-         print_r($item);
          $order_item = $wpdb->query( 
           $wpdb->prepare( 
             "
@@ -130,13 +128,11 @@ function shopper_db_save_order($email, $phone, $delivery, $discount, $items) {
       }
     }
     
-    // Add total to orders
-    if ($order_total > 0) {
-      $order_update = $wpdb->query( 
-        $wpdb->prepare("UPDATE wp_shopper_orders SET total = %s WHERE id = %s"), 
-        $order_total, $order_id
-      );      
-    }          
+    // Add total to orders    
+    $order_update = $wpdb->query( 
+      $wpdb->prepare("UPDATE wp_shopper_orders SET total = %s WHERE id = %s", 
+      $order_total, $order_id)
+    );        
   } else {
     $msg = "Eroare creare profil utilizator.";  
   }
@@ -146,7 +142,7 @@ function shopper_db_save_order($email, $phone, $delivery, $discount, $items) {
 
 
 // Creating a new profile
-function shopper_db_save_profile($args, $cookie) {
+function shopper_db_save_profile($args, $session_id) {
   global $wpdb;
   $wpdb->show_errors();
   
@@ -157,7 +153,7 @@ function shopper_db_save_profile($args, $cookie) {
       (session_id, email, phone)
       VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE phone=VALUES(phone), session_id=VALUES(session_id)
     ", 
-    array($cookie, $args['email'], $args['phone'])
+    array($session_id, $args['email'], $args['phone'])
     )
   );
   
