@@ -31,21 +31,58 @@ class Orders_Table extends WP_List_Table {
   */
   function get_columns() {
     return $columns= array(
-	    'id'=>__('Numar comanda'),
+	    'id'=>__('Numar<br/>comanda'),
 	    'date'=>__('Data'),
-	    'total'=>__('Total'),
-	    'grand_total'=>__('Final')
+	    'customer' => __('Cumparator'),
+	    'products' => __('Produse'),
+	    'total'=>__('Total'),	    
+	    'delivery_id' => __('Livrare'),
+	    'grand_total'=>__('Final'),
+	    'status_id' => __('Statut'),
     );
   }
   
   
+  // Return what data to display for each column
+  //
   function column_default($item, $column_name){
+    global $wpdb;
+    
     switch($column_name){
-      case 'id':
-      case 'date':
+      case 'id':      
       case 'total':
+      case 'delivery_id':
+      case 'status_id':
       case 'grand_total':
         return $item->$column_name;
+      case 'date':
+        return date('Y M d', strtotime($item->$column_name));
+      case 'customer':
+        $profile = $wpdb->get_results(
+          "SELECT * FROM wp_shopper_profiles " .
+          "WHERE wp_shopper_profiles.id = " . $item->profile_id
+        ); 
+        return $profile[0]->email . "<br/>Tel: " . $profile[0]->phone;
+      case 'products':
+        $products = $wpdb->get_results(
+          "SELECT * FROM wp_shopper_order_items " .
+          "WHERE wp_shopper_order_items.order_id = " . $item->id
+        ); 
+        $ret = "";
+        foreach ($products as $product) {
+          $ret .= $product->product_name;
+          if ($product->product_variation_name != 'default') {
+            $ret .= ' (' . $product->product_variation_name . ')';
+          }
+          $q = $product->product_qty;
+          if ($q > 1) {
+            $ret .= ' &mdash; ' . $product->product_qty . ' x ' . $product->product_price . 'RON';
+          } else {
+            $ret .= ' &mdash; ' . $product->product_price . 'RON';
+          }          
+          $ret .= '<br/><br/>';
+        }
+        return $ret;
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
@@ -64,8 +101,11 @@ class Orders_Table extends WP_List_Table {
     
     $this->_column_headers = array($columns, $hidden, $sortable);
     
-    global $wpdb;
-    $data = $wpdb->get_results("SELECT * FROM wp_shopper_orders");
+    global $wpdb;    
+    $data = $wpdb->get_results(
+      "SELECT * FROM wp_shopper_orders"     
+    );
+    
         
     $current_page = $this->get_pagenum();
     $total_items = count($data);
