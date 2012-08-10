@@ -56,7 +56,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'cart.php');
 include_once(plugin_dir_path( __FILE__ ) . 'product.php');
 include_once(plugin_dir_path( __FILE__ ) . 'checkout.php');
 
-
+include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
 
 
 
@@ -71,7 +71,15 @@ function shopper_main_page() {
   ?>
   
   <div id="shopper">
-    <h1>Shopper</h1>    
+    <h1>Shopper</h1>   
+    
+    <?php 
+      // Orders
+      $orders = new Orders_Table();
+      $orders->prepare_items();
+      $orders->display();
+    ?>
+     
   </div>
   
   <?php

@@ -10,6 +10,7 @@
 
 
 // Processing the order
+//
 function shopper_checkout_ajax() {
   $nonce = $_POST['nonce'];  
   if ( wp_verify_nonce( $nonce, 'checkout' ) ) {
@@ -80,6 +81,7 @@ function shopper_checkout_form() {
 
 
 // Saving the order
+//
 function shopper_db_save_order($email, $phone, $delivery, $discount, $items) {
   $msg = 'OK';
   
@@ -142,6 +144,7 @@ function shopper_db_save_order($email, $phone, $delivery, $discount, $items) {
 
 
 // Creating a new profile
+//
 function shopper_db_save_profile($args, $session_id) {
   global $wpdb;
   $wpdb->show_errors();
@@ -168,6 +171,10 @@ function shopper_db_save_profile($args, $session_id) {
     return $id;
   }
 }
+
+
+
+
 
 /*
 // Update session with profile
