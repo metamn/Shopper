@@ -20,7 +20,7 @@ class Customers_Table extends WP_List_Table {
     parent::__construct(array(
       'singular'  => 'cumparator',
       'plural'  => 'cumparatori',
-      'ajax'	=> false //We won't support Ajax for this table
+      'ajax'	=> true
     ));
   }
 	 

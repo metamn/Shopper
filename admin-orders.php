@@ -104,11 +104,18 @@ class Orders_Table extends WP_List_Table {
     $this->_column_headers = array($columns, $hidden, $sortable);
     
     // Do the search
-    // - don't know what to search for ... ask ami
+    // - we will use search to filter orders by month
     global $wpdb;            
     if (isset($_POST['s'])) {
+      // the filter query must have the format '2012 08'
+      $s = explode(" ", $_POST['s']);
+      $start = date('Y-m-d', mktime(0, 0, 0, $s[1], 1, $s[0]));
+      $start .= " 00:00:00";
+      $end = date('Y-m-t', mktime(0, 0, 0, $s[1], 1, $s[0]));
+      $end .= " 23:59:59";
       $data = $wpdb->get_results(
-        "SELECT * FROM wp_shopper_orders ORDER BY id DESC"     
+        "SELECT * FROM wp_shopper_orders " .
+        "WHERE date >= '" . $start . "' AND date <='" . $end . "'"      
       );
     } else {
       $data = $wpdb->get_results(

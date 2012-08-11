@@ -18,10 +18,9 @@
       );
       
       if ($ret != false) {
-        echo "Modificare cu succes!" . "<br/><br/>";
-        echo "<a href='" . admin_url() ."admin.php?page=shopper-customers'>Inapoi la pagina de Cumparatori</a>";
+        echo "Modificare cu succes!" . "<br/><br/>";        
       }
-      
+      echo "<a href='" . admin_url() ."admin.php?page=shopper-customers'>Inapoi la pagina de Cumparatori</a>";
     } 
   } else {  
 ?>
