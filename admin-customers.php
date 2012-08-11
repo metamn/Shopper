@@ -113,7 +113,7 @@ class Customers_Table extends WP_List_Table {
       $s = $_POST['s'];
       $data = $wpdb->get_results(
         "SELECT * FROM wp_shopper_profiles " .
-        "WHERE (email='" . $s . "' OR phone='" . $s . "')"     
+        "WHERE (email='" . $s . "' OR phone='" . $s . "' OR name='" . $s . "')"     
       );
     } else {
       $data = $wpdb->get_results(

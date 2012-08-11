@@ -115,7 +115,7 @@ function shopper_customers_page() {
     include(plugin_dir_path( __FILE__ ) . 'admin-customers-edit.php');
   } else { ?>
     <div id="shopper-customers">
-      <h1>Customers</h1>   
+      <h1>Cumparatori</h1>   
       
       <?php
         $customers = new Customers_Table();
