@@ -41,8 +41,7 @@ define("CONTACTABLE", 3);
 // Admin menu & Plugin init
 //
 function shopper_admin_menu() {  
-  add_menu_page('Shopper', 'Shopper', 'delete_others_posts', 'session-manager-menu', 'shopper_main_page' );
-  add_action( 'admin_init', 'shopper_tables' );  
+  add_menu_page('Shopper', 'Shopper', 'delete_others_posts', 'session-manager-menu', 'shopper_main_page' );   
 } 
 add_action('admin_menu', 'shopper_admin_menu');
 
@@ -91,6 +90,8 @@ function shopper_main_page() {
 // Database tables
 // --------------------------------------------------------------------------------
 
+
+register_activation_hook(__FILE__,'shopper_tables');
 
 // Create database tables
 function shopper_tables() {

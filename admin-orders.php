@@ -88,6 +88,19 @@ class Orders_Table extends WP_List_Table {
     }
   }
   
+  
+  function get_sortable_columns() {
+    $sortable_columns = array(
+        'id'     => array('id', false),     //true means its already sorted
+        'date'    => array('date', false),
+        'customer'  => array('customer', false),
+        'status_id'  => array('status_id', false)
+    );
+    return $sortable_columns;
+  }
+  
+  
+  
   /**
   * Prepare the table with different parameters, pagination, columns and table elements
   */
@@ -98,13 +111,25 @@ class Orders_Table extends WP_List_Table {
     $hidden = array();
     $sortable = $this->get_sortable_columns();
     
-    
     $this->_column_headers = array($columns, $hidden, $sortable);
+    
     
     global $wpdb;    
     $data = $wpdb->get_results(
-      "SELECT * FROM wp_shopper_orders"     
+      "SELECT * FROM wp_shopper_orders ORDER BY id DESC"     
     );
+    
+    //print_r($data);
+    
+    
+    function usort_reorder($a, $b){
+      $orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'id'; //If no sort, default to this
+      $order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
+      $result = strcmp($a->$orderby, $b->$orderby); //Determine sort order
+      return ($order==='asc') ? $result : -$result; //Send final sort direction to usort
+    }
+    usort($data, 'usort_reorder');
+    
     
         
     $current_page = $this->get_pagenum();
