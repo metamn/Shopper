@@ -41,8 +41,9 @@ define("CONTACTABLE", 3);
 // Admin menu & Plugin init
 //
 function shopper_admin_menu() {  
-  add_menu_page('shopper', 'Shopper', 'delete_others_posts', 'shopper-menu', 'shopper_main_page' );   
+  add_menu_page('Dashboard', 'Shopper', 'delete_others_posts', 'shopper-menu', 'shopper_main_page' );   
   add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
+  add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-customers", "shopper_customers_page");  
 } 
 add_action('admin_menu', 'shopper_admin_menu');
 
@@ -57,6 +58,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'product.php');
 include_once(plugin_dir_path( __FILE__ ) . 'checkout.php');
 
 include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-customers.php');
 
 
 
@@ -70,6 +72,9 @@ function shopper_main_page() {
   }   
 }
 
+
+// Orders
+// --------------------------------------------------------------------------------
 
 function shopper_orders_page() {
   if (!current_user_can('delete_others_posts'))  {
@@ -97,6 +102,35 @@ function shopper_orders_page() {
   <?php
 }
 
+
+// Customers
+// --------------------------------------------------------------------------------
+
+function shopper_customers_page() {
+  if (!current_user_can('delete_others_posts'))  {
+    wp_die( 'Nu aveti drepturi suficiente de acces.' );
+  } 
+  ?>
+  
+  <div id="shopper-customers">
+    <h1>Customers</h1>   
+    
+    <?php
+      $customers = new Customers_Table();
+      $customers->prepare_items();
+    ?>
+     
+    <form method="post">
+      <input type="hidden" name="page" value="ttest_list_table">
+      <?php
+        $customers->search_box( 'Cautare', 'search_id' );
+        $customers->display();
+      ?>
+    </form>  
+  </div>
+  
+  <?php
+}
 
 
 
@@ -135,6 +169,9 @@ function shopper_tables() {
       session_id INT(9),
       email VARCHAR(120),
       phone VARCHAR(20),
+      name VARCHAR(255),
+      address VARCHAR(255),
+      city VARCHAR(120)
       PRIMARY KEY (id),
       UNIQUE KEY email (email)
   );";  
