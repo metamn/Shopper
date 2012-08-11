@@ -110,26 +110,28 @@ function shopper_customers_page() {
   if (!current_user_can('delete_others_posts'))  {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
   } 
-  ?>
   
-  <div id="shopper-customers">
-    <h1>Customers</h1>   
-    
-    <?php
-      $customers = new Customers_Table();
-      $customers->prepare_items();
-    ?>
-     
-    <form method="post">
-      <input type="hidden" name="page" value="ttest_list_table">
+  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
+    include(plugin_dir_path( __FILE__ ) . 'admin-customers-edit.php');
+  } else { ?>
+    <div id="shopper-customers">
+      <h1>Customers</h1>   
+      
       <?php
-        $customers->search_box( 'Cautare', 'search_id' );
-        $customers->display();
+        $customers = new Customers_Table();
+        $customers->prepare_items();
       ?>
-    </form>  
-  </div>
+       
+      <form method="post">
+        <input type="hidden" name="page" value="ttest_list_table">
+        <?php
+          $customers->search_box( 'Cautare', 'search_id' );
+          $customers->display();
+        ?>
+      </form>  
+    </div>
   
-  <?php
+  <?php }
 }
 
 

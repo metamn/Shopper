@@ -45,8 +45,6 @@ class Customers_Table extends WP_List_Table {
   // Return what data to display for each column
   //
   function column_default($item, $column_name){
-    global $wpdb;
-    
     switch($column_name){  
       case 'id':
       case 'email':
@@ -61,6 +59,7 @@ class Customers_Table extends WP_List_Table {
   }
   
   
+  // Sort columns
   function get_sortable_columns() {
     $sortable_columns = array(
         'id'     => array('id', false),     //true means its already sorted
@@ -70,6 +69,30 @@ class Customers_Table extends WP_List_Table {
     return $sortable_columns;
   }
   
+  
+  // Add Edit to email, name
+  function column_email($item) {
+    $actions = array(
+        'edit'      => sprintf('<a href="?page=%s&action=%s&profile=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+    );
+    
+    //Return the title contents
+    return sprintf('%1$s %2$s',
+        /*$1%s*/ $item->email,
+        /*$3%s*/ $this->row_actions($actions)
+    );
+  }
+  function column_name($item) {
+    $actions = array(
+        'edit'      => sprintf('<a href="?page=%s&action=%s&profile=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+    );
+    
+    //Return the title contents
+    return sprintf('%1$s %2$s',
+        /*$1%s*/ $item->name,
+        /*$3%s*/ $this->row_actions($actions)
+    );
+  }
   
   
   /**
