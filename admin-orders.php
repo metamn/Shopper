@@ -34,10 +34,8 @@ class Orders_Table extends WP_List_Table {
 	    'id'=>__('Numar<br/>comanda'),
 	    'date'=>__('Data'),
 	    'customer' => __('Cumparator'),
-	    'products' => __('Produse'),
-	    'total'=>__('Total'),	    
-	    'delivery_id' => __('Livrare'),
-	    'grand_total'=>__('Final'),
+	    'products' => __('Produse'),	    
+	    'grand_total'=>__('Total'),
 	    'status_id' => __('Statut'),
     );
   }
@@ -49,9 +47,7 @@ class Orders_Table extends WP_List_Table {
     global $wpdb;
     
     switch($column_name){
-      case 'id':      
-      case 'total':
-      case 'delivery_id':
+      case 'id':
       case 'status_id':
       case 'grand_total':
         return $item->$column_name;
@@ -62,27 +58,21 @@ class Orders_Table extends WP_List_Table {
           "SELECT * FROM wp_shopper_profiles " .
           "WHERE wp_shopper_profiles.id = " . $item->profile_id
         ); 
-        return $profile[0]->email . "<br/>Tel: " . $profile[0]->phone;
+        return $profile[0]->email;
       case 'products':
         $products = $wpdb->get_results(
           "SELECT * FROM wp_shopper_order_items " .
           "WHERE wp_shopper_order_items.order_id = " . $item->id
-        ); 
-        $ret = "";
+        );        
+        $counter = 0;
         foreach ($products as $product) {
-          $ret .= $product->product_name;
-          if ($product->product_variation_name != 'default') {
-            $ret .= ' (' . $product->product_variation_name . ')';
-          }
-          $q = $product->product_qty;
-          if ($q > 1) {
-            $ret .= ' &mdash; ' . $product->product_qty . ' x ' . $product->product_price . 'RON';
-          } else {
-            $ret .= ' &mdash; ' . $product->product_price . 'RON';
-          }          
-          $ret .= '<br/><br/>';
+          $counter += $product->product_qty;
+        }        
+        if ($counter == 1) {
+          return $counter . ' produs';
+        } else {
+          return $counter . ' produse';
         }
-        return $ret;
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
