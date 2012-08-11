@@ -103,12 +103,18 @@ class Orders_Table extends WP_List_Table {
     
     $this->_column_headers = array($columns, $hidden, $sortable);
     
-    
-    global $wpdb;    
-    $data = $wpdb->get_results(
-      "SELECT * FROM wp_shopper_orders ORDER BY id DESC"     
-    );
-    
+    // Do the search
+    // - don't know what to search for ... ask ami
+    global $wpdb;            
+    if (isset($_POST['s'])) {
+      $data = $wpdb->get_results(
+        "SELECT * FROM wp_shopper_orders ORDER BY id DESC"     
+      );
+    } else {
+      $data = $wpdb->get_results(
+        "SELECT * FROM wp_shopper_orders ORDER BY id DESC"     
+      );
+    }    
     //print_r($data);
     
     

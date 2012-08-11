@@ -41,7 +41,8 @@ define("CONTACTABLE", 3);
 // Admin menu & Plugin init
 //
 function shopper_admin_menu() {  
-  add_menu_page('Shopper', 'Shopper', 'delete_others_posts', 'session-manager-menu', 'shopper_main_page' );   
+  add_menu_page('shopper', 'Shopper', 'delete_others_posts', 'shopper-menu', 'shopper_main_page' );   
+  add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
 } 
 add_action('admin_menu', 'shopper_admin_menu');
 
@@ -66,23 +67,36 @@ include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
 function shopper_main_page() {
   if (!current_user_can('delete_others_posts'))  {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
+  }   
+}
+
+
+function shopper_orders_page() {
+  if (!current_user_can('delete_others_posts'))  {
+    wp_die( 'Nu aveti drepturi suficiente de acces.' );
   } 
   ?>
   
-  <div id="shopper">
-    <h1>Shopper</h1>   
+  <div id="shopper-orders">
+    <h1>Comenzi</h1>   
     
-    <?php 
-      // Orders
+    <?php
       $orders = new Orders_Table();
       $orders->prepare_items();
-      $orders->display();
     ?>
      
+    <form method="post">
+      <input type="hidden" name="page" value="ttest_list_table">
+      <?php
+        $orders->search_box( 'Cautare', 'search_id' );
+        $orders->display();
+      ?>
+    </form>  
   </div>
   
   <?php
 }
+
 
 
 
