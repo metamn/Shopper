@@ -41,7 +41,7 @@ foreach ($posts as $post) {
   }
   
   if ($product_id != '') {
-    echo "<li>" . $post->post_title . " ( " . $product_id . ")" . "</li>";
+    echo "<li><h1>" . $post->post_title . " ( " . $product_id . ")" . "</h1></li>";
     
     $product = get_product($product_id);
     echo "<li>&nbsp;Name: " . $product->name . "</li>";
@@ -56,6 +56,15 @@ foreach ($posts as $post) {
         }        
       }
     }
+    
+    $attach = get_attachments($post->ID);
+    if ($attach) {
+      foreach ($attach as $a) {        
+        echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
+      }
+    }
+    
+    echo "<li>" . get_content($post->post_content) . "</li>";
     
     
     echo "<li>&nbsp;</li>";
@@ -92,7 +101,28 @@ function get_variations($id) {
   return $ret;  
 }
 
+// Get attachments
+function get_attachments($id) {
+  global $old;
+  $ret = $old->get_results(
+    "SELECT * FROM wp_cp53mf_posts WHERE post_parent = " . $id . " AND " .
+    "post_type = 'attachment'"
+  );
+  
+  return $ret;  
+}
 
 
+// Get post content
+function get_content($content) {
+  $s = explode("<h3>Intrebari frecvente</h3>", $content);
+  if ($s[0]) {
+    $s2 = explode("<h3>Opiniile cumparatorilor</h3>", $s[0]);
+    return $s2[0];
+  } else {
+    $s = explode("<h3>Opiniile cumparatorilor</h3>", $content);
+    return $s[0];
+  }
+}
 
 ?>
