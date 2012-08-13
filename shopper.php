@@ -80,26 +80,29 @@ function shopper_orders_page() {
   if (!current_user_can('delete_others_posts'))  {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
   } 
-  ?>
   
-  <div id="shopper-orders">
-    <h1>Comenzi</h1>   
-    
-    <?php
-      $orders = new Orders_Table();
-      $orders->prepare_items();
-    ?>
-     
-    <form method="post">
-      <input type="hidden" name="page" value="ttest_list_table">
+  
+  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
+    include(plugin_dir_path( __FILE__ ) . 'admin-orders-edit.php');
+  } else { ?>  
+    <div id="shopper-orders">
+      <h1>Comenzi</h1>   
+      
       <?php
-        $orders->search_box( 'Cautare', 'search_id' );
-        $orders->display();
+        $orders = new Orders_Table();
+        $orders->prepare_items();
       ?>
-    </form>  
-  </div>
+       
+      <form method="post">
+        <input type="hidden" name="page" value="ttest_list_table">
+        <?php
+          $orders->search_box( 'Cautare', 'search_id' );
+          $orders->display();
+        ?>
+      </form>  
+    </div>
   
-  <?php
+  <?php }
 }
 
 

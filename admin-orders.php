@@ -58,7 +58,15 @@ class Orders_Table extends WP_List_Table {
           "SELECT * FROM wp_shopper_profiles " .
           "WHERE wp_shopper_profiles.id = " . $item->profile_id
         ); 
-        return $profile[0]->email;
+        
+        // Edit link
+        $link = "<a href='?page=shopper-customers&action=edit&profile=" . $profile[0]->id . "' title='Modificare cumparator'>";
+        
+        if ($profile[0]->name != '') {
+          return $link . $profile[0]->name . "</a>";
+        } else {
+          return $link . $profile[0]->name . "</a>";
+        }        
       case 'products':
         $products = $wpdb->get_results(
           "SELECT * FROM wp_shopper_order_items " .
@@ -78,6 +86,17 @@ class Orders_Table extends WP_List_Table {
     }
   }
   
+  // Add Edit to Status
+  function column_status_id($item) {
+    $actions = array(
+        'edit'      => sprintf('<a href="?page=%s&action=%s&order=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+    );    
+    //Return the title contents
+    return sprintf('%1$s %2$s',
+        /*$1%s*/ $item->status_id,
+        /*$3%s*/ $this->row_actions($actions)
+    );
+  }
   
   function get_sortable_columns() {
     $sortable_columns = array(
