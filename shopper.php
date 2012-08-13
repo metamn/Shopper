@@ -205,13 +205,22 @@ function shopper_import_page() {
   if (!current_user_can('delete_others_posts'))  {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
   } ?> 
-  
-  
+    
   <div id="shopper-import">
     <h1>Import</h1>   
     
-<?php 
-  include_once(plugin_dir_path( __FILE__ ) . 'admin-import.php');   
+    <form action="admin.php?page=shopper-import" method="post">
+      <select id="import" name="import">
+        <option value="posts">Posts</option>
+        <option value="comments">Comments</option>
+        <option value="orders">Orders & Customers</option>
+      </select>
+      <p class="submit"><input type="submit" value="Import" class="button-primary" id="submit" name="submit"></p>
+    </form>
+  </div>
+  <?php include_once(plugin_dir_path( __FILE__ ) . 'admin-import.php'); ?>
+    
+<?php   
 }
 
 

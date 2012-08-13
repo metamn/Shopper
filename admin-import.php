@@ -12,66 +12,80 @@
 // 3. run this script
 
 
-// Gotchas
-//
+// Imports
+// 1. posts, products, variations, images
+// 2. comments and pingbacks
+// 3. orders and customers
 
 
 
-global $old;
-$old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
-
-$posts = $old->get_results(
-  "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post'"
-);
-
-echo "<ul>";
-foreach ($posts as $post) {
-  // this does not works ....
-  //$product_id = get_post_meta($post->ID, 'product_id', true);
-  
-  $meta = $old->get_results(
-    "SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $post->ID . 
-    " AND meta_key = 'product_id'"
-  );
-  //print_r($meta);
-  
-  $product_id = '';
-  if (isset($meta[0])) {
-    $product_id = $meta[0]->meta_value;
-  }
-  
-  if ($product_id != '') {
-    echo "<li><h1>" . $post->post_title . " ( " . $product_id . ")" . "</h1></li>";
-    
-    $product = get_product($product_id);
-    echo "<li>&nbsp;Name: " . $product->name . "</li>";
-    echo "<li>&nbsp;Price: " . $product->price . "</li>";
-    echo "<li>&nbsp;Sale Price: " . $product->special_price . "</li>";
-    
-    $vars = get_variations($product_id);
-    if ($vars) {
-      foreach ($vars as $v) {        
-        if ($v->name != '') {
-          echo "<li>&nbsp;Variation: " . $v->name . ', ' . $v->price . "</li>";
-        }        
-      }
-    }
-    
-    $attach = get_attachments($post->ID);
-    if ($attach) {
-      foreach ($attach as $a) {        
-        echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
-      }
-    }
-    
-    echo "<li>" . get_content($post->post_content) . "</li>";
-    
-    
-    echo "<li>&nbsp;</li>";
-  }
-  
+if ($_POST) {
+  if ($_POST['import'] == 'posts') { import_posts(); }
 }
-echo "</ul>";
+
+
+// Posts
+// ----------------------------------------------------------------
+
+
+function import_posts() {
+  global $old;
+  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+
+  
+  $posts = $old->get_results(
+  "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post'"
+  );
+
+  echo "<ul>";
+  foreach ($posts as $post) {
+    // this does not works ....
+    //$product_id = get_post_meta($post->ID, 'product_id', true);
+    
+    $meta = $old->get_results(
+      "SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $post->ID . 
+      " AND meta_key = 'product_id'"
+    );
+    //print_r($meta);
+    
+    $product_id = '';
+    if (isset($meta[0])) {
+      $product_id = $meta[0]->meta_value;
+    }
+    
+    if ($product_id != '') {
+      echo "<li><h1>" . $post->post_title . " ( " . $product_id . ")" . "</h1></li>";
+      
+      $product = get_product($product_id);
+      echo "<li>&nbsp;Name: " . $product->name . "</li>";
+      echo "<li>&nbsp;Price: " . $product->price . "</li>";
+      echo "<li>&nbsp;Sale Price: " . $product->special_price . "</li>";
+      
+      $vars = get_variations($product_id);
+      if ($vars) {
+        foreach ($vars as $v) {        
+          if ($v->name != '') {
+            echo "<li>&nbsp;Variation: " . $v->name . ', ' . $v->price . "</li>";
+          }        
+        }
+      }
+      
+      $attach = get_attachments($post->ID);
+      if ($attach) {
+        foreach ($attach as $a) {        
+          echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
+        }
+      }
+      
+      echo "<li>" . get_content($post->post_content) . "</li>";
+      
+      
+      echo "<li>&nbsp;</li>";
+    }
+    
+  }
+  echo "</ul>";
+}
 
 
 
