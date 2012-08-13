@@ -123,7 +123,23 @@
       </tr>
       <th><label>Statut</label></th>
         <td>
-          <input type="text" class="regular-text" value="<?php echo $item->status_id ?>" id="status_id" name="status_id">
+          <?php
+            $status = $wpdb->get_results(
+              "SELECT * FROM wp_shopper_order_status"
+            );
+            if (isset($status)) { ?>
+              <select id="status_id" name="status_id">
+              <?php foreach ($status as $s) {
+                if ($s->id == $item->status_id) {
+                  $selected = "selected";
+                } else {
+                  $selected = '';
+                } ?>
+                <option <?php echo $selected ?> value="<?php echo $s->id ?>"><?php echo $s->name ?></option>
+              <?php }
+            } else { ?>
+              <input type="text" class="regular-text" value="<?php echo $item->status_id ?>" id="status_id" name="status_id">
+          <?php } ?>              
         </td>
     </tbody>
   </table>

@@ -62,10 +62,10 @@ class Orders_Table extends WP_List_Table {
         // Edit link
         $link = "<a href='?page=shopper-customers&action=edit&profile=" . $profile[0]->id . "' title='Modificare cumparator'>";
         
-        if ($profile[0]->name != '') {
+        if (isset($profile[0]->name) && ($profile[0]->name != '')) {
           return $link . $profile[0]->name . "</a>";
         } else {
-          return $link . $profile[0]->name . "</a>";
+          return $link . $profile[0]->email . "</a>";
         }        
       case 'products':
         $products = $wpdb->get_results(
@@ -80,7 +80,7 @@ class Orders_Table extends WP_List_Table {
           return $counter . ' produs';
         } else {
           return $counter . ' produse';
-        }
+        }        
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
@@ -91,9 +91,21 @@ class Orders_Table extends WP_List_Table {
     $actions = array(
         'edit'      => sprintf('<a href="?page=%s&action=%s&order=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
     );    
-    //Return the title contents
+    
+    global $wpdb;
+    $status = $wpdb->get_results(
+      "SELECT * FROM wp_shopper_order_status " .
+      "WHERE id = " . $item->status_id
+    ); 
+    if (isset($status[0])) {
+      $ret = $status[0]->name;        
+    } else {
+      $ret = $item->$column_name;
+    }
+    
+    
     return sprintf('%1$s %2$s',
-        /*$1%s*/ $item->status_id,
+        /*$1%s*/ $ret,
         /*$3%s*/ $this->row_actions($actions)
     );
   }

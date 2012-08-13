@@ -44,6 +44,7 @@ function shopper_admin_menu() {
   add_menu_page('Dashboard', 'Shopper', 'delete_others_posts', 'shopper-menu', 'shopper_main_page' );   
   add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
   add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-customers", "shopper_customers_page");  
+  add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-status", "shopper_status_page");  
 } 
 add_action('admin_menu', 'shopper_admin_menu');
 
@@ -59,7 +60,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'checkout.php');
 
 include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-customers.php');
-
+include_once(plugin_dir_path( __FILE__ ) . 'admin-status.php');
 
 
 
@@ -71,6 +72,7 @@ function shopper_main_page() {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
   }   
 }
+
 
 
 // Orders
@@ -104,6 +106,31 @@ function shopper_orders_page() {
   
   <?php }
 }
+
+
+// Status
+// --------------------------------------------------------------------------------
+
+function shopper_status_page() {
+  if (!current_user_can('delete_others_posts'))  {
+    wp_die( 'Nu aveti drepturi suficiente de acces.' );
+  } 
+  
+  
+  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
+    include(plugin_dir_path( __FILE__ ) . 'admin-status-edit.php');
+  } else { ?>  
+    <div id="shopper-status">
+      <h1>Statut comanda si trimitere email</h1>   
+      
+      <?php
+        $status = new Status_Table();
+        $status->prepare_items();
+        $status->display();
+      ?>
+  <?php }
+}
+
 
 
 // Customers
@@ -176,7 +203,7 @@ function shopper_tables() {
       phone VARCHAR(20),
       name VARCHAR(255),
       address VARCHAR(255),
-      city VARCHAR(120)
+      city VARCHAR(120),
       PRIMARY KEY (id),
       UNIQUE KEY email (email)
   );";  
@@ -220,6 +247,8 @@ function shopper_tables() {
   $sql = "CREATE TABLE $table (
       id INT(9) NOT NULL AUTO_INCREMENT,
       name VARCHAR(32),
+      email_subject VARCHAR(255),
+      email_body VARCHAR(1200),
       PRIMARY KEY (id)
   );";  
   dbDelta($sql); 
