@@ -100,7 +100,16 @@
       <tr>
         <th><label>Livrare</label></th>
         <td>
-          <?php echo $item->delivery_id; ?>
+          <?php
+            $d = $wpdb->get_results(
+              "SELECT * FROM wp_shopper_order_delivery WHERE id = " . $item->delivery_id
+            );
+            if (isset($d)) {
+              echo $d[0]->name . ', ' . $d[0]->description . ', ' . $d[0]->price . ' RON, ' . $d[0]->duration;
+            } else {
+              echo $item->delivery_id;
+            }
+          ?>
         </td>
       </tr>
       <tr>

@@ -45,6 +45,7 @@ function shopper_admin_menu() {
   add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
   add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-customers", "shopper_customers_page");  
   add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-status", "shopper_status_page");  
+  add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-delivery", "shopper_delivery_page");  
 } 
 add_action('admin_menu', 'shopper_admin_menu');
 
@@ -61,6 +62,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'checkout.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-customers.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-status.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-delivery.php');
 
 
 
@@ -104,6 +106,30 @@ function shopper_orders_page() {
       </form>  
     </div>
   
+  <?php }
+}
+
+
+// Delivery
+// --------------------------------------------------------------------------------
+
+function shopper_delivery_page() {
+  if (!current_user_can('delete_others_posts'))  {
+    wp_die( 'Nu aveti drepturi suficiente de acces.' );
+  } 
+  
+  
+  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
+    include(plugin_dir_path( __FILE__ ) . 'admin-delivery-edit.php');
+  } else { ?>  
+    <div id="shopper-delivery">
+      <h1>Livrare comanda</h1>   
+      
+      <?php
+        $delivery = new Delivery_Table();
+        $delivery->prepare_items();
+        $delivery->display();
+      ?>
   <?php }
 }
 
