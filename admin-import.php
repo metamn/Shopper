@@ -34,7 +34,7 @@ function import_posts() {
 
   
   $posts = $old->get_results(
-  "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post'"
+  "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' LIMIT 100"
   );
 
   echo "<ul>";
@@ -56,11 +56,13 @@ function import_posts() {
     if ($product_id != '') {
       echo "<li><h1>" . $post->post_title . " ( " . $product_id . ")" . "</h1></li>";
       
+      // Product
       $product = get_product($product_id);
       echo "<li>&nbsp;Name: " . $product->name . "</li>";
       echo "<li>&nbsp;Price: " . $product->price . "</li>";
       echo "<li>&nbsp;Sale Price: " . $product->special_price . "</li>";
       
+      // Variations
       $vars = get_variations($product_id);
       if ($vars) {
         foreach ($vars as $v) {        
@@ -70,6 +72,7 @@ function import_posts() {
         }
       }
       
+      // Attachments
       $attach = get_attachments($post->ID);
       if ($attach) {
         foreach ($attach as $a) {        
@@ -77,8 +80,17 @@ function import_posts() {
         }
       }
       
+      // Content
       echo "<li>" . get_content($post->post_content) . "</li>";
       
+      
+      // Comments
+      $comms = get_comments2($post->ID);
+      if ($comms) {
+        foreach ($comms as $c) {        
+          echo "<li>&nbsp;Comment: " . $c->comment_content . "</li>";        
+        }
+      }
       
       echo "<li>&nbsp;</li>";
     }
@@ -138,5 +150,17 @@ function get_content($content) {
     return $s[0];
   }
 }
+
+// Get comments
+function get_comments2($id) {
+  global $old;
+  $ret = $old->get_results(
+    "SELECT * FROM wp_cp53mf_comments WHERE comment_post_id = " . $id . " AND " .
+    "comment_approved = 1"
+  );
+  
+  return $ret;  
+}
+
 
 ?>
