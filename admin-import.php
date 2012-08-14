@@ -20,7 +20,7 @@
 
 
 if ($_POST) {
-  if ($_POST['import'] == 'posts') { import_posts(); }
+  if ($_POST['import'] == 'posts') { shopper_import_posts(); }
 }
 
 
@@ -28,13 +28,110 @@ if ($_POST) {
 // ----------------------------------------------------------------
 
 
-function import_posts() {
+// Does the import, really
+function shopper_import_posts() {
+  global $old;
+  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+
+  // Get all published posts
+  $posts = $old->get_results(
+    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' AND post_status = 'publish' LIMIT 1"
+  );
+  
+  foreach ($posts as $post) {
+    
+    // Check if it is a product
+    $meta = $old->get_results(
+      "SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $post->ID . 
+      " AND meta_key = 'product_id'"
+    );
+    
+    $product_id = '';
+    if (isset($meta[0])) {
+      $product_id = $meta[0]->meta_value;
+    }
+    
+    if ($product_id != '') {
+      echo "<li>" . $post->post_title . " ( " . $product_id . ")" . "</li>";
+      
+      // Product
+      $product = shopper_import_get_product($product_id);      
+      
+      // Variations
+      $vars = shopper_import_get_variations($product_id);
+      if ($vars) {
+        foreach ($vars as $v) {        
+          if ($v->name != '') {
+            
+          }        
+        }
+      }
+      
+      // Content
+      $content = shopper_import_get_content($post->post_content);
+      
+      // Save
+      $id = shopper_import_save_post($post, $product, $vars, $content); 
+      echo "<br/>... post saved, id=$id";
+    }
+  }
+}
+
+
+
+
+// Save the post / product
+function shopper_import_save_post($post, $product, $vars, $content){
+  require_once(WP_CONTENT_DIR . '/../wp-config.php');
+  
+  // Remove old post id, otherwise it will not insert
+  // - http://codex.wordpress.org/Function_Reference/wp_insert_post
+  $post->ID = '';
+  
+  // Replace post content
+  $post->post_content = $content;
+  
+  // Create post  
+  $id = wp_insert_post($post);
+  
+  // Add product info as meta fields
+  add_post_meta($id, 'product_name', $product->name);
+  add_post_meta($id, 'product_description', $post->post_excerpt);
+  
+  // Add variations
+  $variations = array();
+  $i = 1;
+  foreach ($vars as $v) {
+    if ($v->name != '') {
+      $variation = array();
+      $variation['id'] = $i;
+      $variation['name'] = $v->name;
+      $variation['price'] = $v->price;
+      $variation['saleprice'] = '';
+      $variation['delivery'] = '';
+      $variation['image'] = '';
+      
+      $variations[] = $variation;
+      $i++; 
+    }
+  }
+  add_post_meta($id, 'product_variations', $variations);
+  
+  return $id;
+}
+
+
+
+
+// Displays the imported posts
+// - used to understand the real import
+function shopper_import_display_import_posts() {
   global $old;
   $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
 
   
   $posts = $old->get_results(
-  "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' LIMIT 100"
+    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' LIMIT 100"
   );
 
   echo "<ul>";
@@ -57,13 +154,13 @@ function import_posts() {
       echo "<li><h1>" . $post->post_title . " ( " . $product_id . ")" . "</h1></li>";
       
       // Product
-      $product = get_product($product_id);
+      $product = shopper_import_get_product($product_id);
       echo "<li>&nbsp;Name: " . $product->name . "</li>";
       echo "<li>&nbsp;Price: " . $product->price . "</li>";
       echo "<li>&nbsp;Sale Price: " . $product->special_price . "</li>";
       
       // Variations
-      $vars = get_variations($product_id);
+      $vars = shopper_import_get_variations($product_id);
       if ($vars) {
         foreach ($vars as $v) {        
           if ($v->name != '') {
@@ -73,7 +170,7 @@ function import_posts() {
       }
       
       // Attachments
-      $attach = get_attachments($post->ID);
+      $attach = shopper_import_get_attachments($post->ID);
       if ($attach) {
         foreach ($attach as $a) {        
           echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
@@ -81,11 +178,11 @@ function import_posts() {
       }
       
       // Content
-      echo "<li>" . get_content($post->post_content) . "</li>";
+      echo "<li>" . shopper_import_get_content($post->post_content) . "</li>";
       
       
       // Comments
-      $comms = get_comments2($post->ID);
+      $comms = shopper_import_get_comments2($post->ID);
       if ($comms) {
         foreach ($comms as $c) {        
           echo "<li>&nbsp;Comment: " . $c->comment_content . "</li>";        
@@ -102,7 +199,7 @@ function import_posts() {
 
 
 // Get the product
-function get_product($id) {  
+function shopper_import_get_product($id) {  
   global $old;
   $product = $old->get_results(
     "SELECT * FROM wp_cp53mf_wpsc_product_list WHERE id = " . $id
@@ -112,7 +209,7 @@ function get_product($id) {
 }
 
 // Get product variations
-function get_variations($id) {  
+function shopper_import_get_variations($id) {  
   global $old;
   $ret = $old->get_results(
     "SELECT * FROM wp_cp53mf_wpsc_variation_values_assoc AS a, ".
@@ -128,7 +225,7 @@ function get_variations($id) {
 }
 
 // Get attachments
-function get_attachments($id) {
+function shopper_import_get_attachments($id) {
   global $old;
   $ret = $old->get_results(
     "SELECT * FROM wp_cp53mf_posts WHERE post_parent = " . $id . " AND " .
@@ -140,7 +237,7 @@ function get_attachments($id) {
 
 
 // Get post content
-function get_content($content) {
+function shopper_import_get_content($content) {
   $s = explode("<h3>Intrebari frecvente</h3>", $content);
   if ($s[0]) {
     $s2 = explode("<h3>Opiniile cumparatorilor</h3>", $s[0]);
@@ -152,7 +249,7 @@ function get_content($content) {
 }
 
 // Get comments
-function get_comments2($id) {
+function shopper_import_get_comments2($id) {
   global $old;
   $ret = $old->get_results(
     "SELECT * FROM wp_cp53mf_comments WHERE comment_post_id = " . $id . " AND " .
