@@ -73,8 +73,11 @@ function shopper_import_posts() {
       // Images
       $attach = shopper_import_get_attachments($post->ID);
       
+      // Comments
+      $comms = shopper_import_get_comments2($post->ID);
+      
       // Save
-      $id = shopper_import_save_post($post, $product, $vars, $content, $attach); 
+      $id = shopper_import_save_post($post, $product, $vars, $content, $attach, $comms); 
       echo "<br/>... post saved, id=$id";
       
       
@@ -86,7 +89,7 @@ function shopper_import_posts() {
 
 
 // Save the post / product
-function shopper_import_save_post($post, $product, $vars, $content, $attach){
+function shopper_import_save_post($post, $product, $vars, $content, $attach, $comms){
   require_once(WP_CONTENT_DIR . '/../wp-config.php');
   
   // Remove old post id, otherwise it will not insert
@@ -130,6 +133,26 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach){
     $a->guid = str_replace("173.203.94.129", "www.smuff.ro", $a->guid);
     $aid = wp_insert_post($a);
     echo "<br/>... Attachment: $aid";
+  }
+  
+  // Comments
+  foreach ($comms as $c) {
+    $data = array(
+      'comment_post_ID' => $id,
+      'comment_author' => $c->comment_author,
+      'comment_author_email' => $c->comment_author_email,
+      'comment_author_url' => $c->comment_author_url,
+      'comment_content' => $c->comment_content,
+      'comment_type' => $c->comment_type,
+      'comment_parent' => $c->comment_parent,
+      'user_id' => $c->user_id,
+      'comment_author_IP' => $c->comment_author_IP,
+      'comment_agent' => $c->comment_agent,
+      'comment_date' => $c->comment_date,
+      'comment_approved' => $c->comment_approved,
+    );
+    $cid = wp_insert_comment($data);
+    echo "<br/>... Comment: $cid";
   }
   
   return $id;
