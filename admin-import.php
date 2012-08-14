@@ -32,10 +32,14 @@ if ($_POST) {
 function shopper_import_posts() {
   global $old;
   $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+  
+  // Drop existing data
+  shopper_import_drop_old_posts();
+  
 
   // Get all published posts
   $posts = $old->get_results(
-    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' AND post_status = 'publish' LIMIT 1"
+    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' AND post_status = 'publish'"
   );
   
   foreach ($posts as $post) {
@@ -108,21 +112,34 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
   
   // Add variations
   $variations = array();
-  $i = 1;
-  foreach ($vars as $v) {
-    if ($v->name != '') {
-      $variation = array();
-      $variation['id'] = $i;
-      $variation['name'] = $v->name;
-      $variation['price'] = $v->price;
-      $variation['saleprice'] = '';
-      $variation['delivery'] = '';
-      $variation['image'] = '';
-      
-      $variations[] = $variation;
-      $i++; 
+  if ($vars) {
+    $i = 1;
+    foreach ($vars as $v) {
+      if ($v->name != '') {
+        $variation = array();
+        $variation['id'] = $i;
+        $variation['name'] = $v->name;
+        $variation['price'] = $v->price;
+        $variation['saleprice'] = '';
+        $variation['delivery'] = '';
+        $variation['image'] = '';
+        
+        $variations[] = $variation;
+        $i++; 
+      }
     }
+  } else {
+    $variation = array();
+    $variation['id'] = 1;
+    $variation['name'] = 'default';
+    $variation['price'] = $product->price;
+    $variation['saleprice'] = '';
+    $variation['delivery'] = '';
+    $variation['image'] = '';
+    
+    $variations[] = $variation;  
   }
+  
   add_post_meta($id, 'product_variations', $variations);
   
   // Attachments
@@ -159,6 +176,19 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
 }
 
 
+
+// Drop posts, postmeta and comments
+// - to clean up the db
+// - this was done manually before every import
+function shopper_import_drop_old_posts() {
+  global $wpdb;
+  
+  $ret = $wpdb->query( 
+    $wpdb->prepare( 
+      "DELETE * FROM wp_comments, wp_posts, wp_postmeta"
+    )
+  );
+}
 
 
 // Displays the imported posts
