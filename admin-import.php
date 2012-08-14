@@ -21,7 +21,111 @@
 
 if ($_POST) {
   if ($_POST['import'] == 'posts') { shopper_import_posts(); }
+  if ($_POST['import'] == 'orders') { shopper_import_orders(); }
 }
+
+
+
+// Orders
+// ----------------------------------------------------------------
+
+
+// Does the import, really
+function shopper_import_orders() {
+  global $old;
+  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+  
+  // Get orders
+  $orders = $old->get_results(
+    "SELECT * FROM wp_cp53mf_wpsc_purchase_logs"
+  );
+  
+  foreach ($orders as $order) {
+    // Load order items
+    $items = shopper_import_order_items($order->id);
+    foreach ($items as $item) {
+      // Match old product with new 
+      $match = shopper_import_orders_get_product($item->name);
+      if ($match) {
+        $product = shopper_product($match['post_id']);
+        //print_r($product);
+        echo "<br/>Product: " . $product->name;
+        echo "<br/>Variation: " . $product->variations[$match['variation_id']-1]['name'];        
+        echo "<br/>";
+      }
+    }  
+  }
+
+}
+
+
+// Load order items
+function shopper_import_order_items($id){
+  global $old;
+  
+  $items = $old->get_results(
+    "SELECT * FROM wp_cp53mf_wpsc_cart_contents WHERE purchaseid = " . $id
+  );
+
+  return $items;
+}
+
+// Match old order items (form WPSC) with new products (to Shopper)
+// - returns the post_id from Shopper and the variation_id of the product associated
+function shopper_import_orders_get_product($name) {
+  // Try to separate variation from name
+  // - ex.: Lounge book (red)
+  $variation = '';
+  $s = explode('(', $name);
+  if (isset($s[0])) {
+    $name = $s[0];
+    if (isset($s[1])) {
+      $s1 = explode(')', $s[1]);
+      $variation = $s1[0];
+    }    
+  }
+  //echo "<br/>product: $name";
+  //echo "<br/>variation: $variation";
+  
+  
+  // Search post meta to get post id
+  global $wpdb;
+  $postmeta = $wpdb->get_results(
+    "SELECT * FROM wp_postmeta WHERE meta_key = 'product_name' AND " .
+    "meta_value = '" . $name . "'"
+  );
+  
+  if ($postmeta) {
+    $post_id = $postmeta[0]->post_id;
+    // Search post meta for variation
+    $variation = $wpdb->get_results(
+      "SELECT meta_value FROM wp_postmeta WHERE post_id = '" . $post_id . "' " .
+      "AND meta_key = 'product_variations'"
+    );
+    
+    $variation_id = '1';
+    if ($variation) {
+      foreach ($variation as $var) {
+        // var is a database row, we need just the meta value
+        $va = maybe_unserialize($var->meta_value);
+        // after unserialization we need the values of the first array
+        $v = $va[0];
+        //print_r($v);
+        if ($v['name'] == $variation) {
+          $variation_id = $v['id'];
+          break;
+        }
+      }      
+    }
+    
+    return array(
+      'post_id' => $post_id,
+      'variation_id' => $variation_id
+    );
+  }
+}
+
+
 
 
 // Posts
@@ -35,7 +139,6 @@ function shopper_import_posts() {
   
   // Drop existing data
   shopper_import_drop_old_posts();
-  
 
   // Get all published posts
   $posts = $old->get_results(
@@ -183,9 +286,21 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
 function shopper_import_drop_old_posts() {
   global $wpdb;
   
-  $ret = $wpdb->query( 
+  $wpdb->query( 
     $wpdb->prepare( 
-      "DELETE * FROM wp_comments, wp_posts, wp_postmeta"
+      "TRUNCATE TABLE wp_comments"
+    )
+  );
+  
+  $wpdb->query( 
+    $wpdb->prepare( 
+      "TRUNCATE TABLE wp_posts"
+    )
+  );
+  
+  $wpdb->query( 
+    $wpdb->prepare( 
+      "TRUNCATE TABLE wp_postmeta"
     )
   );
 }
