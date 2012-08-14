@@ -70,9 +70,14 @@ function shopper_import_posts() {
       // Content
       $content = shopper_import_get_content($post->post_content);
       
+      // Images
+      $attach = shopper_import_get_attachments($post->ID);
+      
       // Save
-      $id = shopper_import_save_post($post, $product, $vars, $content); 
+      $id = shopper_import_save_post($post, $product, $vars, $content, $attach); 
       echo "<br/>... post saved, id=$id";
+      
+      
     }
   }
 }
@@ -81,7 +86,7 @@ function shopper_import_posts() {
 
 
 // Save the post / product
-function shopper_import_save_post($post, $product, $vars, $content){
+function shopper_import_save_post($post, $product, $vars, $content, $attach){
   require_once(WP_CONTENT_DIR . '/../wp-config.php');
   
   // Remove old post id, otherwise it will not insert
@@ -116,6 +121,16 @@ function shopper_import_save_post($post, $product, $vars, $content){
     }
   }
   add_post_meta($id, 'product_variations', $variations);
+  
+  // Attachments
+  // - slicehost ip must be replaced with smuff: http://173.203.94.129/wp-content/uploads/2006/11/ceas-binar-samui-moon7.jpg
+  foreach ($attach as $a) {
+    $a->ID = '';
+    $a->post_parent = $id;
+    $a->guid = str_replace("173.203.94.129", "www.smuff.ro", $a->guid);
+    $aid = wp_insert_post($a);
+    echo "<br/>... Attachment: $aid";
+  }
   
   return $id;
 }

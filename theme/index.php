@@ -26,6 +26,22 @@ get_header(); ?>
 
 					<?php get_template_part( 'content', get_post_format() ); ?>
 					
+					<?php 
+					  $args = array(
+	            'post_type' => 'attachment',
+	            'numberposts' => -1,
+	            'post_status' => null,
+	            'post_parent' => $post->ID,
+	            'orderby' => 'menu_order',
+	            'order' => 'ASC'
+            ); 
+            $imgs = get_posts($args);
+            echo "<br/>" . count($imgs) . " images<br/>";
+					  foreach ($imgs as $img) {?>
+					     <img width="400px" height="auto" src="<?php echo $img->guid ?>" />
+					  <?php break; }					
+					?>
+					
 					<?php echo shopper_product($post->ID)->name; ?>
 					<?php echo shopper_add_to_cart_form($post->ID); ?>
 					<?php echo shopper_checkout_form(); ?>
