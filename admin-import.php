@@ -28,9 +28,167 @@ if ($_POST) {
 // Orders
 // ----------------------------------------------------------------
 
-
-// Does the import, really
+// Do the import
 function shopper_import_orders() {
+  global $old;
+  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+  
+  // Drop existing data
+  shopper_import_drop_old_profiles_and_orders();
+  
+  // Get orders
+  $orders = $old->get_results(
+    "SELECT * FROM wp_cp53mf_wpsc_purchase_logs ORDER BY id"
+  );
+  
+  foreach ($orders as $order) {
+    // Load and save buyer info
+    $customer = shopper_import_order_customer($order->id);
+    $c = shopper_import_save_customer($customer);
+    echo "<br/>Customer saved ... $c";
+    
+    // Save order
+    $sanitized_order = shopper_import_sanitize_order($order);
+    $o = shopper_import_save_order($sanitized_order, $c);
+    echo "<br/>Order saved ... $o";
+    
+    // Load order items
+    $items = shopper_import_order_items($order->id);
+    foreach ($items as $item) {
+      // Match old product with new 
+      $match = shopper_import_orders_get_product($item->name);
+      if ($match) {
+        // Get the product
+        $product = shopper_product($match['post_id']);  
+        $i = shopper_import_save_order_items($o, $product, $item, $match);      
+        echo "<br/>Item saved ... $i";        
+      }
+    }
+    echo "<br/>";
+  }
+}
+
+
+// Save order items
+function shopper_import_save_order_items($orderid, $product, $wpec, $match) {
+  global $wpdb;
+  $ret = $wpdb->query( 
+    $wpdb->prepare( 
+      "INSERT INTO wp_shopper_order_items
+       (order_id, product_post_id, product_name, product_qty, product_variation_id, product_price)
+       VALUES (%s, %s, %s, %s, %s, %s)
+      ", 
+      array($order->id, $product->post_id, $product->name, $wpec->quantity, 
+        $product->variations[$match['variation_id']-1]['id'], 
+        $product->variations[$match['variation_id']-1]['name'], $wpec->price
+      )
+    )
+  );
+  
+  return $ret; 
+}
+
+// Sanitize order
+// - transform WPEC data into Shopper
+function shopper_import_sanitize_order($order) {
+  // Delivery
+  $d = $order->shipping_option;
+  
+  $s = explode("Posta Romana", $d);
+  if ($s[0]) {
+    $order->delivery_id = 1;
+  }
+  
+  $s = explode("Fan Courier, cu plata la livrare 24 ore", $d);
+  if ($s[0]) {
+    $order->delivery_id = 2;
+  }
+  
+  $s = explode("Fan Courier, cu plata prin transfer bancar in avans 1-2 zile", $d);
+  if ($s[0]) {
+    $order->delivery_id = 3;
+  }
+  
+  $s = explode("Ridicare din sediul Tg. Mures", $d);
+  if ($s[0]) {
+    $order->delivery_id = 4;
+  }
+  $order->delivery = $order->base_shipping;
+  
+  
+  // Discount
+  $order->discount_id = $order->discount_data;
+  $order->discount = $order->discount_value;
+  
+  // Total
+  $order->grand_total = $order->totalprice;
+  $order->total = $order->grand_total - $order->discount;
+  
+  // Status
+  $order->status_id = $order->processed;
+}
+
+
+// Add a new order
+function shopper_import_save_order($order, $profile_id) {
+  global $wpdb;
+  $ret = $wpdb->query( 
+    $wpdb->prepare( 
+      "INSERT INTO wp_shopper_orders
+       (old_id, profile_id, delivery_id, delivery, status_id, discount_id, total, grand_total)
+       VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+      ", 
+      array($order->id, $$profile_id, $order->delivery_id, $order->delivery, $order->status_id, $order->discount_id, $order->total, $order->grand_total)
+    )
+  );
+  
+  return $ret;  
+}
+
+
+// Add a new customer
+// - if there is already a customer added ignore ...
+function shopper_import_save_customer($customer) {
+  global $wpdb;
+  $ret = $wpdb->query( 
+    $wpdb->prepare( 
+      "INSERT IGNORE INTO wp_shopper_profiles
+      (name, email, phone, address, city)
+      VALUES (%s, %s, %s, %s, %s)", 
+      array($customer['name'], $customer['email'], $customer['phone'], $customer['address'], $customer['city'])
+    )
+  );
+  
+  return $ret;  
+}
+
+
+// Drop old customer dat
+function shopper_import_drop_old_profiles_and_orders() {
+  global $wpdb;
+  
+  $wpdb->query( 
+    $wpdb->prepare( 
+      "TRUNCATE TABLE wp_shopper_profiles"
+    )
+  );
+  
+  $wpdb->query( 
+    $wpdb->prepare( 
+      "TRUNCATE TABLE wp_shopper_orders"
+    )
+  );
+  
+  $wpdb->query( 
+    $wpdb->prepare( 
+      "TRUNCATE TABLE wp_shopper_order_items"
+    )
+  );
+}
+
+
+// Displaying order, to check before the real import
+function shopper_import_display_orders() {
   global $old;
   $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
   
@@ -57,7 +215,8 @@ function shopper_import_orders() {
         //print_r($product);
         echo "<br/>&nbsp;&nbsp;Product: " . $product->name;
         echo "<br/>&nbsp;&nbsp;Variation: " . $product->variations[$match['variation_id']-1]['name'];
-        echo "<br/>&nbsp;&nbsp;Price: " . $product->variations[$match['variation_id']-1]['price'];
+        //echo "<br/>&nbsp;&nbsp;Price: " . $product->variations[$match['variation_id']-1]['price'];
+        echo "<br/>&nbsp;&nbsp;Quantity: " . $item->price;        
         echo "<br/>&nbsp;&nbsp;Quantity: " . $item->quantity;        
         echo "<br/>";
       }
@@ -253,6 +412,7 @@ function shopper_import_posts() {
 
 
 // Save the post / product
+// - it is done via the WP API not direct SQL insert
 function shopper_import_save_post($post, $product, $vars, $content, $attach, $comms){
   require_once(WP_CONTENT_DIR . '/../wp-config.php');
   

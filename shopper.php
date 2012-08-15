@@ -271,8 +271,10 @@ function shopper_tables() {
   $table = $wpdb->prefix . "shopper_orders";
   $sql = "CREATE TABLE $table (
       id INT(9) NOT NULL AUTO_INCREMENT,
+      old_id INT(9) NOT NULL,
       profile_id INT(9) NOT NULL,
       delivery_id INT(9),
+      delivery VARCHAR(20), 
       status_id INT(9),
       discount_id INT(9),      
       date TIMESTAMP,
