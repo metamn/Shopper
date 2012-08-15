@@ -13,14 +13,13 @@
 
 
 // Imports
-// 1. posts, products, variations, images
-// 2. comments and pingbacks
+// 1. posts, products, variations, images, comments and pingbacks
 // 3. orders and customers
 
 
 
 if ($_POST) {
-  if ($_POST['import'] == 'posts') { shopper_import_posts(); }
+  if ($_POST['import'] == 'posts') { shopper_import_display_posts(); }
   if ($_POST['import'] == 'orders') { shopper_import_orders(); }
 }
 
@@ -50,7 +49,9 @@ function shopper_import_orders() {
         $product = shopper_product($match['post_id']);
         //print_r($product);
         echo "<br/>Product: " . $product->name;
-        echo "<br/>Variation: " . $product->variations[$match['variation_id']-1]['name'];        
+        echo "<br/>Variation: " . $product->variations[$match['variation_id']-1]['name'];
+        echo "<br/>Price: " . $product->variations[$match['variation_id']-1]['price'];
+        echo "<br/>Quantity: " . $item->quantity;        
         echo "<br/>";
       }
     }  
@@ -71,7 +72,7 @@ function shopper_import_order_items($id){
 }
 
 // Match old order items (form WPSC) with new products (to Shopper)
-// - returns the post_id from Shopper and the variation_id of the product associated
+// - returns the post_id, variation_id and quantity 
 function shopper_import_orders_get_product($name) {
   // Try to separate variation from name
   // - ex.: Lounge book (red)
@@ -166,14 +167,7 @@ function shopper_import_posts() {
       
       // Variations
       $vars = shopper_import_get_variations($product_id);
-      if ($vars) {
-        foreach ($vars as $v) {        
-          if ($v->name != '') {
             
-          }        
-        }
-      }
-      
       // Content
       $content = shopper_import_get_content($post->post_content);
       
@@ -308,13 +302,13 @@ function shopper_import_drop_old_posts() {
 
 // Displays the imported posts
 // - used to understand the real import
-function shopper_import_display_import_posts() {
+function shopper_import_display_posts() {
   global $old;
   $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
 
   
   $posts = $old->get_results(
-    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' LIMIT 100"
+    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post'"
   );
 
   echo "<ul>";
@@ -339,8 +333,8 @@ function shopper_import_display_import_posts() {
       // Product
       $product = shopper_import_get_product($product_id);
       echo "<li>&nbsp;Name: " . $product->name . "</li>";
-      echo "<li>&nbsp;Price: " . $product->price . "</li>";
-      echo "<li>&nbsp;Sale Price: " . $product->special_price . "</li>";
+      //echo "<li>&nbsp;Price: " . $product->price . "</li>";
+      //echo "<li>&nbsp;Sale Price: " . $product->special_price . "</li>";
       
       // Variations
       $vars = shopper_import_get_variations($product_id);
@@ -356,19 +350,19 @@ function shopper_import_display_import_posts() {
       $attach = shopper_import_get_attachments($post->ID);
       if ($attach) {
         foreach ($attach as $a) {        
-          echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
+          //echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
         }
       }
       
       // Content
-      echo "<li>" . shopper_import_get_content($post->post_content) . "</li>";
+      //echo "<li>" . shopper_import_get_content($post->post_content) . "</li>";
       
       
       // Comments
       $comms = shopper_import_get_comments2($post->ID);
       if ($comms) {
         foreach ($comms as $c) {        
-          echo "<li>&nbsp;Comment: " . $c->comment_content . "</li>";        
+          //echo "<li>&nbsp;Comment: " . $c->comment_content . "</li>";        
         }
       }
       
@@ -394,6 +388,7 @@ function shopper_import_get_product($id) {
 // Get product variations
 function shopper_import_get_variations($id) {  
   global $old;
+  /*
   $ret = $old->get_results(
     "SELECT * FROM wp_cp53mf_wpsc_variation_values_assoc AS a, ".
     "wp_cp53mf_wpsc_variation_values AS v, ".
@@ -402,8 +397,16 @@ function shopper_import_get_variations($id) {
     "p.id = a.value_id AND " .
     "v.id = a.value_id"
   );
+  */
   
-  //print_r($ret);
+  $ret = $old->get_results(
+    "SELECT * FROM wp_cp53mf_wpsc_variation_combinations " .
+    "JOIN wp_cp53mf_wpsc_variation_properties ON wp_cp53mf_wpsc_variation_combinations.priceandstock_id = wp_cp53mf_wpsc_variation_properties.id " .
+    "JOIN wp_cp53mf_wpsc_variation_values ON wp_cp53mf_wpsc_variation_combinations.value_id = wp_cp53mf_wpsc_variation_values.id " .
+    "WHERE wp_cp53mf_wpsc_variation_combinations.product_id = " . $id
+  );
+  
+  // print_r($ret);
   return $ret;  
 }
 
