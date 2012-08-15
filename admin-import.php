@@ -36,10 +36,17 @@ function shopper_import_orders() {
   
   // Get orders
   $orders = $old->get_results(
-    "SELECT * FROM wp_cp53mf_wpsc_purchase_logs"
+    "SELECT * FROM wp_cp53mf_wpsc_purchase_logs ORDER BY id"
   );
   
   foreach ($orders as $order) {
+    echo "<br/><br/>Order # : " . $order->id;
+    echo "<br/>Date: " . date("Y M d", $order->date);
+    echo "<br/>Total: " . $order->totalprice;
+    echo "<br/>Status: " . $order->processed;
+    echo "<br/>Shipping: " . $order->shipping_option . ", " . $order->base_shipping . " RON";
+    echo "<br/>Discount: " . $order->discount_value . ", " . $order->discount_data;
+    
     // Load order items
     $items = shopper_import_order_items($order->id);
     foreach ($items as $item) {
@@ -48,13 +55,22 @@ function shopper_import_orders() {
       if ($match) {
         $product = shopper_product($match['post_id']);
         //print_r($product);
-        echo "<br/>Product: " . $product->name;
-        echo "<br/>Variation: " . $product->variations[$match['variation_id']-1]['name'];
-        echo "<br/>Price: " . $product->variations[$match['variation_id']-1]['price'];
-        echo "<br/>Quantity: " . $item->quantity;        
+        echo "<br/>&nbsp;&nbsp;Product: " . $product->name;
+        echo "<br/>&nbsp;&nbsp;Variation: " . $product->variations[$match['variation_id']-1]['name'];
+        echo "<br/>&nbsp;&nbsp;Price: " . $product->variations[$match['variation_id']-1]['price'];
+        echo "<br/>&nbsp;&nbsp;Quantity: " . $item->quantity;        
         echo "<br/>";
       }
-    }  
+    } 
+    
+    // Load buyer info
+    $customer = shopper_import_order_customer($order->id);
+    if ($customer) {
+      foreach ($customer as $k => $v) {
+        echo "<br/>&nbsp;&nbsp$k: $v";
+      }
+      echo "<br/>";
+    }
   }
 
 }
@@ -124,6 +140,53 @@ function shopper_import_orders_get_product($name) {
       'variation_id' => $variation_id
     );
   }
+}
+
+
+// Get customer info from order
+function shopper_import_order_customer($id) {  
+  global $old;
+  $info = $old->get_results(
+    "SELECT * FROM wp_cp53mf_wpsc_submited_form_data WHERE log_id = " . $id
+  );
+  
+  $ret = array(
+    'name' => '',
+    'address' => '',
+    'city' => '',
+    'email' => '',
+    'phone' => ''
+  );
+
+  if ($info) {
+    foreach ($info as $i) {
+      switch ($i->form_id) {
+        case '2':
+          $ret['name'] .= $i->value . " ";
+          break;
+        case '3':
+          $ret['name'] .= $i->value . " ";
+          break;
+        case '4':
+          $ret['address'] = $i->value;
+          break;
+        case '5':
+          $ret['city'] = $i->value;
+          break;
+        case '8':
+          $ret['email'] = $i->value;
+          break;
+        case '16':
+          $ret['phone'] = $i->value;
+          break;
+        case '17':
+          $ret['phone'] = $i->value;
+          break;
+      }
+    }
+  }
+  
+  return $ret;
 }
 
 
