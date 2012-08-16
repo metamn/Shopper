@@ -103,7 +103,7 @@ function shopper_orders_page() {
       ?>
        
       <form method="post">
-        <input type="hidden" name="page" value="ttest_list_table">
+        <input type="hidden" name="page" value="shopper-orders">
         <?php
           $orders->search_box( 'Cautare', 'search_id' );
           $orders->display();
@@ -136,7 +136,7 @@ function shopper_customers_page() {
       ?>
        
       <form method="post">
-        <input type="hidden" name="page" value="ttest_list_table">
+        <input type="hidden" name="page" value="shopper-customers">
         <?php
           $customers->search_box( 'Cautare', 'search_id' );
           $customers->display();

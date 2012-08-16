@@ -89,7 +89,7 @@ class Orders_Table extends WP_List_Table {
   // Add Edit to Status
   function column_status_id($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&order=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+        'edit'      => sprintf('<a href="?page=%s&action=%s&order=%s">Edit</a>','shopper-orders','edit',$item->id),        
     );    
     
     global $wpdb;
