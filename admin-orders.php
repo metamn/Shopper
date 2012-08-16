@@ -113,7 +113,7 @@ class Orders_Table extends WP_List_Table {
   function get_sortable_columns() {
     $sortable_columns = array(
         'id'     => array('id', false),     //true means its already sorted
-        'date'    => array('date', false),
+        'date'    => array('date', true),
         'customer'  => array('customer', false),
         'status_id'  => array('status_id', false)
     );
@@ -146,11 +146,11 @@ class Orders_Table extends WP_List_Table {
       $end .= " 23:59:59";
       $data = $wpdb->get_results(
         "SELECT * FROM wp_shopper_orders " .
-        "WHERE date >= '" . $start . "' AND date <='" . $end . "'"      
+        "WHERE date >= '" . $start . "' AND date <='" . $end . "' ORDER BY date DESC"      
       );
     } else {
       $data = $wpdb->get_results(
-        "SELECT * FROM wp_shopper_orders ORDER BY id DESC"     
+        "SELECT * FROM wp_shopper_orders ORDER BY date DESC"     
       );
     }    
     //print_r($data);

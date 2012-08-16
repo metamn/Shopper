@@ -252,6 +252,7 @@ function shopper_tables() {
   
   // Profiles  
   // - a session can have many profiles associated, ie a visitor can buy from multiple emails
+  // - an email address can have many addresses
   $table = $wpdb->prefix . "shopper_profiles";
   $sql = "CREATE TABLE $table (
       id INT(9) NOT NULL AUTO_INCREMENT,
@@ -261,8 +262,7 @@ function shopper_tables() {
       name VARCHAR(255),
       address VARCHAR(255),
       city VARCHAR(120),
-      PRIMARY KEY (id),
-      UNIQUE KEY email (email)
+      PRIMARY KEY (id)
   );";  
   dbDelta($sql);
   

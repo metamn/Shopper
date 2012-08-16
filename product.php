@@ -179,6 +179,7 @@ function shopper_save_postdata( $post_id ) {
 function shopper_product($post_id) {
   $product = new stdClass();
   
+  $product->post_id = $post_id;
   $product->name = '';
   $product->description = '';
   $product->variations = '';

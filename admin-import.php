@@ -19,7 +19,7 @@
 
 
 if ($_POST) {
-  if ($_POST['import'] == 'posts') { shopper_import_display_posts(); }
+  if ($_POST['import'] == 'posts') { shopper_import_posts(); }
   if ($_POST['import'] == 'orders') { shopper_import_orders(); }
 }
 
@@ -27,6 +27,12 @@ if ($_POST) {
 
 // Orders
 // ----------------------------------------------------------------
+
+
+// Notes:
+// - There are plenty incomplete orders like no shipping cost or zero total costs
+// - There are products which changed their name during years
+
 
 // Do the import
 function shopper_import_orders() {
@@ -40,6 +46,10 @@ function shopper_import_orders() {
   $orders = $old->get_results(
     "SELECT * FROM wp_cp53mf_wpsc_purchase_logs ORDER BY id"
   );
+  
+  // Not saved items
+  // - some items changed their name during years ....
+  $not_saved = array();
   
   foreach ($orders as $order) {
     // Load and save buyer info
@@ -60,12 +70,21 @@ function shopper_import_orders() {
       if ($match) {
         // Get the product
         $product = shopper_product($match['post_id']);  
-        $i = shopper_import_save_order_items($o, $product, $item, $match);      
+        $i = shopper_import_save_order_items($o, $product, $item, $match);         
         echo "<br/>Item saved ... $i";        
+      } else {
+        echo "<br/>Item NOT saved! ... $i";
+        $not_saved[] = $product->name;
       }
     }
     echo "<br/>";
   }
+  
+  echo "<br/>Not saved items:";
+  foreach ($not_saved as $n) {
+    echo "<br/>" . $n;
+  }
+  
 }
 
 
@@ -75,17 +94,17 @@ function shopper_import_save_order_items($orderid, $product, $wpec, $match) {
   $ret = $wpdb->query( 
     $wpdb->prepare( 
       "INSERT INTO wp_shopper_order_items
-       (order_id, product_post_id, product_name, product_qty, product_variation_id, product_price)
-       VALUES (%s, %s, %s, %s, %s, %s)
+       (order_id, product_post_id, product_name, product_qty, product_variation_id, product_variation_name, product_price)
+       VALUES (%s, %s, %s, %s, %s, %s, %s)
       ", 
-      array($order->id, $product->post_id, $product->name, $wpec->quantity, 
+      array($orderid, $product->post_id, $product->name, $wpec->quantity, 
         $product->variations[$match['variation_id']-1]['id'], 
         $product->variations[$match['variation_id']-1]['name'], $wpec->price
       )
     )
   );
   
-  return $ret; 
+  return $wpdb->insert_id; 
 }
 
 // Sanitize order
@@ -94,6 +113,8 @@ function shopper_import_sanitize_order($order) {
   // Delivery
   $d = $order->shipping_option;
   
+  // There are some errors in the WPEC, ie orders without delivery
+  $order->delivery_id = 0;  
   $s = explode("Posta Romana", $d);
   if ($s[0]) {
     $order->delivery_id = 1;
@@ -126,6 +147,8 @@ function shopper_import_sanitize_order($order) {
   
   // Status
   $order->status_id = $order->processed;
+  
+  return $order;
 }
 
 
@@ -135,31 +158,33 @@ function shopper_import_save_order($order, $profile_id) {
   $ret = $wpdb->query( 
     $wpdb->prepare( 
       "INSERT INTO wp_shopper_orders
-       (old_id, profile_id, delivery_id, delivery, status_id, discount_id, total, grand_total)
-       VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+       (old_id, profile_id, delivery_id, delivery, status_id, discount_id, total, grand_total, date)
+       VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
       ", 
-      array($order->id, $$profile_id, $order->delivery_id, $order->delivery, $order->status_id, $order->discount_id, $order->total, $order->grand_total)
+      array($order->id, $profile_id, $order->delivery_id, $order->delivery, 
+        $order->status_id, $order->discount_id, $order->total, $order->grand_total,
+        date("Y-m-d H:i:s", $order->date))
     )
   );
   
-  return $ret;  
+  return $wpdb->insert_id;  
 }
 
 
 // Add a new customer
-// - if there is already a customer added ignore ...
+// - if there is already a customer we add anyway the (new) address ...
 function shopper_import_save_customer($customer) {
   global $wpdb;
-  $ret = $wpdb->query( 
+  $wpdb->query( 
     $wpdb->prepare( 
-      "INSERT IGNORE INTO wp_shopper_profiles
+      "INSERT INTO wp_shopper_profiles
       (name, email, phone, address, city)
       VALUES (%s, %s, %s, %s, %s)", 
       array($customer['name'], $customer['email'], $customer['phone'], $customer['address'], $customer['city'])
     )
   );
   
-  return $ret;  
+  return $wpdb->insert_id;  
 }
 
 
@@ -197,6 +222,9 @@ function shopper_import_display_orders() {
     "SELECT * FROM wp_cp53mf_wpsc_purchase_logs ORDER BY id"
   );
   
+  // Check whicg items could not be saved
+  $no_match = array();
+  
   foreach ($orders as $order) {
     echo "<br/><br/>Order # : " . $order->id;
     echo "<br/>Date: " . date("Y M d", $order->date);
@@ -205,8 +233,8 @@ function shopper_import_display_orders() {
     echo "<br/>Shipping: " . $order->shipping_option . ", " . $order->base_shipping . " RON";
     echo "<br/>Discount: " . $order->discount_value . ", " . $order->discount_data;
     
-    // Load order items
-    $items = shopper_import_order_items($order->id);
+    // Load order items    
+    $items = shopper_import_order_items($order->id);    
     foreach ($items as $item) {
       // Match old product with new 
       $match = shopper_import_orders_get_product($item->name);
@@ -219,8 +247,12 @@ function shopper_import_display_orders() {
         echo "<br/>&nbsp;&nbsp;Quantity: " . $item->price;        
         echo "<br/>&nbsp;&nbsp;Quantity: " . $item->quantity;        
         echo "<br/>";
+      } else {
+        $no_match[] = $item->name;
+        echo "<br>NO PRODUCT MATCH: " . $item->name . " <br/>";        
       }
     } 
+    
     
     // Load buyer info
     $customer = shopper_import_order_customer($order->id);
@@ -230,6 +262,12 @@ function shopper_import_display_orders() {
       }
       echo "<br/>";
     }
+  }
+  
+  //print_r($no_match);
+  echo "<br/>No match: ";
+  foreach ($no_match as $n) {
+    echo  "<br/>" . $n;
   }
 
 }
@@ -251,24 +289,69 @@ function shopper_import_order_items($id){
 function shopper_import_orders_get_product($name) {
   // Try to separate variation from name
   // - ex.: Lounge book (red)
-  $variation = '';
-  $s = explode('(', $name);
-  if (isset($s[0])) {
-    $name = $s[0];
-    if (isset($s[1])) {
-      $s1 = explode(')', $s[1]);
-      $variation = $s1[0];
-    }    
+  
+  if ($name == "Lumini Spa (6 buc.)") {
+    $name = "Lumini Spa (6 buc.)";
+    $variation = '';
+  } else {
+    $variation = '';
+    $s = explode('(', $name);
+    if (isset($s[0])) {
+      $name = $s[0];
+      if (isset($s[1])) {
+        $s1 = explode(')', $s[1]);
+        $variation = $s1[0];
+      }    
+    }
   }
+  
+  
+  
   //echo "<br/>product: $name";
   //echo "<br/>variation: $variation";
+  
+  // Some products changed their names through years
+  // - this is how to fix it:
+  
+  switch ($name) {
+    case 'Racoritor de vinuri':
+      $name = 'Racitor inteligent de vinuri';
+      break;
+    case 'Vinturi aerator profesional pentru vin':
+      $name = 'Decantus aerator profesional pentru vin';
+      break;
+    case 'Ceas Binar Slider SD227R':
+      $name = 'Ceas Binar Slider SD227R1 si SD102B1';
+      break;
+    case 'Sabia Laser Speciala FX ':
+      $name = 'Sabia Laser Ultimate FX ';
+      break;
+    case 'Robot Solar':
+      $name = 'Robot Solar T3';
+      break;
+    case 'Frolicat':
+      $name = 'Frolicat Dart 360';
+      break;  
+    case 'Borat bikini - Borat mankini ROZ':
+      $name = 'Borat bikini - Borat mankini';
+      break;
+    case 'Proiector iPhone 2':
+      $name = 'Proiector iPhone';
+      break;
+    case 'Scatecycle':
+      $name = 'SkateCycle';
+      break;
+    case 'Manusi Touchscreen':
+      $name = 'Manusi Sport Touchscreen';
+      break;
+  }
   
   
   // Search post meta to get post id
   global $wpdb;
   $postmeta = $wpdb->get_results(
-    "SELECT * FROM wp_postmeta WHERE meta_key = 'product_name' AND " .
-    "meta_value = '" . $name . "'"
+    'SELECT * FROM wp_postmeta WHERE meta_key = "product_name" AND ' .
+    'meta_value = "' . $name . '"'
   );
   
   if ($postmeta) {
