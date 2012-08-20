@@ -68,7 +68,11 @@ add_action('admin_menu', 'shopper_admin_menu');
 
 
 // Include parts of the plugin
-//
+
+// General admin functions
+// - it is like a framework (Rails) to display, edit, add, manage tables
+include_once(plugin_dir_path( __FILE__ ) . 'admin-general.php');
+
 include_once(plugin_dir_path( __FILE__ ) . 'session.php');
 include_once(plugin_dir_path( __FILE__ ) . 'cart.php');
 include_once(plugin_dir_path( __FILE__ ) . 'product.php');
@@ -112,32 +116,7 @@ function shopper_separator_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_orders_page() {
-  if (!current_user_can('delete_others_posts'))  {
-    wp_die( 'Nu aveti drepturi suficiente de acces.' );
-  } 
-  
-  
-  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
-    include(plugin_dir_path( __FILE__ ) . 'admin-orders-edit.php');
-  } else { ?>  
-    <div id="shopper-orders">
-      <h1>Comenzi</h1>   
-      
-      <?php
-        $orders = new Orders_Table();
-        $orders->prepare_items();
-      ?>
-       
-      <form method="post">
-        <input type="hidden" name="page" value="shopper-orders">
-        <?php
-          $orders->search_box( 'Cautare', 'search_id' );
-          $orders->display();
-        ?>
-      </form>  
-    </div>
-  
-  <?php }
+  shopper_admin_display_submenu_page("Comenzi", "orders", new Orders_Table(), true, true);
 }
 
 
@@ -146,31 +125,7 @@ function shopper_orders_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_customers_page() {
-  if (!current_user_can('delete_others_posts'))  {
-    wp_die( 'Nu aveti drepturi suficiente de acces.' );
-  } 
-  
-  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
-    include(plugin_dir_path( __FILE__ ) . 'admin-customers-edit.php');
-  } else { ?>
-    <div id="shopper-customers">
-      <h1>Cumparatori</h1>   
-      
-      <?php
-        $customers = new Customers_Table();
-        $customers->prepare_items();
-      ?>
-       
-      <form method="post">
-        <input type="hidden" name="page" value="shopper-customers">
-        <?php
-          $customers->search_box( 'Cautare', 'search_id' );
-          $customers->display();
-        ?>
-      </form>  
-    </div>
-  
-  <?php }
+  shopper_admin_display_submenu_page("Cumparatori", "customers", new Customers_Table(), true, true);
 }
 
 
@@ -179,23 +134,7 @@ function shopper_customers_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_delivery_page() {
-  if (!current_user_can('delete_others_posts'))  {
-    wp_die( 'Nu aveti drepturi suficiente de acces.' );
-  } 
-  
-  
-  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
-    include(plugin_dir_path( __FILE__ ) . 'admin-delivery-edit.php');
-  } else { ?>  
-    <div id="shopper-delivery">
-      <h1>Livrare comanda</h1>   
-      
-      <?php
-        $delivery = new Delivery_Table();
-        $delivery->prepare_items();
-        $delivery->display();
-      ?>
-  <?php }
+  shopper_admin_display_submenu_page("Livrare comanda", "delivery", new Delivery_Table(), false, true);
 }
 
 
@@ -203,23 +142,7 @@ function shopper_delivery_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_status_page() {
-  if (!current_user_can('delete_others_posts'))  {
-    wp_die( 'Nu aveti drepturi suficiente de acces.' );
-  } 
-  
-  
-  if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
-    include(plugin_dir_path( __FILE__ ) . 'admin-status-edit.php');
-  } else { ?>  
-    <div id="shopper-status">
-      <h1>Statut comanda si trimitere email</h1>   
-      
-      <?php
-        $status = new Status_Table();
-        $status->prepare_items();
-        $status->display();
-      ?>
-  <?php }
+  shopper_admin_display_submenu_page("Statut comanda si trimitere email", "status", new Status_Table(), false, true);
 }
 
 
@@ -250,6 +173,9 @@ function shopper_import_page() {
 }
 
 
+
+
+
 // Database tables
 // --------------------------------------------------------------------------------
 
@@ -262,6 +188,82 @@ function shopper_tables() {
   
   require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
   
+  
+  // Profiles  
+  // - stores customer and session profiles
+  // - id: the unique identifier
+  // - name, email, phone: they uniquely identify a person
+  $table = $wpdb->prefix . "shopper_profiles";
+  $sql = "CREATE TABLE $table (
+      id INT(9) NOT NULL AUTO_INCREMENT,
+      name VARCHAR(255),
+      email VARCHAR(120) NOT NULL,      
+      phone VARCHAR(20),
+      date TIMESTAMP,
+      PRIMARY KEY (id)
+  );";  
+  dbDelta($sql);
+  
+  
+  // Addresses
+  // - stores delivery, billing, etc addresses
+  // - profile_id: a profile can have many addresses
+  $table = $wpdb->prefix . "shopper_addresses";
+  $sql = "CREATE TABLE $table (
+      id INT(9) NOT NULL AUTO_INCREMENT,
+      profile_id INT(9) NOT NULL,
+      address VARCHAR(255),
+      city VARCHAR(100),
+      judet VARCHAR(100),
+      date TIMESTAMP,
+      PRIMARY KEY (id)
+  );";  
+  dbDelta($sql);
+  
+  
+  // Common, shared tables
+  //
+  
+  // Notes
+  // - stores any additional information to any other database tables
+  // - it is like comments in a blog to posts, pages
+  // - table_id: a profile, an order, etc can have (many) notes
+  // - entry_id: to which entry in a table this note belongs
+  $table = $wpdb->prefix . "shopper_notes";
+  $sql = "CREATE TABLE $table (
+      id INT(9) NOT NULL AUTO_INCREMENT,
+      table_id VARCHAR(100) NOT NULL,
+      entry_id INT(9) NOT NULL,
+      body VARCHAR(1200) NOT NULL,
+      date TIMESTAMP,
+      PRIMARY KEY (id)
+  );";  
+  dbDelta($sql);
+  
+  
+  // Changes / History
+  // - registers who, which internal user modified what
+  // - table_id: which table was modified
+  // - entry_id: which entry was modified
+  // - user_id: who did the modification
+  // - before: the original data
+  // - after: the modified data
+  $table = $wpdb->prefix . "shopper_changes";
+  $sql = "CREATE TABLE $table (
+      id INT(9) NOT NULL AUTO_INCREMENT,
+      table_id VARCHAR(100) NOT NULL,
+      entry_id INT(9) NOT NULL,
+      user_id INT(9) NOT NULL,
+      before VARCHAR(1200) NOT NULL,
+      after VARCHAR(1200) NOT NULL,
+      date TIMESTAMP,
+      PRIMARY KEY (id)
+  );";  
+  dbDelta($sql);
+  
+  
+  
+  
   // Sessions
   $table = $wpdb->prefix . "shopper_sessions";
   $sql = "CREATE TABLE $table (
@@ -272,23 +274,6 @@ function shopper_tables() {
       cart VARCHAR(1200),
       PRIMARY KEY (id),
       UNIQUE KEY cookie (cookie)
-  );";  
-  dbDelta($sql);
-  
-  
-  // Profiles  
-  // - a session can have many profiles associated, ie a visitor can buy from multiple emails
-  // - an email address can have many addresses
-  $table = $wpdb->prefix . "shopper_profiles";
-  $sql = "CREATE TABLE $table (
-      id INT(9) NOT NULL AUTO_INCREMENT,
-      session_id INT(9),
-      email VARCHAR(120),
-      phone VARCHAR(20),
-      name VARCHAR(255),
-      address VARCHAR(255),
-      city VARCHAR(120),
-      PRIMARY KEY (id)
   );";  
   dbDelta($sql);
   
