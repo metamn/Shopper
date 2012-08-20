@@ -21,6 +21,13 @@
 
 // Global variables
 //
+
+// form data
+define("FORM_TITLE_ADD", "Adaugare");
+define("FORM_TITLE_MODIFY", "Modificare");
+define("FORM_SUBMIT_ADD", "Adaugare");
+define("FORM_SUBMIT_MODIFY", "Salvare modificari");
+
 // the slug of the shopping cart page
 define("CART", 'cos-cumparaturi');
 define("CHECKOUT", 'confirmare-comanda');
@@ -71,7 +78,7 @@ add_action('admin_menu', 'shopper_admin_menu');
 
 // General admin functions
 // - it is like a framework (Rails) to display, edit, add, manage tables
-include_once(plugin_dir_path( __FILE__ ) . 'admin-general.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-framework.php');
 
 include_once(plugin_dir_path( __FILE__ ) . 'session.php');
 include_once(plugin_dir_path( __FILE__ ) . 'cart.php');
@@ -116,7 +123,8 @@ function shopper_separator_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_orders_page() {
-  shopper_admin_display_submenu_page("Comenzi", "orders", new Orders_Table(), true, true);
+  $orders = new Orders_Table();
+  shopper_admin_display_submenu_page("Comenzi", "orders", $orders, true, true, true);
 }
 
 
@@ -125,7 +133,8 @@ function shopper_orders_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_customers_page() {
-  shopper_admin_display_submenu_page("Cumparatori", "customers", new Customers_Table(), true, true);
+  $customers = new Customers_Table();
+  shopper_admin_display_submenu_page("Cumparatori", "customers", $customers, true, true, true);
 }
 
 
@@ -134,7 +143,7 @@ function shopper_customers_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_delivery_page() {
-  shopper_admin_display_submenu_page("Livrare comanda", "delivery", new Delivery_Table(), false, true);
+  shopper_admin_display_submenu_page("Livrare comanda", "delivery", new Delivery_Table(), true, false, true);
 }
 
 
@@ -142,7 +151,7 @@ function shopper_delivery_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_status_page() {
-  shopper_admin_display_submenu_page("Statut comanda si trimitere email", "status", new Status_Table(), false, true);
+  shopper_admin_display_submenu_page("Statut comanda si trimitere email", "status", new Status_Table(), true, false, true);
 }
 
 
