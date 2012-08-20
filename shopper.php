@@ -41,12 +41,26 @@ define("CONTACTABLE", 3);
 // Admin menu & Plugin init
 //
 function shopper_admin_menu() {  
-  add_menu_page('Dashboard', 'Shopper', 'delete_others_posts', 'shopper-menu', 'shopper_main_page' );   
+  add_menu_page('Dashboard', 'Shopper', 'delete_others_posts', 'shopper-menu', 'shopper_main_page' );     
+  
+  // This makes the first submenu to be 'Overview' instead of the default 'Shopper'
+  // - http://wordpress.stackexchange.com/questions/26499/naming-admin-menus-and-submenus
+  add_submenu_page("shopper-menu", "Overview", "Overview", 'delete_others_posts', "shopper-menu", "shopper_main_page");
+  
+  // Separator, hack
+  add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");  
+  
   add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
   add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-customers", "shopper_customers_page");  
   add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-status", "shopper_status_page");  
   add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-delivery", "shopper_delivery_page");  
+  
+  // Separator, hack
+  add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
+  
   add_submenu_page("shopper-menu", "Import", "Import", 'delete_others_posts', "shopper-import", "shopper_import_page");  
+  
+  
 } 
 add_action('admin_menu', 'shopper_admin_menu');
 
@@ -77,7 +91,19 @@ include_once(plugin_dir_path( __FILE__ ) . 'admin-delivery.php');
 function shopper_main_page() {
   if (!current_user_can('delete_others_posts'))  {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
-  }   
+  } ?>
+  
+  <h1>Overview</h1>
+  
+  <?php  
+}
+
+// This is an empty page corresponding to a separator in the Shopper menu
+// - this is a hack to insert separators in the plugin menu
+function shopper_separator_page() {
+  if (!current_user_can('delete_others_posts'))  {
+    wp_die( 'Nu aveti drepturi suficiente de acces.' );
+  }
 }
 
 
