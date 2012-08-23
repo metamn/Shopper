@@ -7,10 +7,10 @@
 
 // Displays a submenu page with a table showing data
 // - used in the main plugin file
-// - Delas also with adding, editing records
+// - Deals also with adding, editing records
 //
 // - title: the title of the page
-// - page: the slug/name of the page, like: orders, customers, delivery etc...
+// - page: the slug/name of the page, and the table SQL name, like: orders, customers, delivery etc...
 // - table: on which data to operate (new Orders_Table())
 // - editables: which fields to edit
 // - addable: Add new item?
@@ -44,8 +44,6 @@ function shopper_admin_display_submenu_page($title, $page, $table, $editables, $
       // Get which item to edit or create an empty one
       $item = shopper_admin_form_header($_REQUEST[$page], $page);
       echo "<h2>" . $item->page_title . " " . $title . "</h2>";
-      
-      print_r($item);
       
       // Display the form 
       echo shopper_admin_form_body($item, $editables, $nonce);
@@ -89,17 +87,40 @@ function shopper_admin_form_save($post, $table_name, $nonce) {
       
       global $wpdb;
       $wpdb->show_errors();
+      
       $table = $wpdb->prefix . "shopper_" . $table_name;
+      // (id, name, email, phone)
+      $fields = '(';
+      // (%s, %s, %s, %s)
+      $values = '(';
+      // name=VALUES(name), ...
+			$update = '';
+			// array($post['id'], ...
+			$a = array();
+      foreach ($post as $k => $v) {
+      	if (!(in_array($k, array("nonce", "action", "submit")))) {
+      		$fields .= "$k, ";
+      		$values .= "%s, ";
+      		if ($k != "id") {
+      			$update .= "$k=VALUES($k), ";
+      		}
+      		$a[] = $v;
+      	}
+      }
+      $fields = chop($fields, ", ");
+      $fields .= ")";
+      $values = chop($values, ", ");
+      $values .= ")";
+      $update = chop($update, ", ");
+      
+      //echo "fields: $fields" . "<br/>";
+      //echo "values: $values" . "<br/>";
+      //echo "update: $update" . "<br/>";
+      //print_r($a);
       
       $ret = $wpdb->query( 
         $wpdb->prepare( 
-        "
-          INSERT INTO $table
-          (id, name, email, phone)
-          VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE " .
-          "name=VALUES(name), email=VALUES(email), phone=VALUES(phone)"
-        , 
-        array($post['id'], $post['name'], $post['email'], $post['phone'])
+        	"INSERT INTO $table $fields VALUES $values ON DUPLICATE KEY UPDATE $update ", $a
         )
       );
       
@@ -121,21 +142,24 @@ function shopper_admin_form_save($post, $table_name, $nonce) {
 // - item: the existing or new record to edit / add
 // - editables: an array of fields to show
 // - nonce: the nonce string to secure the form
-function shopper_admin_form_body($item, $editables, $nonce) { ?>    
-  <form action="" method="post">
+function shopper_admin_form_body($item, $editables, $nonce) { ?>
+	<form action="" method="post">
     <table class="form-table">
       <tbody>
         <?php foreach ($editables as $field) { ?>
           <tr>
             <th><label><?php echo $field['title'] ?></label></th>
             <td>
-              <input type="text" class="regular-text" value="<?php echo $item->data[$field['id']] ?>" id="<?php echo $field['id'] ?>" name="<?php echo $field['id'] ?>">
+            	<?php 
+            		$id = $field['id'];		
+            		$value = $item->data[$id]; ?>
+              <input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
             </td>
           </tr>
         <?php } ?>
       </tbody>
     </table>
-    <input type="hidden" value="<?php echo $item->data->id ?>" id="id" name="id">
+    <input type="hidden" value="<?php echo $item->data['id'] ?>" id="id" name="id">
     <input type="hidden" value="<?php echo wp_create_nonce($nonce) ?>" id="nonce" name="nonce">
     <input type="hidden" id="action" name="action" value="submit-form">
     <p class="submit"><input type="submit" value="<?php echo $item->button_title ?>" class="button-primary" id="submit" name="submit"></p>

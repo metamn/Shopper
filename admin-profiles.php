@@ -73,7 +73,7 @@ class Customers_Table extends WP_List_Table {
   // Add Edit to email, name
   function column_email($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&profile=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+        'edit'      => sprintf('<a href="?page=%s&action=%s&profiles=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
     );
     
     //Return the title contents
@@ -84,7 +84,7 @@ class Customers_Table extends WP_List_Table {
   }
   function column_name($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&profile=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+        'edit'      => sprintf('<a href="?page=%s&action=%s&profiles=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
     );
     
     //Return the title contents
