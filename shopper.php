@@ -125,8 +125,7 @@ function shopper_separator_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_orders_page() {
-  $orders = new Orders_Table();
-  shopper_admin_display_submenu_page("Comenzi", "orders", $orders, true, true, true);
+  shopper_admin_display_submenu_page("Comenzi", "orders", new Orders_Table(), true, true, true);
 }
 
 
@@ -135,8 +134,7 @@ function shopper_orders_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_profiles_page() {
-  $customers = new Customers_Table();
-  shopper_admin_display_submenu_page("Cumparatori", "profiles", $customers, true, true, true);
+  shopper_admin_display_submenu_page("Cumparatori", "profiles", new Customers_Table(), true, true, true);
 }
 
 

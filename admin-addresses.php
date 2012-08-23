@@ -81,7 +81,7 @@ class Addresses_Table extends WP_List_Table {
   // Add Edit to Address
   function column_address($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&addresses=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+        'edit'      => sprintf('<a href="?page=shopper-addresses&action=%s&addresses=%s&parent_id=%s">Edit</a>','edit',$item->id, $this->parent_id),        
     );    
     //Return the title contents
     return sprintf('%1$s %2$s',

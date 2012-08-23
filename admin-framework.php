@@ -33,15 +33,23 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
   
   echo "<div class='wrap'>";  
   if (($_POST) && ($_POST['action'] == 'submit-form')) {
+    // ------------------------------------------------
+    // Save
+    // ------------------------------------------------
+    
     echo shopper_admin_form_save($_POST, $page, $nonce);
   }
   // Check if the data is editable
   if ($editable) {
     if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') && ($_REQUEST['page'] == $form_url)) {
-      // Edit
+      // ------------------------------------------------
+    	// Edit
+    	// ------------------------------------------------
       
       // Get which item to edit or create an empty one
-      $item = shopper_admin_form_header($_REQUEST[$page], $page);
+      $item = shopper_admin_form_setup($_REQUEST[$page], $page);
+      
+      // Page title
       echo "<h2>" . $item->page_title . " " . $title . "</h2>";
       
       // Display the form 
@@ -56,9 +64,9 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       }
       
     } else {
-      // Display the data in a table
-      
-      //echo "parent: $table->parent_id";
+      // ------------------------------------------------
+    	// List
+    	// ------------------------------------------------
       
       // Page title
       $t = '';
@@ -71,6 +79,7 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       // The table
       $table->prepare_items();
       
+      // The search
       if ($searchable) {
         echo '<form method="post">';
         echo '<input type="hidden" name="page" value="' . $form_url . '">';
@@ -98,14 +107,21 @@ function shopper_admin_form_save($post, $table_name, $nonce) {
       $wpdb->show_errors();
       
       $table = $wpdb->prefix . "shopper_" . $table_name;
+      
+      // Construct the SQL query
+      
       // (id, name, email, phone)
       $fields = '(';
+      
       // (%s, %s, %s, %s)
       $values = '(';
+      
       // name=VALUES(name), ...
 			$update = '';
+			
 			// array($post['id'], ...
 			$a = array();
+      
       foreach ($post as $k => $v) {
       	if (!(in_array($k, array("nonce", "action", "submit")))) {
       		$fields .= "$k, ";
@@ -121,11 +137,6 @@ function shopper_admin_form_save($post, $table_name, $nonce) {
       $values = chop($values, ", ");
       $values .= ")";
       $update = chop($update, ", ");
-      
-      //echo "fields: $fields" . "<br/>";
-      //echo "values: $values" . "<br/>";
-      //echo "update: $update" . "<br/>";
-      //print_r($a);
       
       $ret = $wpdb->query( 
         $wpdb->prepare( 
@@ -154,22 +165,23 @@ function shopper_admin_form_save($post, $table_name, $nonce) {
 function shopper_admin_form_body($item, $table, $nonce) {
 	// Get the fields to edit
 	$editables = $table->get_editables(); ?>
-
 	<form action="" method="post">
     <table class="form-table">
       <tbody>
-        <?php 
-        	print_r($editables);
-        	foreach ($editables as $field) { ?>
+        <?php foreach ($editables as $field) { ?>
           <tr>
             <th><label><?php echo $field['title'] ?></label></th>
             <td>
             	<?php 
             		$id = $field['id'];		
             		if (isset($field['not_editable']) && ($field['not_editable'] == true)) {
+            			// Non editable field, usually the parent value
+            			
             			echo $field['foreign_name']; ?>
             			<input type="hidden" value="<?php echo $field['value'] ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
             		<?php } else {
+            			// Normal field
+            			
             			$value = $item->data[$id]; ?>
               		<input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
               	<?php } ?>
@@ -196,7 +208,7 @@ function shopper_admin_form_body($item, $table, $nonce) {
 //   or preloaded from db with data to edit
 // - page_title: the "Add" or "Modify" text 
 // - button_title: the "update" or "add" text
-function shopper_admin_form_header($request, $table_name) {
+function shopper_admin_form_setup($request, $table_name) {
   $id = $request;
   
   global $wpdb;
