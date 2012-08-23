@@ -60,7 +60,8 @@ function shopper_admin_menu() {
   add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
   add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-profiles", "shopper_profiles_page");  
   add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-status", "shopper_status_page");  
-  add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-delivery", "shopper_delivery_page");  
+  add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-delivery", "shopper_delivery_page"); 
+  add_submenu_page("shopper-menu", "Addresses", "Addresses", 'delete_others_posts', "shopper-addresses", "shopper_addresses_page"); 
   
   // Separator, hack
   add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
@@ -89,6 +90,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-profiles.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-status.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-delivery.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-addresses.php');
 
 
 
@@ -152,7 +154,6 @@ function shopper_profiles_page() {
 }
 
 
-
 // Delivery
 // --------------------------------------------------------------------------------
 
@@ -162,12 +163,34 @@ function shopper_delivery_page() {
 }
 
 
+
 // Status
 // --------------------------------------------------------------------------------
 
 function shopper_status_page() {
   $editables = array();
   shopper_admin_display_submenu_page("Statut comanda si trimitere email", "status", new Status_Table(), $editables, true, false, true);
+}
+
+
+// Addresses
+// --------------------------------------------------------------------------------
+
+function shopper_addresses_page() {
+  $editables = array();
+  $editables[] = array(
+		'id' => "address",
+    'title' => 'Adresa'
+  );
+  $editables[] = array(
+    'id' => "city",
+    'title' => 'Oras'
+  );
+  $editables[] = array(
+    'id' => "judet",
+    'title' => 'Judet'
+  );
+  shopper_admin_display_submenu_page("Adrese", "addresses", new Addresses_Table(), $editables, true, true, true, true, true);
 }
 
 

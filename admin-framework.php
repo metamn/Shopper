@@ -38,7 +38,7 @@ function shopper_admin_display_submenu_page($title, $page, $table, $editables, $
   }
   // Check if the data is editable
   if ($editable) {
-    if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') ) {
+    if ( (isset($_REQUEST['action'])) && ($_REQUEST['action'] == 'edit') && ($_REQUEST['page'] == $form_url)) {
       // Edit
       
       // Get which item to edit or create an empty one
@@ -48,12 +48,35 @@ function shopper_admin_display_submenu_page($title, $page, $table, $editables, $
       // Display the form 
       echo shopper_admin_form_body($item, $editables, $nonce);
       
+      // Display Addresses
+      if (($_REQUEST['page'] != 'shopper-addresses')) {
+      	$e = array();
+      	$e[] = array(
+      		'id' => "address",
+      		'title' => 'Adresa'
+      	);
+      	$e[] = array(
+      		'id' => "city",
+      		'title' => 'Oras'
+      	);
+      	$e[] = array(
+      		'id' => "judet",
+      		'title' => 'Judet'
+      	);
+      	$params = array(
+      		"parent_id" => $item->data['id']
+      	);
+      	shopper_admin_display_submenu_page("Adrese", "addresses", new Addresses_Table($params), $e, true, true, true, true, $item->data['id']);
+      }
+      
     } else {
       // Display the data in a table
       
+      echo "parent: $table->parent_id";
+      
       // Page title
       $t = '';
-      $link = "?page=$form_url&action=edit";
+      $link = "?page=$form_url&action=edit&parent_id=" . $table->parent_id;
       if ($addable) {
         $t = '<a class="add-new-h2" href="' . $link . '">Adaugare</a>';
       }    
