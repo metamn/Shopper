@@ -4,6 +4,9 @@
 // --------------------------------------------------------------------------------
 //
 // - tutorial: http://wordpress.org/extend/plugins/custom-list-table-example/
+//
+// Adresses cannot be edited directly only via Customers / Profiles
+
 
 
 
@@ -17,11 +20,13 @@ class Addresses_Table extends WP_List_Table {
 	function __construct($params) {
 	  global $status, $page;
 	  
+	  // Checking if the parent exists when new Addresses_Table is initialized
 	  if ($params) {
 	  	$this->parent_id = $params['parent_id'];
 	  }
 	  
     if (!isset($this->parent_id)) {
+    	// Checking if parent exists when dealing with forms 
     	$this->parent_id = $_REQUEST['parent_id'];
     	if (!isset($this->parent_id)) {
     		wp_die("Modificarea directa acestor date nu este permis.");
@@ -43,6 +48,7 @@ class Addresses_Table extends WP_List_Table {
   function get_columns() {
     return $columns= array(
 	    'id'=>__('#'),
+	    'profile_id' => __('Cumparator'),
 	    'address'=>__('Adresa'),
 	    'city' => __('Oras'),
 	    'judet' => __('Judet')
@@ -61,6 +67,12 @@ class Addresses_Table extends WP_List_Table {
       case 'city':
       case 'judet':
         return $item->$column_name;
+      case 'profile_id':
+      	global $wpdb;
+      	$customer = $wpdb->get_results(
+      		"SELECT * FROM wp_shopper_profiles WHERE id = " . $this->parent_id      
+    		);
+    		return $customer[0]->name;
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
@@ -76,6 +88,29 @@ class Addresses_Table extends WP_List_Table {
         /*$1%s*/ $item->address,
         /*$3%s*/ $this->row_actions($actions)
     );
+  }
+  
+  
+  // Get editable columns
+  function get_editables() {
+  	$ret = array();
+  	
+  	$columns = $this->get_columns();
+  	foreach ($columns as $k => $v) {
+  		if ($k != 'id') {
+  			$ret[] = array(
+  				'title' => $v,
+  				'id' => $k
+  			);
+  		}
+  	}
+  	
+  	// Add customer...
+  	$ret[0]['not_editable'] = true;
+  	$ret[0]['value'] = $this->parent_id;
+  	$ret[0]['foreign_name'] = $this->column_default($columns[0], 'profile_id');
+  	
+  	return $ret;
   }
 
   

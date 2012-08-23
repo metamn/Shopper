@@ -33,11 +33,8 @@ class Customers_Table extends WP_List_Table {
     return $columns= array(
 	    'id'=>__('#'),
 	    'name' => __('Nume'),
-	    'city' => __('Oras'),
 	    'email'=>__('Email'),
-	    'phone' => __('Telefon'),	    	    
-	    'address'=>__('Adresa'),
-	    
+	    'phone' => __('Telefon')
     );
   }
   
@@ -50,12 +47,27 @@ class Customers_Table extends WP_List_Table {
       case 'email':
       case 'phone':
       case 'name':
-      case 'address':
-      case 'city':
         return $item->$column_name;    
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
+  }
+  
+  // Return which fields are editable
+  function get_editables() {
+  	$ret = array();
+  	
+  	$columns = $this->get_columns();
+  	foreach ($columns as $k => $v) {
+  		if ($k != 'id') {
+  			$ret[] = array(
+  				'title' => $v,
+  				'id' => $k
+  			);
+  		}
+  	}
+  	
+  	return $ret;
   }
   
   

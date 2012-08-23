@@ -12,14 +12,13 @@
 // - title: the title of the page
 // - page: the slug/name of the page, and the table SQL name, like: orders, customers, delivery etc...
 // - table: on which data to operate (new Orders_Table())
-// - editables: which fields to edit
 // - addable: Add new item?
 // - searchable: if the table is searchable
 // - editable: boolean, if the page will handle forms and updates
 //
 // Example:
 // - shopper_admin_display_submenu_page("Comenzi", "orders", new Orders_Table(), true, true)
-function shopper_admin_display_submenu_page($title, $page, $table, $editables, $addable, $searchable, $editable) {
+function shopper_admin_display_submenu_page($title, $page, $table, $addable, $searchable, $editable) {
   if (!current_user_can('delete_others_posts'))  {
     wp_die( 'Nu aveti drepturi suficiente de acces.' );
   } 
@@ -46,33 +45,20 @@ function shopper_admin_display_submenu_page($title, $page, $table, $editables, $
       echo "<h2>" . $item->page_title . " " . $title . "</h2>";
       
       // Display the form 
-      echo shopper_admin_form_body($item, $editables, $nonce);
+      echo shopper_admin_form_body($item, $table, $nonce);
       
       // Display Addresses
       if (($_REQUEST['page'] != 'shopper-addresses')) {
-      	$e = array();
-      	$e[] = array(
-      		'id' => "address",
-      		'title' => 'Adresa'
-      	);
-      	$e[] = array(
-      		'id' => "city",
-      		'title' => 'Oras'
-      	);
-      	$e[] = array(
-      		'id' => "judet",
-      		'title' => 'Judet'
-      	);
       	$params = array(
       		"parent_id" => $item->data['id']
       	);
-      	shopper_admin_display_submenu_page("Adrese", "addresses", new Addresses_Table($params), $e, true, true, true, true, $item->data['id']);
+      	shopper_admin_display_submenu_page("Adrese", "addresses", new Addresses_Table($params), true, true, true);
       }
       
     } else {
       // Display the data in a table
       
-      echo "parent: $table->parent_id";
+      //echo "parent: $table->parent_id";
       
       // Page title
       $t = '';
@@ -163,20 +149,30 @@ function shopper_admin_form_save($post, $table_name, $nonce) {
 // - it is like a partial for simpler forms
 //
 // - item: the existing or new record to edit / add
-// - editables: an array of fields to show
+// - table: the WP List Table
 // - nonce: the nonce string to secure the form
-function shopper_admin_form_body($item, $editables, $nonce) { ?>
+function shopper_admin_form_body($item, $table, $nonce) {
+	// Get the fields to edit
+	$editables = $table->get_editables(); ?>
+
 	<form action="" method="post">
     <table class="form-table">
       <tbody>
-        <?php foreach ($editables as $field) { ?>
+        <?php 
+        	print_r($editables);
+        	foreach ($editables as $field) { ?>
           <tr>
             <th><label><?php echo $field['title'] ?></label></th>
             <td>
             	<?php 
             		$id = $field['id'];		
-            		$value = $item->data[$id]; ?>
-              <input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
+            		if (isset($field['not_editable']) && ($field['not_editable'] == true)) {
+            			echo $field['foreign_name']; ?>
+            			<input type="hidden" value="<?php echo $field['value'] ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
+            		<?php } else {
+            			$value = $item->data[$id]; ?>
+              		<input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
+              	<?php } ?>
             </td>
           </tr>
         <?php } ?>
