@@ -58,7 +58,7 @@ function shopper_admin_menu() {
   add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");  
   
   add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
-  add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-customers", "shopper_customers_page");  
+  add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-profiles", "shopper_profiles_page");  
   add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-status", "shopper_status_page");  
   add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-delivery", "shopper_delivery_page");  
   
@@ -86,7 +86,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'product.php');
 include_once(plugin_dir_path( __FILE__ ) . 'checkout.php');
 
 include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
-include_once(plugin_dir_path( __FILE__ ) . 'admin-customers.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-profiles.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-status.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-delivery.php');
 
@@ -124,7 +124,8 @@ function shopper_separator_page() {
 
 function shopper_orders_page() {
   $orders = new Orders_Table();
-  shopper_admin_display_submenu_page("Comenzi", "orders", $orders, true, true, true);
+  $editables = array();
+  shopper_admin_display_submenu_page("Comenzi", "orders", $orders, $editables, true, true, true);
 }
 
 
@@ -132,9 +133,22 @@ function shopper_orders_page() {
 // Customers
 // --------------------------------------------------------------------------------
 
-function shopper_customers_page() {
+function shopper_profiles_page() {
   $customers = new Customers_Table();
-  shopper_admin_display_submenu_page("Cumparatori", "customers", $customers, true, true, true);
+  $editables = array();
+  $editables[] = array(
+  	"title" => 'Nume',
+  	"id" => 'name'
+  );
+  $editables[] = array(
+  	"title" => 'Email',
+  	"id" => 'email'
+  );
+  $editables[] = array(
+  	"title" => 'Telefon',
+  	"id" => 'phone'
+  );
+  shopper_admin_display_submenu_page("Cumparatori", "profiles", $customers, $editables, true, true, true);
 }
 
 
@@ -143,7 +157,8 @@ function shopper_customers_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_delivery_page() {
-  shopper_admin_display_submenu_page("Livrare comanda", "delivery", new Delivery_Table(), true, false, true);
+  $editables = array();
+  shopper_admin_display_submenu_page("Livrare comanda", "delivery", new Delivery_Table(), $editables, true, false, true);
 }
 
 
@@ -151,7 +166,8 @@ function shopper_delivery_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_status_page() {
-  shopper_admin_display_submenu_page("Statut comanda si trimitere email", "status", new Status_Table(), true, false, true);
+  $editables = array();
+  shopper_admin_display_submenu_page("Statut comanda si trimitere email", "status", new Status_Table(), $editables, true, false, true);
 }
 
 
