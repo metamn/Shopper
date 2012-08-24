@@ -192,5 +192,3 @@ function shopper_db_add_profile_to_session($profile_id) {
 */
 
 ?>
-
-

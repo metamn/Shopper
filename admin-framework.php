@@ -31,7 +31,16 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
   // the nonce
   $nonce = "admin-$page-edit";
   
-  echo "<div class='wrap'>";  
+  // Create the div container
+  // Check if this is a master detail relationship
+  if (isset($table->parent_id)) {
+  	$detail = ' detail';
+  } else {
+  	$detail = '';
+  }
+  echo "<div id='" . $form_url . "' class='wrap " . $detail . "'>";  
+  
+  
   if (($_POST) && ($_POST['action'] == 'submit-form')) {
     // ------------------------------------------------
     // Save

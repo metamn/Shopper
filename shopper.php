@@ -95,6 +95,13 @@ include_once(plugin_dir_path( __FILE__ ) . 'admin-addresses.php');
 
 
 
+// include admin.css, admin.js 
+function shopper_admin_scripts() {
+	wp_register_style( 'shopper-admin', plugins_url('admin.css', __FILE__) );
+	wp_enqueue_style( 'shopper-admin' );
+	wp_enqueue_script('shopper', plugins_url('admin.js', __FILE__), array('jquery'));
+}  
+add_action('admin_print_styles', 'shopper_admin_scripts');
 
 
 
