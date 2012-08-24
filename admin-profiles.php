@@ -62,7 +62,8 @@ class Customers_Table extends WP_List_Table {
   		if ($k != 'id') {
   			$ret[] = array(
   				'title' => $v,
-  				'id' => $k
+  				'id' => $k,
+  				'required' => true
   			);
   		}
   	}

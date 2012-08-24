@@ -37,7 +37,7 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
     // Save
     // ------------------------------------------------
     
-    echo shopper_admin_form_save($_POST, $page, $nonce);
+    echo shopper_admin_form_save($_POST, $table->get_editables(), $page, $nonce);
   }
   // Check if the data is editable
   if ($editable) {
@@ -100,7 +100,10 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
 // post: the $_POST
 // table_name: the SQL table
 // nonce: the nonce
-function shopper_admin_form_save($post, $table_name, $nonce) {
+//
+// - if one of the required fields are missing there is no save
+// - moreover, the newly created empty record (for Add) will de deleted
+function shopper_admin_form_save($post, $editables, $table_name, $nonce) {
 	if (wp_verify_nonce( $post['nonce'], $nonce )) {
       
       global $wpdb;
@@ -108,52 +111,84 @@ function shopper_admin_form_save($post, $table_name, $nonce) {
       
       $table = $wpdb->prefix . "shopper_" . $table_name;
       
-      // Construct the SQL query
+      $required = shopper_admin_form_check_required_fields_for_save($post, $editables);
+      if ($required == "") {
       
-      // (id, name, email, phone)
-      $fields = '(';
+      	// Construct the SQL query
       
-      // (%s, %s, %s, %s)
-      $values = '(';
+      	// (id, name, email, phone)
+      	$fields = '(';
       
-      // name=VALUES(name), ...
-			$update = '';
+      	// (%s, %s, %s, %s)
+      	$values = '(';
+      
+      	// name=VALUES(name), ...
+				$update = '';
 			
-			// array($post['id'], ...
-			$a = array();
+				// array($post['id'], ...
+				$a = array();
       
-      foreach ($post as $k => $v) {
-      	if (!(in_array($k, array("nonce", "action", "submit")))) {
-      		$fields .= "$k, ";
-      		$values .= "%s, ";
-      		if ($k != "id") {
-      			$update .= "$k=VALUES($k), ";
+      	foreach ($post as $k => $v) {
+      		if (!(in_array($k, array("nonce", "action", "submit")))) {
+      			$fields .= "$k, ";
+      			$values .= "%s, ";
+      			if ($k != "id") {
+      				$update .= "$k=VALUES($k), ";
+      			}
+      			$a[] = $v;
       		}
-      		$a[] = $v;
       	}
-      }
-      $fields = chop($fields, ", ");
-      $fields .= ")";
-      $values = chop($values, ", ");
-      $values .= ")";
-      $update = chop($update, ", ");
+      	$fields = chop($fields, ", ");
+      	$fields .= ")";
+      	$values = chop($values, ", ");
+      	$values .= ")";
+      	$update = chop($update, ", ");
       
-      $ret = $wpdb->query( 
-        $wpdb->prepare( 
-        	"INSERT INTO $table $fields VALUES $values ON DUPLICATE KEY UPDATE $update ", $a
-        )
-      );
+      	$ret = $wpdb->query( 
+        	$wpdb->prepare( 
+        		"INSERT INTO $table $fields VALUES $values ON DUPLICATE KEY UPDATE $update ", $a
+        	)
+      	);
       
-      if ($ret != false) {
-        echo "Succes!";        
+      	if ($ret != false) {
+        	echo "Succes!";        
+      	} else {
+      		echo "Error!";
+      	}
+      
       } else {
-      	echo "Error!";
+      	// Required fields are missing
+      	echo $required . " is empty";
+      	
+      	// Delete this empty record
+      	$ret = $wpdb->query( 
+        	$wpdb->prepare( 
+        		"DELETE FROM $table WHERE id = " . $post['id']
+        	)
+      	);
+      	
       }
   } else {
   	echo "Nonce error";
   }
 }
 
+
+// Check if all required fields are ok before save
+function shopper_admin_form_check_required_fields_for_save($post, $editables) {
+	$ret == "";
+	
+	foreach ($editables as $e) {
+		if ($e['required'] == true) {
+			$field = $e['id'];
+			if ($post[$field] == "") {
+				$ret .= $e['title'] . ", "; 
+			}
+		}
+	}
+
+	return $ret;
+}
 
 
 // Display a form to edit / add new data
