@@ -64,12 +64,9 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       // Display the form 
       echo shopper_admin_form_body($item, $table, $nonce);
       
-      // Display Addresses
-      if (($_REQUEST['page'] != 'shopper-addresses')) {
-      	$params = array(
-      		"parent_id" => $item->data['id']
-      	);
-      	shopper_admin_display_submenu_page("Adrese", "addresses", new Addresses_Table($params), true, true, true);
+      // Display detail tables
+      foreach ($table->get_detail_tables($item->data['id']) as $detail) {
+      	shopper_admin_display_detail($detail);
       }
       
     } else {
@@ -79,7 +76,7 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       
       // Page title
       $t = '';
-      $link = "?page=$form_url&action=edit&parent_id=" . $table->parent_id;
+      $link = "?page=$form_url&action=edit&parent_id=" . $table->parent_id . "&table_id=" . $table->table_id;
       if ($addable) {
         $t = '<a class="add-new-h2" href="' . $link . '">Adaugare</a>';
       }    
@@ -104,6 +101,14 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
 }
 
 
+// Display detail table
+function shopper_admin_display_detail($detail) {
+	$page = "shopper-" . $detail['page'];
+  if ($_REQUEST['page'] != $page) {
+    shopper_admin_display_submenu_page($detail['title'], $detail['page'], $detail['table'], true, true, true);
+  }
+}
+
 // Save the form
 //
 // post: the $_POST
@@ -124,7 +129,6 @@ function shopper_admin_form_save($post, $editables, $table_name, $nonce) {
       if ($required == "") {
       
       	// Construct the SQL query
-      
       	// (id, name, email, phone)
       	$fields = '(';
       
@@ -208,8 +212,11 @@ function shopper_admin_form_check_required_fields_for_save($post, $editables) {
 // - nonce: the nonce string to secure the form
 function shopper_admin_form_body($item, $table, $nonce) {
 	// Get the fields to edit
-	$editables = $table->get_editables(); ?>
-	<form action="" method="post">
+	$editables = $table->get_editables(); 
+	
+	print_r($editables);
+	?>
+	<form id="edit" action="" method="post">
     <table class="form-table">
       <tbody>
         <?php foreach ($editables as $field) { ?>

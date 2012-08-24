@@ -61,7 +61,12 @@ function shopper_admin_menu() {
   add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-profiles", "shopper_profiles_page");  
   add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-status", "shopper_status_page");  
   add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-delivery", "shopper_delivery_page"); 
+  
+  // Separator, hack
+  add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
+  
   add_submenu_page("shopper-menu", "Addresses", "Addresses", 'delete_others_posts', "shopper-addresses", "shopper_addresses_page"); 
+  add_submenu_page("shopper-menu", "Notes", "Notes", 'delete_others_posts', "shopper-notes", "shopper_notes_page"); 
   
   // Separator, hack
   add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
@@ -91,6 +96,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'admin-profiles.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-status.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-delivery.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-addresses.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-notes.php');
 
 
 
@@ -167,6 +173,13 @@ function shopper_status_page() {
 
 function shopper_addresses_page() {
 	shopper_admin_display_submenu_page("Adrese", "addresses", new Addresses_Table(), true, true, true);
+}
+
+// Notes
+// --------------------------------------------------------------------------------
+
+function shopper_notes_page() {
+	shopper_admin_display_submenu_page("Observatii", "notes", new Notes_Table(), true, true, true);
 }
 
 

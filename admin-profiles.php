@@ -67,6 +67,34 @@ class Customers_Table extends WP_List_Table {
   			);
   		}
   	}
+  	return $ret;
+  }
+  
+  
+  // Define detail tables
+  function get_detail_tables($parent_id) {
+  	$ret = array();
+  	
+  	// Addresses
+  	$params = array(
+  		'parent_id' => $parent_id
+  	);
+  	$ret[] = array(
+  		'title' => "Adrese",
+  		'page' => 'addresses',
+  		'table' => new Addresses_Table($params)
+  	);
+  	
+  	// Notes
+  	$params = array(
+  		'entry_id' => $parent_id,
+  		'table_id' => 'profiles'
+  	);
+  	$ret[] = array(
+  		'title' => "Observatii",
+  		'page' => 'notes',
+  		'table' => new Notes_Table($params)
+  	);
   	
   	return $ret;
   }

@@ -6,3 +6,6 @@
 #wpbody-content .detail form {
 	display: none;
 }
+#wpbody-content .detail form#edit {
+	display: block;
+}
