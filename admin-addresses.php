@@ -26,6 +26,7 @@ class Addresses_Table extends WP_List_Table {
 	  }
 	  
     if (!isset($this->parent_id)) {
+    	
     	// Checking if parent exists when dealing with forms 
     	$this->parent_id = $_REQUEST['parent_id'];
     	if (!isset($this->parent_id)) {
@@ -72,7 +73,9 @@ class Addresses_Table extends WP_List_Table {
       	$customer = $wpdb->get_results(
       		"SELECT * FROM wp_shopper_profiles WHERE id = " . $this->parent_id      
     		);
-    		return $customer[0]->name;
+    		
+    		// Clicking on parent goes back to the parents edit page
+    		return "<a href='?page=shopper-profiles&action=edit&profiles=" . $this->parent_id . "'>" . $customer[0]->name . "</a>";
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
