@@ -212,14 +212,13 @@ function shopper_admin_form_check_required_fields_for_save($post, $editables) {
 // - nonce: the nonce string to secure the form
 function shopper_admin_form_body($item, $table, $nonce) {
 	// Get the fields to edit
-	$editables = $table->get_editables(); 
-	
-	print_r($editables);
-	?>
+	$editables = $table->get_editables(); ?>
 	<form id="edit" action="" method="post">
     <table class="form-table">
       <tbody>
-        <?php foreach ($editables as $field) { ?>
+        <?php 
+        	$counter = 0;
+        	foreach ($editables as $field) { ?>
           <tr>
             <th><label><?php echo $field['title'] ?></label></th>
             <td>
@@ -227,8 +226,8 @@ function shopper_admin_form_body($item, $table, $nonce) {
             		$id = $field['id'];		
             		if (isset($field['not_editable']) && ($field['not_editable'] == true)) {
             			// Non editable field, usually the parent value
-            			
-            			echo $field['foreign_name']; ?>
+            			$i = (object) $item->data;
+            			echo $table->column_default($i, $field['id']); ?>
             			<input type="hidden" value="<?php echo $field['value'] ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
             		<?php } else {
             			// Normal field

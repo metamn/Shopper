@@ -62,13 +62,12 @@ class Notes_Table extends WP_List_Table {
   //
   function column_default($item, $column_name){
     global $wpdb;
-    
+   
     switch($column_name){
       case 'id':
       case 'body':
         return $item->$column_name;
     	case 'table_id':
-    		echo "column_name: " . $item->$column_name;
     		switch ($item->$column_name) {
     			case 'profiles':
     				return "Cumparatori";
@@ -120,12 +119,10 @@ class Notes_Table extends WP_List_Table {
   	// Mark table_id relationship ...
   	$ret[0]['not_editable'] = true;
   	$ret[0]['value'] = $this->table_id;
-  	$ret[0]['foreign_name'] = $this->column_default($columns[0], 'table_id');
   	
   	// Mark entry_id relationship ...
   	$ret[1]['not_editable'] = true;
   	$ret[1]['value'] = $this->parent_id;
-  	$ret[1]['foreign_name'] = $this->column_default($columns[0], 'entry_id');
   	
   	return $ret;
   }

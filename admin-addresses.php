@@ -112,7 +112,6 @@ class Addresses_Table extends WP_List_Table {
   	// Add customer relationship ...
   	$ret[0]['not_editable'] = true;
   	$ret[0]['value'] = $this->parent_id;
-  	$ret[0]['foreign_name'] = $this->column_default($columns[0], 'profile_id');
   	
   	return $ret;
   }
