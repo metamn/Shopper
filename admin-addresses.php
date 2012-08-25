@@ -153,9 +153,13 @@ class Addresses_Table extends WP_List_Table {
     
         
     $current_page = $this->get_pagenum();
+    
     $total_items = count($data);
+    $this->total_items = $total_items;
+    
     $data = array_slice($data,(($current_page-1)*$per_page),$per_page);
     $this->items = $data;
+    
     $this->set_pagination_args( array(
         'total_items' => $total_items,                  //WE have to calculate the total number of items
         'per_page'    => $per_page,                     //WE have to determine how many items to show on a page

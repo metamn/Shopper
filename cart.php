@@ -13,8 +13,8 @@
 
 // Init sessions
 // - it is used to access $_SESSION in this plugin 
-//if ( !session_id() ) 
-//  add_action( 'init', 'session_start' );
+if ( !session_id() ) 
+  add_action( 'init', 'session_start' );
   
 
 // include shopper.js and set up AJAX

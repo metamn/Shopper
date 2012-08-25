@@ -1,11 +1,9 @@
+/* Master details
+*/
 #wpbody-content .detail h2 {
 	border-bottom: 1px dotted;
 	cursor: pointer;
 }
-
-#wpbody-content .detail form {
+#wpbody-content .edit .list form {
 	display: none;
-}
-#wpbody-content .detail form#edit {
-	display: block;
 }

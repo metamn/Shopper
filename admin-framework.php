@@ -31,20 +31,14 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
   // the nonce
   $nonce = "admin-$page-edit";
   
-  // Create the div container
-  // Check if this is a master detail relationship
-  if (isset($table->parent_id)) {
-  	$detail = ' detail';
-  } else {
-  	$detail = '';
-  }
-  echo "<div id='" . $form_url . "' class='wrap " . $detail . "'>";  
-  
   
   if (($_POST) && ($_POST['action'] == 'submit-form')) {
     // ------------------------------------------------
     // Save
     // ------------------------------------------------
+    
+    // Display the main div
+    echo shopper_admin_div($table->parent_id, $form_url, 'save');
     
     echo shopper_admin_form_save($_POST, $table->get_editables(), $page, $nonce);
   }
@@ -54,6 +48,9 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       // ------------------------------------------------
     	// Edit
     	// ------------------------------------------------
+    	
+    	// Display the main div
+    	echo shopper_admin_div($table->parent_id, $form_url, 'edit');
       
       // Get which item to edit or create an empty one
       $item = shopper_admin_form_setup($_REQUEST[$page], $page);
@@ -73,6 +70,13 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       // ------------------------------------------------
     	// List
     	// ------------------------------------------------
+    	
+    	// Display the main div
+    	echo shopper_admin_div($table->parent_id, $form_url, 'list');
+    	
+    	// The table
+      $table->prepare_items();
+      
       
       // Page title
       $t = '';
@@ -80,10 +84,11 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       if ($addable) {
         $t = '<a class="add-new-h2" href="' . $link . '">Adaugare</a>';
       }    
-      echo "<h2>$title $t</h2>";
-      
-      // The table
-      $table->prepare_items();
+      if (isset($table->parent_id)) {
+      	echo "<h2>" . $table->total_items . " $title $t</h2>";
+      } else {
+      	echo "<h2>$title $t</h2>";
+      }
       
       // The search
       if ($searchable) {
@@ -101,13 +106,34 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
 }
 
 
-// Display detail table
+// Create the main div id and classes
+// - it is important because detail tables sometimes must be hidden
+// - and for the navigation between tables on edit and add
+//
+// parent: if this is a master detail relationship
+// page: the page name like orders, customers etc
+// action: edit, list or save
+function shopper_admin_div($parent, $page, $action) {
+  // Check if this is a master detail relationship
+  if (isset($parent)) {
+  	$detail = ' detail';
+  } else {
+  	$detail = '';
+  }
+  echo "<div id='" . $page . "' class='wrap " . $detail . " " . $action . "'>";  
+}
+
+
+
+// Display a detail table
+//
 function shopper_admin_display_detail($detail) {
 	$page = "shopper-" . $detail['page'];
   if ($_REQUEST['page'] != $page) {
     shopper_admin_display_submenu_page($detail['title'], $detail['page'], $detail['table'], true, true, true);
   }
 }
+
 
 // Save the form
 //
