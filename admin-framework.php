@@ -77,7 +77,6 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
     	// The table
       $table->prepare_items();
       
-      
       // Page title
       $t = '';
       $link = "?page=$form_url&action=edit&parent_id=" . $table->parent_id . "&table_id=" . $table->table_id;
@@ -242,25 +241,11 @@ function shopper_admin_form_body($item, $table, $nonce) {
 	<form id="edit" action="" method="post">
     <table class="form-table">
       <tbody>
-        <?php 
-        	$counter = 0;
-        	foreach ($editables as $field) { ?>
+        <?php foreach ($editables as $field) { ?>
           <tr>
             <th><label><?php echo $field['title'] ?></label></th>
             <td>
-            	<?php 
-            		$id = $field['id'];		
-            		if (isset($field['not_editable']) && ($field['not_editable'] == true)) {
-            			// Non editable field, usually the parent value
-            			$i = (object) $item->data;
-            			echo $table->column_default($i, $field['id']); ?>
-            			<input type="hidden" value="<?php echo $field['value'] ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
-            		<?php } else {
-            			// Normal field
-            			
-            			$value = $item->data[$id]; ?>
-              		<input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>">
-              	<?php } ?>
+            	<?php echo shopper_admin_form_field($field, $item, $table); ?>
             </td>
           </tr>
         <?php } ?>
@@ -272,6 +257,36 @@ function shopper_admin_form_body($item, $table, $nonce) {
     <p class="submit"><input type="submit" value="<?php echo $item->button_title ?>" class="button-primary" id="submit" name="submit"></p>
   </form>
 <?php }
+
+
+// Display a hidden, text, textarea or select field
+function shopper_admin_form_field($field, $item, $table) {
+	$id = $field['id'];
+	$value = $item->data[$id];
+	
+	// Hidden
+	// Non editable field, usually the parent value
+	if (isset($field['not_editable']) && ($field['not_editable'] == true)) {
+		// Parent value comes from the WP List Table 
+    $i = (object) $item->data;
+    echo $table->column_default($i, $id); 
+    $value = $field['value'];?>
+    
+    <input type="hidden" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
+  } else {
+  	
+  	// Textarea
+  	if (isset($field['type']) && ($field['type'] == 'textarea')) { ?>
+  		<textarea cols="40" rows="5" name="<?php echo $id ?>" id="<?php echo $id ?>"><?php echo $value ?></textarea> <?php
+  	} else { 
+  		
+  		// Normal input 
+  		?>
+  		<input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
+  	}
+  	
+  }
+}
 
 
 

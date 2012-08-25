@@ -124,6 +124,9 @@ class Notes_Table extends WP_List_Table {
   	$ret[1]['not_editable'] = true;
   	$ret[1]['value'] = $this->parent_id;
   	
+  	// Make input for 'body' to be a textarea
+  	$ret[2]['type'] = 'textarea';
+  	
   	return $ret;
   }
   
