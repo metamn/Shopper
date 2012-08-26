@@ -27,11 +27,11 @@ function shopper_checkout_ajax() {
       $discount = strval( $_POST['discount'] );
       
       // Get cart items
-      $session = shopper_load_session();
+      //$session = shopper_load_session();
       $items = $session->cart;
       
       // Save all
-      $msg = shopper_db_save_order($email, $phone, $delivery, $discount, $items);
+      //$msg = shopper_db_save_order($email, $phone, $delivery, $discount, $items);
       
       
       $ret = array(
