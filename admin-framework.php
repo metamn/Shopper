@@ -61,6 +61,7 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
       // Display the form 
       echo shopper_admin_form_body($item, $table, $nonce);
       
+      
       // Display detail tables
       foreach ($table->get_detail_tables($item->data['id']) as $detail) {
       	shopper_admin_display_detail($detail);
@@ -237,7 +238,7 @@ function shopper_admin_form_check_required_fields_for_save($post, $editables) {
 // - nonce: the nonce string to secure the form
 function shopper_admin_form_body($item, $table, $nonce) {
 	// Get the fields to edit
-	$editables = $table->get_editables(); ?>
+	$editables = $table->get_editables($item->page_title); ?>
 	<form id="edit" action="" method="post">
     <table class="form-table">
       <tbody>
@@ -270,7 +271,10 @@ function shopper_admin_form_field($field, $item, $table) {
 		// Parent value comes from the WP List Table 
     $i = (object) $item->data;
     echo $table->column_default($i, $id); 
-    $value = $field['value'];?>
+    
+    if (isset($field['value'])) {
+    	$value = $field['value'];
+    } ?>
     
     <input type="hidden" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
   } else {

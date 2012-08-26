@@ -92,6 +92,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'product.php');
 include_once(plugin_dir_path( __FILE__ ) . 'checkout.php');
 
 include_once(plugin_dir_path( __FILE__ ) . 'admin-orders.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-orders-form.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-profiles.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-status.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-delivery.php');
@@ -328,6 +329,8 @@ function shopper_tables() {
       date TIMESTAMP,
       total VARCHAR(32),
       grand_total VARCHAR(32),
+      type INT(9) NOT NULL,
+      delivery_date DATE,
       PRIMARY KEY (id)
   );";  
   dbDelta($sql);

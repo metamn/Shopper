@@ -4,6 +4,10 @@
 // --------------------------------------------------------------------------------
 //
 // - tutorial: http://wordpress.org/extend/plugins/custom-list-table-example/
+//
+// - Orders are differnt, more complicated than normal tables:
+//	- they can be edited (phone order) or not (online)
+//	- the form will be custom not using the general framework
 
 
 
@@ -14,8 +18,17 @@ endif;
 
 class Orders_Table extends WP_List_Table {
 
-	function __construct() {
+	function __construct($params) {
 	  global $status, $page;
+	  
+	  // This is to list Orders of a Customer
+	  if ($params) {
+	  	$this->parent_id = $params['parent_id'];
+	  }
+	  if (!isset($this->parent_id)) {
+    	// Checking if parent exists when dealing with forms 
+    	$this->parent_id = $_REQUEST['parent_id'];
+    }
     
     parent::__construct(array(
       'singular'  => 'comanda',
@@ -32,8 +45,9 @@ class Orders_Table extends WP_List_Table {
   function get_columns() {
     return $columns= array(
 	    'id'=>__('Numar<br/>comanda'),
+	    'type' => __('Tip comanda'),
 	    'date'=>__('Data'),
-	    'customer' => __('Cumparator'),
+	    'profile_id' => __('Cumparator'),
 	    'products' => __('Produse'),	    
 	    'grand_total'=>__('Total'),
 	    'status_id' => __('Statut'),
@@ -48,19 +62,19 @@ class Orders_Table extends WP_List_Table {
     
     switch($column_name){
       case 'id':
-      case 'status_id':
+      case 'type':
       case 'grand_total':
         return $item->$column_name;
       case 'date':
         return date('Y M d', strtotime($item->$column_name));
-      case 'customer':
+      case 'profile_id':
         $profile = $wpdb->get_results(
           "SELECT * FROM wp_shopper_profiles " .
           "WHERE wp_shopper_profiles.id = " . $item->profile_id
         ); 
         
         // Edit link
-        $link = "<a href='?page=shopper-customers&action=edit&profile=" . $profile[0]->id . "' title='Modificare cumparator'>";
+        $link = "<a href='?page=shopper-customers&action=edit&profiles=" . $profile[0]->id . "' title='Modificare cumparator'>";
         
         if (isset($profile[0]->name) && ($profile[0]->name != '')) {
           return $link . $profile[0]->name . "</a>";
@@ -80,7 +94,17 @@ class Orders_Table extends WP_List_Table {
           return $counter . ' produs';
         } else {
           return $counter . ' produse';
-        }        
+        }       
+    	case 'status_id':
+    		$status = $wpdb->get_results(
+      		"SELECT * FROM wp_shopper_order_status " .
+      		"WHERE id = " . $item->status_id
+    		); 
+    		if (isset($status[0])) {
+      		return $status[0]->name;        
+    		} else {
+      		return $item->$column_name;
+    		}
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
@@ -89,35 +113,80 @@ class Orders_Table extends WP_List_Table {
   // Add Edit to Status
   function column_status_id($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&order=%s">Edit</a>','shopper-orders','edit',$item->id),        
+        'edit'      => sprintf('<a href="?page=%s&action=%s&orders=%s">Edit</a>','shopper-orders','edit',$item->id),        
     );    
     
-    global $wpdb;
-    $status = $wpdb->get_results(
-      "SELECT * FROM wp_shopper_order_status " .
-      "WHERE id = " . $item->status_id
-    ); 
-    if (isset($status[0])) {
-      $ret = $status[0]->name;        
-    } else {
-      $ret = $item->$column_name;
-    }
-    
-    
     return sprintf('%1$s %2$s',
-        /*$1%s*/ $ret,
+        /*$1%s*/ $item->status_id,
         /*$3%s*/ $this->row_actions($actions)
     );
   }
   
+  
+  // Sort table
   function get_sortable_columns() {
     $sortable_columns = array(
         'id'     => array('id', false),     //true means its already sorted
+        'type'    => array('type', true),
         'date'    => array('date', true),
-        'customer'  => array('customer', false),
+        'profile_id'  => array('profile_id', false),
         'status_id'  => array('status_id', false)
     );
     return $sortable_columns;
+  }
+  
+  
+  // Get editable columns
+  // - they differ based on order type (phone, online) and on action (add, edit)
+  function get_editables($action) {
+  	$ret = array();
+  	
+  	// Add all fields by default
+  	$columns = $this->get_columns();
+  	foreach ($columns as $k => $v) {
+  		if (!in_array($k, array('id', 'products'))) {
+  			$ret[] = array(
+  				'title' => $v,
+  				'id' => $k,
+  				'required' => true
+  			);
+  		}
+  	}
+  	print_r($ret);
+  	
+  	// Remove fields by special cases
+  	switch ($action) {
+  		case FORM_TITLE_ADD:
+  			// When Add the order type will be 'phone'
+  			$ret[0]['not_editable'] = true;
+  			$ret[0]['value'] = 'phone';
+  			
+  			// Date is automatically set to now
+  			$ret[1]['not_editable'] = true;
+  			$ret[1]['value'] = date("Y-m-d H:i:s");
+  			break;
+  		
+  		case FORM_TITLE_MODIFY:
+  			// Order type not modificable
+  			$ret[0]['not_editable'] = true;
+  			
+  			// Order date not modificable
+  			$ret[1]['not_editable'] = true;
+  			
+  			// Customer not modificable
+  			$ret[2]['not_editable'] = true;
+  			break;
+  	}
+  	
+  	
+  	return $ret;
+  }
+  
+  // Define detail tables
+  function get_detail_tables($parent_id) {
+  	$ret = array();
+  	
+  	return $ret;
   }
   
   
@@ -168,6 +237,8 @@ class Orders_Table extends WP_List_Table {
         
     $current_page = $this->get_pagenum();
     $total_items = count($data);
+    $this->total_items = $total_items;
+    
     $data = array_slice($data,(($current_page-1)*$per_page),$per_page);
     $this->items = $data;
     $this->set_pagination_args( array(

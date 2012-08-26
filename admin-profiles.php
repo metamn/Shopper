@@ -96,6 +96,17 @@ class Customers_Table extends WP_List_Table {
   		'table' => new Notes_Table($params)
   	);
   	
+  	// Orders
+  	$params = array(
+  		'parent_id' => $parent_id
+  	);
+  	$ret[] = array(
+  		'title' => "Comenzi",
+  		'page' => 'orders',
+  		'table' => new Orders_Table($params)
+  	);
+  	
+  	
   	return $ret;
   }
   
@@ -164,13 +175,13 @@ class Customers_Table extends WP_List_Table {
     //print_r($data);
     
     
-    function usort_reorder($a, $b){
+    function usort_reorder_profiles($a, $b){
       $orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'id'; //If no sort, default to this
       $order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
       $result = strcmp($a->$orderby, $b->$orderby); //Determine sort order
       return ($order==='asc') ? $result : -$result; //Send final sort direction to usort
     }
-    usort($data, 'usort_reorder');
+    usort($data, 'usort_reorder_profiles');
     
     
         

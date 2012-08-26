@@ -157,13 +157,13 @@ class Notes_Table extends WP_List_Table {
     //print_r($data);
     
     
-    function usort_reorder2($a, $b){
+    function usort_reorder_notes($a, $b){
       $orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'id'; //If no sort, default to this
       $order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
       $result = strcmp($a->$orderby, $b->$orderby); //Determine sort order
       return ($order==='asc') ? $result : -$result; //Send final sort direction to usort
     }
-    usort($data, 'usort_reorder2');
+    usort($data, 'usort_reorder_notes');
     
     
         
