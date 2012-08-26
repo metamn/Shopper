@@ -65,6 +65,12 @@ function shopper_admin_menu() {
   // Separator, hack
   add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
   
+  add_submenu_page("shopper-menu", "Suppliers", "Suppliers", 'delete_others_posts', "shopper-suppliers", "shopper_suppliers_page"); 
+  
+  
+  // Separator, hack
+  add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
+  
   add_submenu_page("shopper-menu", "Addresses", "Addresses", 'delete_others_posts', "shopper-addresses", "shopper_addresses_page"); 
   add_submenu_page("shopper-menu", "Notes", "Notes", 'delete_others_posts', "shopper-notes", "shopper_notes_page"); 
   add_submenu_page("shopper-menu", "Order Items", "Order Items", 'delete_others_posts', "shopper-order_items", "shopper_order_items_page"); 
@@ -99,7 +105,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'admin-delivery.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-addresses.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-notes.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-order-items.php');
-
+include_once(plugin_dir_path( __FILE__ ) . 'admin-suppliers.php');
 
 
 
@@ -192,6 +198,12 @@ function shopper_order_items_page() {
 	shopper_admin_display_submenu_page("Produse comandate", "order_items", new OrderItems_Table(), true, true, true);
 }
 
+// Suppliers
+// --------------------------------------------------------------------------------
+
+function shopper_suppliers_page() {
+	shopper_admin_display_submenu_page("Suppliers", "suppliers", new Suppliers_Table(), true, true, true);
+}
 
 
 // Import 
@@ -308,9 +320,6 @@ function shopper_tables() {
   );";  
   dbDelta($sql);
   
-  
-  
-  
   // Sessions
   $table = $wpdb->prefix . "shopper_sessions";
   $sql = "CREATE TABLE $table (
@@ -381,6 +390,18 @@ function shopper_tables() {
       description VARCHAR(255),
       price VARCHAR(32),
       duration VARCHAR(32),
+      PRIMARY KEY (id)
+  );";  
+  dbDelta($sql);
+  
+  
+  // Suppliers
+  $table = $wpdb->prefix . "shopper_suppliers";
+  $sql = "CREATE TABLE $table (
+      id INT(9) NOT NULL AUTO_INCREMENT,
+      name VARCHAR(32),
+      description VARCHAR(255),
+      contact VARCHAR(255),
       PRIMARY KEY (id)
   );";  
   dbDelta($sql);
