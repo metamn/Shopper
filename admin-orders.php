@@ -74,7 +74,7 @@ class Orders_Table extends WP_List_Table {
         ); 
         
         // Edit link
-        $link = "<a href='?page=shopper-customers&action=edit&profiles=" . $profile[0]->id . "' title='Modificare cumparator'>";
+        $link = "<a href='?page=shopper-profiles&action=edit&profiles=" . $profile[0]->id . "' title='Modificare cumparator'>";
         
         if (isset($profile[0]->name) && ($profile[0]->name != '')) {
           return $link . $profile[0]->name . "</a>";
@@ -200,6 +200,28 @@ class Orders_Table extends WP_List_Table {
   // Define detail tables
   function get_detail_tables($parent_id) {
   	$ret = array();
+  	
+  	// Order items
+  	$params = array(
+  		'parent_id' => $parent_id
+  	);
+  	$ret[] = array(
+  		'title' => "Produse comandate",
+  		'page' => 'order_items',
+  		'table' => new OrderItems_Table($params)
+  	);
+  	
+  	// Notes
+  	$params = array(
+  		'entry_id' => $parent_id,
+  		'table_id' => 'orders'
+  	);
+  	$ret[] = array(
+  		'title' => "Observatii",
+  		'page' => 'notes',
+  		'table' => new Notes_Table($params)
+  	);
+  	
   	
   	return $ret;
   }
