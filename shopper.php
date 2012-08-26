@@ -66,6 +66,7 @@ function shopper_admin_menu() {
   add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
   
   add_submenu_page("shopper-menu", "Suppliers", "Suppliers", 'delete_others_posts', "shopper-suppliers", "shopper_suppliers_page"); 
+  add_submenu_page("shopper-menu", "Supplier needs", "Supplier needs", 'delete_others_posts', "shopper-supplier_needs", "shopper_supplier_needs_page"); 
   
   
   // Separator, hack
@@ -106,6 +107,7 @@ include_once(plugin_dir_path( __FILE__ ) . 'admin-addresses.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-notes.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-order-items.php');
 include_once(plugin_dir_path( __FILE__ ) . 'admin-suppliers.php');
+include_once(plugin_dir_path( __FILE__ ) . 'admin-supplier-needs.php');
 
 
 
@@ -204,6 +206,15 @@ function shopper_order_items_page() {
 function shopper_suppliers_page() {
 	shopper_admin_display_submenu_page("Suppliers", "suppliers", new Suppliers_Table(), true, true, true);
 }
+
+// Supplier Needs
+// --------------------------------------------------------------------------------
+
+function shopper_supplier_needs_page() {
+	shopper_admin_display_submenu_page("Supplier Needs", "supplier_needs", new SupplierNeeds_Table(), true, true, true);
+}
+
+
 
 
 // Import 
@@ -402,6 +413,19 @@ function shopper_tables() {
       name VARCHAR(32),
       description VARCHAR(255),
       contact VARCHAR(255),
+      PRIMARY KEY (id)
+  );";  
+  dbDelta($sql);
+  
+  // Supplier Needs
+  $table = $wpdb->prefix . "shopper_supplier_needs";
+  $sql = "CREATE TABLE $table (
+      id INT(9) NOT NULL AUTO_INCREMENT,
+      supplier_id INT(9),
+      product_id VARCHAR(255),
+      variation_id VARCHAR(255),
+      qty INT(9),
+      date TIMESTAMP,
       PRIMARY KEY (id)
   );";  
   dbDelta($sql);
