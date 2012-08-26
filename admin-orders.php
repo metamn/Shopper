@@ -152,7 +152,22 @@ class Orders_Table extends WP_List_Table {
   			);
   		}
   	}
-  	print_r($ret);
+  	
+  	// Customer is a select box
+  	$ret[2]['type'] = 'select';
+  	$v = array();
+  	global $wpdb;
+  	$customers = $wpdb->get_results("SELECT * FROM wp_shopper_profiles");  
+  	foreach ($customers as $c) {
+  		$v[] = array(
+  			'value' => $c->id,
+  			'title' => $c->name
+  		); 
+  	}
+		$ret[2]['values'] = $v;	
+  	
+  	// Total is removed
+  	unset($ret[3]);
   	
   	// Remove fields by special cases
   	switch ($action) {

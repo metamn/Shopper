@@ -268,13 +268,15 @@ function shopper_admin_form_field($field, $item, $table) {
 	// Hidden
 	// Non editable field, usually the parent value
 	if (isset($field['not_editable']) && ($field['not_editable'] == true)) {
-		// Parent value comes from the WP List Table 
-    $i = (object) $item->data;
-    echo $table->column_default($i, $id); 
-    
     if (isset($field['value'])) {
     	$value = $field['value'];
-    } ?>
+    	echo $value;
+    } else {
+    	// Parent value comes from the WP List Table 
+    	$i = (object) $item->data;
+    	echo $table->column_default($i, $id); 
+    } 
+    ?>
     
     <input type="hidden" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
   } else {
@@ -284,11 +286,19 @@ function shopper_admin_form_field($field, $item, $table) {
   		<textarea cols="40" rows="5" name="<?php echo $id ?>" id="<?php echo $id ?>"><?php echo $value ?></textarea> <?php
   	} else { 
   		
-  		// Normal input 
-  		?>
-  		<input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
+  		// Select
+  		if (isset($field['type']) && ($field['type'] == 'select')) { ?>
+  		 <select id="<?php echo $id ?>" name="<?php echo $id ?>">
+  		 	<?php foreach ($field['values'] as $v) { ?>
+  		 		<option value="<?php echo $v['value'] ?>"><?php echo $v['title'] ?></option> 
+  		 	<?php } ?>
+  		 </select>
+  		<?php } else { 
+  		
+  			// Normal input ?>
+  			<input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
+  		}
   	}
-  	
   }
 }
 

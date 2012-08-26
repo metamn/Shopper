@@ -118,11 +118,11 @@ class Notes_Table extends WP_List_Table {
   	
   	// Mark table_id relationship ...
   	$ret[0]['not_editable'] = true;
-  	$ret[0]['value'] = $this->table_id;
+  	//$ret[0]['value'] = $this->table_id;
   	
   	// Mark entry_id relationship ...
   	$ret[1]['not_editable'] = true;
-  	$ret[1]['value'] = $this->parent_id;
+  	//$ret[1]['value'] = $this->parent_id;
   	
   	// Make input for 'body' to be a textarea
   	$ret[2]['type'] = 'textarea';
