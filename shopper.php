@@ -22,15 +22,11 @@
 // Global variables
 //
 
-
 // Date formatting
 define("DATE_FORMAT", "D, d M Y");
 
-
 // Order types
 $ORDER_TYPES = array("Online", "Phone");
-
-
 
 // form data
 define("FORM_TITLE_ADD", "Adaugare");

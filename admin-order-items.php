@@ -67,6 +67,8 @@ class OrderItems_Table extends WP_List_Table {
       case 'product_variation_name':
       case 'product_price':
       case 'product_qty':
+      case 'product_post_id':
+      case 'product_variation_id':
         return $item->$column_name;
       case 'order_id':
       	global $wpdb;
@@ -108,10 +110,38 @@ class OrderItems_Table extends WP_List_Table {
   		}
   	}
   	
-  	// order_id is not editable
-  	$ret[0]['not_editable'] = true;
+  	// Order_id is not editable
+  	$ret[0]['type'] = 'not editable';
   	$ret[0]['value'] = $this->parent_id;
   	
+  	// Product_name is a selectbox
+  	$v = array();
+  	$all_products = shopper_products();
+  	if ($all_products->have_posts()) {
+    	foreach($all_products->posts as $post) {	
+    		$p = shopper_product($post->ID);
+    		$v[] = array(
+    			'title' => $p->name,
+    			'value' => $p->post_id
+    		);
+  		}
+  	}
+  	$ret['1']['type'] = 'select';
+  	$ret['1']['value'] = $v;
+  	
+  	
+  	// Post_id and variation_id is hidden
+		$ret[] = array(
+			'title' => 'Nr. produs',
+			'id' => 'product_post_id',
+			'type' => 'hidden');
+		
+		$ret[] = array(
+			'title' => 'Nr. variatie',
+			'id' => 'product_variation_id',
+			'type' => 'hidden');
+		
+		
   	return $ret;
   }
   

@@ -266,6 +266,9 @@ function shopper_admin_form_body($item, $table, $nonce) {
 //	- type: the form input type: hidden, select, ...
 //	- required: if this field is required or not
 //	- snippet: a html/text snippet to be added after the field
+//
+// - the selectbox values are stored in an array of arrays, with 'title' and 'value' fields set
+//
 function shopper_admin_form_field($field, $item, $table) {
 	
 	// Each field is a table row

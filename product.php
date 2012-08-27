@@ -6,7 +6,18 @@
 //
 // - inserts a 'Product info' box in Posts and Pages editor
 // - stores Product Name, Product Description and Product Variations in meta fields
-// - retrieves complete Product information
+// - retrieves complete Product and Products information
+//
+// The metadata structure describing a product is:
+//
+//	product_name
+//	product_description
+//	product_variations, which is a serialized array with the following structure
+//		variation->name
+//		variation->price
+//		variation->saleprice
+//		variation->delivery
+//		variation->image
 
 
 // insert Product box into Posts and Page
@@ -189,6 +200,17 @@ function shopper_product($post_id) {
   $product->variations = get_post_meta($post_id, 'product_variations', true);
   
   return $product;
+}
+
+
+// Get all products
+// - returns a collection of posts
+function shopper_products() {
+	$q = new WP_Query(array(
+		'posts_per_page' => '-1',
+		'meta_key' => 'product_name'
+	));
+  return $q;
 }
 
 ?>
