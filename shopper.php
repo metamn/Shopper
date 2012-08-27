@@ -22,6 +22,16 @@
 // Global variables
 //
 
+
+// Date formatting
+define("DATE_FORMAT", "D, d M Y");
+
+
+// Order types
+$ORDER_TYPES = array("Online", "Phone");
+
+
+
 // form data
 define("FORM_TITLE_ADD", "Adaugare");
 define("FORM_TITLE_MODIFY", "Modificare");
@@ -39,7 +49,6 @@ define("NEW_SESSION_HRS", 3);
 define("PASSIVE", 1);
 define("INTERACTIVE", 2);
 define("CONTACTABLE", 3);
-
 
 
 

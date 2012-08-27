@@ -242,14 +242,7 @@ function shopper_admin_form_body($item, $table, $nonce) {
 	<form id="edit" action="" method="post">
     <table class="form-table">
       <tbody>
-        <?php foreach ($editables as $field) { ?>
-          <tr>
-            <th><label><?php echo $field['title'] ?></label></th>
-            <td>
-            	<?php echo shopper_admin_form_field($field, $item, $table); ?>
-            </td>
-          </tr>
-        <?php } ?>
+        <?php foreach ($editables as $field) { echo shopper_admin_form_field($field, $item, $table); } ?>
       </tbody>
     </table>
     <input type="hidden" value="<?php echo $item->data['id'] ?>" id="id" name="id">
@@ -261,45 +254,70 @@ function shopper_admin_form_body($item, $table, $nonce) {
 
 
 // Display a hidden, text, textarea or select field
+// - field: the display properties of the field
+// - item: the data, value of the field
+// - table: to access the column_default function to get associated data (like parent name, etc)
+//
+// - the field can have the following structure:
+//
+// 	- title: the name of the column, ie Cumparator
+//	-	id: the id of the form field, ie profile_id
+//	- value: the value of the column, ie 12
+//	- type: the form input type: hidden, select, ...
+//	- required: if this field is required or not
+//	- snippet: a html/text snippet to be added after the field
 function shopper_admin_form_field($field, $item, $table) {
-	$id = $field['id'];
-	$value = $item->data[$id];
 	
-	// Hidden
-	// Non editable field, usually the parent value
-	if (isset($field['not_editable']) && ($field['not_editable'] == true)) {
-    if (isset($field['value'])) {
-    	$value = $field['value'];
-    	echo $value;
-    } else {
-    	// Parent value comes from the WP List Table 
-    	$i = (object) $item->data;
-    	echo $table->column_default($i, $id); 
-    } 
-    ?>
-    
-    <input type="hidden" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
-  } else {
-  	
-  	// Textarea
-  	if (isset($field['type']) && ($field['type'] == 'textarea')) { ?>
-  		<textarea cols="40" rows="5" name="<?php echo $id ?>" id="<?php echo $id ?>"><?php echo $value ?></textarea> <?php
-  	} else { 
-  		
-  		// Select
-  		if (isset($field['type']) && ($field['type'] == 'select')) { ?>
-  		 <select id="<?php echo $id ?>" name="<?php echo $id ?>">
-  		 	<?php foreach ($field['values'] as $v) { ?>
-  		 		<option value="<?php echo $v['value'] ?>"><?php echo $v['title'] ?></option> 
-  		 	<?php } ?>
-  		 </select>
-  		<?php } else { 
-  		
-  			// Normal input ?>
-  			<input type="text" class="regular-text" value="<?php echo $value ?>" id="<?php echo $id ?>" name="<?php echo $id ?>"> <?php
-  		}
-  	}
-  }
+	// Each field is a table row
+	$row_start = "<tr><th><label>" . $field['title'] . "</label></th><td>";
+	// A HTML / text snippet can be added after each field
+	$row_end = $field['snippet'] . "</td></tr>";
+
+	// Commonly used data saved into variables
+	$id = $field['id'];
+	
+	// The field value is either:
+	// - predefined, like parent_id in a relationship
+	// - or loaded from database via $item
+	if (isset($field['value'])) {
+		$value = $field['value'];
+	} else {
+		$value = $item->data[$id];
+	}
+	
+	// The field display value is always given by the WP List Table column_default function
+	$i = (object) $item->data;
+  $display_value = $table->column_default($i, $id); 
+	
+	// Do the job
+	switch ($field['type']) {
+		case 'hidden':
+			echo "<input type='hidden' value='" . $value . "' id='" . $id . "' name='" . $id . "'>";
+			break;
+		case 'not editable':
+			echo "<input type='hidden' value='" . $value . "' id='" . $id . "' name='" . $id . "'>";
+			echo $row_start . $display_value. $row_end;
+			break;
+		case 'textarea':
+			echo $row_start;
+			echo "<textarea cols='40' rows='5' name='" . $id . "' id='" . $id . "'>" . $display_value . "</textarea>";
+			echo $row_end;
+			break;
+		case 'select':
+			echo $row_start;
+			echo "<select id='". $id . "' name='" . $id . "'>";
+  			foreach ($field['value'] as $v) { 
+  		 		echo "<option value='" . $v['value'] . "'>" . $v['title'] . "</option>"; 
+  		 	}
+  		echo "</select>";
+			echo $row_end;
+			break;
+		default:
+			echo $row_start;
+			echo "<input type='text' class='regular-text' value='" . $value . "' id='" . $id . "' name='" . $id . "'>";
+			echo $row_end;
+	}
+  
 }
 
 

@@ -2,12 +2,6 @@
 
 // Display orders in Admin
 // --------------------------------------------------------------------------------
-//
-// - tutorial: http://wordpress.org/extend/plugins/custom-list-table-example/
-//
-// - Orders are differnt, more complicated than normal tables:
-//	- they can be edited (phone order) or not (online)
-//	- the form will be custom not using the general framework
 
 
 
@@ -45,7 +39,7 @@ class Orders_Table extends WP_List_Table {
   function get_columns() {
     return $columns= array(
 	    'id'=>__('Numar<br/>comanda'),
-	    'type' => __('Tip comanda'),
+	    'type' => __('Tip<br/>comanda'),
 	    'date'=>__('Data'),
 	    'profile_id' => __('Cumparator'),
 	    'products' => __('Produse'),	    
@@ -62,11 +56,13 @@ class Orders_Table extends WP_List_Table {
     
     switch($column_name){
       case 'id':
-      case 'type':
       case 'grand_total':
         return $item->$column_name;
+    	case 'type':
+    		global $ORDER_TYPES;
+      	return $ORDER_TYPES[$item->$column_name];
       case 'date':
-        return date('Y M d', strtotime($item->$column_name));
+        return date(DATE_FORMAT, strtotime($item->$column_name));
       case 'profile_id':
         $profile = $wpdb->get_results(
           "SELECT * FROM wp_shopper_profiles " .
@@ -76,6 +72,7 @@ class Orders_Table extends WP_List_Table {
         // Edit link
         $link = "<a href='?page=shopper-profiles&action=edit&profiles=" . $profile[0]->id . "' title='Modificare cumparator'>";
         
+        // Sometimes there is no name but email for a Customer
         if (isset($profile[0]->name) && ($profile[0]->name != '')) {
           return $link . $profile[0]->name . "</a>";
         } else {
@@ -164,7 +161,20 @@ class Orders_Table extends WP_List_Table {
   			'title' => $c->name
   		); 
   	}
-		$ret[2]['values'] = $v;	
+		$ret[2]['value'] = $v;	
+
+		
+		// Status is a select box
+		$ret[4]['type'] = 'select';
+  	$v = array();
+  	$s = $wpdb->get_results("SELECT * FROM wp_shopper_order_status");  
+  	foreach ($s as $c) {
+  		$v[] = array(
+  			'value' => $c->id,
+  			'title' => $c->name
+  		); 
+  	}
+		$ret[4]['value'] = $v;	
   	
   	// Total is removed
   	unset($ret[3]);
@@ -173,23 +183,30 @@ class Orders_Table extends WP_List_Table {
   	switch ($action) {
   		case FORM_TITLE_ADD:
   			// When Add the order type will be 'phone'
-  			$ret[0]['not_editable'] = true;
-  			$ret[0]['value'] = 'phone';
+  			$ret[0]['type'] = 'hidden';
+  			$ret[0]['value'] = 0;
   			
   			// Date is automatically set to now
-  			$ret[1]['not_editable'] = true;
+  			$ret[1]['type'] = 'hidden';
   			$ret[1]['value'] = date("Y-m-d H:i:s");
+  			
+  			// Customer has an "Add new" button / link attached
+				$ret[2]['snippet'] = "<a class='add-new-h2' href='?page=shopper-profiles&action=edit'>Adaugare cumparator</a>";
+		
+  			// Status is PENDING
+  			$ret[4]['type'] = 'hidden';
+  			$ret[4]['value'] = 1;
   			break;
   		
   		case FORM_TITLE_MODIFY:
   			// Order type not modificable
-  			$ret[0]['not_editable'] = true;
+  			$ret[0]['type'] = 'not editable';
   			
   			// Order date not modificable
-  			$ret[1]['not_editable'] = true;
+  			$ret[1]['type'] = 'not editable';
   			
   			// Customer not modificable
-  			$ret[2]['not_editable'] = true;
+  			$ret[2]['type'] = 'not editable';
   			break;
   	}
   	
