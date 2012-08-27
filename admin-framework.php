@@ -266,6 +266,8 @@ function shopper_admin_form_body($item, $table, $nonce) {
 //	- type: the form input type: hidden, select, ...
 //	- required: if this field is required or not
 //	- snippet: a html/text snippet to be added after the field
+//	- nonce: if this field supports ajax calls a nonce is a must
+//		- the nonce string convention is: 'fieldname_nonce'
 //
 // - the selectbox values are stored in an array of arrays, with 'title' and 'value' fields set
 //
@@ -291,11 +293,18 @@ function shopper_admin_form_field($field, $item, $table) {
 	// The field display value is always given by the WP List Table column_default function
 	$i = (object) $item->data;
   $display_value = $table->column_default($i, $id); 
+  
+  // Check and set up nonce
+  if (isset($field['nonce'])) {
+  	$nonce = " data-nonce='" . $field['nonce'] . "' ";
+  } else {
+  	$nonce = '';
+  }
 	
 	// Do the job
 	switch ($field['type']) {
 		case 'hidden':
-			echo "<input type='hidden' value='" . $value . "' id='" . $id . "' name='" . $id . "'>";
+			echo "<input type='hidden' value='" . $value . "' id='" . $id . "' name='" . $id ."'>";
 			break;
 		case 'not editable':
 			echo "<input type='hidden' value='" . $value . "' id='" . $id . "' name='" . $id . "'>";
@@ -308,7 +317,7 @@ function shopper_admin_form_field($field, $item, $table) {
 			break;
 		case 'select':
 			echo $row_start;
-			echo "<select id='". $id . "' name='" . $id . "'>";
+			echo "<select id='". $id . "' name='" . $id . "' " . $nonce . ">";
   			foreach ($field['value'] as $v) { 
   		 		echo "<option value='" . $v['value'] . "'>" . $v['title'] . "</option>"; 
   		 	}

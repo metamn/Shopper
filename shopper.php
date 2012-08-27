@@ -122,6 +122,7 @@ function shopper_admin_scripts() {
 	wp_register_style( 'shopper-admin', plugins_url('admin.css', __FILE__) );
 	wp_enqueue_style( 'shopper-admin' );
 	wp_enqueue_script('shopper', plugins_url('admin.js', __FILE__), array('jquery'));
+	wp_localize_script( 'shopper', 'shopper', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }  
 add_action('admin_print_styles', 'shopper_admin_scripts');
 

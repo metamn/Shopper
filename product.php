@@ -208,7 +208,11 @@ function shopper_product($post_id) {
 function shopper_products() {
 	$q = new WP_Query(array(
 		'posts_per_page' => '-1',
-		'meta_key' => 'product_name'
+		'meta_query' => array( array(
+			'key' => 'product_name',
+			'value' => '',
+			'compare' => '!='
+		))
 	));
   return $q;
 }
