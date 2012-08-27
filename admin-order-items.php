@@ -130,7 +130,7 @@ class OrderItems_Table extends WP_List_Table {
   // Add Edit to Product Name
   function column_product_name($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=shopper-order_items&action=%s&order-items=%s&parent_id=%s">Edit</a>','edit',$item->id, $this->parent_id),        
+        'edit'      => sprintf('<a href="?page=shopper-order_items&action=%s&order_items=%s&parent_id=%s">Edit</a>','edit',$item->id, $this->parent_id),        
     );    
     //Return the title contents
     return sprintf('%1$s %2$s',
