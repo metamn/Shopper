@@ -1,5 +1,10 @@
 jQuery(document).ready(function() {
 
+	// Populate Stock available and Price when variation is selected
+	jQuery("#shopper-order_items #edit #product_variation_name").change(function() {
+  	alert("price");
+	});
+
 	// Populate Variations when a Product is selected
 	jQuery("#shopper-order_items #edit #product_name").change(function() {
   	var postID = jQuery("option:selected", this).val();

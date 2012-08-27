@@ -24,7 +24,7 @@ function shopper_get_product_variations() {
     // Construct a Select for variations
     $s = "<select id='product_variation_name' name='product_variation_name'>";
     foreach ($product->variations as $v) {
-    	$s .= "<option value='" . $v['id'] . "'>" . $v['name'] . "</option>";
+    	$s .= "<option value='" . $v['id'] . "' data-price='" . $v['price'] . "' data-saleprice='" . $v['saleprice'] . "' data-stock='" . $v['delivery'] . "'>" . $v['name'] . "</option>";
     }
     $s .= "</select>";
     
@@ -175,6 +175,19 @@ class OrderItems_Table extends WP_List_Table {
   	$ret['1']['value'] = $products;
   	$ret['1']['nonce'] = wp_create_nonce('product_name_nonce');
   	
+  	
+  	// Product variation is an empty select box
+  	$ret['2']['type'] = 'select';
+  	$ret['2']['value'] = array(
+  		array(
+  			'title' => '1',
+  			'value' => '1'
+  		),
+  		array(
+  			'title' => '2',
+  			'value' => '2'
+  		)
+  	);
   	
   	// Post_id and variation_id is hidden
 		$ret[] = array(
