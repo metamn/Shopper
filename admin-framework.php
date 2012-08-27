@@ -270,6 +270,7 @@ function shopper_admin_form_body($item, $table, $nonce) {
 //		- the nonce string convention is: 'fieldname_nonce'
 //
 // - the selectbox values are stored in an array of arrays, with 'title' and 'value' fields set
+// - selectbox options can have a $snippet variable storing extra information
 //
 function shopper_admin_form_field($field, $item, $table) {
 	
@@ -319,7 +320,7 @@ function shopper_admin_form_field($field, $item, $table) {
 			echo $row_start;
 			echo "<select id='". $id . "' name='" . $id . "' " . $nonce . ">";
   			foreach ($field['value'] as $v) { 
-  		 		echo "<option value='" . $v['value'] . "'>" . $v['title'] . "</option>"; 
+  		 		echo "<option value='" . $v['value'] . "' " . $v['snippet'] . ">" . $v['title'] . "</option>"; 
   		 	}
   		echo "</select>";
 			echo $row_end;

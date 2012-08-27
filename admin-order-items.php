@@ -24,7 +24,7 @@ function shopper_get_product_variations() {
     // Construct a Select for variations
     $s = "<select id='product_variation_name' name='product_variation_name'>";
     foreach ($product->variations as $v) {
-    	$s .= "<option value='" . $v['id'] . "' data-price='" . $v['price'] . "' data-saleprice='" . $v['saleprice'] . "' data-stock='" . $v['delivery'] . "'>" . $v['name'] . "</option>";
+    	$s .= "<option value='" . $product->name . "' data-price='" . $v['price'] . "' data-saleprice='" . $v['saleprice'] . "' data-stock='" . $v['delivery'] . "'>" . $v['name'] . "</option>";
     }
     $s .= "</select>";
     
@@ -165,10 +165,26 @@ class OrderItems_Table extends WP_List_Table {
   	if ($all_products->have_posts()) {
     	foreach($all_products->posts as $post) {	
     		$p = shopper_product($post->ID);
-    		$products[] = array(
-    			'title' => $p->name,
-    			'value' => $p->post_id
-    		);
+    		
+    		// Products are returned together vith their variations
+    		foreach ($p->variations as $v) {
+    			$product_name = $p->name;
+    			
+    			// Add variation name to product
+    			if ($v['name'] != 'default') {
+    				$product_name .= ' (' . $v['name'] . ')';
+    			}
+    			
+    			// Get variation details
+    			$snippet = " data-postid='" . $p->post_id . "' data-name='" . $p->name . "' data-variationname='" . $v['name'] . "'";
+    			$snippet .= " data-variationid='" . $v['id'] . "' data-price='" . $v['price'] . "'";
+    			
+    			$products[] = array(
+    				'title' => $product_name,
+    				'value' => $p->name,
+    				'snippet' => $snippet 
+    			);
+    		}
   		}
   	}
   	$ret['1']['type'] = 'select';
@@ -176,20 +192,9 @@ class OrderItems_Table extends WP_List_Table {
   	$ret['1']['nonce'] = wp_create_nonce('product_name_nonce');
   	
   	
-  	// Product variation is an empty select box
-  	$ret['2']['type'] = 'select';
-  	$ret['2']['value'] = array(
-  		array(
-  			'title' => '1',
-  			'value' => '1'
-  		),
-  		array(
-  			'title' => '2',
-  			'value' => '2'
-  		)
-  	);
-  	
-  	// Post_id and variation_id is hidden
+  	// price, product_post_id, variation_id, variation_name is hidden
+  	$ret['2']['type'] = 'hidden';
+  	$ret['3']['type'] = 'hidden';
 		$ret[] = array(
 			'title' => 'Nr. produs',
 			'id' => 'product_post_id',
