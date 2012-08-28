@@ -16,7 +16,8 @@
 //		variation->name
 //		variation->price
 //		variation->saleprice
-//		variation->delivery
+//		variation->delivery - how many days to deliver the product
+//		variation->stock - how much we have in stock
 //		variation->image
 
 
@@ -74,12 +75,14 @@ function shopper_inner_custom_box($post) {
       $variation_price = $product->variations[$i-1]['price'];
       $variation_saleprice = $product->variations[$i-1]['saleprice'];
       $variation_delivery = $product->variations[$i-1]['delivery'];
+      $variation_stock = $product->variations[$i-1]['stock'];
       $variation_image = $product->variations[$i-1]['image'];
     } else {
       $variation_name = '';
       $variation_price = '';
       $variation_saleprice = '';
       $variation_delivery = '';
+      $variation_stock = '';
       $variation_image = '';      
     }   
     
@@ -109,6 +112,12 @@ function shopper_inner_custom_box($post) {
     _e("Delivery", 'shopper_textdomain' );
     echo '</label> ';
     echo '<input type="text" id="shopper_product_variation_delivery-'. $i .'" name="shopper_product_variation_delivery-'. $i .'" value="' . $variation_delivery . '" size="2" />';
+
+		echo '<label for="shopper_product_variation_stock">';
+    echo "&nbsp;&nbsp;";
+    _e("Stock", 'shopper_textdomain' );
+    echo '</label> ';
+    echo '<input type="text" id="shopper_product_variation_stock-'. $i .'" name="shopper_product_variation_stock-'. $i .'" value="' . $variation_stock . '" size="2" />';
 
     echo '<label for="shopper_product_variation_image">';
     echo "&nbsp;&nbsp;";
@@ -170,7 +179,8 @@ function shopper_save_postdata( $post_id ) {
       $v['name'] = $variation_name;
       $v['price'] = sanitize_text_field($_POST['shopper_product_variation_price-' . $i]);
       $v['saleprice'] = sanitize_text_field($_POST['shopper_product_variation_saleprice-' . $i]);
-      $v['delivery'] = sanitize_text_field($_POST['shopper_product_variation_delivery-' . $i]);       
+      $v['delivery'] = sanitize_text_field($_POST['shopper_product_variation_delivery-' . $i]);  
+      $v['stock'] = sanitize_text_field($_POST['shopper_product_variation_stock-' . $i]);
       $v['image'] = sanitize_text_field($_POST['shopper_product_variation_image-' . $i]);
       
       $variations[] = $v;

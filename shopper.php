@@ -17,6 +17,15 @@
 // - all user actions (ajax) and clicks is registered into db to analyze behaviour
 
 
+// File structure
+//
+// - this is the main file with mostly declarations (db structure, menu structure, etc.)
+// - the admin backend is done via WP List Table stored in the admin-xxx.php files for each table
+// - admin-framework.php is a Rails like set of tools for editing and saving records
+
+
+
+
 
 
 // Global variables
@@ -24,6 +33,7 @@
 
 // Date formatting
 define("DATE_FORMAT", "D, d M Y");
+define("DATE_MYSQL", "Y-m-d H:i:s");
 
 // Order types
 $ORDER_TYPES = array("Online", "Phone");

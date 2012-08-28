@@ -18,6 +18,10 @@ class SupplierNeeds_Table extends WP_List_Table {
 	function __construct($params) {
 	  global $status, $page;
 	  
+	  // Checking for product id and variation id 
+    $this->post_id = $_REQUEST['post_id'];
+	  $this->variation_id = $_REQUEST['variation_id'];
+	  
     parent::__construct(array(
       'singular'  => 'supplier need',
       'plural'  => 'supplier needs',
@@ -49,18 +53,21 @@ class SupplierNeeds_Table extends WP_List_Table {
     
     switch($column_name){
       case 'id':
-      case 'product_id':
-      case 'variation_id':
       case 'qty':
         return $item->$column_name;
+      case 'product_id':
+      	$product = shopper_product($item->$column_name);
+      	return $product->name;
+      case 'variation_id':
+      	$product = shopper_product($item->product_id);
+      	return $product->variations[$item->$column_name-1]['name'];
       case 'supplier_id':
-      	global $wpdb;
       	$supplier = $wpdb->get_results(
           "SELECT * FROM wp_shopper_suppliers " .
           "WHERE id = " . $item->$column_name
         ); 
         // Edit link
-        $link = "<a href='?page=shopper-suppliers&action=edit&suppliers=" . $supplier[0]->id . "' title='Modificare cumparator'>";
+        return "<a href='?page=shopper-suppliers&action=edit&suppliers=" . $supplier[0]->id . "'>" . $supplier[0]->name . "</a>";
       case 'date':
       	return date('Y M d', strtotime($item->$column_name));
       default:
@@ -69,13 +76,13 @@ class SupplierNeeds_Table extends WP_List_Table {
   }
   
   // Add Edit to Product Name
-  function column_product_id($item) {
+  function column_qty($item) {
     $actions = array(
         'edit'      => sprintf('<a href="?page=shopper-supplier_needs&action=%s&supplier_needs=%s&parent_id=%s">Edit</a>','edit',$item->id, $this->parent_id),        
     );    
     //Return the title contents
     return sprintf('%1$s %2$s',
-        /*$1%s*/ $item->product_id,
+        /*$1%s*/ $item->qty,
         /*$3%s*/ $this->row_actions($actions)
     );
   }
@@ -95,6 +102,52 @@ class SupplierNeeds_Table extends WP_List_Table {
   			);
   		}
   	}
+  	
+  	// Supplier, Product are select boxes
+  	$suppliers = array();
+  	global $wpdb;
+  	$data = $wpdb->get_results("SELECT * FROM wp_shopper_suppliers");
+  	foreach ($data as $d) {
+  		$suppliers[] = array(
+    		'title' => $d->name,
+    		'value' => $d->id 
+    	);
+  	}
+  	$ret['0']['type'] = 'select';
+  	$ret['0']['value'] = $suppliers;
+  	
+  	$all_products = shopper_products();
+  	if ($all_products->have_posts()) {
+    	foreach($all_products->posts as $post) {	
+    		$p = shopper_product($post->ID);
+    		
+    		// Products are returned together vith their variations
+    		foreach ($p->variations as $v) {
+    			$product_name = $p->name;
+    			
+    			// Add variation name to product
+    			if ($v['name'] != 'default') {
+    				$product_name .= ' (' . $v['name'] . ')';
+    			}
+    			
+    			// Get variation details
+    			$snippet = " data-variation_id='" . $v['id'] . "'";
+    			
+    			$products[] = array(
+    				'title' => $product_name,
+    				'value' => $p->post_id,
+    				'snippet' => $snippet 
+    			);
+    		}
+  		}
+  	}
+  	$ret['1']['type'] = 'select';
+  	$ret['1']['value'] = $products;
+  	
+  	$ret['2']['type'] = 'hidden';
+  	
+  	$ret['4']['type'] = 'hidden';
+  	$ret['4']['value'] = date(DATE_MYSQL);
   	
   	return $ret;
   }

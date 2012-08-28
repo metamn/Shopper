@@ -8,51 +8,6 @@
 
 
 
-// Get Product Variations, AJAX
-function shopper_get_product_variations() {
-	// Get the nonce
-	$nonce = $_POST['nonce'];  
-	$nonce_string = $_POST['fieldid'];
-	$nonce_string .= "_nonce";
-  if ( wp_verify_nonce( $nonce, $nonce_string ) ) {
-    // Get the post id
-    $post_id = strval( $_POST['postid'] );
-    
-    // Get the product
-    $product = shopper_product($post_id);
-    
-    // Construct a Select for variations
-    $s = "<select id='product_variation_name' name='product_variation_name'>";
-    foreach ($product->variations as $v) {
-    	$s .= "<option value='" . $product->name . "' data-price='" . $v['price'] . "' data-saleprice='" . $v['saleprice'] . "' data-stock='" . $v['delivery'] . "'>" . $v['name'] . "</option>";
-    }
-    $s .= "</select>";
-    
-    $ret = array(
-      'success' => true,
-      'variations' => $s, 
-      'message' => 'Ok'
-    );  
-  
-  } else {
-    $ret = array(
-      'success' => false,
-      'message' => 'Nonce error'
-    );
-  }
-    
-  $response = json_encode($ret);
-  header( "Content-Type: application/json" );
-  echo $response;
-  exit;
-}
-add_action('wp_ajax_shopper_get_product_variations', 'shopper_get_product_variations');
-add_action( 'wp_ajax_nopriv_shopper_get_product_variations', 'shopper_get_product_variations' );
-
-
-
-
-
 if(!class_exists('WP_List_Table')) :
   require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 endif;
@@ -177,7 +132,7 @@ class OrderItems_Table extends WP_List_Table {
     			
     			// Get variation details
     			$snippet = " data-postid='" . $p->post_id . "' data-name='" . $p->name . "' data-variationname='" . $v['name'] . "'";
-    			$snippet .= " data-variationid='" . $v['id'] . "' data-price='" . $v['price'] . "'";
+    			$snippet .= " data-variationid='" . $v['id'] . "' data-price='" . $v['price'] . "' data-stock='" . $v['stock'] . "'";
     			
     			$products[] = array(
     				'title' => $product_name,
@@ -189,8 +144,11 @@ class OrderItems_Table extends WP_List_Table {
   	}
   	$ret['1']['type'] = 'select';
   	$ret['1']['value'] = $products;
-  	$ret['1']['nonce'] = wp_create_nonce('product_name_nonce');
+  	$ret['1']['snippet'] = "&nbsp;&nbsp;	<span class='stock'>Stoc: </span>";
   	
+  	
+  	// Quantity has an 'Add new order" button
+  	$ret['4']['snippet'] = '<a id="import" class="add-new-h2" href="?page=shopper-supplier_needs&action=edit">Import more</a>';
   	
   	// price, product_post_id, variation_id, variation_name is hidden
   	$ret['2']['type'] = 'hidden';
