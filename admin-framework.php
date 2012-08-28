@@ -337,7 +337,7 @@ function shopper_admin_form_field($field, $item, $table) {
 
 
 // Decide if this is an edit or add new action
-// - request: the query param to work with, ie $_REQUEST['status']
+// - request: the item id
 // - table_name: the SQL name of the table
 //
 // Returns
@@ -370,7 +370,7 @@ function shopper_admin_form_setup($request, $table_name) {
     // Add new
     $item->page_title = FORM_TITLE_ADD;
     $item->button_title = FORM_SUBMIT_ADD;    
-    
+    /*
     // Insert a new empty row        
     $wpdb->query( 
       $wpdb->prepare( 
@@ -378,6 +378,7 @@ function shopper_admin_form_setup($request, $table_name) {
       )
     );
     $item->data->id = $wpdb->insert_id;
+    */
   }
 
 	// Covert data into an array
