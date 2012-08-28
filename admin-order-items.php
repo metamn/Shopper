@@ -110,12 +110,36 @@ class OrderItems_Table extends WP_List_Table {
   		}
   	}
   	
+  	// price, product_post_id, variation_id, variation_name is hidden
+  	$ret['2']['type'] = 'hidden';
+  	$ret['3']['type'] = 'hidden';
+		$ret[] = array(
+			'title' => 'Nr. produs',
+			'id' => 'product_post_id',
+			'type' => 'hidden');
+		
+		$ret[] = array(
+			'title' => 'Nr. variatie',
+			'id' => 'product_variation_id',
+			'type' => 'hidden');	
+			
+  	
   	// Order_id is not editable
   	$ret[0]['type'] = 'not editable';
   	$ret[0]['value'] = $this->parent_id;
   	
+  	// Quantity has an 'Add new order" button
+  	$ret['4']['snippet'] = '<a id="import" class="add-new-h2" href="?page=shopper-supplier_needs&action=edit">Import more</a>';
+  	
+  	
   	// Product_name is a selectbox
   	$products = array();
+  	$products[] = array(
+    	'title' => 'Va rugam selectati un produs',
+    	'value' => '',
+    	'selected' => '',
+    	'snippet' => '' 
+    );
   	$all_products = shopper_products();
   	if ($all_products->have_posts()) {
     	foreach($all_products->posts as $post) {	
@@ -141,6 +165,15 @@ class OrderItems_Table extends WP_List_Table {
   					$current_variation_id = $item->data['product_variation_id'];
   					if (($p->post_id == $current_post_id) && ($v['id'] == $current_variation_id)) {
   						$selected = 'selected';
+  						
+  						// Update post_id, variation, and price
+  						$ret['2']['value'] = $v['name'];
+  						$ret['3']['value'] = $v['price'];
+  						$ret['5']['value'] = $p->post_id;
+  						$ret['6']['value'] = $v['id'];
+  						
+  						// Update Add new order / Import more
+  						$ret['4']['snippet'] = '<a id="import" class="add-new-h2" href="?page=shopper-supplier_needs&action=edit&post_id=' . $p->post_id . '&variation_id=' . $v['id'] . '">Import more</a>';
   					}
   				}
     			
@@ -158,22 +191,8 @@ class OrderItems_Table extends WP_List_Table {
   	$ret['1']['snippet'] = "&nbsp;&nbsp;	<span class='stock'>Stoc: </span>";
   	
   	
-  	// Quantity has an 'Add new order" button
-  	$ret['4']['snippet'] = '<a id="import" class="add-new-h2" href="?page=shopper-supplier_needs&action=edit">Import more</a>';
   	
-  	// price, product_post_id, variation_id, variation_name is hidden
-  	$ret['2']['type'] = 'hidden';
-  	$ret['3']['type'] = 'hidden';
-		$ret[] = array(
-			'title' => 'Nr. produs',
-			'id' => 'product_post_id',
-			'type' => 'hidden');
-		
-		$ret[] = array(
-			'title' => 'Nr. variatie',
-			'id' => 'product_variation_id',
-			'type' => 'hidden');
-		
+  	
 		
   	return $ret;
   }

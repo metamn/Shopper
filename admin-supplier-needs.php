@@ -129,6 +129,21 @@ class SupplierNeeds_Table extends WP_List_Table {
   	$ret['0']['value'] = $suppliers;
   	
   	
+  	// Variation ID
+  	$ret['2']['type'] = 'hidden';
+  	$ret['2']['type'] = 0; // Will be overwritten anyway
+  	
+  	// Date
+  	$ret['4']['type'] = 'hidden';
+  	$ret['4']['value'] = date(DATE_MYSQL);
+  	
+  	
+  	$products[] = array(
+  		'title' => 'Va rudam selectati un produs',
+    	'value' => 0,
+    	'selected' => '',
+    	'snippet' => '' 
+    );
   	$all_products = shopper_products();
   	if ($all_products->have_posts()) {
     	foreach($all_products->posts as $post) {	
@@ -151,11 +166,17 @@ class SupplierNeeds_Table extends WP_List_Table {
     			if (isset($this->post_id) && isset($this->variation_id)) {
     				if (($p->post_id == $this->post_id) && ($v['id'] == $this->variation_id)) {
     					$selected = 'selected';
+    					
+    					// Update variation id
+    					$ret['2']['value'] = $v['id'];
     				}
     			}
     			if (isset($item->data['product_id']) && isset($item->data['variation_id'])) {
     				if (($p->post_id == $item->data['product_id']) && ($v['id'] == $item->data['variation_id'])) {
     					$selected = 'selected';
+    					
+    					// Update variation id
+    					$ret['2']['value'] = $v['id'];
     				}
     			}
     			
@@ -171,10 +192,6 @@ class SupplierNeeds_Table extends WP_List_Table {
   	$ret['1']['type'] = 'select';
   	$ret['1']['value'] = $products;
   	
-  	$ret['2']['type'] = 'hidden';
-  	
-  	$ret['4']['type'] = 'hidden';
-  	$ret['4']['value'] = date(DATE_MYSQL);
   	
   	return $ret;
   }
