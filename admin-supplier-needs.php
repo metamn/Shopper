@@ -89,7 +89,9 @@ class SupplierNeeds_Table extends WP_List_Table {
   
   
   // Get editable columns
-  function get_editables() {
+  // - $item is the current item loaded from db
+  // - it is used to determine which selectbox value to display on edit
+  function get_editables($item) {
   	$ret = array();
   	
   	$columns = $this->get_columns();
@@ -133,9 +135,26 @@ class SupplierNeeds_Table extends WP_List_Table {
     			// Get variation details
     			$snippet = " data-variation_id='" . $v['id'] . "'";
     			
+    			// Check selected
+    			$selected = '';
+    			if (isset($this->post_id) && isset($this->variation_id)) {
+    				if (($p->post_id == $this->post_id) && ($v['id'] == $this->variation_id)) {
+    					$selected = 'selected';
+    				}
+    			}
+    
+    			if (isset($item->data['product_id']) && isset($item->data['variation_id'])) {
+    				if (($p->post_id == $item->data['product_id']) && ($v['id'] == $item->data['variation_id'])) {
+    					$selected = 'selected';
+    				}
+    			}
+    			
+    			
+    			
     			$products[] = array(
     				'title' => $product_name,
     				'value' => $p->post_id,
+    				'selected' => $selected,
     				'snippet' => $snippet 
     			);
     		}

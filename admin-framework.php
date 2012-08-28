@@ -238,7 +238,7 @@ function shopper_admin_form_check_required_fields_for_save($post, $editables) {
 // - nonce: the nonce string to secure the form
 function shopper_admin_form_body($item, $table, $nonce) {
 	// Get the fields to edit
-	$editables = $table->get_editables($item->page_title); ?>
+	$editables = $table->get_editables($item); ?>
 	<form id="edit" action="" method="post">
     <table class="form-table">
       <tbody>
@@ -271,6 +271,7 @@ function shopper_admin_form_body($item, $table, $nonce) {
 //
 // - the selectbox values are stored in an array of arrays, with 'title' and 'value' fields set
 // - selectbox options can have a $snippet variable storing extra information
+// - selected item is marked with 'selected' field
 //
 function shopper_admin_form_field($field, $item, $table) {
 	
@@ -320,7 +321,7 @@ function shopper_admin_form_field($field, $item, $table) {
 			echo $row_start;
 			echo "<select id='". $id . "' name='" . $id . "' " . $nonce . ">";
   			foreach ($field['value'] as $v) { 
-  		 		echo "<option value='" . $v['value'] . "' " . $v['snippet'] . ">" . $v['title'] . "</option>"; 
+  		 		echo "<option value='" . $v['value'] . "' " . $v['snippet'] . " " . $v['selected'] .  " >" . $v['title'] . "</option>"; 
   		 	}
   		echo "</select>";
 			echo $row_end;
