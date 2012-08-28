@@ -40,7 +40,7 @@ function shopper_admin_display_submenu_page($title, $page, $table, $addable, $se
     // Display the main div
     echo shopper_admin_div($table->parent_id, $form_url, 'save');
     
-    echo shopper_admin_form_save($_POST, $table->get_editables(), $page, $nonce);
+    echo shopper_admin_form_save($_POST, $table->get_editables(), $page, $nonce, $table);
   }
   // Check if the data is editable
   if ($editable) {
@@ -140,16 +140,18 @@ function shopper_admin_display_detail($detail) {
 // post: the $_POST
 // table_name: the SQL table
 // nonce: the nonce
+// table: the table
 //
 // - if one of the required fields are missing there is no save
-// - moreover, the newly created empty record (for Add) will de deleted
-function shopper_admin_form_save($post, $editables, $table_name, $nonce) {
+function shopper_admin_form_save($post, $editables, $table_name, $nonce, $table) {
+	$msg = '';
+
 	if (wp_verify_nonce( $post['nonce'], $nonce )) {
       
       global $wpdb;
       $wpdb->show_errors();
       
-      $table = $wpdb->prefix . "shopper_" . $table_name;
+      $table_name2 = $wpdb->prefix . "shopper_" . $table_name;
       
       $required = shopper_admin_form_check_required_fields_for_save($post, $editables);
       if ($required == "") {
@@ -185,35 +187,34 @@ function shopper_admin_form_save($post, $editables, $table_name, $nonce) {
       
       	$ret = $wpdb->query( 
         	$wpdb->prepare( 
-        		"INSERT INTO $table $fields VALUES $values ON DUPLICATE KEY UPDATE $update ", $a
+        		"INSERT INTO $table_name2 $fields VALUES $values ON DUPLICATE KEY UPDATE $update ", $a
         	)
       	);
       
       	if ($ret != false) {
-        	echo "Succes!";        
+        	$msg = "Succes!";      
+        	
+        	// Callback, after the save
+        	$table->after_save($wpdb->insert_id);
+        	
       	} else {
-      		echo "Error!";
+      		$msg = "Error!";
       	}
       
       } else {
       	// Required fields are missing
-      	echo $required . " is empty";
-      	
-      	// Delete this empty record
-      	$ret = $wpdb->query( 
-        	$wpdb->prepare( 
-        		"DELETE FROM $table WHERE id = " . $post['id']
-        	)
-      	);
-      	
+      	$msg = $required . " trebuie completat";
       }
   } else {
-  	echo "Nonce error";
+  	$msg = "Nonce error";
   }
+  
+  return "<div id='message' class='updated below-h2'>" . $msg . "</div>";
 }
 
 
 // Check if all required fields are ok before save
+// Returns a string with empty required fields
 function shopper_admin_form_check_required_fields_for_save($post, $editables) {
 	$ret == "";
 	
@@ -370,15 +371,6 @@ function shopper_admin_form_setup($request, $table_name) {
     // Add new
     $item->page_title = FORM_TITLE_ADD;
     $item->button_title = FORM_SUBMIT_ADD;    
-    /*
-    // Insert a new empty row        
-    $wpdb->query( 
-      $wpdb->prepare( 
-        "INSERT INTO $table VALUES ()"
-      )
-    );
-    $item->data->id = $wpdb->insert_id;
-    */
   }
 
 	// Covert data into an array

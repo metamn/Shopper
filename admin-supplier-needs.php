@@ -197,6 +197,12 @@ class SupplierNeeds_Table extends WP_List_Table {
   	return $ret;
   }
 
+
+	// Callback, after the save, just in case 
+  // - $id: which order item was saved
+  function after_save($id) {
+  	
+  }
   
   /**
   * Prepare the table with different parameters, pagination, columns and table elements

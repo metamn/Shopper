@@ -96,7 +96,7 @@ class OrderItems_Table extends WP_List_Table {
   
   
   // Get editable columns
-  function get_editables() {
+  function get_editables($item) {
   	$ret = array();
   	
   	$columns = $this->get_columns();
@@ -134,9 +134,20 @@ class OrderItems_Table extends WP_List_Table {
     			$snippet = " data-postid='" . $p->post_id . "' data-name='" . $p->name . "' data-variationname='" . $v['name'] . "'";
     			$snippet .= " data-variationid='" . $v['id'] . "' data-price='" . $v['price'] . "' data-stock='" . $v['stock'] . "'";
     			
+    			// Check selected
+  				$selected = '';
+  				if (isset($item)) {
+  					$current_post_id = $item->data['product_post_id'];
+  					$current_variation_id = $item->data['product_variation_id'];
+  					if (($p->post_id == $current_post_id) && ($v['id'] == $current_variation_id)) {
+  						$selected = 'selected';
+  					}
+  				}
+    			
     			$products[] = array(
     				'title' => $product_name,
     				'value' => $p->name,
+    				'selected' => $selected,
     				'snippet' => $snippet 
     			);
     		}
@@ -172,6 +183,38 @@ class OrderItems_Table extends WP_List_Table {
   	$ret = array();
   	
   	return $ret;
+  }
+  
+  
+  // Callback, after the save, to update Order total
+  // - $id: which order item was saved
+  function after_save($id) {
+  	global $wpdb;
+  	
+  	echo "id: $id";
+  	
+  	// Get the current order id
+  	$item = $wpdb->get_results(
+  		"SELECT * FROM wp_shopper_order_items WHERE id = " . $id
+  	);
+  	$order_id = $item[0]->order_id;
+  	
+  	// Get all products of an order and calculate the total
+  	$total = 0;
+  	$items = $wpdb->get_results(
+  		"SELECT * FROM wp_shopper_order_items WHERE order_id = " . $order_id
+  	);
+  	foreach ($items as $i) {
+  		$total += $i->product_qty * $i->product_price;
+  	}
+  	
+  	// Update order total
+  	$ret = $wpdb->query( 
+    	$wpdb->prepare( 
+      	"INSERT INTO wp_shopper_orders (id, total) VALUES (%d, %d) ON DUPLICATE KEY UPDATE total=VALUES(total)", 
+      	array($order_id, $total)
+      )
+  	);
   }
 
   

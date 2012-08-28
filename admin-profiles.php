@@ -53,6 +53,43 @@ class Customers_Table extends WP_List_Table {
     }
   }
   
+  
+  // Sort columns
+  function get_sortable_columns() {
+    $sortable_columns = array(
+        'id'     => array('id', false),     //true means its already sorted
+        'name'    => array('name', false),
+        'city'  => array('city', false)
+    );
+    return $sortable_columns;
+  }
+  
+  
+  // Add Edit to email, name
+  function column_email($item) {
+    $actions = array(
+        'edit'      => sprintf('<a href="?page=%s&action=%s&profiles=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+    );
+    
+    //Return the title contents
+    return sprintf('%1$s %2$s',
+        /*$1%s*/ $item->email,
+        /*$3%s*/ $this->row_actions($actions)
+    );
+  }
+  function column_name($item) {
+    $actions = array(
+        'edit'      => sprintf('<a href="?page=%s&action=%s&profiles=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+    );
+    
+    //Return the title contents
+    return sprintf('%1$s %2$s',
+        /*$1%s*/ $item->name,
+        /*$3%s*/ $this->row_actions($actions)
+    );
+  }
+  
+  
   // Return which fields are editable
   function get_editables() {
   	$ret = array();
@@ -110,41 +147,13 @@ class Customers_Table extends WP_List_Table {
   	return $ret;
   }
   
-  
-  // Sort columns
-  function get_sortable_columns() {
-    $sortable_columns = array(
-        'id'     => array('id', false),     //true means its already sorted
-        'name'    => array('name', false),
-        'city'  => array('city', false)
-    );
-    return $sortable_columns;
+  // Callback, after the save, just in case 
+  // - $id: which order item was saved
+  function after_save($id) {
+  	
   }
   
   
-  // Add Edit to email, name
-  function column_email($item) {
-    $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&profiles=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
-    );
-    
-    //Return the title contents
-    return sprintf('%1$s %2$s',
-        /*$1%s*/ $item->email,
-        /*$3%s*/ $this->row_actions($actions)
-    );
-  }
-  function column_name($item) {
-    $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&profiles=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
-    );
-    
-    //Return the title contents
-    return sprintf('%1$s %2$s',
-        /*$1%s*/ $item->name,
-        /*$3%s*/ $this->row_actions($actions)
-    );
-  }
   
   
   /**

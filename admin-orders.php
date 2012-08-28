@@ -43,8 +43,9 @@ class Orders_Table extends WP_List_Table {
 	    'date'=>__('Data'),
 	    'profile_id' => __('Cumparator'),
 	    'products' => __('Produse'),	    
-	    'grand_total'=>__('Total'),
+	    'total'=>__('Total'),
 	    'status_id' => __('Statut'),
+	    'delivery_date' => __('Data livrarii')
     );
   }
   
@@ -56,17 +57,18 @@ class Orders_Table extends WP_List_Table {
     
     switch($column_name){
       case 'id':
-      case 'grand_total':
+      case 'total':
         return $item->$column_name;
     	case 'type':
     		global $ORDER_TYPES;
       	return $ORDER_TYPES[$item->$column_name];
       case 'date':
+      case 'delivery_date':
         return date(DATE_FORMAT, strtotime($item->$column_name));
       case 'profile_id':
         $profile = $wpdb->get_results(
           "SELECT * FROM wp_shopper_profiles " .
-          "WHERE wp_shopper_profiles.id = " . $item->profile_id
+          "WHERE wp_shopper_profiles.id = " . $item->$column_name
         ); 
         
         // Edit link
@@ -95,26 +97,22 @@ class Orders_Table extends WP_List_Table {
     	case 'status_id':
     		$status = $wpdb->get_results(
       		"SELECT * FROM wp_shopper_order_status " .
-      		"WHERE id = " . $item->status_id
+      		"WHERE id = " . $item->$column_name
     		); 
-    		if (isset($status[0])) {
-      		return $status[0]->name;        
-    		} else {
-      		return $item->$column_name;
-    		}
+    		return $status[0]->name;        
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
   }
   
-  // Add Edit to Status
-  function column_status_id($item) {
+  // Add Edit to ID
+  function column_id($item) {
     $actions = array(
         'edit'      => sprintf('<a href="?page=%s&action=%s&orders=%s">Edit</a>','shopper-orders','edit',$item->id),        
     );    
     
     return sprintf('%1$s %2$s',
-        /*$1%s*/ $item->status_id,
+        /*$1%s*/ $item->id,
         /*$3%s*/ $this->row_actions($actions)
     );
   }
@@ -135,7 +133,7 @@ class Orders_Table extends WP_List_Table {
   
   // Get editable columns
   // - they differ based on order type (phone, online) and on action (add, edit)
-  function get_editables($action) {
+  function get_editables($item) {
   	$ret = array();
   	
   	// Add all fields by default
@@ -151,17 +149,27 @@ class Orders_Table extends WP_List_Table {
   	}
   	
   	// Customer is a select box
-  	$ret[2]['type'] = 'select';
   	$v = array();
   	global $wpdb;
   	$customers = $wpdb->get_results("SELECT * FROM wp_shopper_profiles");  
   	foreach ($customers as $c) {
+  		// Check selected
+  		$selected = '';
+  		if (isset($item)) {
+  			$current = $item->data['profile_id'];
+  			if ($c->id == $current) {
+  				$selected = 'selected';
+  			}
+  		}
+  	
   		$v[] = array(
   			'value' => $c->id,
-  			'title' => $c->name
+  			'title' => $c->name,
+  			'selected' => $selected
   		); 
   	}
-		$ret[2]['value'] = $v;	
+  	$ret[2]['type'] = 'select';
+		$ret[2]['value'] = $v;
 
 		
 		// Status is a select box
@@ -169,18 +177,25 @@ class Orders_Table extends WP_List_Table {
   	$v = array();
   	$s = $wpdb->get_results("SELECT * FROM wp_shopper_order_status");  
   	foreach ($s as $c) {
+  		// Check selected
+  		$selected = '';
+  		if (isset($item)) {
+  			$current = $item->data['status_id'];
+  			if ($c->id == $current) {
+  				$selected = 'selected';
+  			}
+  		}
+  	
   		$v[] = array(
   			'value' => $c->id,
   			'title' => $c->name
   		); 
   	}
-		$ret[4]['value'] = $v;	
+		$ret[4]['value'] = $v;
   	
-  	// Total is removed
-  	unset($ret[3]);
   	
   	// Remove fields by special cases
-  	switch ($action) {
+  	switch ($item->page_title) {
   		case FORM_TITLE_ADD:
   			// When Add the order type will be 'phone'
   			$ret[0]['type'] = 'hidden';
@@ -188,10 +203,14 @@ class Orders_Table extends WP_List_Table {
   			
   			// Date is automatically set to now
   			$ret[1]['type'] = 'hidden';
-  			$ret[1]['value'] = date("Y-m-d H:i:s");
+  			$ret[1]['value'] = date(DATE_MYSQL);
   			
   			// Customer has an "Add new" button / link attached
 				$ret[2]['snippet'] = "<a class='add-new-h2' href='?page=shopper-profiles&action=edit'>Adaugare cumparator</a>";
+		
+				// Total is hidden
+  			$ret[3]['type'] = 'hidden';
+  			$ret[3]['value'] = 0;
 		
   			// Status is PENDING
   			$ret[4]['type'] = 'hidden';
@@ -207,8 +226,17 @@ class Orders_Table extends WP_List_Table {
   			
   			// Customer not modificable
   			$ret[2]['type'] = 'not editable';
+  			$ret[2]['value'] = $item->profile_id;
+  			
+  			// Total is not modificable
+  			$ret[3]['type'] = 'not editable';
+  			$ret[3]['value'] = $item->total;
+  			
   			break;
   	}
+  	
+  	// Show date format for Delivery Date
+  	$ret[5]['snippet'] = '&nbsp;&nbsp;Format: 2012-08-23';
   	
   	
   	return $ret;
@@ -242,6 +270,14 @@ class Orders_Table extends WP_List_Table {
   	
   	return $ret;
   }
+  
+  
+  // Callback, after the save, just in case 
+  // - $id: which order item was saved
+  function after_save($id) {
+  	
+  }
+  
   
   
   

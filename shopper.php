@@ -36,7 +36,7 @@ define("DATE_FORMAT", "D, d M Y");
 define("DATE_MYSQL", "Y-m-d H:i:s");
 
 // Order types
-$ORDER_TYPES = array("Online", "Phone");
+$ORDER_TYPES = array("Phone", "Online");
 
 // form data
 define("FORM_TITLE_ADD", "Adaugare");
