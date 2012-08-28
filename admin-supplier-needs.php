@@ -110,13 +110,24 @@ class SupplierNeeds_Table extends WP_List_Table {
   	global $wpdb;
   	$data = $wpdb->get_results("SELECT * FROM wp_shopper_suppliers");
   	foreach ($data as $d) {
+  		
+  		// Check selected
+  		$selected = '';
+  		if (isset($item->data['supplier_id'])) {
+  			if ($d->id == $item->data['supplier_id']) {
+  				$selected = 'selected';
+  			}
+  		}
+  		
   		$suppliers[] = array(
     		'title' => $d->name,
-    		'value' => $d->id 
+    		'value' => $d->id,
+    		'selected' => $selected
     	);
   	}
   	$ret['0']['type'] = 'select';
   	$ret['0']['value'] = $suppliers;
+  	
   	
   	$all_products = shopper_products();
   	if ($all_products->have_posts()) {
@@ -142,14 +153,11 @@ class SupplierNeeds_Table extends WP_List_Table {
     					$selected = 'selected';
     				}
     			}
-    
     			if (isset($item->data['product_id']) && isset($item->data['variation_id'])) {
     				if (($p->post_id == $item->data['product_id']) && ($v['id'] == $item->data['variation_id'])) {
     					$selected = 'selected';
     				}
     			}
-    			
-    			
     			
     			$products[] = array(
     				'title' => $product_name,
