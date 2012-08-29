@@ -293,6 +293,15 @@ class Orders_Table extends WP_List_Table {
     
     $this->_column_headers = array($columns, $hidden, $sortable);
     
+    // Check if orders of a customer will be listed, or all orders
+    if (isset($this->parent_id)) {
+    	$search_sql = " AND profile_id = " . $this->parent_id;
+    	$select_sql = " WHERE profile_id = " . $this->parent_id;
+    } else {
+    	$search_sql = '';
+    	$select_sql = '';
+    }
+    
     // Do the search
     // - we will use search to filter orders by month
     global $wpdb;            
@@ -305,13 +314,16 @@ class Orders_Table extends WP_List_Table {
       $end .= " 23:59:59";
       $data = $wpdb->get_results(
         "SELECT * FROM wp_shopper_orders " .
-        "WHERE date >= '" . $start . "' AND date <='" . $end . "' ORDER BY date DESC"      
+        "WHERE date >= '" . $start . "' AND date <='" . $end . "' " . $search_sql . " ORDER BY date DESC"      
       );
     } else {
       $data = $wpdb->get_results(
-        "SELECT * FROM wp_shopper_orders ORDER BY date DESC"     
+        "SELECT * FROM wp_shopper_orders " . $select_sql . " ORDER BY date DESC"     
       );
     }    
+    
+    
+    
     //print_r($data);
     
     
