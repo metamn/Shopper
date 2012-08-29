@@ -51,8 +51,7 @@ class Notes_Table extends WP_List_Table {
   function get_columns() {
     return $columns= array(
 	    'id'=>__('#'),
-	    'table_id' => __('Apartine'),
-	    'entry_id'=>__('Nume'),
+	    'entry_id'=>__('Apartine'),
 	    'body' => __('Observatie')
     );
   }
@@ -67,22 +66,26 @@ class Notes_Table extends WP_List_Table {
       case 'id':
       case 'body':
         return $item->$column_name;
-    	case 'table_id':
-    		switch ($item->$column_name) {
-    			case 'profiles':
-    				return "Cumparatori";
-    			default:
-    				return $item->$column_name;
-    		}
-      case 'entry_id':
+    	case 'entry_id':
       	global $wpdb;
       	$table = $wpdb->prefix . 'shopper_' . $this->table_id;
       	$parent = $wpdb->get_results(
       		"SELECT * FROM $table WHERE id = " . $this->parent_id      
     		);
     		
+    		switch ($this->table_id) {
+    			case 'profiles':
+    				$t = "Cumparatori";
+    				break;
+    			case 'orders':
+    				$t = "Comenzi";
+    				break;
+    			default:
+    				$t = $this->table_id;
+    		}
+    		
     		// Clicking on parent goes back to the parents edit page
-    		return "<a href='?page=shopper-profiles&action=edit&profiles=" . $this->parent_id . "'>" . $parent[0]->name . "</a>";
+    		return "<a href='?page=shopper-" . $this->table_id . "&action=edit&" . $this->table_id . "=" . $this->parent_id . "'>" . $t . " #" . $parent[0]->id . "</a>";
       default:
         return print_r($item, true); //Show the whole array for troubleshooting purposes
     }
@@ -102,7 +105,7 @@ class Notes_Table extends WP_List_Table {
   
   
   // Get editable columns
-  function get_editables() {
+  function get_editables($item) {
   	$ret = array();
   	
   	$columns = $this->get_columns();
@@ -116,16 +119,18 @@ class Notes_Table extends WP_List_Table {
   		}
   	}
   	
-  	// Mark table_id relationship ...
-  	$ret[0]['not_editable'] = true;
-  	//$ret[0]['value'] = $this->table_id;
-  	
   	// Mark entry_id relationship ...
-  	$ret[1]['not_editable'] = true;
-  	//$ret[1]['value'] = $this->parent_id;
+  	$ret[0]['type'] = 'not editable';
+  	$ret[0]['value'] = $this->parent_id;
   	
   	// Make input for 'body' to be a textarea
-  	$ret[2]['type'] = 'textarea';
+  	$ret[1]['type'] = 'textarea';
+  	
+  	// Mark table_id relationship ...
+  	$ret[] = array(
+  		'type' => 'hidden',
+  		'value' => $this->table_id
+  	);
   	
   	return $ret;
   }

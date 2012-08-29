@@ -311,7 +311,7 @@ function shopper_admin_form_field($field, $item, $table) {
 			break;
 		case 'not editable':
 			echo "<input type='hidden' value='" . $value . "' id='" . $id . "' name='" . $id . "'>";
-			echo $row_start . $display_value. $row_end;
+			echo $row_start . $display_value . $row_end;
 			break;
 		case 'textarea':
 			echo $row_start;
