@@ -112,6 +112,7 @@ class Customers_Table extends WP_List_Table {
   function get_detail_tables($parent_id) {
   	$ret = array();
   	
+  	
   	// Addresses
   	$params = array(
   		'parent_id' => $parent_id

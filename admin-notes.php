@@ -128,6 +128,7 @@ class Notes_Table extends WP_List_Table {
   	
   	// Mark table_id relationship ...
   	$ret[] = array(
+  		'id' => 'table_id',
   		'type' => 'hidden',
   		'value' => $this->table_id
   	);
@@ -164,7 +165,7 @@ class Notes_Table extends WP_List_Table {
     
     global $wpdb;
     $data = $wpdb->get_results(
-      "SELECT * FROM wp_shopper_notes WHERE entry_id = " . $this->parent_id      
+      "SELECT * FROM wp_shopper_notes WHERE entry_id = " . $this->parent_id . " AND table_id = '" . $this->table_id . "'"  
     );
     //print_r($data);
     
