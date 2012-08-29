@@ -97,7 +97,7 @@ class Suppliers_Table extends WP_List_Table {
   	// Notes
   	$params = array(
   		'entry_id' => $parent_id,
-  		'table_id' => 'profiles'
+  		'table_id' => 'suppliers'
   	);
   	$ret[] = array(
   		'title' => "Observatii",
