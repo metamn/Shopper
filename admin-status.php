@@ -58,7 +58,7 @@ class Status_Table extends WP_List_Table {
   // Add Edit to Status
   function column_name($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&status=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+        'edit'      => sprintf('<a href="?page=%s&action=%s&order_status=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
     );    
     //Return the title contents
     return sprintf('%1$s %2$s',
@@ -67,22 +67,33 @@ class Status_Table extends WP_List_Table {
     );
   }
   
-  /**
-   * Add extra markup in the toolbars before or after the list
-   * @param string $which, helps you decide if you add the markup after (bottom) or before (top) the list
-   */
-  function extra_tablenav( $which ) {  
-    $add = "<a href='?page=shopper-status&action=edit' title='Adaugare'>Adaugare</a>";  
-	  if ( $which == "top" ){
-		  //The code that goes before the table is here
-		  echo $add;
-	  }
-	  if ( $which == "bottom" ){
-		  //The code that goes after the table is there
-		  echo $add;
-	  }
+  
+  // Editable columns
+  function get_editables() {
+  	$ret = array();
+  	
+  	$columns = $this->get_columns();
+  	foreach ($columns as $k => $v) {
+  		if ($k != 'id') {
+  			$ret[] = array(
+  				'title' => $v,
+  				'id' => $k,
+  				'required' => true
+  			);
+  		}
+  	}
+  	
+  	$ret[2]['type'] = 'textarea';
+  	
+  	return $ret;
   }
 
+	// Master detail relationships
+	function get_detail_tables($parent_id) {
+		$ret = array();
+  	
+  	return $ret;
+	}
   
   // Callback, after the save, just in case 
   // - $id: which order item was saved
@@ -111,18 +122,21 @@ class Status_Table extends WP_List_Table {
     //print_r($data);
     
     
-    function usort_reorder($a, $b){
+    function usort_reorder_status($a, $b){
       $orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'id'; //If no sort, default to this
       $order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
       $result = strcmp($a->$orderby, $b->$orderby); //Determine sort order
       return ($order==='asc') ? $result : -$result; //Send final sort direction to usort
     }
-    usort($data, 'usort_reorder');
+    usort($data, 'usort_reorder_status');
     
     
         
     $current_page = $this->get_pagenum();
     $total_items = count($data);
+    
+    $this->total_items = $total_items;
+    
     $data = array_slice($data,(($current_page-1)*$per_page),$per_page);
     $this->items = $data;
     $this->set_pagination_args( array(

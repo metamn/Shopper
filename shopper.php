@@ -74,8 +74,8 @@ function shopper_admin_menu() {
   
   add_submenu_page("shopper-menu", "Orders", "Orders", 'delete_others_posts', "shopper-orders", "shopper_orders_page");  
   add_submenu_page("shopper-menu", "Customers", "Customers", 'delete_others_posts', "shopper-profiles", "shopper_profiles_page");  
-  add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-status", "shopper_status_page");  
-  add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-delivery", "shopper_delivery_page"); 
+  add_submenu_page("shopper-menu", "Status & Emails", "Status & Emails", 'delete_others_posts', "shopper-order_status", "shopper_status_page");  
+  add_submenu_page("shopper-menu", "Delivery", "Delivery", 'delete_others_posts', "shopper-order_delivery", "shopper_delivery_page"); 
   
   // Separator, hack
   add_submenu_page("shopper-menu", "________________", "________________", 'delete_others_posts', "shopper-separator-menu", "shopper_separator_page");
@@ -182,7 +182,7 @@ function shopper_profiles_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_delivery_page() {
-  shopper_admin_display_submenu_page("Livrare comanda", "delivery", new Delivery_Table(), true, false, true);
+  shopper_admin_display_submenu_page("Livrare comanda", "order_delivery", new Delivery_Table(), true, false, true);
 }
 
 
@@ -191,7 +191,7 @@ function shopper_delivery_page() {
 // --------------------------------------------------------------------------------
 
 function shopper_status_page() {
-  shopper_admin_display_submenu_page("Statut comanda si trimitere email", "status", new Status_Table(), true, false, true);
+  shopper_admin_display_submenu_page("Statut comanda si trimitere email", "order_status", new Status_Table(), true, false, true);
 }
 
 

@@ -60,7 +60,7 @@ class Delivery_Table extends WP_List_Table {
   // Add Edit to Status
   function column_name($item) {
     $actions = array(
-        'edit'      => sprintf('<a href="?page=%s&action=%s&order=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
+        'edit'      => sprintf('<a href="?page=%s&action=%s&order_delivery=%s">Edit</a>',$_REQUEST['page'],'edit',$item->id),        
     );    
     //Return the title contents
     return sprintf('%1$s %2$s',
@@ -69,22 +69,38 @@ class Delivery_Table extends WP_List_Table {
     );
   }
   
-  /**
-   * Add extra markup in the toolbars before or after the list
-   * @param string $which, helps you decide if you add the markup after (bottom) or before (top) the list
-   */
-  function extra_tablenav( $which ) {  
-    $add = "<a href='?page=shopper-delivery&action=edit' title='Adaugare'>Adaugare</a>";  
-	  if ( $which == "top" ){
-		  //The code that goes before the table is here
-		  echo $add;
-	  }
-	  if ( $which == "bottom" ){
-		  //The code that goes after the table is there
-		  echo $add;
-	  }
+  // Editable columns
+  function get_editables() {
+  	$ret = array();
+  	
+  	$columns = $this->get_columns();
+  	foreach ($columns as $k => $v) {
+  		if ($k != 'id') {
+  			$ret[] = array(
+  				'title' => $v,
+  				'id' => $k,
+  				'required' => true
+  			);
+  		}
+  	}
+  	
+  	return $ret;
   }
 
+	// Master detail relationships
+	function get_detail_tables($parent_id) {
+		$ret = array();
+  	
+  	return $ret;
+	}
+  
+  // Callback, after the save, just in case 
+  // - $id: which order item was saved
+  function after_save($id) {
+  	
+  }
+  
+  
   
   
   /**
