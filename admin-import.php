@@ -198,7 +198,7 @@ function shopper_import_save_customer($customer) {
       "INSERT INTO wp_shopper_addresses
       (profile_id, address, city)
       VALUES (%s, %s, %s)", 
-      array($is, $customer['address'], $customer['city'])
+      array($id, $customer['address'], $customer['city'])
     )
   );
   
@@ -213,6 +213,12 @@ function shopper_import_drop_old_profiles_and_orders() {
   $wpdb->query( 
     $wpdb->prepare( 
       "TRUNCATE TABLE wp_shopper_profiles"
+    )
+  );
+  
+  $wpdb->query( 
+    $wpdb->prepare( 
+      "TRUNCATE TABLE wp_shopper_addresses"
     )
   );
   
