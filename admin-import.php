@@ -7,7 +7,7 @@
 
 // Steps
 //
-// 1. Export the smuff db as sql
+// 1. Export the smuff db as sql.gz, from slicehost/backup
 // 2. Import the db into ujsmuff
 // 3. run this script
 
