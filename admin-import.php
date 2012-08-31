@@ -20,7 +20,7 @@
 
 if ($_POST) {
   if ($_POST['import'] == 'posts') { shopper_import_posts(); }
-  if ($_POST['import'] == 'orders') { shopper_import_orders(); }
+  if ($_POST['import'] == 'orders') { shopper_import_display_orders(); }
 }
 
 
@@ -37,7 +37,7 @@ if ($_POST) {
 // Do the import
 function shopper_import_orders() {
   global $old;
-  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+  $old = new wpdb('cs','cs','ujsmuff','localhost');
   
   // Drop existing data
   shopper_import_drop_old_profiles_and_orders();
@@ -94,12 +94,13 @@ function shopper_import_save_order_items($orderid, $product, $wpec, $match) {
   $ret = $wpdb->query( 
     $wpdb->prepare( 
       "INSERT INTO wp_shopper_order_items
-       (order_id, product_post_id, product_name, product_qty, product_variation_id, product_variation_name, product_price)
-       VALUES (%s, %s, %s, %s, %s, %s, %s)
+       (order_id, product_post_id, product_name, product_qty, product_variation_id, product_variation_name, product_price, product_stock)
+       VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
       ", 
       array($orderid, $product->post_id, $product->name, $wpec->quantity, 
         $product->variations[$match['variation_id']-1]['id'], 
-        $product->variations[$match['variation_id']-1]['name'], $wpec->price
+        $product->variations[$match['variation_id']-1]['name'], $wpec->price,
+        '0'
       )
     )
   );
@@ -215,7 +216,7 @@ function shopper_import_drop_old_profiles_and_orders() {
 // Displaying order, to check before the real import
 function shopper_import_display_orders() {
   global $old;
-  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+  $old = new wpdb('cs','cs','ujsmuff','localhost');
   
   // Get orders
   $orders = $old->get_results(
@@ -244,7 +245,7 @@ function shopper_import_display_orders() {
         echo "<br/>&nbsp;&nbsp;Product: " . $product->name;
         echo "<br/>&nbsp;&nbsp;Variation: " . $product->variations[$match['variation_id']-1]['name'];
         //echo "<br/>&nbsp;&nbsp;Price: " . $product->variations[$match['variation_id']-1]['price'];
-        echo "<br/>&nbsp;&nbsp;Quantity: " . $item->price;        
+        echo "<br/>&nbsp;&nbsp;Price: " . $item->price;        
         echo "<br/>&nbsp;&nbsp;Quantity: " . $item->quantity;        
         echo "<br/>";
       } else {
@@ -441,7 +442,7 @@ function shopper_import_order_customer($id) {
 // Does the import, really
 function shopper_import_posts() {
   global $old;
-  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
+  $old = new wpdb('cs','cs','ujsmuff','localhost');
   
   // Drop existing data
   shopper_import_drop_old_posts();
@@ -526,6 +527,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
         $variation['saleprice'] = '';
         $variation['delivery'] = '';
         $variation['image'] = '';
+        $variation['stock'] = '';
         
         $variations[] = $variation;
         $i++; 
@@ -539,6 +541,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
     $variation['saleprice'] = '';
     $variation['delivery'] = '';
     $variation['image'] = '';
+    $variation['stock'] = '';
     
     $variations[] = $variation;  
   }
@@ -552,7 +555,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
     $a->post_parent = $id;
     $a->guid = str_replace("173.203.94.129", "www.smuff.ro", $a->guid);
     $aid = wp_insert_post($a);
-    echo "<br/>... Attachment: $aid";
+    //echo "<br/>... Attachment: $aid";
   }
   
   // Comments
@@ -572,7 +575,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
       'comment_approved' => $c->comment_approved,
     );
     $cid = wp_insert_comment($data);
-    echo "<br/>... Comment: $cid";
+    //echo "<br/>... Comment: $cid";
   }
   
   return $id;
@@ -610,12 +613,17 @@ function shopper_import_drop_old_posts() {
 // - used to understand the real import
 function shopper_import_display_posts() {
   global $old;
-  $old = new wpdb('ujsmuff','5FJFuy6Ff6bHNCcs','ujsmuff','localhost');
-
+  $old = new wpdb('cs','cs','ujsmuff','localhost');
+  
   
   $posts = $old->get_results(
     "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post'"
   );
+   
+  if (!isset($posts)) {
+  	die("No posts ... probably the password / the db connection is wrong");
+  }
+  
 
   echo "<ul>";
   foreach ($posts as $post) {
@@ -656,12 +664,12 @@ function shopper_import_display_posts() {
       $attach = shopper_import_get_attachments($post->ID);
       if ($attach) {
         foreach ($attach as $a) {        
-          //echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
+        	echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
         }
       }
       
       // Content
-      //echo "<li>" . shopper_import_get_content($post->post_content) . "</li>";
+      echo "<li>" . shopper_import_get_content($post->post_content) . "</li>";
       
       
       // Comments
