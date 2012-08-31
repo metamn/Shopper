@@ -20,7 +20,7 @@
 
 if ($_POST) {
   if ($_POST['import'] == 'posts') { shopper_import_posts(); }
-  if ($_POST['import'] == 'orders') { shopper_import_display_orders(); }
+  if ($_POST['import'] == 'orders') { shopper_import_orders(); }
 }
 
 
@@ -91,16 +91,17 @@ function shopper_import_orders() {
 // Save order items
 function shopper_import_save_order_items($orderid, $product, $wpec, $match) {
   global $wpdb;
+  $wpdb->show_errors();
+  
   $ret = $wpdb->query( 
     $wpdb->prepare( 
       "INSERT INTO wp_shopper_order_items
-       (order_id, product_post_id, product_name, product_qty, product_variation_id, product_variation_name, product_price, product_stock)
-       VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+       (order_id, product_post_id, product_name, product_qty, product_variation_id, product_variation_name, product_price)
+       VALUES (%s, %s, %s, %s, %s, %s, %s)
       ", 
       array($orderid, $product->post_id, $product->name, $wpec->quantity, 
         $product->variations[$match['variation_id']-1]['id'], 
-        $product->variations[$match['variation_id']-1]['name'], $wpec->price,
-        '0'
+        $product->variations[$match['variation_id']-1]['name'], $wpec->price
       )
     )
   );
@@ -156,15 +157,17 @@ function shopper_import_sanitize_order($order) {
 // Add a new order
 function shopper_import_save_order($order, $profile_id) {
   global $wpdb;
+  $wpdb->show_errors();
+  
   $ret = $wpdb->query( 
     $wpdb->prepare( 
       "INSERT INTO wp_shopper_orders
-       (old_id, profile_id, delivery_id, delivery, status_id, discount_id, total, grand_total, date)
-       VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+       (old_id, profile_id, delivery_id, delivery, status_id, discount_id, total, grand_total, date, type)
+       VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
       ", 
       array($order->id, $profile_id, $order->delivery_id, $order->delivery, 
         $order->status_id, $order->discount_id, $order->total, $order->grand_total,
-        date("Y-m-d H:i:s", $order->date))
+        date("Y-m-d H:i:s", $order->date), '1')
     )
   );
   
@@ -176,16 +179,30 @@ function shopper_import_save_order($order, $profile_id) {
 // - if there is already a customer we add anyway the (new) address ...
 function shopper_import_save_customer($customer) {
   global $wpdb;
+  $wpdb->show_errors();
+  
   $wpdb->query( 
     $wpdb->prepare( 
       "INSERT INTO wp_shopper_profiles
-      (name, email, phone, address, city)
-      VALUES (%s, %s, %s, %s, %s)", 
-      array($customer['name'], $customer['email'], $customer['phone'], $customer['address'], $customer['city'])
+      (name, email, phone)
+      VALUES (%s, %s, %s)", 
+      array($customer['name'], $customer['email'], $customer['phone'])
     )
   );
   
-  return $wpdb->insert_id;  
+  $id = $wpdb->insert_id;
+  
+  // Save addresses
+  $wpdb->query( 
+    $wpdb->prepare( 
+      "INSERT INTO wp_shopper_addresses
+      (profile_id, address, city)
+      VALUES (%s, %s, %s)", 
+      array($is, $customer['address'], $customer['city'])
+    )
+  );
+  
+  return $id;
 }
 
 
@@ -336,8 +353,8 @@ function shopper_import_orders_get_product($name) {
     case 'Borat bikini - Borat mankini ROZ':
       $name = 'Borat bikini - Borat mankini';
       break;
-    case 'Proiector iPhone 2':
-      $name = 'Proiector iPhone';
+    case 'Proiector iPhone':
+      $name = 'Proiector iPhone 2';
       break;
     case 'Scatecycle':
       $name = 'SkateCycle';
