@@ -1,0 +1,20 @@
+html {
+  body {
+    .container {
+      #content {
+        article.page {
+          @include block;
+          
+          header {
+            float: none;
+          }
+        }      
+      }
+            
+      #checkout {
+        @include col(20%, 0, 0);
+        display: block;
+      }
+    }
+  }
+}

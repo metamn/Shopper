@@ -1,0 +1,907 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> 
+*/
+/* line 17, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../.rvm/gems/ruby-1.8.7-p370/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 1, typography.scss */
+body {
+  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+  font-size: 100%;
+  line-height: 1.25;
+}
+/* line 10, typography.scss */
+body .container {
+  width: 50%;
+  margin: 0 auto;
+}
+/* line 15, typography.scss */
+body .container h1, body .container h2, body .container h3, body .container h4, body .container h5, body .container h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 28, typography.scss */
+body .container h1, body .container h2, body .container h3, body .container h4, body .container h5, body .container h6 {
+  font-size: 2em;
+  padding: 1.25em 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* line 36, typography.scss */
+body .container h4, body .container h5, body .container h6 {
+  font-size: 1em;
+  text-transform: uppercase;
+}
+/* line 43, typography.scss */
+body .container h1, body .container h4 {
+  font-weight: bold;
+}
+/* line 47, typography.scss */
+body .container h2 {
+  font-weight: bold;
+  font-style: italic;
+}
+/* line 52, typography.scss */
+body .container h6 {
+  text-transform: none;
+  font-variant: small-caps;
+}
+/* line 64, typography.scss */
+body .container p + p {
+  margin-top: 1.25em;
+}
+/* line 69, typography.scss */
+body .container q, body .container blockquote {
+  margin: 1.25em;
+  border-left: 1px dotted;
+  padding-left: 1.25em;
+  font-style: italic;
+  font-size: larger;
+}
+/* line 80, typography.scss */
+body .container address {
+  font-variant: small-caps;
+}
+/* line 88, typography.scss */
+body .container ul, body .container menu, body .container dir, body .container ol {
+  margin: 1.25em;
+  list-style-type: square;
+}
+/* line 93, typography.scss */
+body .container ol {
+  list-style-type: decimal;
+}
+/* line 97, typography.scss */
+body .container dl {
+  margin: 1.25em 0;
+}
+/* line 100, typography.scss */
+body .container dl dt {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 104, typography.scss */
+body .container dl dd {
+  margin: 0.625em 1.25em 1.875em;
+}
+/* line 113, typography.scss */
+body .container table {
+  margin: 1.25em 0;
+}
+/* line 118, typography.scss */
+body .container table thead tr td {
+  font-weight: bold;
+}
+/* line 124, typography.scss */
+body .container table tbody {
+  border-top: 1px dotted;
+  border-bottom: 1px dotted;
+}
+/* line 129, typography.scss */
+body .container table td, body .container table th, body .container table tr {
+  text-align: left;
+  vertical-align: top;
+}
+/* line 134, typography.scss */
+body .container table td {
+  padding: 1.25em;
+}
+
+/* Site specific mixins
+*/
+/* display post thumbnails 
+*/
+/* display post description
+*/
+/* General mixins
+*/
+/* invert color with background
+*/
+/* set z-index
+
+- parent must have set 'position'
+- this element must have set weight
+- http://www.tjkdesign.com/articles/z-index/teach_yourself_how_elements_stack.asp
+
+*/
+/* rotate
+*/
+/* underline a text with padding and margin
+*/
+/* make cursor to be pointer
+*/
+/* line 80, mixins.scss */
+.j-toggle {
+  cursor: pointer;
+}
+
+/* list, inline 
+*/
+/* table, simple
+*/
+/* make a column 
+*/
+/* box-shadow
+*/
+/* make image fit within container
+*/
+/* hide an element 
+*/
+/* line 158, mixins.scss */
+.hidden {
+  display: none;
+}
+
+/* block element -- expand something full size inside a container
+*/
+/* line 3, header.scss */
+html body .container {
+  width: 90%;
+  margin: 0 auto;
+}
+/* line 10, header.scss */
+html body .container header {
+  position: static;
+  width: 100%;
+  float: left;
+  margin-top: 1.25em;
+}
+/* line 15, header.scss */
+html body .container header hgroup {
+  width: 20%;
+  margin: 0 0 0 0;
+  float: left;
+}
+/* line 18, header.scss */
+html body .container header hgroup h1 {
+  display: none;
+}
+/* line 21, header.scss */
+html body .container header hgroup h2 {
+  display: none;
+}
+/* line 24, header.scss */
+html body .container header hgroup #logo {
+  height: 4.375em;
+  width: 14.688em;
+  /* an extra space must be add */
+}
+/* line 27, header.scss */
+html body .container header hgroup #logo .cell {
+  width: 0.625em;
+  height: 0.625em;
+  float: left;
+}
+/* line 32, header.scss */
+html body .container header hgroup #logo .small {
+  width: 0.3125em;
+}
+/* line 35, header.scss */
+html body .container header hgroup #logo .set {
+  background: black;
+}
+/* line 41, header.scss */
+html body .container header nav {
+  width: 50%;
+  margin: 0 5% 0 5%;
+  float: left;
+}
+/* line 44, header.scss */
+html body .container header nav h3 {
+  display: none;
+}
+/* line 48, header.scss */
+html body .container header nav #search {
+  margin-bottom: 3.125em;
+}
+/* line 52, header.scss */
+html body .container header nav #search form input[type="text"] {
+  width: 22.5em;
+  margin-right: 5%;
+}
+/* line 58, header.scss */
+html body .container header nav #search form ul {
+  display: none;
+  margin: 1.25em 0;
+}
+/* line 64, header.scss */
+html body .container header nav ul#categories {
+  display: block;
+  margin: 0;
+}
+/* line 90, mixins.scss */
+html body .container header nav ul#categories li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 0;
+}
+/* line 66, header.scss */
+html body .container header nav ul#categories li {
+  margin-right: 5%;
+}
+/* line 68, header.scss */
+html body .container header nav ul#categories li span {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=$value);
+  display: inline-block;
+}
+/* line 72, header.scss */
+html body .container header nav ul#categories li.last {
+  margin-right: none;
+}
+/* line 77, header.scss */
+html body .container header aside {
+  width: 20%;
+  margin: 0 0 0 0;
+  float: left;
+  position: relative;
+  z-index: 1;
+  height: 10em;
+}
+/* line 81, header.scss */
+html body .container header aside h3 {
+  display: none;
+}
+/* line 87, header.scss */
+html body .container header aside ul li .title {
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+}
+/* line 90, header.scss */
+html body .container header aside ul li ul {
+  display: none;
+}
+/* line 92, header.scss */
+html body .container header aside ul li ul li {
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+}
+
+/* line 108, header.scss */
+html body .container footer {
+  width: 100%;
+  float: left;
+  margin: 5em 0 2.5em;
+  padding: 1.25em 0;
+  border-top: 1px solid;
+}
+/* line 114, header.scss */
+html body .container footer ul {
+  display: block;
+  margin: 0;
+}
+/* line 90, mixins.scss */
+html body .container footer ul li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 0;
+}
+
+/* line 4, index.scss */
+html body .container #shopping-info {
+  display: none;
+}
+/* line 9, index.scss */
+html body .container #product-info.large,
+html body .container #product-info.list {
+  width: 20%;
+  margin: 0 0 0 0;
+  float: left;
+  position: relative;
+  z-index: 2;
+  display: none;
+}
+/* line 15, index.scss */
+html body .container #product-info.large h3,
+html body .container #product-info.list h3 {
+  display: none;
+}
+/* line 18, index.scss */
+html body .container #product-info.large .close,
+html body .container #product-info.list .close {
+  float: right;
+  color: white;
+  background: black;
+  cursor: pointer;
+  padding: 0 0.3125em;
+}
+/* line 24, index.scss */
+html body .container #product-info.large .thumbs,
+html body .container #product-info.list .thumbs {
+  width: 100%;
+  float: left;
+  margin-bottom: 2.5em;
+}
+/* line 28, index.scss */
+html body .container #product-info.large .thumbs .item,
+html body .container #product-info.list .thumbs .item {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 0 0.3125em 0.625em 0;
+  border: 1px solid;
+}
+/* line 19, mixins.scss */
+html body .container #product-info.large .body h3,
+html body .container #product-info.list .body h3 {
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+  cursor: pointer;
+  display: block;
+}
+/* line 24, mixins.scss */
+html body .container #product-info.large .body .pane,
+html body .container #product-info.list .body .pane {
+  display: none;
+}
+/* line 39, index.scss */
+html body .container #product-info.mixed {
+  width: 56.6%;
+  margin: 0 0 0 0;
+  float: left;
+  height: 40em;
+  position: relative;
+  top: -34em;
+  float: right;
+  z-index: 2;
+  background: white;
+  display: none;
+}
+/* line 49, index.scss */
+html body .container #product-info.mixed h3 {
+  display: none;
+}
+/* line 52, index.scss */
+html body .container #product-info.mixed .close {
+  float: right;
+  color: white;
+  background: black;
+  cursor: pointer;
+  padding: 0 0.3125em;
+}
+/* line 58, index.scss */
+html body .container #product-info.mixed .thumbs {
+  width: 98%;
+  float: left;
+  margin: 0 1% 2.5em;
+}
+/* line 63, index.scss */
+html body .container #product-info.mixed .thumbs .item {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 0 0.3125em 0.625em 0;
+  border: 1px solid;
+}
+/* line 68, index.scss */
+html body .container #product-info.mixed .body {
+  width: 98%;
+  margin: 0 1%;
+  float: left;
+}
+/* line 19, mixins.scss */
+html body .container #product-info.mixed .body h3 {
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+  cursor: pointer;
+  display: block;
+}
+/* line 24, mixins.scss */
+html body .container #product-info.mixed .body .pane {
+  display: none;
+}
+/* line 76, index.scss */
+html body .container #sidebar {
+  width: 20%;
+  margin: 0 0 0 0;
+  float: left;
+}
+/* line 79, index.scss */
+html body .container #sidebar h3 {
+  display: none;
+}
+/* line 84, index.scss */
+html body .container #sidebar #switch-view li {
+  display: none;
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+  cursor: pointer;
+}
+/* line 88, index.scss */
+html body .container #sidebar #switch-view li span {
+  display: none;
+}
+/* line 92, index.scss */
+html body .container #sidebar #switch-view li.active {
+  display: block !important;
+}
+/* line 94, index.scss */
+html body .container #sidebar #switch-view li.active span {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=$value);
+  display: inline-block;
+  float: right;
+}
+/* line 101, index.scss */
+html body .container #sidebar #categories {
+  margin-top: 12.5em;
+}
+/* line 103, index.scss */
+html body .container #sidebar #categories li {
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+}
+/* line 106, index.scss */
+html body .container #sidebar #categories li.active {
+  color: white;
+  background: black;
+  padding-top: 0.625em;
+}
+/* line 113, index.scss */
+html body .container #content {
+  position: static;
+  width: 70%;
+  margin: 0 10% 0 0;
+  float: left;
+}
+/* line 118, index.scss */
+html body .container #content .entry .featured-image {
+  cursor: pointer;
+}
+/* line 122, index.scss */
+html body .container #content .entry .thumbs {
+  display: none;
+}
+/* line 126, index.scss */
+html body .container #content .entry .body {
+  display: none;
+}
+
+/* Single article
+*/
+/* line 10, article.scss */
+html body.single .container #content article .entry .featured-image {
+  background: white;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+}
+/* line 13, article.scss */
+html body.single .container #content article .entry .thumbs {
+  width: 100%;
+  float: left;
+  display: block;
+}
+/* line 17, article.scss */
+html body.single .container #content article .entry .thumbs .item {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 0 0.3125em 0.625em 0;
+  border: 1px solid;
+}
+/* line 21, article.scss */
+html body.single .container #content article .entry .shopping {
+  position: relative;
+  top: -35em;
+  left: 15%;
+}
+/* line 26, article.scss */
+html body.single .container #content article .entry .excerpt {
+  display: none;
+}
+/* line 29, article.scss */
+html body.single .container #content article .entry .body {
+  width: 100%;
+  float: left;
+  display: block;
+}
+/* line 19, mixins.scss */
+html body.single .container #content article .entry .body h3 {
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+  cursor: pointer;
+  display: block;
+}
+/* line 24, mixins.scss */
+html body.single .container #content article .entry .body .pane {
+  display: none;
+}
+/* line 39, article.scss */
+html body.single .container #shopping-info {
+  width: 20%;
+  margin: 0 0 0 0;
+  float: left;
+  display: block;
+}
+/* line 44, article.scss */
+html body.single .container .product-scroller {
+  display: none;
+}
+/* line 48, article.scss */
+html body.single .container #sidebar {
+  display: none;
+}
+
+/* Articles on index page
+*/
+/* Icons */
+/* line 68, article.scss */
+html body .container #content article.icons {
+  width: 20%;
+  height: 13em;
+  margin: 0 5% 20em 0;
+  float: left;
+  background: white;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+}
+/* line 76, article.scss */
+html body .container #content article.icons header {
+  position: relative;
+  top: 13em;
+}
+/* line 79, article.scss */
+html body .container #content article.icons header h1 {
+  font-size: 100%;
+}
+/* line 84, article.scss */
+html body .container #content article.icons .entry {
+  position: relative;
+  top: -2em;
+}
+/* line 88, article.scss */
+html body .container #content article.icons .entry .featured-image {
+  text-align: center;
+}
+/* line 91, article.scss */
+html body .container #content article.icons .entry .featured-image img {
+  max-height: 7em;
+}
+/* line 98, article.scss */
+html body .container #content article.icons .entry .shopping {
+  position: relative;
+  top: 8em;
+}
+/* line 102, article.scss */
+html body .container #content article.icons .entry .excerpt {
+  display: none;
+}
+/* line 111, article.scss */
+html body .container #content .product-scroller.icons {
+  display: none;
+}
+
+/* List */
+/* line 128, article.scss */
+html body .container #content article.list {
+  width: 60%;
+  height: 31em;
+  margin: 0 0 5em;
+  float: left;
+  background: white;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+}
+/* line 136, article.scss */
+html body .container #content article.list header {
+  position: relative;
+  left: 105%;
+  width: 70%;
+  float: left;
+}
+/* line 142, article.scss */
+html body .container #content article.list header h1 {
+  padding-left: 0.3125em;
+}
+/* line 148, article.scss */
+html body .container #content article.list .entry .featured-image {
+  text-align: center;
+}
+/* line 151, article.scss */
+html body .container #content article.list .entry .featured-image img {
+  max-height: 20em;
+}
+/* line 158, article.scss */
+html body .container #content article.list .entry .shopping {
+  position: relative;
+  left: 105%;
+  top: -3.75em;
+  width: 70%;
+  float: left;
+}
+/* line 165, article.scss */
+html body .container #content article.list .entry .excerpt {
+  position: relative;
+  left: 105%;
+  top: -25em;
+  width: 70%;
+  float: left;
+}
+/* line 178, article.scss */
+html body .container #content .product-scroller.list {
+  display: none;
+}
+
+/* Mixed */
+/* line 193, article.scss */
+html body .container #content article.mixed {
+  width: 60%;
+  height: 31em;
+  margin-right: 2%;
+  float: left;
+  background: white;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+}
+/* line 201, article.scss */
+html body .container #content article.mixed header {
+  position: relative;
+  z-index: 1;
+  top: 24.6em;
+  background: #eee;
+  opacity: .7;
+}
+/* line 208, article.scss */
+html body .container #content article.mixed header h1 {
+  padding-left: 0.3125em;
+}
+/* line 213, article.scss */
+html body .container #content article.mixed .entry {
+  position: relative;
+  top: -6.4em;
+}
+/* line 220, article.scss */
+html body .container #content article.mixed .entry .shopping {
+  position: relative;
+  top: 6em;
+  float: right;
+  margin-right: 0.625em;
+  z-index: 2;
+  background: #eee;
+  opacity: .7;
+}
+/* line 230, article.scss */
+html body .container #content article.mixed .entry .excerpt {
+  position: relative;
+  top: 5em;
+  padding-left: 0.625em;
+}
+/* line 241, article.scss */
+html body .container #content article.mixed.not-first {
+  width: 15%;
+  height: auto;
+  float: left;
+  padding: 1%;
+  margin: 0 2% 5% 0;
+}
+/* line 248, article.scss */
+html body .container #content article.mixed.not-first header {
+  display: none;
+}
+/* line 251, article.scss */
+html body .container #content article.mixed.not-first .entry {
+  top: 0;
+}
+/* line 254, article.scss */
+html body .container #content article.mixed.not-first .entry .shopping {
+  display: none;
+}
+/* line 257, article.scss */
+html body .container #content article.mixed.not-first .entry .excerpt {
+  display: none;
+}
+/* line 262, article.scss */
+html body .container #content article.mixed.odd {
+  margin-right: 0;
+}
+/* line 267, article.scss */
+html body .container #content article.mixed.count-8,
+html body .container #content article.mixed.count-9,
+html body .container #content article.mixed.count-10 {
+  display: none;
+}
+/* line 272, article.scss */
+html body .container #content .product-scroller.mixed {
+  font-size: 4em;
+  position: relative;
+  cursor: pointer;
+  width: 10%;
+  height: 0;
+}
+/* line 279, article.scss */
+html body .container #content #product-scroll-left.mixed {
+  left: 68%;
+}
+/* line 282, article.scss */
+html body .container #content #product-scroll-right.mixed {
+  left: 88%;
+}
+
+/* Large */
+/* line 296, article.scss */
+html body .container #content article.large {
+  height: 40em;
+  background: white;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
+}
+/* line 300, article.scss */
+html body .container #content article.large header {
+  position: relative;
+  z-index: 1;
+  top: 33.6em;
+  background: #eee;
+  opacity: .7;
+}
+/* line 307, article.scss */
+html body .container #content article.large header h1 {
+  padding-left: 0.3125em;
+}
+/* line 312, article.scss */
+html body .container #content article.large .entry {
+  position: relative;
+  top: -2em;
+}
+/* line 320, article.scss */
+html body .container #content article.large .entry .shopping {
+  position: relative;
+  top: -2.85em;
+  float: right;
+  margin-right: 0.625em;
+  z-index: 2;
+  background: #eee;
+  opacity: .7;
+}
+/* line 330, article.scss */
+html body .container #content article.large .entry .excerpt {
+  position: relative;
+  top: -1.25em;
+  padding-left: 0.625em;
+}
+/* line 340, article.scss */
+html body .container #content article.large.not-first {
+  display: none;
+}
+/* line 344, article.scss */
+html body .container #content .product-scroller.large {
+  font-size: 4em;
+  position: relative;
+  top: -6em;
+  cursor: pointer;
+  width: 10%;
+  height: 0;
+}
+/* line 352, article.scss */
+html body .container #content #product-scroll-left.large {
+  left: 1%;
+}
+/* line 355, article.scss */
+html body .container #content #product-scroll-right.large {
+  left: 96%;
+}
+
+/* line 5, page.scss */
+html body .container #content article.page {
+  width: 100%;
+  float: left;
+}
+/* line 8, page.scss */
+html body .container #content article.page header {
+  float: none;
+}
+/* line 14, page.scss */
+html body .container #checkout {
+  width: 20%;
+  margin: 0 0 0 0;
+  float: left;
+  display: block;
+}
+
+/* Generally available settings
+*/
+/* line 25, screen.scss */
+img {
+  max-width: 100%;
+  height: auto;
+}
