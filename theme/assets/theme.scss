@@ -1,2 +1,38 @@
+/* Colors
+*/
+
 $background: white;
 $text: black;
+
+
+/* Fonts
+*/
+
+
+@include font-face("Ostrich Black", font-files("ostrich/ostrich-black-webfont.woff", "ostrich/ostrich-black-webfont.ttf", "ostrich/ostrich-black-webfont.svg"), "ostrich/ostrich-black-webfont.eot");
+@include font-face("Ostrich Light", font-files("ostrich/ostrich-light-webfont.woff", "ostrich/ostrich-light-webfont.ttf", "ostrich/ostrich-light-webfont.svg"), "ostrich/ostrich-light-webfont.eot");
+@include font-face("Ostrich Bold", font-files("ostrich/ostrich-bold-webfont.woff", "ostrich/ostrich-bold-webfont.ttf", "ostrich/ostrich-bold-webfont.svg"), "ostrich/ostrich-bold-webfont.eot");
+@include font-face("Ostrich Dashed", font-files("ostrich/ostrich-dashed-webfont.woff", "ostrich/ostrich-dashed-webfont.ttf", "ostrich/ostrich-dashed-webfont.svg"), "ostrich/ostrich-dashed-webfont.eot");
+@include font-face("Ostrich Regular", font-files("ostrich/ostrich-regular-webfont.woff", "ostrich/ostrich-regular-webfont.ttf", "ostrich/ostrich-regular-webfont.svg"), "ostrich/ostrich-regular-webfont.eot");
+@include font-face("Ostrich Rounded", font-files("ostrich/ostrich-rounded-webfont.woff", "ostrich/ostrich-rounded-webfont.ttf", "ostrich/ostrich-rounded-webfont.svg"), "ostrich/ostrich-rounded-webfont.eot");
+
+
+body {
+	.container {
+		h1, h2, h3, h4, h5, h6 {
+			font-family: "Ostrich Black";
+		}
+	
+		header {
+			nav {
+				h3 {
+					font-size: 3em;
+					padding: 0;
+				}
+			}
+		}
+			
+	}
+}
+
+

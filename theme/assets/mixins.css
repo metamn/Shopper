@@ -21,7 +21,6 @@
 */
 /* make cursor to be pointer
 */
-/* line 80, mixins.scss */
 .j-toggle {
   cursor: pointer;
 }
@@ -38,7 +37,6 @@
 */
 /* hide an element 
 */
-/* line 158, mixins.scss */
 .hidden {
   display: none;
 }
