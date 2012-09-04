@@ -1,73 +1,41 @@
-<?php
-/**
- * The main template file.
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Eleven
- */
+<?php get_header(); ?>
 
-get_header(); ?>
 
-		<div id="primary">
-			<div id="content" role="main">
+<section id="content"> 
+  <header>
+    <?php echo get_content_title(); ?>
+  </header>
+  <?php 
+  	if ( have_posts() ) { 
+  		$count = 1;          
+    	while ( have_posts() ) : the_post();		    
+      	include 'article.php';                
+	  		$count++; 
+	  	endwhile; 
+	  } else {
+    	include 'not_found.php';
+	  } 
+	?>
+</section>
 
-			<?php if ( have_posts() ) : ?>
+<nav id="sidebar">
+  <h3>Alte categorii</h3>  
+  <ul>
+    <li>Cadouri noi</li>
+    <li>Reduceri</li>
+    <li>Cele mai vandute</li>
+    <li>Livrare imediata</li>
+    <li>Recomandari speciale pentru tine</li>
+  </ul>
+</nav>
 
-				<?php twentyeleven_content_nav( 'nav-above' ); ?>
+<aside id="info">
+  <h3>Product info</h3>
+</aside>
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
+<aside id="shopping-info">
+  <h3>Informatii shopping</h3>
+</aside>
 
-					<?php get_template_part( 'content', get_post_format() ); ?>
-					
-					<?php 
-					  $args = array(
-	            'post_type' => 'attachment',
-	            'numberposts' => -1,
-	            'post_status' => null,
-	            'post_parent' => $post->ID,
-	            'orderby' => 'menu_order',
-	            'order' => 'ASC'
-            ); 
-            $imgs = get_posts($args);
-            echo "<br/>" . count($imgs) . " images<br/>";
-					  foreach ($imgs as $img) {?>
-					     <img width="400px" height="auto" src="<?php echo $img->guid ?>" />
-					  <?php break; }					
-					?>
-					
-					<?php echo shopper_product($post->ID)->name; ?>
-					<?php echo shopper_add_to_cart_form($post->ID); ?>
-					<?php echo shopper_checkout_form(); ?>
-					<?php echo shopper_display_cart('short'); ?>
 
-				<?php endwhile; ?>
-
-				<?php twentyeleven_content_nav( 'nav-below' ); ?>
-
-			<?php else : ?>
-
-				<article id="post-0" class="post no-results not-found">
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'Nothing Found', 'twentyeleven' ); ?></h1>
-					</header><!-- .entry-header -->
-
-					<div class="entry-content">
-						<p><?php _e( 'Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.', 'twentyeleven' ); ?></p>
-						<?php get_search_form(); ?>
-					</div><!-- .entry-content -->
-				</article><!-- #post-0 -->
-
-			<?php endif; ?>
-
-			</div><!-- #content -->
-		</div><!-- #primary -->
-
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
