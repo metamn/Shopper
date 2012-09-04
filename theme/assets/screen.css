@@ -219,141 +219,65 @@ body .container table td {
 */
 /* line 3, header.scss */
 html body .container {
-  width: 90%;
+  width: 98%;
   margin: 0 auto;
 }
-/* line 10, header.scss */
+/* line 7, header.scss */
 html body .container header {
-  position: static;
   width: 100%;
   float: left;
-  margin-top: 1.25em;
 }
-/* line 15, header.scss */
+/* line 10, header.scss */
 html body .container header hgroup {
-  width: 20%;
+  width: 37.5%;
   margin: 0 0 0 0;
   float: left;
 }
-/* line 18, header.scss */
+/* line 13, header.scss */
 html body .container header hgroup h1 {
   display: none;
 }
-/* line 21, header.scss */
+/* line 16, header.scss */
 html body .container header hgroup h2 {
   display: none;
 }
-/* line 24, header.scss */
+/* line 19, header.scss */
 html body .container header hgroup #logo {
   height: 4.375em;
   width: 14.688em;
   /* an extra space must be add */
 }
-/* line 27, header.scss */
+/* line 22, header.scss */
 html body .container header hgroup #logo .cell {
   width: 0.625em;
   height: 0.625em;
   float: left;
 }
-/* line 32, header.scss */
+/* line 27, header.scss */
 html body .container header hgroup #logo .small {
   width: 0.3125em;
 }
-/* line 35, header.scss */
+/* line 30, header.scss */
 html body .container header hgroup #logo .set {
   background: black;
 }
-/* line 41, header.scss */
+/* line 36, header.scss */
 html body .container header nav {
-  width: 50%;
-  margin: 0 5% 0 5%;
-  float: left;
-}
-/* line 44, header.scss */
-html body .container header nav h3 {
-  display: none;
-}
-/* line 48, header.scss */
-html body .container header nav #search {
-  margin-bottom: 3.125em;
-}
-/* line 52, header.scss */
-html body .container header nav #search form input[type="text"] {
-  width: 22.5em;
-  margin-right: 5%;
-}
-/* line 58, header.scss */
-html body .container header nav #search form ul {
-  display: none;
-  margin: 1.25em 0;
-}
-/* line 64, header.scss */
-html body .container header nav ul#categories {
-  display: block;
-  margin: 0;
-}
-/* line 90, mixins.scss */
-html body .container header nav ul#categories li {
-  display: inline-block;
-  list-style-type: none;
-  margin-left: 0;
-}
-/* line 66, header.scss */
-html body .container header nav ul#categories li {
-  margin-right: 5%;
-}
-/* line 68, header.scss */
-html body .container header nav ul#categories li span {
-  -moz-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=$value);
-  display: inline-block;
-}
-/* line 72, header.scss */
-html body .container header nav ul#categories li.last {
-  margin-right: none;
-}
-/* line 77, header.scss */
-html body .container header aside {
-  width: 20%;
+  width: 62.5%;
   margin: 0 0 0 0;
   float: left;
-  position: relative;
-  z-index: 1;
-  height: 10em;
-}
-/* line 81, header.scss */
-html body .container header aside h3 {
-  display: none;
-}
-/* line 87, header.scss */
-html body .container header aside ul li .title {
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
-}
-/* line 90, header.scss */
-html body .container header aside ul li ul {
-  display: none;
-}
-/* line 92, header.scss */
-html body .container header aside ul li ul li {
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
 }
 
-/* line 108, header.scss */
+/* line 51, header.scss */
 html body .container footer {
   width: 100%;
   float: left;
+  display: none;
   margin: 5em 0 2.5em;
   padding: 1.25em 0;
   border-top: 1px solid;
 }
-/* line 114, header.scss */
+/* line 58, header.scss */
 html body .container footer ul {
   display: block;
   margin: 0;
@@ -365,191 +289,23 @@ html body .container footer ul li {
   margin-left: 0;
 }
 
-/* line 4, index.scss */
-html body .container #shopping-info {
+/* line 5, index.scss */
+html body .container #sidebar {
   display: none;
+  width: 20%;
+  margin: 0 0 0 0;
+  float: left;
 }
 /* line 9, index.scss */
-html body .container #product-info.large,
-html body .container #product-info.list {
-  width: 20%;
-  margin: 0 0 0 0;
-  float: left;
-  position: relative;
-  z-index: 2;
-  display: none;
-}
-/* line 15, index.scss */
-html body .container #product-info.large h3,
-html body .container #product-info.list h3 {
-  display: none;
-}
-/* line 18, index.scss */
-html body .container #product-info.large .close,
-html body .container #product-info.list .close {
-  float: right;
-  color: white;
-  background: black;
-  cursor: pointer;
-  padding: 0 0.3125em;
-}
-/* line 24, index.scss */
-html body .container #product-info.large .thumbs,
-html body .container #product-info.list .thumbs {
-  width: 100%;
-  float: left;
-  margin-bottom: 2.5em;
-}
-/* line 28, index.scss */
-html body .container #product-info.large .thumbs .item,
-html body .container #product-info.list .thumbs .item {
-  width: 100px;
-  height: 100px;
-  float: left;
-  margin: 0 0.3125em 0.625em 0;
-  border: 1px solid;
-}
-/* line 19, mixins.scss */
-html body .container #product-info.large .body h3,
-html body .container #product-info.list .body h3 {
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
-  cursor: pointer;
-  display: block;
-}
-/* line 24, mixins.scss */
-html body .container #product-info.large .body .pane,
-html body .container #product-info.list .body .pane {
-  display: none;
-}
-/* line 39, index.scss */
-html body .container #product-info.mixed {
-  width: 56.6%;
-  margin: 0 0 0 0;
-  float: left;
-  height: 40em;
-  position: relative;
-  top: -34em;
-  float: right;
-  z-index: 2;
-  background: white;
-  display: none;
-}
-/* line 49, index.scss */
-html body .container #product-info.mixed h3 {
-  display: none;
-}
-/* line 52, index.scss */
-html body .container #product-info.mixed .close {
-  float: right;
-  color: white;
-  background: black;
-  cursor: pointer;
-  padding: 0 0.3125em;
-}
-/* line 58, index.scss */
-html body .container #product-info.mixed .thumbs {
-  width: 98%;
-  float: left;
-  margin: 0 1% 2.5em;
-}
-/* line 63, index.scss */
-html body .container #product-info.mixed .thumbs .item {
-  width: 100px;
-  height: 100px;
-  float: left;
-  margin: 0 0.3125em 0.625em 0;
-  border: 1px solid;
-}
-/* line 68, index.scss */
-html body .container #product-info.mixed .body {
-  width: 98%;
-  margin: 0 1%;
-  float: left;
-}
-/* line 19, mixins.scss */
-html body .container #product-info.mixed .body h3 {
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
-  cursor: pointer;
-  display: block;
-}
-/* line 24, mixins.scss */
-html body .container #product-info.mixed .body .pane {
-  display: none;
-}
-/* line 76, index.scss */
-html body .container #sidebar {
-  width: 20%;
-  margin: 0 0 0 0;
-  float: left;
-}
-/* line 79, index.scss */
 html body .container #sidebar h3 {
   display: none;
 }
-/* line 84, index.scss */
-html body .container #sidebar #switch-view li {
-  display: none;
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
-  cursor: pointer;
-}
-/* line 88, index.scss */
-html body .container #sidebar #switch-view li span {
-  display: none;
-}
-/* line 92, index.scss */
-html body .container #sidebar #switch-view li.active {
-  display: block !important;
-}
-/* line 94, index.scss */
-html body .container #sidebar #switch-view li.active span {
-  -moz-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=$value);
-  display: inline-block;
-  float: right;
-}
-/* line 101, index.scss */
-html body .container #sidebar #categories {
-  margin-top: 12.5em;
-}
-/* line 103, index.scss */
-html body .container #sidebar #categories li {
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
-}
-/* line 106, index.scss */
-html body .container #sidebar #categories li.active {
-  color: white;
-  background: black;
-  padding-top: 0.625em;
-}
-/* line 113, index.scss */
+/* line 14, index.scss */
 html body .container #content {
-  position: static;
+  display: none;
   width: 70%;
   margin: 0 10% 0 0;
   float: left;
-}
-/* line 118, index.scss */
-html body .container #content .entry .featured-image {
-  cursor: pointer;
-}
-/* line 122, index.scss */
-html body .container #content .entry .thumbs {
-  display: none;
-}
-/* line 126, index.scss */
-html body .container #content .entry .body {
-  display: none;
 }
 
 /* Single article

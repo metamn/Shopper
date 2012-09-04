@@ -1,19 +1,14 @@
 html {
   body {
     .container {
-      width: 90%;
+      width: 98%;
       margin: 0 auto;
-      //@include respond-to(mobile) { width: 98%; }
-      //@include respond-to(smartphone) { width: 96%; }
-      //@include respond-to(tablet) { width: 96%; }
       
       header {
-        position: static;
         @include block;
-        margin-top: $pad;
         
         hgroup {
-          @include col(20%, 0, 0);
+          @include col($minor, 0, 0);
           
           h1 {
             @include hidden;
@@ -39,63 +34,11 @@ html {
         }        
         
         nav {
-          @include col(50%, 5%, 5%);          
+          @include col($major, 0, 0);          
           
-          h3 {
-            display: none;
-          }
           
-          #search {
-            margin-bottom: $pad * 2.5;            
-            
-            form {
-              input[type="text"] {
-                width: 22.5em;
-                margin-right: 5%;
-                //@include respond-to(tablet) { width: 15.4em; }
-              }
-             
-              ul {
-                @include hidden;
-                margin: 1.25em 0;
-              } 
-            }
-          }
-          ul#categories {
-            @include list-inline;
-            li {
-              margin-right: 5%;
-              span {
-                @include rotate(90deg, 1);                
-              }
-            }
-            li.last {
-              margin-right: none;
-            }
-          }
         }
-        aside {
-          @include col(20%, 0, 0);
-          @include z-index(1, 10em);
-          
-          h3 {
-            display: none;
-          }
-          
-          ul {            
-            li {
-              .title {
-                @include text-underlined;
-              }              
-              ul {
-                @include hidden;
-                li {
-                  @include text-underlined;                
-                }                
-              }
-            }
-          }
-        }
+        
       }         
     }    
   }
@@ -106,7 +49,8 @@ html {
     .container {
 
       footer {
-        @include block;        
+        @include block;    
+        @include hidden;
         margin: $pad*4 0 $pad*2;
         padding: $pad 0;
         border-top: 1px solid;

@@ -63,47 +63,16 @@
           <h2>
             <?php bloginfo( 'description' ); ?>
           </h2> 
+          
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
             <div id="logo"></div>       
           </a>
-        </hgroup>
-      
-        <nav> 
-          <h3>Navigare principala si cautare</h3>    
-          <div id="search">
-            <?php include 'search.php' ?>            
-          </div>
-          <ul id="categories">
-            <li><h4>Cadouri <span>></span></h4></li>
-            <li><h4>Evenimente <span>></span></h4></li>
-            <li><h4>Sarbatori <span>></span></h4></li>
-            <li class="last"><h4>Servicii <span>></span></h4></li>
-          </ul>   
-        </nav>
+        </hgroup>   
         
-        <aside>
-          <h3>Cos cumparaturi si informatii</h3>
-          <ul>
-            <li>
-              <div class="title j-toggle">Cos cumparaturi</div>
-              <ul>
-                
-              </ul>
-            </li>
-            <li>
-              <div class="title j-toggle">Contul meu</div>
-              <ul>
-                
-              </ul>
-            </li>
-            <li>
-              <div class="title j-toggle">Informatii</div>
-              <ul>
-                
-              </ul>
-            </li>
-          </ul>
-        </aside>       
+        <nav>
+    			<h3><?php bloginfo( 'description' ); ?></h3>
+    		</nav>
       </header>
     
+    	
   
