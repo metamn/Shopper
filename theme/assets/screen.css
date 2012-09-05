@@ -226,11 +226,8 @@ body .container table td {
 }
 
 body .container h1, body .container h2, body .container h3, body .container h4, body .container h5, body .container h6 {
-  font-family: "Ostrich Black";
-}
-body .container header nav h3 {
-  font-size: 3em;
-  padding: 0;
+  font-family: "Ostrich Rounded";
+  letter-spacing: .1em;
 }
 
 html body .container {
@@ -239,11 +236,6 @@ html body .container {
 }
 html body .container header {
   width: 100%;
-  float: left;
-}
-html body .container header hgroup {
-  width: 37.5%;
-  margin: 0 0 0 0;
   float: left;
 }
 html body .container header hgroup h1 {
@@ -269,9 +261,34 @@ html body .container header hgroup #logo .set {
   background: black;
 }
 html body .container header nav {
+  margin: 14.0625% 0 0 14.0625%;
+}
+html body .container header nav h3 {
+  display: none;
+}
+html body .container header nav ul {
+  margin: 0;
+}
+html body .container header nav ul li {
+  font-size: 2em;
+  font-family: "Ostrich Rounded";
+  letter-spacing: .1em;
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+}
+html body .container header nav ul ul {
+  display: none;
+  margin: 0 1.25em;
+}
+html body .container header aside {
   width: 62.5%;
-  margin: 0 0 0 0;
-  float: left;
+  height: 62.5%;
+  position: absolute;
+  top: 14.0625%;
+  right: 3.75em;
+  background: yellow;
+  opacity: .9;
 }
 
 html body .container footer {

@@ -17,21 +17,16 @@ $text: black;
 @include font-face("Ostrich Rounded", font-files("ostrich/ostrich-rounded-webfont.woff", "ostrich/ostrich-rounded-webfont.ttf", "ostrich/ostrich-rounded-webfont.svg"), "ostrich/ostrich-rounded-webfont.eot");
 
 
+@mixin ostrich($variant) {
+	font-family: $variant;
+	letter-spacing: .1em;
+}
+
 body {
 	.container {
 		h1, h2, h3, h4, h5, h6 {
-			font-family: "Ostrich Black";
+			@include ostrich("Ostrich Rounded");
 		}
-	
-		header {
-			nav {
-				h3 {
-					font-size: 3em;
-					padding: 0;
-				}
-			}
-		}
-			
 	}
 }
 

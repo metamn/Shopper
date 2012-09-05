@@ -8,7 +8,7 @@ html {
         @include block;
         
         hgroup {
-          @include col($minor, 0, 0);
+          // @include col($minor, 0, 0);
           
           h1 {
             @include hidden;
@@ -34,11 +34,40 @@ html {
         }        
         
         nav {
-          @include col($major, 0, 0);          
-          
-          
+          // @include col($major, 0, 0);          
+					margin: $minor/8*3 0 0 $minor/8*3;	
+	
+					h3 {
+						@include hidden;
+					}
+					
+					ul {
+						margin: 0;
+						
+						li {
+							font-size: 2em;
+							@include ostrich("Ostrich Rounded");
+							@include text-underlined;
+						}
+						
+						ul {
+							@include hidden;
+							margin: 0 $pad;
+						}
+					}
         }
         
+        aside {
+        	width: $major;
+        	height: $major;
+        	
+        	position: absolute;
+        	top: $minor/8*3;
+        	right: $pad*3;
+        	
+        	background: yellow;
+        	opacity: .9;
+        }
       }         
     }    
   }

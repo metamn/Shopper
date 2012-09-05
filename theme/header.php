@@ -71,7 +71,25 @@
         
         <nav>
     			<h3><?php bloginfo( 'description' ); ?></h3>
+    			<ul>
+    				<li>Servicii</li>
+    				<ul>
+    					<li>GiftShopper</li>
+    					<li>GiftPlanner</li>
+    				</ul>
+    				<li>de Cadouri</li>
+    				<ul>
+    					<li>Gadget</li>
+    					<li>Gizmo</li>
+    					<li>Lifestyle</li>
+    					<li>Eco</li>
+    				</ul>
+    				<li>Premium</li>
+    			</ul>
     		</nav>
+    		
+    		<aside>
+    		</aside>
       </header>
     
     	
