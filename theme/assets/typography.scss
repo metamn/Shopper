@@ -24,8 +24,9 @@ body {
 		// -----------------------------------------------
 		
 		
-		// Headings don't differ by size but by decoration
+		// Headings dont differ by size but by decoration
 		// - vertical rhythm is maintained by padding
+		
 		h1, h2, h3, h4, h5, h6 {
 			font-size: 2em;
 			padding: 1.25em 0;
@@ -137,6 +138,14 @@ body {
 			}
 		}
 		
+		
+		
+		// Other
+		// -----------------------------------------------
+	
+		em {
+			font-style: italic;
+		}
 	
 	}
 }

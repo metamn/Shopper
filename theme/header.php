@@ -44,6 +44,8 @@
     <!--[if IE]>
         <link href="<?php bloginfo('stylesheet_directory')?>/assets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
     <![endif]-->
+    
+    <link href="http://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700" rel="stylesheet" type="text/css">
             
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="<?php bloginfo('stylesheet_directory')?>/assets/jquery.init.js"></script>
@@ -75,7 +77,7 @@
     				<li>
     					Servicii
 							<dl>
-								<dt>GiftShopper</dt>
+								<dt><em>gift</em> Shopper</dt>
 								<dd>
 									<div id="c1">
 										<h5>Te ajutam sa alegi cadoul perfect</h5>
@@ -85,7 +87,7 @@
 										<p>&#9794; &nbsp; &#9792;</p>
 									</div>
 								</dd>
-								<dt>GiftPlanner</dt>
+								<dt><em>gift</em> Planner</dt>
 								<dd>
 									<div id="c1">
 										<h5>Planifici cadouri pe tot anul</h5>

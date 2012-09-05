@@ -2,10 +2,11 @@
 */
 
 $background: white;
-$text: black;
-$highlight: yellow;
+$text: lighten(black, 10%);
+$highlight: lighten(yellow, 10%);
 
 $text-light: lighten($text, 50%); 
+$highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
 
 /* Fonts
 */
@@ -26,7 +27,7 @@ $text-light: lighten($text, 50%);
 }
 
 @mixin font-text() {
-	font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+	font-family: "Old Standard TT", serif;
 	letter-spacing: normal;
 }
 

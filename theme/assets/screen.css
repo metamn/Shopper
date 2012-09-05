@@ -139,6 +139,9 @@ body .container table td, body .container table th, body .container table tr {
 body .container table td {
   padding: 1.25em;
 }
+body .container em {
+  font-style: italic;
+}
 
 /* Site specific mixins
 */
@@ -185,6 +188,7 @@ body .container table td {
 */
 /* Colors
 */
+/* FF3, Kuler, Mono */
 /* Fonts
 */
 @font-face {
@@ -276,16 +280,16 @@ html body .container header nav ul li {
   padding-bottom: 0.625em;
   border-bottom: 1px solid;
   cursor: pointer;
-  color: gray;
+  color: #999999;
 }
 html body .container header nav ul li span {
-  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+  font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   font-style: italic;
 }
 html body .container header nav ul li dl {
   display: none;
-  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+  font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   cursor: default;
   width: 62.5%;
@@ -298,6 +302,7 @@ html body .container header nav ul li dl {
 }
 html body .container header nav ul li dl dt {
   text-transform: none;
+  font-weight: normal;
   padding: 1.25em;
 }
 html body .container header nav ul li dl dd {
@@ -312,18 +317,22 @@ html body .container header nav ul li dl dd div#c1 {
   float: left;
 }
 html body .container header nav ul li dl dd div#c1 h5, html body .container header nav ul li dl dd div#c1 h6 {
-  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+  font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   font-size: 0.625em;
-  padding: 0;
+  padding: 0.3125em 0;
   margin-left: 1.25em;
 }
 html body .container header nav ul li dl dd div#c1 h5 {
   text-transform: none;
   font-variant: small-caps;
+  border-bottom: 1px dotted;
 }
 html body .container header nav ul li dl dd div#c1 h6 {
   font-variant: normal;
+  font-style: italic;
+  font-size: medium;
+  margin-left: 1.5em;
 }
 html body .container header nav ul li dl dd div#c2 {
   width: 37.5%;
@@ -332,7 +341,7 @@ html body .container header nav ul li dl dd div#c2 {
   font-size: 2em;
   font-weight: bold;
   color: white;
-  background: black;
+  background: #1a1a1a;
   position: relative;
   top: -0.625em;
 }
@@ -341,7 +350,7 @@ html body .container header nav ul li dl dd div#c2 p {
   text-align: center;
 }
 html body .container header nav ul li.active {
-  color: black;
+  color: #1a1a1a;
 }
 html body .container header nav ul li.active dl {
   display: block;
@@ -351,7 +360,7 @@ html body .container header nav ul li.active:after {
   padding-left: 0.625em;
 }
 html body .container header nav ul li.hover {
-  color: black;
+  color: #1a1a1a;
 }
 html body .container header aside {
   width: 62.5%;
@@ -359,7 +368,8 @@ html body .container header aside {
   position: absolute;
   top: 14.0625%;
   left: 37.5%;
-  background: yellow;
+  background: #ffff33;
+  opacity: .97;
 }
 
 html body .container footer {
