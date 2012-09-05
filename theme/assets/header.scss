@@ -45,7 +45,6 @@ html {
 						margin: 0;
 						
 						li {
-							font-size: 2em;
 							@include font-heading("Ostrich Rounded");
 							@include text-underlined;
 							cursor: pointer;
@@ -60,9 +59,40 @@ html {
 							dl {
 								@include hidden;
 								@include font-text;
+								cursor: default;
 								
 								@include startpage-main-div;
 								z-index: 1;
+								
+								dt {
+									
+								}
+								
+								dd {
+									@include block;
+									margin: 0;
+									
+									p {
+										@include col(20%, 0, 0);
+										
+										font-size: 2em;
+										font-weight: bold;
+										@include text-inverted;
+										padding: $pad/4;
+									}
+									div {
+										@include col(60%, 0, 0);
+										
+										padding: 0;
+										margin: $pad;
+										
+										h5, h6 {
+											@include font-text;
+											font-size: $pad2;
+											padding: 0;
+										}
+									}
+								}
 							}
 						}
 						
@@ -89,7 +119,6 @@ html {
         	@include startpage-main-div;
         	
         	background: $highlight;
-        	opacity: .8;
         }
       }         
     }    

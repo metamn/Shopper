@@ -76,9 +76,25 @@
     					Servicii
 							<dl>
 								<dt>GiftShopper</dt>
-								<dd>her comes a div with lots of stuff my man</dd>
+								<dd>
+									<div>
+										<h5>Te ajutam sa alegi cadoul perfect</h5>
+										<h6>Ce cadouri vrei, pentru cine, la ce pret?</h6>
+									</div>
+									<p>
+										&#9794; &nbsp; &#9792;
+									</p>
+								</dd>
 								<dt>GiftPlanner</dt>
-								<dd>her comes a div with lots of stuff my man</dd>
+								<dd>
+									<div>
+										<h5>Planifici cadouri pe tot anul</h5>
+										<h6>Pentru zi de nasteri, botezuri, craciun, ...</h6>
+									</div>
+									<p>
+										&#10050; &nbsp; &#10052;
+									</p>
+								</dd>
 							</dl>    				
     				</li>
     				<li>

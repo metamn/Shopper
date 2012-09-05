@@ -22,10 +22,12 @@ $text-light: lighten($text, 50%);
 @mixin font-heading($variant) {
 	font-family: $variant;
 	letter-spacing: .1em;
+	font-size: 2em;
 }
 
 @mixin font-text() {
 	font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+	letter-spacing: normal;
 }
 
 

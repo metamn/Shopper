@@ -46,7 +46,7 @@
 
 /* invert color with background
 */
-@mixin color-inverted {
+@mixin text-inverted {
   color: $background;
   background: $text;
 }
