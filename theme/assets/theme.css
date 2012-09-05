@@ -1,11 +1,11 @@
 /*
 Syntax error: Undefined mixin 'font-face'.
-        on line 12 of /Users/cs/work/Shopper/theme/assets/theme.scss, in `font-face'
-        from line 12 of /Users/cs/work/Shopper/theme/assets/theme.scss
+        on line 14 of /Users/cs/work/shopper/theme/assets/theme.scss, in `font-face'
+        from line 14 of /Users/cs/work/shopper/theme/assets/theme.scss
 
 Backtrace:
-/Users/cs/work/Shopper/theme/assets/theme.scss:12:in `font-face'
-/Users/cs/work/Shopper/theme/assets/theme.scss:12
+/Users/cs/work/shopper/theme/assets/theme.scss:14:in `font-face'
+/Users/cs/work/shopper/theme/assets/theme.scss:14
 /Users/cs/.rvm/gems/ruby-1.8.7-p370/gems/sass-3.2.1/lib/sass/../sass/tree/visitors/perform.rb:249:in `visit_mixin'
 /Users/cs/.rvm/gems/ruby-1.8.7-p370/gems/sass-3.2.1/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
 /Users/cs/.rvm/gems/ruby-1.8.7-p370/gems/sass-3.2.1/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
@@ -68,4 +68,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'font-face'.\A         on line 12 of /Users/cs/work/Shopper/theme/assets/theme.scss, in `font-face'\A         from line 12 of /Users/cs/work/Shopper/theme/assets/theme.scss"; }
+  content: "Syntax error: Undefined mixin 'font-face'.\A         on line 14 of /Users/cs/work/shopper/theme/assets/theme.scss, in `font-face'\A         from line 14 of /Users/cs/work/shopper/theme/assets/theme.scss"; }

@@ -46,27 +46,50 @@ html {
 						
 						li {
 							font-size: 2em;
-							@include ostrich("Ostrich Rounded");
+							@include font-heading("Ostrich Rounded");
 							@include text-underlined;
+							cursor: pointer;
+							
+							color: $text-light;
+							
+							span {
+								@include font-text;
+								font-style: italic;
+							}
+							
+							dl {
+								@include hidden;
+								@include font-text;
+								
+								@include startpage-main-div;
+								z-index: 1;
+							}
 						}
 						
-						ul {
-							@include hidden;
-							margin: 0 $pad;
+						li.active {
+							color: $text;
+							
+							dl {
+								display: block;
+							}
 						}
+						li.active:after {
+							content: "\2605";
+							padding-left: $pad/2;
+						}
+						
+						li.hover {
+							color: $text;
+						}
+						
 					}
         }
         
         aside {
-        	width: $major;
-        	height: $major;
+        	@include startpage-main-div;
         	
-        	position: absolute;
-        	top: $minor/8*3;
-        	right: $pad*3;
-        	
-        	background: yellow;
-        	opacity: .9;
+        	background: $highlight;
+        	opacity: .8;
         }
       }         
     }    

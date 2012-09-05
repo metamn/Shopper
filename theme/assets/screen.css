@@ -142,6 +142,8 @@ body .container table td {
 
 /* Site specific mixins
 */
+/* startpage main div
+*/
 /* display post thumbnails 
 */
 /* display post description
@@ -163,10 +165,6 @@ body .container table td {
 */
 /* make cursor to be pointer
 */
-.j-toggle {
-  cursor: pointer;
-}
-
 /* list, inline 
 */
 /* table, simple
@@ -276,19 +274,44 @@ html body .container header nav ul li {
   margin-bottom: 0.625em;
   padding-bottom: 0.625em;
   border-bottom: 1px solid;
+  cursor: pointer;
+  color: gray;
 }
-html body .container header nav ul ul {
+html body .container header nav ul li span {
+  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+  font-style: italic;
+}
+html body .container header nav ul li dl {
   display: none;
-  margin: 0 1.25em;
+  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+  width: 62.5%;
+  height: 62.5%;
+  position: absolute;
+  top: 14.0625%;
+  left: 37.5%;
+  z-index: 1;
+}
+html body .container header nav ul li.active {
+  color: black;
+}
+html body .container header nav ul li.active dl {
+  display: block;
+}
+html body .container header nav ul li.active:after {
+  content: "\2605";
+  padding-left: 0.625em;
+}
+html body .container header nav ul li.hover {
+  color: black;
 }
 html body .container header aside {
   width: 62.5%;
   height: 62.5%;
   position: absolute;
   top: 14.0625%;
-  right: 3.75em;
+  left: 37.5%;
   background: yellow;
-  opacity: .9;
+  opacity: .8;
 }
 
 html body .container footer {

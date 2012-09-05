@@ -72,19 +72,37 @@
         <nav>
     			<h3><?php bloginfo( 'description' ); ?></h3>
     			<ul>
-    				<li>Servicii</li>
-    				<ul>
-    					<li>GiftShopper</li>
-    					<li>GiftPlanner</li>
-    				</ul>
-    				<li>de Cadouri</li>
-    				<ul>
-    					<li>Gadget</li>
-    					<li>Gizmo</li>
-    					<li>Lifestyle</li>
-    					<li>Eco</li>
-    				</ul>
-    				<li>Premium</li>
+    				<li>
+    					Servicii
+							<dl>
+								<dt>GiftShopper</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+								<dt>GiftPlanner</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+							</dl>    				
+    				</li>
+    				<li>
+    					<span>de</span> Cadouri
+							<dl>
+								<dt>Gadget</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+								<dt>Gizmo</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+								<dt>Lifestyle</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+								<dt>Eco</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+							</dl>
+    				</li>
+    				<li>
+    					Premium
+							<dl>
+								<dt>Cadouri Unice</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+								<dt>Shopping si suport perfect</dt>
+								<dd>her comes a div with lots of stuff my man</dd>
+							</dl>
+    				</li>
     			</ul>
     		</nav>
     		

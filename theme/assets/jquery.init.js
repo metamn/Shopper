@@ -1,13 +1,30 @@
 jQuery(document).ready(function() {
-
+	
+	// Header >> Servicii de Cadouri Premium
+	//
+	// -- hide all
+	jQuery("header nav ul li").removeClass('active');
  
-  // Header
-  //
-
-  // Show price search in header
-  jQuery("header #search #s").click(function() {
-    jQuery(this).next().next().slideDown();
-  });
+ 	// -- display the first
+ 	jQuery("header nav ul li").first().addClass('active');
+ 	
+ 	// -- hover
+ 	jQuery("header nav ul li").hover(
+		function () {
+			jQuery(this).addClass('hover');
+		}, 
+		function () {
+			jQuery(this).removeClass('hover');
+		}
+	);
+	
+	// - click
+	jQuery("header nav ul li").click(function(){
+		jQuery("header nav ul li").removeClass('active');
+		jQuery(this).addClass('active');
+	});
+ 
+  
   
   // Draw the logo
   function logo() {
@@ -125,17 +142,10 @@ jQuery(document).ready(function() {
   // General functions
   //
   
-   // Display the responsive image
+  // Display the responsive image
   jQuery('noscript[data-large][data-small]').each(function(){
     var src = screen.width >= 500 ? jQuery(this).data('large') : jQuery(this).data('small');
     jQuery('<img src="' + src + '" alt="' + $(this).data('alt') + '" />').insertAfter($(this));
   });
-  
-  
-  // Toggle the next element
-  jQuery(".j-toggle").click(function() {
-    jQuery(this).next().slideToggle();
-  });
-
   
 });

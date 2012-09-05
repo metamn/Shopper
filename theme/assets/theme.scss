@@ -3,7 +3,9 @@
 
 $background: white;
 $text: black;
+$highlight: yellow;
 
+$text-light: lighten($text, 50%); 
 
 /* Fonts
 */
@@ -17,15 +19,20 @@ $text: black;
 @include font-face("Ostrich Rounded", font-files("ostrich/ostrich-rounded-webfont.woff", "ostrich/ostrich-rounded-webfont.ttf", "ostrich/ostrich-rounded-webfont.svg"), "ostrich/ostrich-rounded-webfont.eot");
 
 
-@mixin ostrich($variant) {
+@mixin font-heading($variant) {
 	font-family: $variant;
 	letter-spacing: .1em;
 }
 
+@mixin font-text() {
+	font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+}
+
+
 body {
 	.container {
 		h1, h2, h3, h4, h5, h6 {
-			@include ostrich("Ostrich Rounded");
+			@include font-heading("Ostrich Rounded");
 		}
 	}
 }

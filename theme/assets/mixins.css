@@ -1,5 +1,7 @@
 /* Site specific mixins
 */
+/* startpage main div
+*/
 /* display post thumbnails 
 */
 /* display post description
@@ -21,10 +23,6 @@
 */
 /* make cursor to be pointer
 */
-.j-toggle {
-  cursor: pointer;
-}
-
 /* list, inline 
 */
 /* table, simple

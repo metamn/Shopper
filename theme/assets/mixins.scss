@@ -2,6 +2,19 @@
 */
 
 
+/* startpage main div
+*/
+@mixin startpage-main-div {
+	width: $major;
+	height: $major;
+	
+	position: absolute;
+	top: $minor/8*3;
+	left: $minor;
+}
+
+
+
 /* display post thumbnails 
 */
 @mixin thumbnail {
@@ -77,9 +90,7 @@
 @mixin pointer {
   cursor: pointer;
 }
-.j-toggle {
-  cursor: pointer;
-}
+
 
 
 /* list, inline 
