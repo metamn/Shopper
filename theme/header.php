@@ -77,23 +77,23 @@
 							<dl>
 								<dt>GiftShopper</dt>
 								<dd>
-									<div>
+									<div id="c1">
 										<h5>Te ajutam sa alegi cadoul perfect</h5>
 										<h6>Ce cadouri vrei, pentru cine, la ce pret?</h6>
 									</div>
-									<p>
-										&#9794; &nbsp; &#9792;
-									</p>
+									<div id="c2">
+										<p>&#9794; &nbsp; &#9792;</p>
+									</div>
 								</dd>
 								<dt>GiftPlanner</dt>
 								<dd>
-									<div>
+									<div id="c1">
 										<h5>Planifici cadouri pe tot anul</h5>
-										<h6>Pentru zi de nasteri, botezuri, craciun, ...</h6>
+										<h6>Pentru zi de nasteri, botezuri, craciun si alte evenimente.</h6>
 									</div>
-									<p>
-										&#10050; &nbsp; &#10052;
-									</p>
+									<div id="c2">
+										<p>&#10050; &nbsp; &#10052;</p>
+									</div>
 								</dd>
 							</dl>    				
     				</li>

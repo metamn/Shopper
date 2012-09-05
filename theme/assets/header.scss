@@ -8,8 +8,6 @@ html {
         @include block;
         
         hgroup {
-          // @include col($minor, 0, 0);
-          
           h1 {
             @include hidden;
           }
@@ -33,8 +31,7 @@ html {
           }
         }        
         
-        nav {
-          // @include col($major, 0, 0);          
+        nav {       
 					margin: $minor/8*3 0 0 $minor/8*3;	
 	
 					h3 {
@@ -63,36 +60,52 @@ html {
 								
 								@include startpage-main-div;
 								z-index: 1;
+								margin: 0;
 								
 								dt {
-									
+									text-transform: none;
+									padding: $pad;
 								}
 								
 								dd {
 									@include block;
+									padding-bottom: $pad/2;
 									margin: 0;
 									
-									p {
-										@include col(20%, 0, 0);
-										
-										font-size: 2em;
-										font-weight: bold;
-										@include text-inverted;
-										padding: $pad/4;
-									}
-									div {
-										@include col(60%, 0, 0);
-										
-										padding: 0;
-										margin: $pad;
-										
+									div#c1 {
+										@include col($major, 0, 0);
+											
 										h5, h6 {
 											@include font-text;
 											font-size: $pad2;
 											padding: 0;
+											margin-left: $pad;
+										}
+										h5 {
+											text-transform: none;
+											font-variant: small-caps;
+										}
+										h6 {
+											font-variant: normal;
 										}
 									}
-								}
+									
+									div#c2 {
+										@include col($minor, 0, 0);
+									
+										font-size: 2em;
+										font-weight: bold;
+										@include text-inverted;										
+										
+										position: relative;
+										top: -$pad/2;
+										
+										p {
+											padding: $pad/4;
+											text-align: center;
+										}
+									}
+								}							
 							}
 						}
 						

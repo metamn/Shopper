@@ -294,34 +294,51 @@ html body .container header nav ul li dl {
   top: 14.0625%;
   left: 37.5%;
   z-index: 1;
+  margin: 0;
+}
+html body .container header nav ul li dl dt {
+  text-transform: none;
+  padding: 1.25em;
 }
 html body .container header nav ul li dl dd {
   width: 100%;
   float: left;
+  padding-bottom: 0.625em;
   margin: 0;
 }
-html body .container header nav ul li dl dd p {
-  width: 20%;
+html body .container header nav ul li dl dd div#c1 {
+  width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
+html body .container header nav ul li dl dd div#c1 h5, html body .container header nav ul li dl dd div#c1 h6 {
+  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+  letter-spacing: normal;
+  font-size: 0.625em;
+  padding: 0;
+  margin-left: 1.25em;
+}
+html body .container header nav ul li dl dd div#c1 h5 {
+  text-transform: none;
+  font-variant: small-caps;
+}
+html body .container header nav ul li dl dd div#c1 h6 {
+  font-variant: normal;
+}
+html body .container header nav ul li dl dd div#c2 {
+  width: 37.5%;
   margin: 0 0 0 0;
   float: left;
   font-size: 2em;
   font-weight: bold;
   color: white;
   background: black;
+  position: relative;
+  top: -0.625em;
+}
+html body .container header nav ul li dl dd div#c2 p {
   padding: 0.3125em;
-}
-html body .container header nav ul li dl dd div {
-  width: 60%;
-  margin: 0 0 0 0;
-  float: left;
-  padding: 0;
-  margin: 1.25em;
-}
-html body .container header nav ul li dl dd div h5, html body .container header nav ul li dl dd div h6 {
-  font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
-  letter-spacing: normal;
-  font-size: 0.625em;
-  padding: 0;
+  text-align: center;
 }
 html body .container header nav ul li.active {
   color: black;
