@@ -62,6 +62,10 @@ html {
 								z-index: 1;
 								margin: 0;
 								
+								a, a:visited, a:active {
+									@include link-neutral;
+								}
+								
 								dt {
 									text-transform: none;
 									font-weight: normal;
@@ -100,10 +104,14 @@ html {
 									
 										font-size: 2em;
 										font-weight: bold;
-										@include text-inverted;										
+										@include text-inverted;		
 										
 										position: relative;
 										top: -$pad/2;
+										
+										a, a:visited, a:active {
+											@include link-neutral-inverted;
+										}
 										
 										p {
 											padding: $pad/4;

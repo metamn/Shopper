@@ -77,24 +77,32 @@
     				<li>
     					Servicii
 							<dl>
-								<dt><em>gift</em> Shopper</dt>
+								<dt><a href="<?php bloginfo('home')?>/servicii/giftshopper" title="Giftshopper | Te ajutam sa alegi cadoul perfect"><em>gift</em> Shopper</a></dt>
 								<dd>
 									<div id="c1">
-										<h5>Te ajutam sa alegi cadoul perfect</h5>
-										<h6>Ce cadouri vrei, pentru cine, la ce pret?</h6>
+										<a href="<?php bloginfo('home')?>/servicii/giftshopper" title="Giftshopper | Te ajutam sa alegi cadoul perfect">
+											<h5>Te ajutam sa alegi cadoul perfect</h5>
+											<h6>Ce cadouri vrei, pentru cine, la ce pret?</h6>
+										</a>
 									</div>
 									<div id="c2">
-										<p>&#9794; &nbsp; &#9792;</p>
+										<a href="<?php bloginfo('home')?>/servicii/giftshopper" title="Giftshopper | Te ajutam sa alegi cadoul perfect">
+											<p>&#9794; &nbsp; &#9792;</p>
+										</a>
 									</div>
 								</dd>
-								<dt><em>gift</em> Planner</dt>
+								<dt><a href="<?php bloginfo('home')?>/servicii/giftplanner" title="Giftplanner | Planifici cadouri pe tot anul"><em>gift</em> Planner</a></dt>
 								<dd>
 									<div id="c1">
-										<h5>Planifici cadouri pe tot anul</h5>
-										<h6>Pentru zi de nasteri, botezuri, craciun si alte evenimente.</h6>
+										<a href="<?php bloginfo('home')?>/servicii/giftplanner" title="Giftplanner | Planifici cadouri pe tot anul">
+											<h5>Planifici cadouri pe tot anul</h5>
+											<h6>Pentru zi de nasteri, botezuri, craciun si alte evenimente.</h6>
+										</a>
 									</div>
 									<div id="c2">
-										<p>&#10050; &nbsp; &#10052;</p>
+										<a href="<?php bloginfo('home')?>/servicii/giftplanner" title="Giftplanner | Planifici cadouri pe tot anul">
+											<p>&#10050; &nbsp; &#10052;</p>
+										</a>
 									</div>
 								</dd>
 							</dl>    				

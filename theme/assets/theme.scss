@@ -1,12 +1,41 @@
 /* Colors
 */
 
+
+/* Text
+*/
+
 $background: white;
 $text: lighten(black, 10%);
-$highlight: lighten(yellow, 10%);
-
 $text-light: lighten($text, 50%); 
+
+/* invert color with background */
+@mixin text-inverted {
+  color: $background;
+  background: $text;
+}
+
+
+/* Highlight
+*/
+$highlight: lighten(yellow, 10%);
 $highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
+
+
+
+/* Links
+*/
+
+@mixin link-neutral {
+	color: $text;
+	text-decoration: none;
+}
+
+@mixin link-neutral-inverted {
+	color: $background;
+	text-decoration: none;
+}
+
 
 /* Fonts
 */

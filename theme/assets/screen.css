@@ -153,8 +153,6 @@ body .container em {
 */
 /* General mixins
 */
-/* invert color with background
-*/
 /* set z-index
 
 - parent must have set 'position'
@@ -188,7 +186,14 @@ body .container em {
 */
 /* Colors
 */
+/* Text
+*/
+/* invert color with background */
+/* Highlight
+*/
 /* FF3, Kuler, Mono */
+/* Links
+*/
 /* Fonts
 */
 @font-face {
@@ -300,6 +305,10 @@ html body .container header nav ul li dl {
   z-index: 1;
   margin: 0;
 }
+html body .container header nav ul li dl a, html body .container header nav ul li dl a:visited, html body .container header nav ul li dl a:active {
+  color: #1a1a1a;
+  text-decoration: none;
+}
 html body .container header nav ul li dl dt {
   text-transform: none;
   font-weight: normal;
@@ -344,6 +353,10 @@ html body .container header nav ul li dl dd div#c2 {
   background: #1a1a1a;
   position: relative;
   top: -0.625em;
+}
+html body .container header nav ul li dl dd div#c2 a, html body .container header nav ul li dl dd div#c2 a:visited, html body .container header nav ul li dl dd div#c2 a:active {
+  color: white;
+  text-decoration: none;
 }
 html body .container header nav ul li dl dd div#c2 p {
   padding: 0.3125em;
