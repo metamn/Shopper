@@ -64,6 +64,7 @@ function shopper_import_convert_url() {
 function shopper_import_orders() {
   global $old;
   $old = new wpdb('cs','cs','ujsmuff','localhost');
+  $old->show_errors();
   
   // Drop existing data
   shopper_import_drop_old_profiles_and_orders();
@@ -235,6 +236,7 @@ function shopper_import_save_customer($customer) {
 // Drop old customer dat
 function shopper_import_drop_old_profiles_and_orders() {
   global $wpdb;
+  $wpdb->show_errors();
   
   $wpdb->query( 
     $wpdb->prepare( 
@@ -492,6 +494,7 @@ function shopper_import_order_customer($id) {
 function shopper_import_posts() {
   global $old;
   $old = new wpdb('cs','cs','ujsmuff','localhost');
+  $old->show_errors();
   
   // Drop existing data
   shopper_import_drop_old_posts();
@@ -500,6 +503,8 @@ function shopper_import_posts() {
   $posts = $old->get_results(
     "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' AND post_status = 'publish'"
   );
+  
+  echo "Importing " . count($posts) . " posts<br/";
   
   foreach ($posts as $post) {
     
@@ -552,6 +557,8 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
   
   global $old;
   $old = new wpdb('cs','cs','ujsmuff','localhost');
+  $old->show_errors();
+  $wpdb->show_errors();
   
   
   // Remove old post id, otherwise it will not insert
@@ -620,7 +627,6 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
   	//add_post_meta($aid, '_wp_attached_file', get_post_meta($a->ID, '_wp_attached_file', true));
   	//add_post_meta($aid, '_wp_attachment_metadata', get_post_meta($a->ID, '_wp_attachment_metadata', true));
     
-    
     $meta = $old->get_results(
 			"SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $a_original . 
 			" AND meta_key = '_wp_attached_file'"
@@ -634,7 +640,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
 		);
 		add_post_meta($aid, '_wp_attachment_metadata', $meta[0]->meta_value); 
     
-    //echo "<br/>... Attachment: $aid";
+    echo "<br/>... Attachment: $aid";
   }
   
   // Comments
