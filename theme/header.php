@@ -109,16 +109,15 @@
     				</li>
     				<li>
     					<span>de</span> Cadouri
-							<dl>
-								<dt>Gadget</dt>
-								<dd>her comes a div with lots of stuff my man</dd>
-								<dt>Gizmo</dt>
-								<dd>her comes a div with lots of stuff my man</dd>
-								<dt>Lifestyle</dt>
-								<dd>her comes a div with lots of stuff my man</dd>
-								<dt>Eco</dt>
-								<dd>her comes a div with lots of stuff my man</dd>
-							</dl>
+    					<div class="items">
+								<?php 
+									// echo get_subcategories_with_image('Cadouri'); 
+									// print_r(post_attachments(1));	
+									echo "url:";
+									print_r(wp_get_attachment_image_src(2912, array(150, 150)));
+									echo get_the_post_thumbnail(1);
+								?>
+							</div>
     				</li>
     				<li>
     					Premium

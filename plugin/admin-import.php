@@ -21,7 +21,33 @@
 if ($_POST) {
   if ($_POST['import'] == 'posts') { shopper_import_posts(); }
   if ($_POST['import'] == 'orders') { shopper_import_orders(); }
+  if ($_POST['import'] == 'convert') { shopper_import_convert_url(); }
 }
+
+
+// Convert post GUID from smuff to localhost
+// ----------------------------------------------------------------
+function shopper_import_convert_url() {
+	global $wpdb;
+	$wpdb->show_errors();
+	
+	$attachments = $wpdb->get_results(
+    "SELECT * FROM wp_posts"
+  );
+  
+  foreach ($attachments as $a) {
+  	$guid = str_replace("www.", "", $a->guid);
+  	$guid = str_replace("smuff.ro", "localhost/shopper", $guid);
+  	echo "$a->ID : $guid" . "<br/>";
+		$ret = $wpdb->query( 
+			"UPDATE wp_posts SET guid = '" . $guid . "' WHERE ID = '" . $a->ID . "'"
+		);
+		echo "Result: $ret";
+		echo "<br/>";
+  }
+  
+}
+
 
 
 
@@ -523,6 +549,11 @@ function shopper_import_posts() {
 function shopper_import_save_post($post, $product, $vars, $content, $attach, $comms){
   require_once(WP_CONTENT_DIR . '/../wp-config.php');
   
+  
+  global $old;
+  $old = new wpdb('cs','cs','ujsmuff','localhost');
+  
+  
   // Remove old post id, otherwise it will not insert
   // - http://codex.wordpress.org/Function_Reference/wp_insert_post
   $post->ID = '';
@@ -571,13 +602,38 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
   
   add_post_meta($id, 'product_variations', $variations);
   
+  
   // Attachments
   // - slicehost ip must be replaced with smuff: http://173.203.94.129/wp-content/uploads/2006/11/ceas-binar-samui-moon7.jpg
   foreach ($attach as $a) {
+  	$a_original = $a->ID;
+  	// ID is made empty for wp_insert .....
     $a->ID = '';
     $a->post_parent = $id;
     $a->guid = str_replace("173.203.94.129", "www.smuff.ro", $a->guid);
+    $a->guid = str_replace("www", "", $a->guid);
+    $a->guid = str_replace("smuff.ro", "localhost/shopper", $a->guid);
+    
     $aid = wp_insert_post($a);
+    // Add Attachment info as meta fields
+  	// GET POST META NOT WORKING !!!!!!!
+  	//add_post_meta($aid, '_wp_attached_file', get_post_meta($a->ID, '_wp_attached_file', true));
+  	//add_post_meta($aid, '_wp_attachment_metadata', get_post_meta($a->ID, '_wp_attachment_metadata', true));
+    
+    
+    $meta = $old->get_results(
+			"SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $a_original . 
+			" AND meta_key = '_wp_attached_file'"
+		);
+		add_post_meta($aid, '_wp_attached_file', $meta[0]->meta_value);  
+		
+		
+		$meta = $old->get_results(
+			"SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $a_original . 
+			" AND meta_key = '_wp_attachment_metadata'"
+		);
+		add_post_meta($aid, '_wp_attachment_metadata', $meta[0]->meta_value); 
+    
     //echo "<br/>... Attachment: $aid";
   }
   
@@ -687,12 +743,27 @@ function shopper_import_display_posts() {
       $attach = shopper_import_get_attachments($post->ID);
       if ($attach) {
         foreach ($attach as $a) {        
-        	echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";        
+        	echo "<li>&nbsp;Attachment: " . $a->guid . "</li>";  
+        	
+        	$meta = $old->get_results(
+						"SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $a->ID . 
+						" AND meta_key = '_wp_attached_file'"
+					);
+        	echo "<li>&nbsp;Attachment meta 1: " . $a->ID . " : " . $meta[0]->meta_value . "</li>";  
+        	
+        	
+        	$meta = $old->get_results(
+						"SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $a->ID . 
+						" AND meta_key = '_wp_attachment_metadata'"
+					);
+        	echo "<li>&nbsp;Attachment meta 2: " . $a->ID . " : " . $meta[0]->meta_value . "</li>"; 
         }
       }
       
+      
+      
       // Content
-      echo "<li>" . shopper_import_get_content($post->post_content) . "</li>";
+      // echo "<li>" . shopper_import_get_content($post->post_content) . "</li>";
       
       
       // Comments

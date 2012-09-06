@@ -247,8 +247,8 @@ function shopper_import_page() {
     <form action="admin.php?page=shopper-import" method="post">
       <select id="import" name="import">
         <option value="posts">Posts</option>
-        <option value="comments">Comments</option>
         <option value="orders">Orders & Customers</option>
+        <option value="convert">Convert Attachment URL</option>
       </select>
       <p class="submit"><input type="submit" value="Import" class="button-primary" id="submit" name="submit"></p>
     </form>

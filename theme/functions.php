@@ -1,5 +1,40 @@
 <?php
 
+
+// Category functions
+//
+
+
+// Get all subcategories with images
+function get_subcategories_with_image($cat_name) {	
+	$ret = '';
+	
+	$cat = get_categories("child_of=" . get_category_id($cat_name));
+	if (isset($cat)) {
+		foreach ($cat as $c) {
+			$name = $c->category_nicename;
+			$latest_post = get_posts(array("numberposts" => 1, "category" => $c->term_id, "order" => 'ASC'));
+			if (isset($latest_post)) {
+				$img = post_thumbnails($latest_post->ID, $cat_name, true);
+				if (isset($img)) {
+					$ret .= $img;
+				}
+			}
+		}
+	}
+	
+	return $ret;
+}
+
+// Returns category ID from name
+function get_category_id($cat_name){
+	$term = get_term_by('name', $cat_name, 'category');
+	return $term->term_id;
+}
+
+
+
+
 // Product functions
 //
 
@@ -17,12 +52,15 @@ function post_thumbnails($post_id, $title, $only_first = false) {
   $ret = "";
   
   $images = post_attachments($post_id);
+  //print_r($images);
+  
   foreach ($images as $img) {
-    $thumb = wp_get_attachment_image_src($img->ID, 'thumbnail'); 
-    $large = wp_get_attachment_image_src($img->ID, 'full');
+   	print_r($img);
+   	$thumb = wp_get_attachment_image_src($img->ID, 'full');
+    print_r($thumb);
     
     $ret .= '<div class="item">';
-    $ret .= "<img src='$thumb[0]' rev='$large[0]' title='$title' alt='$title'/>";
+    $ret .= "<img src='$thumb[0]' rev='$thumb[0]' title='$title' alt='$title'/>";
     $ret .= '</div>';
     if ($only_first) { break; }
   }
@@ -38,7 +76,6 @@ function post_attachments($post_id) {
   $args = array(
 	  'post_type' => 'attachment',
 	  'numberposts' => -1,
-	  'post_status' => null,
 	  'post_parent' => $post_id,
 	  'orderby' => 'menu_order',
 	  'order' => 'ASC'
