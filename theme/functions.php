@@ -67,14 +67,37 @@ function post_thumbnails($post_id, $size) {
   $images = post_attachments($post_id);
   
   foreach ($images as $img) {
-   	$thumb = wp_get_attachment_image_src($img->ID, $size);
-    $ret = $thumb[0];
+   	// - This is not working since import !!!
+   	// $thumb = wp_get_attachment_image_src($img->ID, $size);
+   	// $ret = $thumb[0];
+   	$thumb = wp_get_attachment_image_src2($img->ID);
+    $ret = $thumb[$size];
     break; 
   }
   
   return $ret;
 }
 
+
+// Get post thumbnails, hacked version
+function wp_get_attachment_image_src2($id) {
+	$ret = array();
+	
+	$a = wp_get_attachment_image_src($id, $size);
+	$ret['full'] = $a[0];
+	
+	// Get image folder
+	$x = explode("/", $ret['full']);
+	$l = get_last_explode($x);
+	$url = str_replace($l, "", $ret['full']);
+	
+	// Get medium snd thumbnail
+	$m = unserialize(get_post_meta($id, '_wp_attachment_metadata', true));
+	$ret['thumbnail'] = $url . $m['sizes']['thumbnail']['file'];
+	$ret['medium'] = $url . $m['sizes']['medium']['file'];
+	
+	return $ret;
+}
 
 // Display post thumbnails
 // - $col_id: an ID to aid displaying the product / item in columns
@@ -182,7 +205,7 @@ function generateRandomString($length = 10) {
 // Return the last item of an exploded string
 function get_last_explode($explode) {
   $c = count($explode);
-  return $explode[$c-2];  
+  return $explode[$c-1];  
 }
 
 ?>

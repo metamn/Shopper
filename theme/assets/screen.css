@@ -276,6 +276,7 @@ html body .container header nav h3 {
 }
 html body .container header nav ul {
   margin: 0;
+  background: transparent;
 }
 html body .container header nav ul li {
   font-family: "Ostrich Rounded";
