@@ -19,7 +19,7 @@ function category_list($cat_name) {
 			));
 			
 			if (isset($latest_post[0])) {
-				$img = post_thumbnails($latest_post[0]->ID, 'medium');
+				$img = post_thumbnails($latest_post[0]->ID, 'full');
 				if (isset($img)) {
 					$r = new stdClass();
 					

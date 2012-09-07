@@ -134,6 +134,10 @@ html {
 									
 									list-style-type: none;
 									
+									background: $color-highlight;
+									opacity: .9;
+									max-height: 100%;
+									
 									li {
 										font-size: medium;
 										@include font-text;
@@ -156,6 +160,12 @@ html {
 								div {
 									@include col($major, 0, 0);
 									$padding: $pad 0;
+									
+									height: 100%;									
+        	
+									background-color: $color-highlight;
+									background-repeat: no-repeat;
+									background-position: 30% 40%;
 								}
 								
 							}
@@ -182,9 +192,7 @@ html {
         
         aside {
         	@include startpage-main-div;
-        	
-        	background: $color-highlight;
-        	opacity: .97;
+        	background-color: $color-highlight;
         }
       }         
     }    

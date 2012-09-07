@@ -28,12 +28,13 @@ jQuery(document).ready(function() {
  	
 	// Gifts
 	// -- click
-	jQuery("header #gifts ul li").click(function(event){
-		// - do not execute again the click handler for the main menu
-		event.preventDefault();
+	jQuery("header #gifts ul li").click(function(){
 		jQuery(this).addClass('active');
-		var img = jQuery(this).parent().next().children().children();
-		img.attr('src', jQuery(this).attr('data-img'));
+		
+		//var img = jQuery(this).parent().next().children().children();
+		//img.attr('src', jQuery(this).attr('data-img'));
+		//jQuery("header aside").css('background-image', "url(" + jQuery(this).attr('data-img') + ")");
+		jQuery("header #gifts div").css('background-image', "url(" + jQuery(this).attr('data-img') + ")");
 	});
   
   

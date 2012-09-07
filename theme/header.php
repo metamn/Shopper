@@ -121,7 +121,7 @@
 									?>
 								</ul>
 								<div>
-									<a title='aaa' href='aaa'><img src='aaa' title='aaa' /></a>
+									<!--<a title='' href=''><img src='' title='' /></a>-->
 								</div>
 							</dl>
     				</li>

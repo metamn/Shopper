@@ -178,10 +178,6 @@ body .container em {
 */
 /* hide an element 
 */
-.hidden {
-  display: none;
-}
-
 /* block element -- expand something full size inside a container
 */
 /* Colors
@@ -373,6 +369,9 @@ html body .container header nav ul li dl#gifts ul {
   float: left;
   padding: 1.25em 0;
   list-style-type: none;
+  background: #ffff33;
+  opacity: .9;
+  max-height: 100%;
 }
 html body .container header nav ul li dl#gifts ul li {
   font-size: medium;
@@ -395,6 +394,10 @@ html body .container header nav ul li dl#gifts div {
   width: 62.5%;
   margin: 0 0 0 0;
   float: left;
+  height: 100%;
+  background-color: #ffff33;
+  background-repeat: no-repeat;
+  background-position: 30% 40%;
 }
 html body .container header nav ul li.active {
   color: #1a1a1a;
@@ -415,8 +418,7 @@ html body .container header aside {
   position: absolute;
   top: 14.0625%;
   left: 37.5%;
-  background: #ffff33;
-  opacity: .97;
+  background-color: #ffff33;
 }
 
 html body .container footer {
