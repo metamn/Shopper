@@ -4,20 +4,30 @@
 // Category functions
 //
 
-
 // Get all subcategories with images
-function get_subcategories_with_image($cat_name) {	
-	$ret = '';
+// - $cat_name : parent category name
+function category_list($cat_name) {
+	$ret = array();
 	
 	$cat = get_categories("child_of=" . get_category_id($cat_name));
 	if (isset($cat)) {
 		foreach ($cat as $c) {
-			$name = $c->category_nicename;
-			$latest_post = get_posts(array("numberposts" => 1, "category" => $c->term_id, "order" => 'ASC'));
-			if (isset($latest_post)) {
-				$img = post_thumbnails($latest_post->ID, $cat_name, true);
+			$latest_post = get_posts(array(
+				"numberposts" => 1, 
+				"category" => $c->term_id, 
+				"order" => 'ASC'
+			));
+			
+			if (isset($latest_post[0])) {
+				$img = post_thumbnails($latest_post[0]->ID, 'medium');
 				if (isset($img)) {
-					$ret .= $img;
+					$r = new stdClass();
+					
+					$r->title = $c->cat_name;
+					$r->image = $img;
+					$r->link = get_category_link($c->term_id);
+					
+					$ret[] = $r;
 				}
 			}
 		}
@@ -25,6 +35,8 @@ function get_subcategories_with_image($cat_name) {
 	
 	return $ret;
 }
+
+
 
 // Returns category ID from name
 function get_category_id($cat_name){
@@ -47,21 +59,41 @@ function product($post_id){
   return $ret;
 }
 
+// Get post thumbnail
+// - returns an image URL
+function post_thumbnails($post_id, $size) {
+  $ret = "";
+  
+  $images = post_attachments($post_id);
+  
+  foreach ($images as $img) {
+   	$thumb = wp_get_attachment_image_src($img->ID, $size);
+    $ret = $thumb[0];
+    break; 
+  }
+  
+  return $ret;
+}
+
+
 // Display post thumbnails
-function post_thumbnails($post_id, $title, $only_first = false) {
+// - $col_id: an ID to aid displaying the product / item in columns
+function display_post_thumbnails($post_id, $title, $link, $col_id, $only_first = false) {
   $ret = "";
   
   $images = post_attachments($post_id);
   //print_r($images);
   
   foreach ($images as $img) {
-   	print_r($img);
+   	//print_r($img);
    	$thumb = wp_get_attachment_image_src($img->ID, 'full');
-    print_r($thumb);
+    //print_r($thumb);
     
-    $ret .= '<div class="item">';
-    $ret .= "<img src='$thumb[0]' rev='$thumb[0]' title='$title' alt='$title'/>";
+    $ret .= '<div class="item col-' . $col_id . '">';
+    $ret .= "<div class='title'><a href='" . $link . "' title='" . $title . "'>" . $title . "</a></div>";
+    $ret .= "<div class='image'><a href='" . $link . "' title='" . $title . "'><img src='$thumb[0]' rev='$thumb[0]' title='$title' alt='$title'/></a></div>";
     $ret .= '</div>';
+
     if ($only_first) { break; }
   }
   

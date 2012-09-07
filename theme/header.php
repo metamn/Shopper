@@ -76,7 +76,7 @@
     			<ul>
     				<li>
     					Servicii
-							<dl>
+							<dl id="services">
 								<dt><a href="<?php bloginfo('home')?>/servicii/giftshopper" title="Giftshopper | Te ajutam sa alegi cadoul perfect"><em>gift</em> Shopper</a></dt>
 								<dd>
 									<div id="c1">
@@ -109,15 +109,21 @@
     				</li>
     				<li>
     					<span>de</span> Cadouri
-    					<div class="items">
-								<?php 
-									// echo get_subcategories_with_image('Cadouri'); 
-									// print_r(post_attachments(1));	
-									echo "url:";
-									print_r(wp_get_attachment_image_src(2912, array(150, 150)));
-									echo get_the_post_thumbnail(1);
-								?>
-							</div>
+    					<?php 
+								$cadouri = category_list('Cadouri'); 
+							?>
+							<dl id="gifts">
+								<ul>
+									<?php 
+										foreach ($cadouri as $c) {
+											echo "<li data-img='" . $c->image . "'>" . $c->title . "</li>";
+										}
+									?>
+								</ul>
+								<div>
+									<a title='aaa' href='aaa'><img src='aaa' title='aaa' /></a>
+								</div>
+							</dl>
     				</li>
     				<li>
     					Premium

@@ -1,7 +1,9 @@
 jQuery(document).ready(function() {
 	
-	// Header >> Servicii de Cadouri Premium
+	// Header 
 	//
+	
+	// Menu
 	// -- hide all
 	jQuery("header nav ul li").removeClass('active');
  
@@ -17,13 +19,24 @@ jQuery(document).ready(function() {
 			jQuery(this).removeClass('hover');
 		}
 	);
-	
-	// - click
+	// -- click
 	jQuery("header nav ul li").click(function(){
 		jQuery("header nav ul li").removeClass('active');
 		jQuery(this).addClass('active');
 	});
  
+ 	
+	// Gifts
+	// -- click
+	jQuery("header #gifts ul li").click(function(event){
+		// - do not execute again the click handler for the main menu
+		event.preventDefault();
+		jQuery(this).addClass('active');
+		var img = jQuery(this).parent().next().children().children();
+		img.attr('src', jQuery(this).attr('data-img'));
+	});
+  
+  
   
   
   // Draw the logo

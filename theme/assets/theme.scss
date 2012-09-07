@@ -5,21 +5,21 @@
 /* Text
 */
 
-$background: white;
-$text: lighten(black, 10%);
-$text-light: lighten($text, 50%); 
+$color-background: white;
+$color-text: lighten(black, 10%);
+$color-text-light: lighten($color-text, 50%); 
 
 /* invert color with background */
-@mixin text-inverted {
-  color: $background;
-  background: $text;
+@mixin color-text-inverted {
+  color: $color-background;
+  background: $color-text;
 }
 
 
 /* Highlight
 */
-$highlight: lighten(yellow, 10%);
-$highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
+$color-highlight: lighten(yellow, 10%);
+$color-highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
 
 
 
@@ -27,12 +27,12 @@ $highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
 */
 
 @mixin link-neutral {
-	color: $text;
+	color: $color-text;
 	text-decoration: none;
 }
 
 @mixin link-neutral-inverted {
-	color: $background;
+	color: $color-background;
 	text-decoration: none;
 }
 

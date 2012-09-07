@@ -26,7 +26,7 @@ html {
               width: $pad2 / 2;
             }
             .set {
-              background: black;
+              background: $color-text;
             }
           }
         }        
@@ -46,12 +46,15 @@ html {
 							@include text-underlined;
 							cursor: pointer;
 							
-							color: $text-light;
+							color: $color-text-light;
 							
 							span {
 								@include font-text;
 								font-style: italic;
 							}
+							
+							/* Servicii
+							*/
 							
 							dl {
 								@include hidden;
@@ -104,7 +107,7 @@ html {
 									
 										font-size: 2em;
 										font-weight: bold;
-										@include text-inverted;		
+										@include color-text-inverted;		
 										
 										position: relative;
 										top: -$pad/2;
@@ -120,10 +123,45 @@ html {
 									}
 								}							
 							}
+							
+							/* Cadouri 
+							*/
+							dl#gifts {
+								ul {
+									@include col($minor, 0, 0);
+									padding: $pad 0;
+									
+									list-style-type: none;
+									
+									li {
+										font-size: medium;
+										@include font-text;
+										color: $color-text;
+										border-bottom: none;
+										
+										cursor: pointer;
+										
+										margin-bottom: 0;
+										padding: 0 0 $pad/4 $pad;
+									}
+									li.active {
+										cursor: default;
+										font-weight: bold;
+									}
+									li.hover {
+										font-weight: bold;
+									}
+								}
+								div {
+									@include col($major, 0, 0);
+									$padding: $pad 0;
+								}
+								
+							}
 						}
 						
 						li.active {
-							color: $text;
+							color: $color-text;
 							
 							dl {
 								display: block;
@@ -135,7 +173,7 @@ html {
 						}
 						
 						li.hover {
-							color: $text;
+							color: $color-text;
 						}
 						
 					}
@@ -144,7 +182,7 @@ html {
         aside {
         	@include startpage-main-div;
         	
-        	background: $highlight;
+        	background: $color-highlight;
         	opacity: .97;
         }
       }         
