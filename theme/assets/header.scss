@@ -193,6 +193,7 @@ html {
         aside {
         	@include startpage-main-div;
         	background-color: $color-highlight;
+        	opacity: .97;
         }
       }         
     }    

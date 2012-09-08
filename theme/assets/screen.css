@@ -419,6 +419,7 @@ html body .container header aside {
   top: 14.0625%;
   left: 37.5%;
   background-color: #ffff33;
+  opacity: .87;
 }
 
 html body .container footer {
