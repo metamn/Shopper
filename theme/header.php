@@ -69,7 +69,12 @@
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
             <div id="logo"></div>       
           </a>
-        </hgroup>   
+        </hgroup>  
+        
+        <?php 
+        	$klass = 'menu';
+        	include 'home-intro.php' 
+        ?>
       </header>
     
     	

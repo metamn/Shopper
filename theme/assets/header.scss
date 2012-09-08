@@ -8,6 +8,8 @@ html {
         @include block;
         
         hgroup {
+        	@include col($minor, 0, 0);
+        	
           h1 {
             @include hidden;
           }
@@ -29,6 +31,26 @@ html {
               background: $color-text;
             }
           }
+        }
+        
+        #menu {
+        	@include col($major, 0, 0);
+        	
+        	header {
+        		h3 {
+        			@include hidden;
+        		}
+        	}
+        	
+        	nav {
+        		ul {
+        			@include list-inline;
+        		}
+        	}
+        	
+        	article {
+        		@include hidden;
+        	}
         }
       }
     }    

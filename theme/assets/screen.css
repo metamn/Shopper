@@ -245,6 +245,11 @@ html body .container header {
   width: 100%;
   float: left;
 }
+html body .container header hgroup {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
 html body .container header hgroup h1 {
   display: none;
 }
@@ -266,6 +271,26 @@ html body .container header hgroup #logo .small {
 }
 html body .container header hgroup #logo .set {
   background: #1a1a1a;
+}
+html body .container header #menu {
+  width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
+html body .container header #menu header h3 {
+  display: none;
+}
+html body .container header #menu nav ul {
+  display: block;
+  margin: 0;
+}
+html body .container header #menu nav ul li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 0;
+}
+html body .container header #menu article {
+  display: none;
 }
 
 html body .container footer {
@@ -494,8 +519,7 @@ html .container #intro article#premium ul li span a, html .container #intro arti
 }
 
 html body .container #sidebar {
-  display: none;
-  width: 20%;
+  width: 37.5%;
   margin: 0 0 0 0;
   float: left;
 }
@@ -503,9 +527,8 @@ html body .container #sidebar h3 {
   display: none;
 }
 html body .container #content {
-  display: none;
-  width: 70%;
-  margin: 0 10% 0 0;
+  width: 62.5%;
+  margin: 0 0 0 0;
   float: left;
 }
 

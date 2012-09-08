@@ -6,7 +6,10 @@
 
 ?>
 
-<?php include 'home-intro.php' ?>
+<?php 
+	//$klass = 'intro';
+	//include 'home-intro.php' 
+?>
 
 
 <?php get_footer(); ?>

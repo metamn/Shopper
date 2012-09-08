@@ -1,13 +1,12 @@
-<?php get_header(); 
+<?
 
- 
-// A brief description of Smuff 
+// A brief intorduction to Smuff 
 // ----------------------------
 
 ?>
 
 
-<section id="intro"> 
+<section id="<?php echo $klass ?>"> 
   <header>
     <?php echo get_content_title(); ?>
   </header>
@@ -100,7 +99,5 @@
   
 </section>
 
-
-<?php get_footer(); ?>
 
 				

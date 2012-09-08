@@ -3,8 +3,7 @@ html {
     .container {
     	
       #sidebar {
-        @include hidden;
-        @include col(20%, 0, 0);
+        @include col($minor, 0, 0);
         
         h3 {
           @include hidden;
@@ -12,9 +11,7 @@ html {
       }
       
       #content {
-        @include hidden;
-        @include col(70%, 0, 10%);
-        
+        @include col($major, 0, 0);
       }      
     }
   }
