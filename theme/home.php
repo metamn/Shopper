@@ -83,6 +83,19 @@
 	</article>
 	
 	<article id="premium">
+		<ul>
+			<li><span>
+				<?php 
+					$years = (int)date('Y') - 2006; 
+					echo $years;
+				?>
+				ani</span> de existenta.
+			</li>
+			<li><span>10 zile</span> returnare produse.</li>
+			<li><span>365 zile</span> garantie tehnica.</li>
+			<li><span>450+ de cadouri</span> in magazin.</li>
+			<li><span>Peste 8,000 clienti</span> fericiti.</li>
+		</ul>
 	</article>
   
 </section>
