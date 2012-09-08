@@ -142,6 +142,9 @@ body .container table td {
 body .container em {
   font-style: italic;
 }
+body .container strong {
+  font-weight: bold;
+}
 
 /* Site specific mixins
 */
@@ -182,12 +185,12 @@ body .container em {
 */
 /* Colors
 */
-/* Text
-*/
+/* Text */
 /* invert color with background */
-/* Highlight
-*/
+/* Highlight */
 /* FF3, Kuler, Mono */
+/* Action */
+/* FF3, Kuler, Compound */
 /* Links
 */
 /* Fonts
@@ -350,22 +353,23 @@ html .container #intro article a, html .container #intro article a:visited, html
   color: #1a1a1a;
   text-decoration: none;
 }
-html .container #intro article dl {
+html .container #intro article.active {
+  display: block;
+}
+html .container #intro article#services dl {
   cursor: default;
 }
-html .container #intro article dl dt {
+html .container #intro article#services dl dt {
   text-transform: none;
   font-size: 2em;
+  font-weight: normal;
   padding: 1.25em;
 }
-html .container #intro article dl dd {
+html .container #intro article#services dl dd {
   width: 100%;
   float: left;
   padding-bottom: 0.625em;
   margin: 0;
-}
-html .container #intro article.active {
-  display: block;
 }
 html .container #intro article#services dl dd div#c1 {
   width: 62.5%;
@@ -397,7 +401,7 @@ html .container #intro article#services dl dd div#c2 {
   color: white;
   background: #1a1a1a;
   position: relative;
-  top: -1.5em;
+  top: -2em;
 }
 html .container #intro article#services dl dd div#c2 a, html .container #intro article#services dl dd div#c2 a:visited, html .container #intro article#services dl dd div#c2 a:active {
   color: white;
@@ -408,41 +412,62 @@ html .container #intro article#services dl dd div#c2 p {
   text-align: center;
   font-size: 4em;
 }
+html .container #intro article#gifts dl {
+  height: 100%;
+  margin: 0;
+}
 html .container #intro article#gifts dl ul {
   width: 37.5%;
   margin: 0 0 0 0;
   float: left;
-  padding: 1.25em 0;
+  padding: 2.5em 0;
   list-style-type: none;
   background: #ffff33;
   opacity: .9;
-  max-height: 100%;
 }
 html .container #intro article#gifts dl ul li {
   font-size: medium;
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   color: #1a1a1a;
-  border-bottom: none;
   cursor: pointer;
-  margin-bottom: 0;
-  padding: 0 0 0.3125em 1.25em;
+  padding: 0.3125em 1.25em;
+  border-bottom: none;
 }
 html .container #intro article#gifts dl ul li.active {
   cursor: default;
-  font-weight: bold;
+  font-style: italic;
+  font-size: 130%;
+  padding: 0.625em 1.25em;
 }
 html .container #intro article#gifts dl ul li.hover {
-  font-weight: bold;
+  font-style: italic;
 }
-html .container #intro article#gifts dl div {
+html .container #intro article#gifts dl div#image {
   width: 62.5%;
   margin: 0 0 0 0;
   float: left;
+  padding: 0;
   height: 100%;
   background-color: #ffff33;
   background-repeat: no-repeat;
-  background-position: 30% 40%;
+  background-position: 37.5% 62.5%;
+}
+html .container #intro article#gifts dl div#description {
+  position: relative;
+  width: 37.5%;
+  min-height: 14.0625%;
+  top: -62.5%;
+  left: 23.4375%;
+  padding: 1.25em;
+  display: inline-block;
+  background: #9173ff;
+  color: white;
+  font-family: "Lekton", sans-serif;
+  opacity: .9;
+}
+html .container #intro article#gifts dl div#description a, html .container #intro article#gifts dl div#description a:visited, html .container #intro article#gifts dl div#description a:hover {
+  text-decoration: underline;
 }
 
 html body .container #sidebar {

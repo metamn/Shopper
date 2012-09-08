@@ -42,6 +42,7 @@ jQuery(document).ready(function() {
  
  	// -- display the first
  	jQuery("#intro #gifts ul li").first().addClass('active');
+ 	intro_gifts_update(jQuery("#intro #gifts ul li").first());
  	
  	// -- hover
  	jQuery("#intro #gifts ul li").hover(
@@ -57,8 +58,19 @@ jQuery(document).ready(function() {
 		jQuery("#intro #gifts ul li").removeClass('active');
 		jQuery(this).addClass('active');
 		
-		jQuery("#intro #gifts div").css('background-image', "url(" + jQuery(this).attr('data-img') + ")");
+		intro_gifts_update(jQuery(this));
 	});
+	
+	// Updates image, description, links etc when browsing gift categories
+	function intro_gifts_update(item) {
+		jQuery("#intro #gifts #image").css('background-image', "url(" + item.attr('data-img') + ")");
+		jQuery("#intro #gifts #description #text").html(item.attr('data-description'));
+		jQuery("#intro #gifts #description #action strong").html(item.attr('data-count'));
+		jQuery("#intro #gifts #description #action em").html(item.html());
+		
+		jQuery("#intro #gifts #description #action a").attr('href', item.attr('data-link'));
+		jQuery("#intro #gifts #description #action a").attr('title', jQuery("#intro #gifts #description #action a").html());
+	}
 	
 	
   

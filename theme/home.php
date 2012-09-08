@@ -64,13 +64,21 @@
 			<ul>
 				<?php 
 					foreach ($cadouri as $c) {
-						echo "<li data-img='" . $c->image . "'>" . $c->title . "</li>";
+						echo "<li data-link='" . $c->link . "' data-count='" . $c->count . "' data-description='" . $c->description . "' data-img='" . $c->image . "'>" . $c->title . "</li>";
 					}
 				?>
 			</ul>
-			<div>
+			
+			<div id="image">
 				<!--<a title='' href=''><img src='' title='' /></a>-->
 			</div>
+			
+			
+			<div id="description">
+				<p id="text"></p>
+				<p id="action"><a title="" href="">Vezi cele <strong></strong> cadouri din <em></em> &#8674;</a></p>
+			</div>
+			
 		</dl>
 	</article>
 	

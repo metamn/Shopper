@@ -64,22 +64,6 @@ html {
 				a, a:visited, a:active {
 					@include link-neutral;
 				}
-
-				dl {
-					cursor: default;
-					
-					dt {
-						text-transform: none;
-						font-size: 2em;
-						padding: $pad;
-					}
-					
-					dd {
-						@include block;
-						padding-bottom: $pad/2;
-						margin: 0;
-					}							
-				}
 			}
 			article.active {
 				display: block;
@@ -87,7 +71,20 @@ html {
 			
 			article#services {
 				dl {
+					cursor: default;
+					
+					dt {
+						text-transform: none;
+						font-size: 2em;
+						font-weight: normal;
+						padding: $pad;
+					}
+					
 					dd {
+						@include block;
+						padding-bottom: $pad/2;
+						margin: 0;
+					
 						div#c1 {
 							@include col($major, 0, 0);
 								
@@ -116,7 +113,7 @@ html {
 							@include color-text-inverted;		
 							
 							position: relative;
-							top: -$pad*1.2;
+							top: -2em;
 							
 							a, a:visited, a:active {
 								@include link-neutral-inverted;
@@ -134,45 +131,62 @@ html {
 			
 			article#gifts {
 				dl {
+					height: 100%;
+					margin: 0;
+					
 					ul {
 						@include col($minor, 0, 0);
-						padding: $pad 0;
+						padding: $pad*2 0;
 						
 						list-style-type: none;
 						
 						background: $color-highlight;
 						opacity: .9;
-						max-height: 100%;
 						
 						li {
 							font-size: medium;
 							@include font-text;
 							color: $color-text;
-							border-bottom: none;
 							
 							cursor: pointer;
 							
-							margin-bottom: 0;
-							padding: 0 0 $pad/4 $pad;
+							padding: $pad/4 $pad;
+							border-bottom: none;
 						}
 						li.active {
 							cursor: default;
-							font-weight: bold;
+							font-style: italic;
+							font-size: 130%;
+							padding: $pad/2 $pad;
 						}
 						li.hover {
-							font-weight: bold;
+							font-style: italic;
 						}
 					}
 					
-					div {
+					div#image {
 						@include col($major, 0, 0);
-						$padding: $pad 0;
+						padding: 0;
 						
 						height: 100%;									
 		
 						background-color: $color-highlight;
 						background-repeat: no-repeat;
-						background-position: 30% 40%;
+						background-position: $minor $major;
+					}
+					
+					div#description {
+						position: relative;
+						width: $minor;
+						min-height: $minor/8*3;
+						top: -$major;
+						left: $minor - $minor/8*3;
+						
+						padding: $pad;
+						display: inline-block;
+						
+						@include text-action;
+						opacity: .9;
 					}
 				}
 			}

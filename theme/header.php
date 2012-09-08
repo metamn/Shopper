@@ -45,7 +45,7 @@
         <link href="<?php bloginfo('stylesheet_directory')?>/assets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
     <![endif]-->
     
-    <link href="http://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lekton:400italic,700,400|Old+Standard+TT:400,400italic,700' rel='stylesheet' type='text/css'>
             
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="<?php bloginfo('stylesheet_directory')?>/assets/jquery.init.js"></script>

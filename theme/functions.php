@@ -26,6 +26,8 @@ function category_list($cat_name) {
 					$r->title = $c->cat_name;
 					$r->image = $img;
 					$r->link = get_category_link($c->term_id);
+					$r->description = $c->description;
+					$r->count = $c->category_count;
 					
 					$ret[] = $r;
 				}

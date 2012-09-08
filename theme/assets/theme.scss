@@ -2,9 +2,7 @@
 */
 
 
-/* Text
-*/
-
+/* Text */
 $color-background: white;
 $color-text: lighten(black, 10%);
 $color-text-light: lighten($color-text, 50%); 
@@ -15,11 +13,23 @@ $color-text-light: lighten($color-text, 50%);
   background: $color-text;
 }
 
-
-/* Highlight
-*/
+/* Highlight */
 $color-highlight: lighten(yellow, 10%);
 $color-highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
+
+/* Action */
+$color-action: #9173FF; /* FF3, Kuler, Compound */
+
+@mixin text-action {
+	background: $color-action;
+	color: $color-background;
+	@include font-highlight;
+
+	a, a:visited, a:hover {
+		text-decoration: underline;
+	}
+}
+
 
 
 
@@ -58,6 +68,10 @@ $color-highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
 @mixin font-text() {
 	font-family: "Old Standard TT", serif;
 	letter-spacing: normal;
+}
+
+@mixin font-highlight {
+	font-family: "Lekton", sans-serif;
 }
 
 
