@@ -1,17 +1,22 @@
 jQuery(document).ready(function() {
 	
-	// Header 
+	// Home
+	// -----------------------------------------------
+	
+	// Intro
 	//
 	
-	// Menu
+	// Nav
 	// -- hide all
-	jQuery("header nav ul li").removeClass('active');
+	jQuery("#intro nav ul li").removeClass('active');
+	jQuery("#intro article").removeClass('active');
  
  	// -- display the first
- 	jQuery("header nav ul li").first().addClass('active');
+ 	jQuery("#intro nav ul li").first().addClass('active');
+ 	jQuery("#intro #services").addClass('active');
  	
  	// -- hover
- 	jQuery("header nav ul li").hover(
+ 	jQuery("#intro nav ul li").hover(
 		function () {
 			jQuery(this).addClass('hover');
 		}, 
@@ -20,25 +25,46 @@ jQuery(document).ready(function() {
 		}
 	);
 	// -- click
-	jQuery("header nav ul li").click(function(){
-		jQuery("header nav ul li").removeClass('active');
+	jQuery("#intro nav ul li").click(function(){
+		jQuery("#intro nav ul li").removeClass('active');
+		jQuery("#intro article").removeClass('active');
+		
 		jQuery(this).addClass('active');
+		
+		var contentID = jQuery(this).attr('data-content');
+		jQuery("#intro #" + contentID).addClass('active');
 	});
  
  	
 	// Gifts
+	// -- hide all
+	jQuery("#intro #gifts ul li").removeClass('active');
+ 
+ 	// -- display the first
+ 	jQuery("#intro #gifts ul li").first().addClass('active');
+ 	
+ 	// -- hover
+ 	jQuery("#intro #gifts ul li").hover(
+		function () {
+			jQuery(this).addClass('hover');
+		}, 
+		function () {
+			jQuery(this).removeClass('hover');
+		}
+	);
 	// -- click
-	jQuery("header #gifts ul li").click(function(){
+	jQuery("#intro #gifts ul li").click(function(event){
+		jQuery("#intro #gifts ul li").removeClass('active');
 		jQuery(this).addClass('active');
 		
-		//var img = jQuery(this).parent().next().children().children();
-		//img.attr('src', jQuery(this).attr('data-img'));
-		//jQuery("header aside").css('background-image', "url(" + jQuery(this).attr('data-img') + ")");
-		jQuery("header #gifts div").css('background-image', "url(" + jQuery(this).attr('data-img') + ")");
+		jQuery("#intro #gifts div").css('background-image', "url(" + jQuery(this).attr('data-img') + ")");
 	});
+	
+	
   
-  
-  
+	// Header
+	// -----------------------------------------------
+
   
   // Draw the logo
   function logo() {

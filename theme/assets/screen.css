@@ -264,163 +264,6 @@ html body .container header hgroup #logo .small {
 html body .container header hgroup #logo .set {
   background: #1a1a1a;
 }
-html body .container header nav {
-  margin: 14.0625% 0 0 14.0625%;
-}
-html body .container header nav h3 {
-  display: none;
-}
-html body .container header nav ul {
-  margin: 0;
-  background: transparent;
-}
-html body .container header nav ul li {
-  font-family: "Ostrich Rounded";
-  letter-spacing: .1em;
-  font-size: 2em;
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
-  cursor: pointer;
-  color: #999999;
-  /* Servicii
-  */
-  /* Cadouri 
-  */
-}
-html body .container header nav ul li span {
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  font-style: italic;
-}
-html body .container header nav ul li dl {
-  display: none;
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  cursor: default;
-  width: 62.5%;
-  height: 62.5%;
-  position: absolute;
-  top: 14.0625%;
-  left: 37.5%;
-  z-index: 1;
-  margin: 0;
-}
-html body .container header nav ul li dl a, html body .container header nav ul li dl a:visited, html body .container header nav ul li dl a:active {
-  color: #1a1a1a;
-  text-decoration: none;
-}
-html body .container header nav ul li dl dt {
-  text-transform: none;
-  font-weight: normal;
-  padding: 1.25em;
-}
-html body .container header nav ul li dl dd {
-  width: 100%;
-  float: left;
-  padding-bottom: 0.625em;
-  margin: 0;
-}
-html body .container header nav ul li dl dd div#c1 {
-  width: 62.5%;
-  margin: 0 0 0 0;
-  float: left;
-}
-html body .container header nav ul li dl dd div#c1 h5, html body .container header nav ul li dl dd div#c1 h6 {
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  font-size: 0.625em;
-  padding: 0.3125em 0;
-  margin-left: 1.25em;
-}
-html body .container header nav ul li dl dd div#c1 h5 {
-  text-transform: none;
-  font-variant: small-caps;
-  border-bottom: 1px dotted;
-}
-html body .container header nav ul li dl dd div#c1 h6 {
-  font-variant: normal;
-  font-style: italic;
-  font-size: medium;
-  margin-left: 1.5em;
-}
-html body .container header nav ul li dl dd div#c2 {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
-  font-size: 2em;
-  font-weight: bold;
-  color: white;
-  background: #1a1a1a;
-  position: relative;
-  top: -0.625em;
-}
-html body .container header nav ul li dl dd div#c2 a, html body .container header nav ul li dl dd div#c2 a:visited, html body .container header nav ul li dl dd div#c2 a:active {
-  color: white;
-  text-decoration: none;
-}
-html body .container header nav ul li dl dd div#c2 p {
-  padding: 0.3125em;
-  text-align: center;
-}
-html body .container header nav ul li dl#gifts ul {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
-  padding: 1.25em 0;
-  list-style-type: none;
-  background: #ffff33;
-  opacity: .9;
-  max-height: 100%;
-}
-html body .container header nav ul li dl#gifts ul li {
-  font-size: medium;
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  color: #1a1a1a;
-  border-bottom: none;
-  cursor: pointer;
-  margin-bottom: 0;
-  padding: 0 0 0.3125em 1.25em;
-}
-html body .container header nav ul li dl#gifts ul li.active {
-  cursor: default;
-  font-weight: bold;
-}
-html body .container header nav ul li dl#gifts ul li.hover {
-  font-weight: bold;
-}
-html body .container header nav ul li dl#gifts div {
-  width: 62.5%;
-  margin: 0 0 0 0;
-  float: left;
-  height: 100%;
-  background-color: #ffff33;
-  background-repeat: no-repeat;
-  background-position: 30% 40%;
-}
-html body .container header nav ul li.active {
-  color: #1a1a1a;
-}
-html body .container header nav ul li.active dl {
-  display: block;
-}
-html body .container header nav ul li.active:after {
-  content: "\2605";
-  padding-left: 0.625em;
-}
-html body .container header nav ul li.hover {
-  color: #1a1a1a;
-}
-html body .container header aside {
-  width: 62.5%;
-  height: 62.5%;
-  position: absolute;
-  top: 14.0625%;
-  left: 37.5%;
-  background-color: #ffff33;
-  opacity: .87;
-}
 
 html body .container footer {
   width: 100%;
@@ -438,6 +281,168 @@ html body .container footer ul li {
   display: inline-block;
   list-style-type: none;
   margin-left: 0;
+}
+
+html .container #intro {
+  width: 100%;
+  float: left;
+}
+html .container #intro header h3 {
+  display: none;
+}
+html .container #intro nav {
+  margin: 14.0625% 0 0 14.0625%;
+}
+html .container #intro nav ul {
+  margin: 0;
+  background: transparent;
+}
+html .container #intro nav ul li {
+  font-family: "Ostrich Rounded";
+  letter-spacing: .1em;
+  font-size: 2em;
+  margin-bottom: 0.625em;
+  padding-bottom: 0.625em;
+  border-bottom: 1px solid;
+  cursor: pointer;
+  color: #999999;
+}
+html .container #intro nav ul li span {
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-style: italic;
+}
+html .container #intro nav ul li.active {
+  color: #1a1a1a;
+}
+html .container #intro nav ul li.active dl {
+  display: block;
+}
+html .container #intro nav ul li.active:after {
+  content: "\2605";
+  padding-left: 0.625em;
+}
+html .container #intro nav ul li.hover {
+  color: #1a1a1a;
+}
+html .container #intro aside {
+  width: 62.5%;
+  height: 62.5%;
+  position: absolute;
+  top: 14.0625%;
+  left: 37.5%;
+  background-color: #ffff33;
+  opacity: .97;
+}
+html .container #intro article {
+  display: none;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  width: 62.5%;
+  height: 62.5%;
+  position: absolute;
+  top: 14.0625%;
+  left: 37.5%;
+  z-index: 1;
+  margin: 0;
+}
+html .container #intro article a, html .container #intro article a:visited, html .container #intro article a:active {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+html .container #intro article dl {
+  cursor: default;
+}
+html .container #intro article dl dt {
+  text-transform: none;
+  font-size: 2em;
+  padding: 1.25em;
+}
+html .container #intro article dl dd {
+  width: 100%;
+  float: left;
+  padding-bottom: 0.625em;
+  margin: 0;
+}
+html .container #intro article.active {
+  display: block;
+}
+html .container #intro article#services dl dd div#c1 {
+  width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
+html .container #intro article#services dl dd div#c1 h5, html .container #intro article#services dl dd div#c1 h6 {
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-size: medium;
+  padding: 0.3125em 0;
+  margin-left: 1.25em;
+}
+html .container #intro article#services dl dd div#c1 h5 {
+  text-transform: none;
+  font-variant: small-caps;
+  border-bottom: 1px dotted;
+}
+html .container #intro article#services dl dd div#c1 h6 {
+  font-variant: normal;
+  font-style: italic;
+  margin-left: 1.5em;
+}
+html .container #intro article#services dl dd div#c2 {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+  font-weight: bold;
+  color: white;
+  background: #1a1a1a;
+  position: relative;
+  top: -1.5em;
+}
+html .container #intro article#services dl dd div#c2 a, html .container #intro article#services dl dd div#c2 a:visited, html .container #intro article#services dl dd div#c2 a:active {
+  color: white;
+  text-decoration: none;
+}
+html .container #intro article#services dl dd div#c2 p {
+  padding: 0.3125em;
+  text-align: center;
+  font-size: 4em;
+}
+html .container #intro article#gifts dl ul {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+  padding: 1.25em 0;
+  list-style-type: none;
+  background: #ffff33;
+  opacity: .9;
+  max-height: 100%;
+}
+html .container #intro article#gifts dl ul li {
+  font-size: medium;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  color: #1a1a1a;
+  border-bottom: none;
+  cursor: pointer;
+  margin-bottom: 0;
+  padding: 0 0 0.3125em 1.25em;
+}
+html .container #intro article#gifts dl ul li.active {
+  cursor: default;
+  font-weight: bold;
+}
+html .container #intro article#gifts dl ul li.hover {
+  font-weight: bold;
+}
+html .container #intro article#gifts dl div {
+  width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+  height: 100%;
+  background-color: #ffff33;
+  background-repeat: no-repeat;
+  background-position: 30% 40%;
 }
 
 html body .container #sidebar {

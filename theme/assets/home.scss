@@ -1,0 +1,183 @@
+html {
+	.container {
+		#intro {
+			@include block;
+			
+			header {
+				h3 {
+					@include hidden;
+				}
+			}
+			
+			nav {       
+				margin: $minor/8*3 0 0 $minor/8*3;	
+				
+				ul {
+					margin: 0;
+					background: transparent;
+					
+					li {
+						@include font-heading("Ostrich Rounded");
+						@include text-underlined;
+						cursor: pointer;
+						
+						color: $color-text-light;
+						
+						span {
+							@include font-text;
+							font-style: italic;
+						}
+					}
+					
+					li.active {
+						color: $color-text;
+						
+						dl {
+							display: block;
+						}
+					}
+					li.active:after {
+						content: "\2605";
+						padding-left: $pad/2;
+					}
+					
+					li.hover {
+						color: $color-text;
+					}
+				}
+			}
+			
+			aside {
+				@include startpage-main-div;
+				background-color: $color-highlight;
+				opacity: .97;
+			}
+			
+			article {
+				@include hidden;
+				@include font-text;
+				
+				@include startpage-main-div;
+				z-index: 1;
+				margin: 0;
+				
+				a, a:visited, a:active {
+					@include link-neutral;
+				}
+
+				dl {
+					cursor: default;
+					
+					dt {
+						text-transform: none;
+						font-size: 2em;
+						padding: $pad;
+					}
+					
+					dd {
+						@include block;
+						padding-bottom: $pad/2;
+						margin: 0;
+					}							
+				}
+			}
+			article.active {
+				display: block;
+			}
+			
+			article#services {
+				dl {
+					dd {
+						div#c1 {
+							@include col($major, 0, 0);
+								
+							h5, h6 {
+								@include font-text;
+								font-size: medium;
+								padding: $pad/4 0;
+								margin-left: $pad;
+							}
+							h5 {
+								text-transform: none;
+								font-variant: small-caps;
+								border-bottom: 1px dotted;
+							}
+							h6 {
+								font-variant: normal;
+								font-style: italic;
+								margin-left: $pad*1.2;
+							}
+						}
+						
+						div#c2 {
+							@include col($minor, 0, 0);
+						
+							font-weight: bold;
+							@include color-text-inverted;		
+							
+							position: relative;
+							top: -$pad*1.2;
+							
+							a, a:visited, a:active {
+								@include link-neutral-inverted;
+							}
+							
+							p {
+								padding: $pad/4;
+								text-align: center;
+								font-size: 4em;
+							}
+						}
+					}
+				}
+			}
+			
+			article#gifts {
+				dl {
+					ul {
+						@include col($minor, 0, 0);
+						padding: $pad 0;
+						
+						list-style-type: none;
+						
+						background: $color-highlight;
+						opacity: .9;
+						max-height: 100%;
+						
+						li {
+							font-size: medium;
+							@include font-text;
+							color: $color-text;
+							border-bottom: none;
+							
+							cursor: pointer;
+							
+							margin-bottom: 0;
+							padding: 0 0 $pad/4 $pad;
+						}
+						li.active {
+							cursor: default;
+							font-weight: bold;
+						}
+						li.hover {
+							font-weight: bold;
+						}
+					}
+					
+					div {
+						@include col($major, 0, 0);
+						$padding: $pad 0;
+						
+						height: 100%;									
+		
+						background-color: $color-highlight;
+						background-repeat: no-repeat;
+						background-position: 30% 40%;
+					}
+				}
+			}
+		}
+	}
+}
+
+				      
