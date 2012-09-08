@@ -461,13 +461,14 @@ html .container #intro article#gifts dl div#description {
   left: 23.4375%;
   padding: 1.25em;
   display: inline-block;
-  background: #9173ff;
+  background: #1a1a1a;
   color: white;
   font-family: "Lekton", sans-serif;
   opacity: .9;
 }
 html .container #intro article#gifts dl div#description a, html .container #intro article#gifts dl div#description a:visited, html .container #intro article#gifts dl div#description a:hover {
   text-decoration: underline;
+  color: #ffff33;
 }
 
 html body .container #sidebar {

@@ -20,7 +20,7 @@ $color-highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
 /* Action */
 $color-action: #9173FF; /* FF3, Kuler, Compound */
 
-@mixin text-action {
+@mixin text-action-1 {
 	background: $color-action;
 	color: $color-background;
 	@include font-highlight;
@@ -30,6 +30,16 @@ $color-action: #9173FF; /* FF3, Kuler, Compound */
 	}
 }
 
+@mixin text-action {
+	background: $color-text;
+	color: $color-background;
+	@include font-highlight;
+
+	a, a:visited, a:hover {
+		text-decoration: underline;
+		color: $color-highlight;
+	}
+}
 
 
 
