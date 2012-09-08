@@ -77,6 +77,16 @@ jQuery(document).ready(function() {
 	// Header
 	// -----------------------------------------------
 
+
+	// Menu
+	//
+	
+	jQuery("header #menu nav ul li").click(function() {
+		jQuery("header #menu article").slideToggle('slow');
+		jQuery("header #menu nav ul li").toggleClass('active');
+	});
+	
+	
   
   // Draw the logo
   function logo() {

@@ -280,16 +280,59 @@ html body .container header #menu {
 html body .container header #menu header h3 {
   display: none;
 }
+html body .container header #menu nav {
+  width: 100%;
+  float: left;
+}
 html body .container header #menu nav ul {
   display: block;
   margin: 0;
+  font-family: "Ostrich Rounded";
+  letter-spacing: .1em;
+  font-size: 2em;
 }
 html body .container header #menu nav ul li {
   display: inline-block;
   list-style-type: none;
   margin-left: 0;
 }
+html body .container header #menu nav ul li {
+  cursor: pointer;
+}
+html body .container header #menu nav ul li span {
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-style: italic;
+  font-weight: normal;
+}
+html body .container header #menu nav ul li:after {
+  content: "\21E3";
+  font-size: smaller;
+  color: #999999;
+}
+html body .container header #menu nav ul li.active {
+  width: 33%;
+  margin: 0 0 0 0;
+  float: left;
+}
 html body .container header #menu article {
+  display: none;
+  width: 33%;
+  margin: 0 0 0 0;
+  float: left;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+}
+html body .container header #menu article#services dd div#c1 h5 {
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-size: medium;
+  text-transform: none;
+}
+html body .container header #menu article#services dd div#c1 h6 {
+  display: none;
+}
+html body .container header #menu article#services dd div#c2 {
   display: none;
 }
 

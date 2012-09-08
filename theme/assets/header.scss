@@ -43,13 +43,56 @@ html {
         	}
         	
         	nav {
+        		@include block;
+        		
         		ul {
         			@include list-inline;
+        			@include font-heading("Ostrich Rounded");
+        			
+        			li {
+        				cursor: pointer;
+        				
+        				span {
+        					@include font-text;
+        					font-style: italic;
+        					font-weight: normal;
+        				}
+        			}
+        			li:after {
+        				content: "\21E3";
+        				font-size: smaller;
+        				
+        				color: $color-text-light;
+        			}
+        			li.active {
+        				@include col (33%, 0, 0);
+        			}
         		}
         	}
         	
         	article {
         		@include hidden;
+        		@include col (33%, 0, 0);
+        		
+        		@include font-text;
+        	}
+        	
+        	article#services {
+        		dd {
+        			div#c1 {
+        				h5 {
+									@include font-text;
+									font-size: medium;
+									text-transform: none;
+								}
+								h6 {
+									@include hidden;
+								}
+        			}
+        			div#c2 {
+        				@include hidden;
+        			}
+        		}
         	}
         }
       }
