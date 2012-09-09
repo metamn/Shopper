@@ -420,12 +420,6 @@ html body .container header #menu article#gifts dl ul li.active {
 html body .container header #menu article#gifts dl ul li.hover {
   font-style: italic;
 }
-html body .container header #menu article#gifts dl ul li.active {
-  cursor: pointer;
-  font-style: normal;
-  font-size: medium;
-  padding: 0.3125em 1.25em;
-}
 html body .container header #menu article#gifts dl #image {
   display: none;
 }

@@ -90,11 +90,9 @@ jQuery(document).ready(function() {
 	
 	// Menu > Categories
 	//
-	// -- hide all
-	jQuery("header #menu #gifts ul li").removeClass('active');
- 
+	
  	// -- display the first
- 	jQuery("header #menu #gifts ul li").first().addClass('active');
+ 	jQuery("header #menu #gifts ul li").first().addClass('hover');
  	menu_gifts_update(jQuery("#intro #gifts ul li").first());
  	
  	// -- hover
@@ -107,14 +105,6 @@ jQuery(document).ready(function() {
 			jQuery(this).removeClass('hover');
 		}
 	);
-	// -- click
-	jQuery("header #menu  #gifts ul li").click(function(event){
-		jQuery("header #menu  #gifts ul li").removeClass('active');
-		jQuery(this).addClass('active');
-		
-		menu_gifts_update(jQuery(this));
-	});
-	
 	
 	// Updates image, description, links etc when browsing gift categories
 	function menu_gifts_update(item) {
