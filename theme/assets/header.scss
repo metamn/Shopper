@@ -205,6 +205,29 @@ html {
         		}
         	}
         }
+        
+        #cart-and-info {
+        	position: absolute;
+        	top: $pad;
+        	right: $pad;
+        	width: 11%; /* otherwise the italic on hover is moving the entire ul */
+        	
+        	ul {
+        		font-size: smaller;
+        		margin: $pad/2;
+        		
+        		li {
+        			cursor: pointer;
+        			
+        			ul {
+        				display: none;
+        			}
+        		}
+        		li:hover {
+        			font-style: italic;
+        		}
+        	}
+        }
       }
       
       footer {

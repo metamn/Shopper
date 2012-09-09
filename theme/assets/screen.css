@@ -191,6 +191,7 @@ body .container strong {
 /* FF3, Kuler, Mono */
 /* Action */
 /* FF3, Kuler, Compound */
+/* Cart */
 /* Links
 */
 /* Fonts
@@ -545,6 +546,26 @@ html body .container header #menu {
 }
 html body .container header #menu header h3 {
   display: none;
+}
+html body .container header #cart-and-info {
+  position: absolute;
+  top: 1.25em;
+  right: 1.25em;
+  width: 11%;
+  /* otherwise the italic on hover is moving the entire ul */
+}
+html body .container header #cart-and-info ul {
+  font-size: smaller;
+  margin: 0.625em;
+}
+html body .container header #cart-and-info ul li {
+  cursor: pointer;
+}
+html body .container header #cart-and-info ul li ul {
+  display: none;
+}
+html body .container header #cart-and-info ul li:hover {
+  font-style: italic;
 }
 html body .container footer {
   width: 100%;

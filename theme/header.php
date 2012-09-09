@@ -75,6 +75,19 @@
         	$klass = 'menu';
         	include 'home-intro.php' 
         ?>
+        
+        <section id="cart-and-info">
+        	<ul>
+        		<li>Cos cumparaturi
+        			<ul>
+        				<li>10 cadouri</li>
+        				<li>85320.00 RON</li>
+        			</ul>
+        		</li>
+        		<li>Contul meu</li>
+        		<li>Informatii</li>
+        	</ul>
+        </section>
       </header>
     
     	

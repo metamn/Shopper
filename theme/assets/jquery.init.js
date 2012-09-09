@@ -77,7 +77,11 @@ jQuery(document).ready(function() {
   
 	// Header
 	// -----------------------------------------------
-
+	
+	// Cart & Info
+	jQuery("header #cart-and-info ul li").click(function() {
+		jQuery(this).children('ul').slideToggle('slow');
+	});
 
 	// Menu
 	//
