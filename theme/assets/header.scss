@@ -13,6 +13,17 @@ html {
         	}
         }
         
+        #archive-title {
+        	cursor: pointer;
+        	
+        	h3 {
+        		padding: 0;
+        	}
+        	h3:after {
+        		@include list-item-arrow;
+        	}
+        }
+        
         #menu {
         	@include col($major, 0, 0);
         	
@@ -20,36 +31,7 @@ html {
         		@include hidden;
         	}
         	
-        	article#gifts {
-        		dl {
-        			margin: 0;
-        			ul {
-        				@include font-heading("Ostrich Rounded");
-        				margin: 0;
-        				
-        				@include list-item-main-menu;
-        				
-        				li {
-        					@include hidden;
-        				}
-        				li.selected {
-        					display: inline-block;
-        				}
-        			}
-        			
-        			#image {
-        				@include hidden;
-        			}
-        			
-        			#description {
-        				#action {
-        					@include hidden;
-        				}
-        			}
-        		}
-        	}
-        	
-        	article#services, article#premium {
+        	article {
         		@include hidden
         	}
 
@@ -90,6 +72,47 @@ html {
         			li.active {
         				@include col (33%, 0, 0);
         			}
+        		}
+        	}
+        	
+        }
+      }
+    }    
+  }
+}
+
+
+
+
+/* General
+*/
+
+html {
+	body {
+		.container {
+			width: 98%;
+      margin: 0 auto;
+      
+      header {
+        @include block;
+        
+        hgroup {
+        	@include col($minor, 0, 0);
+        	
+        	h1 {
+            @include hidden;
+          }
+          h2 {
+            @include hidden;
+          }
+        }
+        
+        #menu {
+        	@include col($major, 0, 0);
+        	
+        	header {
+        		h3 {
+        			@include hidden;
         		}
         	}
         	
@@ -163,45 +186,6 @@ html {
         					display: inline-block;
         				}
         			}
-        		}
-        	}
-        }
-      }
-    }    
-  }
-}
-
-
-
-
-/* General
-*/
-
-html {
-	body {
-		.container {
-			width: 98%;
-      margin: 0 auto;
-      
-      header {
-        @include block;
-        
-        hgroup {
-        	@include col($minor, 0, 0);
-        	
-        	h1 {
-            @include hidden;
-          }
-          h2 {
-            @include hidden;
-          }
-        }
-        
-        #menu {
-        	@include col($major, 0, 0);
-        	header {
-        		h3 {
-        			@include hidden;
         		}
         	}
         }

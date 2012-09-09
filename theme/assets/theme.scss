@@ -112,11 +112,15 @@ body {
 		}
 	}
 	li:after {
-		content: "\21E3";
-		font-size: smaller;
-		
-		color: $color-text-light;
+		@include list-item-arrow;
 	}
+}
+
+/* List arrow, trigger */
+@mixin list-item-arrow {
+	content: "\21E3";
+	font-size: smaller;
+	color: $color-text-light;
 }
 
 /* A simple list firts used at Intro > Premium */

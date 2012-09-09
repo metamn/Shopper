@@ -1,4 +1,17 @@
 jQuery(document).ready(function() {
+
+	// Archive
+	// -----------------------------------------------
+	
+	// Display the title
+	// - take it from the #content
+	jQuery(".archive header #menu #archive-title").html(jQuery("section#content header").html());
+	
+	// Display the Main Menu
+	jQuery(".archive header #menu #archive-title").click(function() {
+		jQuery(".archive header #menu article").slideToggle('slow');
+	});
+	
 	
 	// Home
 	// -----------------------------------------------
@@ -79,9 +92,11 @@ jQuery(document).ready(function() {
 	// -----------------------------------------------
 	
 	// Cart & Info
+	//
 	jQuery("header #cart-and-info ul li").click(function() {
 		jQuery(this).children('ul').slideToggle('slow');
 	});
+	
 
 	// Menu
 	//
@@ -122,7 +137,9 @@ jQuery(document).ready(function() {
 	
 	
   
-  // Draw the logo
+  // Logo
+  //
+  
   function logo() {
     var matrix = new Array(7);
     for (y = 0; y < 7; y++) {

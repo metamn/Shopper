@@ -22,6 +22,9 @@
 	<!-- the background for articles -->
 	<aside></aside>
 	
+	<!-- On the archive page just the title is displayed, no menu at all. And this is the placeholder -->
+	<div id="archive-title"></div>
+	
 	<article id="services">
 		<dl>
 			<dt><a href="<?php bloginfo('home')?>/servicii/giftshopper" title="Giftshopper | Te ajutam sa alegi cadoul perfect"><em>gift</em> Shopper</a></dt>
