@@ -78,19 +78,74 @@ html {
         	}
         	
         	article#services {
-        		dd {
-        			div#c1 {
-        				h5 {
-									@include font-text;
+        		dl {
+        			@include dlist;
+        			
+        			dt {
+        				padding: 0;
+        			}
+        			
+        			dd {
+        				margin-bottom: $pad + $pad/2;
+        				
+        				#c1 {
+        					h6 {
+        						@include hidden;
+        					}
+        				}
+        				#c2 {
+        					@include hidden;
+        				}
+        			}
+        		}
+        	}
+        	
+        	article#gifts {
+        		dl {
+        			ul {
+        				@include list-categories;
+        				
+        				margin: 0;
+        				padding: 0;
+        				
+        				li.active {
+									cursor: pointer;
+									font-style: normal;
 									font-size: medium;
-									text-transform: none;
-								}
-								h6 {
-									@include hidden;
+									padding: $pad/4 $pad;
 								}
         			}
-        			div#c2 {
+        			
+        			#image {
         				@include hidden;
+        			}
+        			
+        			#description {
+        				margin: $pad 0;
+								padding: $pad;
+								
+								@include text-action;
+								opacity: .9;
+        				
+        				#action {
+        					@include hidden;
+        				}
+        			}
+        		}
+        	}
+        	
+        	article#premium {
+        		ul {
+        			@include list-premium;
+        			
+        			li {
+        				font-size: medium;
+        				
+        				span {
+        					font-weight: normal;
+        					margin: $pad/8 0;
+        					display: inline-block;
+        				}
         			}
         		}
         	}

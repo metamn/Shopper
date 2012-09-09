@@ -71,61 +71,7 @@ html {
 			
 			article#services {
 				dl {
-					cursor: default;
-					
-					dt {
-						text-transform: none;
-						font-size: 2em;
-						font-weight: normal;
-						padding: $pad;
-					}
-					
-					dd {
-						@include block;
-						padding-bottom: $pad/2;
-						margin: 0;
-					
-						div#c1 {
-							@include col($major, 0, 0);
-								
-							h5, h6 {
-								@include font-text;
-								font-size: medium;
-								padding: $pad/4 0;
-								margin-left: $pad;
-							}
-							h5 {
-								text-transform: none;
-								font-variant: small-caps;
-								border-bottom: 1px dotted;
-							}
-							h6 {
-								font-variant: normal;
-								font-style: italic;
-								margin-left: $pad*1.2;
-							}
-						}
-						
-						div#c2 {
-							@include col($minor, 0, 0);
-						
-							font-weight: bold;
-							@include color-text-inverted;		
-							
-							position: relative;
-							top: -2em;
-							
-							a, a:visited, a:active {
-								@include link-neutral-inverted;
-							}
-							
-							p {
-								padding: $pad/4;
-								text-align: center;
-								font-size: 4em;
-							}
-						}
-					}
+					@include dlist;
 				}
 			}
 			
@@ -136,32 +82,10 @@ html {
 					
 					ul {
 						@include col($minor, 0, 0);
-						padding: $pad*2 0;
-						
-						list-style-type: none;
+						@include list-categories;
 						
 						background: $color-highlight;
 						opacity: .9;
-						
-						li {
-							font-size: medium;
-							@include font-text;
-							color: $color-text;
-							
-							cursor: pointer;
-							
-							padding: $pad/4 $pad;
-							border-bottom: none;
-						}
-						li.active {
-							cursor: default;
-							font-style: italic;
-							font-size: 130%;
-							padding: $pad/2 $pad;
-						}
-						li.hover {
-							font-style: italic;
-						}
 					}
 					
 					div#image {
@@ -193,23 +117,7 @@ html {
 			
 			article#premium {
 				ul {
-					list-style-type: none;
-					padding: 0;
-					
-					li {
-						font-size: 2em;
-						font-weight: normal;
-						font-style: italic;
-						
-						padding: $pad/2;
-						border-bottom: 1px dotted;
-						
-						span {
-							font-weight: bold;
-							@include text-action;
-							padding: $pad/4;
-						}
-					}
+					@include list-premium;
 				}
 			}
 		}

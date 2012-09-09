@@ -63,7 +63,9 @@
 			<ul>
 				<?php 
 					foreach ($cadouri as $c) {
+						echo "<a href='" . $c->link . "' title='" . $c->title ." '>";
 						echo "<li data-link='" . $c->link . "' data-count='" . $c->count . "' data-description='" . $c->description . "' data-img='" . $c->image . "'>" . $c->title . "</li>";
+						echo "</a>";
 					}
 				?>
 			</ul>

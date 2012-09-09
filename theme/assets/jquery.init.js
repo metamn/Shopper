@@ -59,6 +59,7 @@ jQuery(document).ready(function() {
 		jQuery(this).addClass('active');
 		
 		intro_gifts_update(jQuery(this));
+		event.preventDefault();
 	});
 	
 	// Updates image, description, links etc when browsing gift categories
@@ -85,6 +86,45 @@ jQuery(document).ready(function() {
 		jQuery("header #menu article").slideToggle('slow');
 		jQuery("header #menu nav ul li").toggleClass('active');
 	});
+	
+	
+	// Menu > Categories
+	//
+	// -- hide all
+	jQuery("header #menu #gifts ul li").removeClass('active');
+ 
+ 	// -- display the first
+ 	jQuery("header #menu #gifts ul li").first().addClass('active');
+ 	menu_gifts_update(jQuery("#intro #gifts ul li").first());
+ 	
+ 	// -- hover
+ 	jQuery("header #menu  #gifts ul li").hover(
+		function () {
+			jQuery(this).addClass('hover');
+			menu_gifts_update(jQuery(this));
+		}, 
+		function () {
+			jQuery(this).removeClass('hover');
+		}
+	);
+	// -- click
+	jQuery("header #menu  #gifts ul li").click(function(event){
+		jQuery("header #menu  #gifts ul li").removeClass('active');
+		jQuery(this).addClass('active');
+		
+		menu_gifts_update(jQuery(this));
+	});
+	
+	
+	// Updates image, description, links etc when browsing gift categories
+	function menu_gifts_update(item) {
+		jQuery("header #menu  #gifts #description #text").html(item.attr('data-description'));
+		jQuery("header #menu  #gifts #description #action strong").html(item.attr('data-count'));
+		jQuery("header #menu  #gifts #description #action em").html(item.html());
+		
+		jQuery("header #menu  #gifts #description #action a").attr('href', item.attr('data-link'));
+		jQuery("header #menu  #gifts #description #action a").attr('title', jQuery("#intro #gifts #description #action a").html());
+	}
 	
 	
   
