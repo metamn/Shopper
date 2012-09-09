@@ -12,6 +12,10 @@ html {
       
       #content {
         @include col($major, 0, 0);
+        
+        h3 {
+          @include hidden;
+        }
       }      
     }
   }

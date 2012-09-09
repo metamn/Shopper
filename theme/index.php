@@ -3,7 +3,7 @@
 
 <section id="content"> 
   <header>
-    <?php echo get_content_title(); ?>
+    <h3><?php echo get_content_title(); ?></h3>
   </header>
   <?php 
   	if ( have_posts() ) { 

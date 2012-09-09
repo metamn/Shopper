@@ -8,7 +8,7 @@
 
 <section id="<?php echo $klass ?>"> 
   <header>
-    <?php echo get_content_title(); ?>
+    <h3><?php echo get_content_title(); ?></h3>
   </header>
   
   <nav>
@@ -63,9 +63,15 @@
 			<ul>
 				<?php 
 					foreach ($cadouri as $c) {
-						echo "<a href='" . $c->link . "' title='" . $c->title ." '>";
-						echo "<li data-link='" . $c->link . "' data-count='" . $c->count . "' data-description='" . $c->description . "' data-img='" . $c->image . "'>" . $c->title . "</li>";
-						echo "</a>";
+						// When is an archive mark the item as 'selected'
+						// - it is used to display the Archive title
+        		$selected = '';
+        		if ($c->title == get_content_title()) {
+        			$selected = ' selected';
+        		}
+						echo "<li class='" . $selected . "' data-link='" . $c->link . "' data-count='" . $c->count . "' data-description='" . $c->description . "' data-img='" . $c->image . "'>";
+						echo "<a href='" . $c->link . "' title='" . $c->title ." '>". $c->title . "</a>";
+						echo "</li>";
 					}
 				?>
 			</ul>

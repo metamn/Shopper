@@ -1,47 +1,83 @@
+/* Archive
+*/
+
 html {
-  body {
-    .container {
-      width: 98%;
-      margin: 0 auto;
-      
+	body.archive {
+		.container {
       header {
-        @include block;
-        
         hgroup {
         	@include col($minor, 0, 0);
-        	
-          h1 {
-            @include hidden;
-          }
-          h2 {
-            @include hidden;
-          }
-          #logo {
-            height: $pad2 * 7;
-            width: $pad2 * 24 - $pad4; /* an extra space must be add */
-            .cell {
-              width: $pad2;
-              height: $pad2;
-              float: left;
-            }
-            .small {
-              width: $pad2 / 2;
-            }
-            .set {
-              background: $color-text;
-            }
-          }
+        
+        	#logo {
+        		@include logo($pad/4);
+        	}
         }
         
         #menu {
         	@include col($major, 0, 0);
         	
-        	header {
-        		h3 {
-        			@include hidden;
+        	header, nav, aside {
+        		@include hidden;
+        	}
+        	
+        	article#gifts {
+        		dl {
+        			margin: 0;
+        			ul {
+        				@include font-heading("Ostrich Rounded");
+        				margin: 0;
+        				
+        				@include list-item-main-menu;
+        				
+        				li {
+        					@include hidden;
+        				}
+        				li.selected {
+        					display: inline-block;
+        				}
+        			}
+        			
+        			#image {
+        				@include hidden;
+        			}
+        			
+        			#description {
+        				#action {
+        					@include hidden;
+        				}
+        			}
         		}
         	}
         	
+        	article#services, article#premium {
+        		@include hidden
+        	}
+
+        }
+      }
+		}
+	}
+}
+
+
+
+
+
+
+/* Home
+*/
+
+html {
+  body.home {
+    .container {
+      header {
+        hgroup {
+          #logo {
+            @include logo($pad/2);
+          }
+        }
+        
+        #menu {
         	nav {
         		@include block;
         		
@@ -49,21 +85,8 @@ html {
         			@include list-inline;
         			@include font-heading("Ostrich Rounded");
         			
-        			li {
-        				cursor: pointer;
-        				
-        				span {
-        					@include font-text;
-        					font-style: italic;
-        					font-weight: normal;
-        				}
-        			}
-        			li:after {
-        				content: "\21E3";
-        				font-size: smaller;
-        				
-        				color: $color-text-light;
-        			}
+        			@include list-item-main-menu;
+        			
         			li.active {
         				@include col (33%, 0, 0);
         			}
@@ -148,10 +171,42 @@ html {
   }
 }
 
-html {
-  body {
-    .container {
 
+
+
+/* General
+*/
+
+html {
+	body {
+		.container {
+			width: 98%;
+      margin: 0 auto;
+      
+      header {
+        @include block;
+        
+        hgroup {
+        	@include col($minor, 0, 0);
+        	
+        	h1 {
+            @include hidden;
+          }
+          h2 {
+            @include hidden;
+          }
+        }
+        
+        #menu {
+        	@include col($major, 0, 0);
+        	header {
+        		h3 {
+        			@include hidden;
+        		}
+        	}
+        }
+      }
+      
       footer {
         @include block;    
         @include hidden;
@@ -163,6 +218,6 @@ html {
           @include list-inline;          
         }
       }
-    }
-  }
-}  
+		}
+	}
+}

@@ -97,6 +97,25 @@ body {
 /* Lists
 */
 
+/* Home > Menu list item */
+@mixin list-item-main-menu {
+	li {
+		cursor: pointer;
+		
+		span {
+			@include font-text;
+			font-style: italic;
+			font-weight: normal;
+		}
+	}
+	li:after {
+		content: "\21E3";
+		font-size: smaller;
+		
+		color: $color-text-light;
+	}
+}
+
 /* A simple list firts used at Intro > Premium */
 @mixin list-premium {
 	list-style-type: none;
@@ -201,6 +220,27 @@ body {
 				font-size: 4em;
 			}
 		}
+	}
+}
+
+
+
+/* Logo
+*/
+
+@mixin logo($size) {
+	height: $size * 7;
+	width: $size * 24 - $size/2; /* an extra space must be add */
+	.cell {
+		width: $size;
+		height: $size;
+		float: left;
+	}
+	.small {
+		width: $size / 2;
+	}
+	.set {
+		background: $color-text;
 	}
 }
 
