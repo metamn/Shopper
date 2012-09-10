@@ -9,75 +9,7 @@ html {
         	header {
         		@include hidden;
         	}
-          .entry {
-          	@include block;
-          	
-          	.featured-image {
-        			text-align: right;
-          	}
-          	
-          	.thumbs {
-          		@include col($major*0.9, 0, 0);
-          		margin: 0 0 0 $minor;
-          		
-          		position: absolute;
-          		bottom: 0;
-          		
-          		background: $color-background;
-          		opacity: .8;
-          		
-          		.thumb {
-          			@include col(7%, 0, 0);
-          			
-          			margin: $pad/2 $pad/2 $pad/2 0;
-          			padding: $pad/4;
-          			border: 1px solid $color-text-light;
-          		}
-          		.thumb.first {
-          			@include text-action-1;
-          			text-align: center;
-          			font-size: 2em;
-          			margin-top: $pad/4;
-          		}
-          	}
-          	
-          	.shopping {
-          		@include col($major, $minor*1.02, 0);
-          		@include text-cart;
-          		
-          		
-          		div {
-          			padding: $pad;
-          		}
-          	}
-          	
-          	.excerpt, .body {
-          		@include col($minor, 0, 0);
-          	}
-          	
-          	.excerpt {
-          		font-size: 2em;
-          		@include font-text;
-          		font-style: italic;
-          		color: $color-text-light; 
-          		padding: $pad/2;
-          		padding-left: 0;
-          	}
-          	
-          	.body {
-          		h3 {
-          			display: block;
-          		}
-          		.pane {
-          			@include hidden;
-          		}
-          		.pane.active {
-          			display: block;
-          		}
-          	}
-          
-          }
-          footer {
+        	footer {
           	@include col($minor, 0, 0);
           	
           	display: block;
@@ -94,6 +26,83 @@ html {
           		opacity: .9;
           	}
           }
+          .entry {
+          	@include block;
+          	
+          	.featured-image {
+        			text-align: right;
+          	}
+          	
+          	.shopping {
+          		@include col($minor, $minor, 0);
+          		@include text-cart;
+          		
+          		position: absolute;
+          		bottom: $pad;
+          		
+          		div {
+          			padding: $pad;
+          		}
+          	}
+          	
+          	.more {
+          		@include col($minor/2, $minor*2, 0);
+          		
+          		position: absolute;
+          		bottom: $pad;
+          		
+          		opacity: .9;
+          		background: $color-background;
+          		padding: $pad;
+          	}
+          	
+          	.thumbs {
+          		@include hidden;
+          		@include col($minor/2, $minor*2, 0);
+          		
+          		position: absolute;
+          		bottom: $pad;
+          		
+          		opacity: .9;
+          		background: $color-background;
+          		
+          		.thumb {
+          			@include col(7%, 0, 0);
+          			height: 3em;
+          			
+          			margin: $pad/2 $pad/2 0 0;
+          			padding: $pad/4;
+          			border: 1px solid $color-text-light;
+          		}
+          	}
+          	
+          	.excerpt {
+          		@include col($minor, 0, 0);
+          		
+          		font-size: 2em;
+          		@include font-text;
+          		font-style: italic;
+          		color: $color-text-light; 
+          		padding: $pad/2;
+          		padding-left: 0;
+          	}
+          	
+          	.body {
+          		@include col($major, $minor*1.02, 0);
+          		
+          		h3 {
+          			display: block;
+          		}
+          		.pane {
+          			@include hidden;
+          		}
+          		.pane.active {
+          			display: block;
+          		}
+          	}
+          
+          }
+          
         }
       }  
     }

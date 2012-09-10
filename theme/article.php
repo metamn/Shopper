@@ -43,14 +43,16 @@
 	<div class="entry">	    
     <div class="featured-image" data-id="<?php echo $post->ID ?>" data-nonce="<?php echo wp_create_nonce('load-post-details') ?>">
       <?php echo make_responsive_image($product->images[0], get_the_title()); ?>
-    </div>	  
+    </div>
+    <div class="shopping">
+	    <div id="widget">Nume variatie &mdash; 1250 RON &nbsp;&nbsp;&nbsp; [Adauga la cos]</div>
+	  </div>
+	  <div class="more">
+	  	Detalii si imagini &#8675;
+	  </div>
     <div class="thumbs">
-    	<div class='thumb first'>&#8674;</div>
       <?php echo display_product_thumbs($product->images); ?>
     </div>	  
-	  <div class="shopping">
-	    <div id="widget">Add to cart</div>
-	  </div>
 	  <div class="excerpt">
 	    <?php the_excerpt(); ?>					
 	  </div>

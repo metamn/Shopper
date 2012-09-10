@@ -48,15 +48,17 @@ $color-action: #9173FF; /* FF3, Kuler, Compound */
 
 /* Cart */
 $color-cart-background: lighten(red, 10%);
-$color-cart-text: lighten(white, 10%);
 
 @mixin text-cart {
 	background: $color-cart-background;
-	color: $color-cart-text;
+	color: $color-text;
+	
+	@include font-text;
+	font-style: italic;
 	
 	a, a:visited, a:hover {
 		text-decoration: underline;
-		color: $color-cart-text;
+		color: $color-text;
 	}
 }
 

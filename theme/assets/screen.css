@@ -812,79 +812,6 @@ html body .container #content h3 {
 html body.single .container #content article header {
   display: none;
 }
-html body.single .container #content article .entry {
-  width: 100%;
-  float: left;
-}
-html body.single .container #content article .entry .featured-image {
-  text-align: right;
-}
-html body.single .container #content article .entry .thumbs {
-  width: 56.25%;
-  margin: 0 0 0 0;
-  float: left;
-  margin: 0 0 0 37.5%;
-  position: absolute;
-  bottom: 0;
-  background: white;
-  opacity: .8;
-}
-html body.single .container #content article .entry .thumbs .thumb {
-  width: 7%;
-  margin: 0 0 0 0;
-  float: left;
-  margin: 0.625em 0.625em 0.625em 0;
-  padding: 0.3125em;
-  border: 1px solid #999999;
-}
-html body.single .container #content article .entry .thumbs .thumb.first {
-  background: #9173ff;
-  color: white;
-  font-family: "Lekton", sans-serif;
-  text-align: center;
-  font-size: 2em;
-  margin-top: 0.3125em;
-}
-html body.single .container #content article .entry .thumbs .thumb.first a, html body.single .container #content article .entry .thumbs .thumb.first a:visited, html body.single .container #content article .entry .thumbs .thumb.first a:hover {
-  text-decoration: underline;
-}
-html body.single .container #content article .entry .shopping {
-  width: 62.5%;
-  margin: 0 0 0 38.25%;
-  float: left;
-  background: #ff3333;
-  color: white;
-}
-html body.single .container #content article .entry .shopping a, html body.single .container #content article .entry .shopping a:visited, html body.single .container #content article .entry .shopping a:hover {
-  text-decoration: underline;
-  color: white;
-}
-html body.single .container #content article .entry .shopping div {
-  padding: 1.25em;
-}
-html body.single .container #content article .entry .excerpt, html body.single .container #content article .entry .body {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
-}
-html body.single .container #content article .entry .excerpt {
-  font-size: 2em;
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  font-style: italic;
-  color: #999999;
-  padding: 0.625em;
-  padding-left: 0;
-}
-html body.single .container #content article .entry .body h3 {
-  display: block;
-}
-html body.single .container #content article .entry .body .pane {
-  display: none;
-}
-html body.single .container #content article .entry .body .pane.active {
-  display: block;
-}
 html body.single .container #content article footer {
   width: 37.5%;
   margin: 0 0 0 0;
@@ -904,6 +831,87 @@ html body.single .container #content article footer h1 {
 html body.single .container #content article footer h1 a, html body.single .container #content article footer h1 a:visited, html body.single .container #content article footer h1 a:active {
   color: white;
   text-decoration: none;
+}
+html body.single .container #content article .entry {
+  width: 100%;
+  float: left;
+}
+html body.single .container #content article .entry .featured-image {
+  text-align: right;
+}
+html body.single .container #content article .entry .shopping {
+  width: 37.5%;
+  margin: 0 0 0 37.5%;
+  float: left;
+  background: #ff3333;
+  color: #1a1a1a;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-style: italic;
+  position: absolute;
+  bottom: 1.25em;
+}
+html body.single .container #content article .entry .shopping a, html body.single .container #content article .entry .shopping a:visited, html body.single .container #content article .entry .shopping a:hover {
+  text-decoration: underline;
+  color: #1a1a1a;
+}
+html body.single .container #content article .entry .shopping div {
+  padding: 1.25em;
+}
+html body.single .container #content article .entry .more {
+  width: 18.75%;
+  margin: 0 0 0 75%;
+  float: left;
+  position: absolute;
+  bottom: 1.25em;
+  opacity: .9;
+  background: white;
+  padding: 1.25em;
+}
+html body.single .container #content article .entry .thumbs {
+  display: none;
+  width: 18.75%;
+  margin: 0 0 0 75%;
+  float: left;
+  position: absolute;
+  bottom: 1.25em;
+  opacity: .9;
+  background: white;
+}
+html body.single .container #content article .entry .thumbs .thumb {
+  width: 7%;
+  margin: 0 0 0 0;
+  float: left;
+  height: 3em;
+  margin: 0.625em 0.625em 0 0;
+  padding: 0.3125em;
+  border: 1px solid #999999;
+}
+html body.single .container #content article .entry .excerpt {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+  font-size: 2em;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-style: italic;
+  color: #999999;
+  padding: 0.625em;
+  padding-left: 0;
+}
+html body.single .container #content article .entry .body {
+  width: 62.5%;
+  margin: 0 0 0 38.25%;
+  float: left;
+}
+html body.single .container #content article .entry .body h3 {
+  display: block;
+}
+html body.single .container #content article .entry .body .pane {
+  display: none;
+}
+html body.single .container #content article .entry .body .pane.active {
+  display: block;
 }
 
 /* Articles on index page
