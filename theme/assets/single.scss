@@ -1,0 +1,46 @@
+html {
+	body.single {
+		.container {
+			#content {
+				#shopping-incentives {
+					@include block;
+					
+					margin: $pad*2 0;
+					
+					dl {
+						@include col($major, 0, 0);
+						@include dlist;
+						
+						background: $color-background-light;
+						
+						dd {
+							ol, p {
+								padding-left: $pad;
+								padding-right: $pad;
+							}
+						}
+					}
+					
+					#action {
+						@include col($minor, 0, 0);
+						
+						h2 {
+							padding: $pad;
+						}
+						
+						#add-to-cart {
+							margin: $pad*2;
+							padding: $pad;
+							
+							@include text-cart;
+						}
+					}
+				}
+				
+				#intro {
+					position: relative;
+				}
+			}		
+		}
+	}
+}

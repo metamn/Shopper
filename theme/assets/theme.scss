@@ -4,6 +4,8 @@
 
 /* Text */
 $color-background: white;
+$color-background-light: darken($color-background, 5%); 
+
 $color-text: lighten(black, 10%);
 $color-text-light: lighten($color-text, 50%); 
 

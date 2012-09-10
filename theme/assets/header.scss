@@ -10,7 +10,13 @@ html {
         
         	#logo {
         		@include logo($pad/4);
+        		
+        		position: fixed;
         	}
+        }
+        
+        #cart-and-info {
+        	position: fixed;
         }
 			}
 		}
@@ -92,7 +98,7 @@ html {
         }
         
         #menu {
-        	@include col($major, 0, 0);
+        	@include col($major, $minor, 0);
         	
         	nav {
         		@include block;

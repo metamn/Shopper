@@ -45,7 +45,7 @@
       <?php echo make_responsive_image($product->images[0], get_the_title()); ?>
     </div>
     <div class="shopping">
-	    <div id="widget">Nume variatie &mdash; 1250 RON &nbsp;&nbsp;&nbsp; [Adauga la cos]</div>
+	    <?php include '_add_to_cart.php' ?>
 	  </div>
 	  <div class="more">
 	  	Detalii si imagini &#8675;

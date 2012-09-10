@@ -14,7 +14,14 @@
 	if (have_posts()) { 
 		while ( have_posts() ) : the_post();    
     	include 'article.php';
-    	// include .....
+    	include '_shopping_incentives.php';
+    	include '_add_to_wishlist.php';
+    	include '_subscribe_to_newsletter.php';
+    	include '_share.php';
+    	include '_browse_products.php';
+    	
+    	$klass = 'intro';
+    	include 'home-intro.php';
   	endwhile; 
 	} else { 
 		include 'not_found.php';
