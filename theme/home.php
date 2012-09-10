@@ -7,8 +7,8 @@
 ?>
 
 <?php 
-	// $klass = 'intro';
-	// include 'home-intro.php' 
+	$klass = 'intro';
+	include 'home-intro.php' 
 ?>
 
 

@@ -60,19 +60,18 @@
 	
 	<article id="gifts">
 		<?php 
-			$cadouri = category_list('Cadouri'); 
+			$cadouri = get_category_list('Cadouri'); 
 		?>
 		<dl>
 			<ul>
 				<?php 
 					foreach ($cadouri as $c) {
-						// When is an archive mark the item as 'selected'
-						// - it is used to display the Archive title
-        		$selected = '';
+						// Marke the current category if it is an Archive page
+        		$current = '';
         		if ($c->title == get_content_title()) {
-        			$selected = ' selected';
+        			$current = ' selected';
         		}
-						echo "<li class='" . $selected . "' data-link='" . $c->link . "' data-count='" . $c->count . "' data-description='" . $c->description . "' data-img='" . $c->image . "'>";
+						echo "<li class='" . $current . "' data-link='" . $c->link . "' data-count='" . $c->count . "' data-description='" . $c->description . "' data-img='" . $c->image->full . "'>";
 						echo "<a href='" . $c->link . "' title='" . $c->title ." '>". $c->title . "</a>";
 						echo "</li>";
 					}
@@ -80,10 +79,8 @@
 			</ul>
 			
 			<div id="image">
-				<!--<a title='' href=''><img src='' title='' /></a>-->
 			</div>
-			
-			
+		
 			<div id="description">
 				<p id="text"></p>
 				<p id="action"><a title="" href="">Vezi cele <strong></strong> cadouri din <em></em> &#8674;</a></p>

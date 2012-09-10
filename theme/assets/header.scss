@@ -1,3 +1,18 @@
+/* Single Post
+*/
+
+html {
+	body.single {
+		.container {
+			header {
+				@include hidden;
+			}
+		}
+	}
+}
+
+
+
 /* Archive
 */
 
@@ -43,47 +58,6 @@ html {
 
 
 
-
-
-
-/* Home
-*/
-
-html {
-  body.home {
-    .container {
-      header {
-        hgroup {
-          #logo {
-            @include logo($pad/2);
-          }
-        }
-        
-        #menu {
-        	nav {
-        		@include block;
-        		
-        		ul {
-        			@include list-inline;
-        			@include font-heading("Ostrich Rounded");
-        			
-        			@include list-item-main-menu;
-        			
-        			li.active {
-        				@include col (33%, 0, 0);
-        			}
-        		}
-        	}
-        	
-        }
-      }
-    }    
-  }
-}
-
-
-
-
 /* General
 */
 
@@ -105,10 +79,29 @@ html {
           h2 {
             @include hidden;
           }
+          
+          #logo {
+            @include logo($pad/2);
+          }
         }
         
         #menu {
         	@include col($major, 0, 0);
+        	
+        	nav {
+        		@include block;
+        		
+        		ul {
+        			@include list-inline;
+        			@include font-heading("Ostrich Rounded");
+        			
+        			@include list-item-main-menu;
+        			
+        			li.active {
+        				@include col (33%, 0, 0);
+        			}
+        		}
+        	}
         	
         	header {
         		h3 {

@@ -247,6 +247,12 @@ body .container h1, body .container h2, body .container h3, body .container h4, 
 /* A dynamic list first used at Intro > Services */
 /* Logo
 */
+/* Single Post
+*/
+html body.single .container header {
+  display: none;
+}
+
 /* Archive
 */
 html body.archive .container header hgroup {
@@ -293,60 +299,6 @@ html body.archive .container header #menu article {
   display: none;
 }
 
-/* Home
-*/
-html body.home .container header hgroup #logo {
-  height: 4.375em;
-  width: 14.6875em;
-  /* an extra space must be add */
-}
-html body.home .container header hgroup #logo .cell {
-  width: 0.625em;
-  height: 0.625em;
-  float: left;
-}
-html body.home .container header hgroup #logo .small {
-  width: 0.3125em;
-}
-html body.home .container header hgroup #logo .set {
-  background: #1a1a1a;
-}
-html body.home .container header #menu nav {
-  width: 100%;
-  float: left;
-}
-html body.home .container header #menu nav ul {
-  display: block;
-  margin: 0;
-  font-family: "Ostrich Rounded";
-  letter-spacing: .1em;
-  font-size: 2em;
-}
-html body.home .container header #menu nav ul li {
-  display: inline-block;
-  list-style-type: none;
-  margin-left: 0;
-}
-html body.home .container header #menu nav ul li {
-  cursor: pointer;
-}
-html body.home .container header #menu nav ul li span {
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  font-style: italic;
-  font-weight: normal;
-}
-html body.home .container header #menu nav ul li:after {
-  content: "\21E3";
-  font-size: smaller;
-  color: #999999;
-}
-html body.home .container header #menu nav ul li.active {
-  width: 33%;
-  margin: 0 0 0 0;
-  float: left;
-}
-
 /* General
 */
 html body .container {
@@ -368,8 +320,59 @@ html body .container header hgroup h1 {
 html body .container header hgroup h2 {
   display: none;
 }
+html body .container header hgroup #logo {
+  height: 4.375em;
+  width: 14.6875em;
+  /* an extra space must be add */
+}
+html body .container header hgroup #logo .cell {
+  width: 0.625em;
+  height: 0.625em;
+  float: left;
+}
+html body .container header hgroup #logo .small {
+  width: 0.3125em;
+}
+html body .container header hgroup #logo .set {
+  background: #1a1a1a;
+}
 html body .container header #menu {
   width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
+html body .container header #menu nav {
+  width: 100%;
+  float: left;
+}
+html body .container header #menu nav ul {
+  display: block;
+  margin: 0;
+  font-family: "Ostrich Rounded";
+  letter-spacing: .1em;
+  font-size: 2em;
+}
+html body .container header #menu nav ul li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 0;
+}
+html body .container header #menu nav ul li {
+  cursor: pointer;
+}
+html body .container header #menu nav ul li span {
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-style: italic;
+  font-weight: normal;
+}
+html body .container header #menu nav ul li:after {
+  content: "\21E3";
+  font-size: smaller;
+  color: #999999;
+}
+html body .container header #menu nav ul li.active {
+  width: 33%;
   margin: 0 0 0 0;
   float: left;
 }
@@ -788,6 +791,11 @@ html body .container #content h3 {
 
 /* Single article
 */
+html body.single .container #content article header {
+  width: 100%;
+  float: left;
+  display: block;
+}
 html body.single .container #content article .entry .featured-image {
   background: white;
   box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;

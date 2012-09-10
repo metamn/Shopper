@@ -6,6 +6,10 @@ html {
     .container {
       #content {        
         article {      
+        	header {
+        		@include block;
+        		display: block;
+        	}
           .entry {
             .featured-image {
               @include box-shadow;
