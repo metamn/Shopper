@@ -902,10 +902,17 @@ html body.single .container #content article .entry .body {
 html body.single .container #content article .entry .body h3 {
   display: block;
   padding-bottom: 0.3125em;
-  border-bottom: 1px solid dotted;
+  border-bottom: 1px solid;
+  cursor: pointer;
+}
+html body.single .container #content article .entry .body h3:after {
+  content: "\21E3";
+  font-size: smaller;
+  color: #999999;
 }
 html body.single .container #content article .entry .body h3 + .pane {
   display: none;
+  margin: 2.5em 0;
 }
 
 /* Articles on index page

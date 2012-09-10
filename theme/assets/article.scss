@@ -86,10 +86,17 @@ html {
           		h3 {
           			display: block;
           			padding-bottom: $pad/4;
-          			border-bottom: 1px solid dotted;
+          			border-bottom: 1px solid;
+          			
+          			cursor: pointer;
+          		}
+          		h3:after {
+          			@include list-item-arrow;
           		}
           		h3 + .pane {
           			@include hidden;
+          			
+          			margin: $pad*2 0;
           		}
           		
           	}
