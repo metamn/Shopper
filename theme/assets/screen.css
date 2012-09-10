@@ -869,21 +869,15 @@ html body.single .container #content article .entry .more {
   padding: 1.25em;
 }
 html body.single .container #content article .entry .thumbs {
-  display: none;
-  width: 18.75%;
-  margin: 0 0 0 75%;
-  float: left;
-  position: absolute;
-  bottom: 1.25em;
-  opacity: .9;
-  background: white;
-}
-html body.single .container #content article .entry .thumbs .thumb {
-  width: 7%;
+  width: 62.5%;
   margin: 0 0 0 0;
   float: left;
-  height: 3em;
-  margin: 0.625em 0.625em 0 0;
+}
+html body.single .container #content article .entry .thumbs .thumb {
+  width: 18.75%;
+  margin: 0 0 0 0;
+  float: left;
+  margin: 2.5em 0.625em 0 0;
   padding: 0.3125em;
   border: 1px solid #999999;
 }
@@ -891,13 +885,14 @@ html body.single .container #content article .entry .excerpt {
   width: 37.5%;
   margin: 0 0 0 0;
   float: left;
+}
+html body.single .container #content article .entry .excerpt p {
   font-size: 2em;
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   font-style: italic;
   color: #999999;
-  padding: 0.625em;
-  padding-left: 0;
+  padding: 1.25em;
 }
 html body.single .container #content article .entry .body {
   width: 62.5%;
@@ -906,12 +901,11 @@ html body.single .container #content article .entry .body {
 }
 html body.single .container #content article .entry .body h3 {
   display: block;
+  padding-bottom: 0.3125em;
+  border-bottom: 1px solid dotted;
 }
-html body.single .container #content article .entry .body .pane {
+html body.single .container #content article .entry .body h3 + .pane {
   display: none;
-}
-html body.single .container #content article .entry .body .pane.active {
-  display: block;
 }
 
 /* Articles on index page

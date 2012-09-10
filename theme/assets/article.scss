@@ -57,20 +57,12 @@ html {
           	}
           	
           	.thumbs {
-          		@include hidden;
-          		@include col($minor/2, $minor*2, 0);
-          		
-          		position: absolute;
-          		bottom: $pad;
-          		
-          		opacity: .9;
-          		background: $color-background;
+          		@include col($major, 0, 0);
           		
           		.thumb {
-          			@include col(7%, 0, 0);
-          			height: 3em;
+          			@include col($minor/2, 0, 0);
           			
-          			margin: $pad/2 $pad/2 0 0;
+          			margin: $pad*2 $pad/2 0 0;
           			padding: $pad/4;
           			border: 1px solid $color-text-light;
           		}
@@ -79,12 +71,13 @@ html {
           	.excerpt {
           		@include col($minor, 0, 0);
           		
-          		font-size: 2em;
-          		@include font-text;
-          		font-style: italic;
-          		color: $color-text-light; 
-          		padding: $pad/2;
-          		padding-left: 0;
+          		p {
+          			font-size: 2em;
+								@include font-text;
+								font-style: italic;
+								color: $color-text-light; 
+								padding: $pad;
+							}
           	}
           	
           	.body {
@@ -92,13 +85,13 @@ html {
           		
           		h3 {
           			display: block;
+          			padding-bottom: $pad/4;
+          			border-bottom: 1px solid dotted;
           		}
-          		.pane {
+          		h3 + .pane {
           			@include hidden;
           		}
-          		.pane.active {
-          			display: block;
-          		}
+          		
           	}
           
           }

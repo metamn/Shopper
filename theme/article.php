@@ -50,12 +50,12 @@
 	  <div class="more">
 	  	Detalii si imagini &#8675;
 	  </div>
-    <div class="thumbs">
-      <?php echo display_product_thumbs($product->images); ?>
-    </div>	  
 	  <div class="excerpt">
 	    <?php the_excerpt(); ?>					
 	  </div>
+    <div class="thumbs">
+      <?php echo display_product_thumbs($product->images); ?>
+    </div>	 
 	  <div class="body">
 	    <?php if (is_single()) { the_content(); } ?>
 	  </div>
