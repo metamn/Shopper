@@ -2,9 +2,8 @@
 
 <?php
 
-// Display a single post or a list of posts
-// - usually a list of posts has all the same data as a single post (images, add to cart, etc)
-// - so there is no need for 'archive.php'
+// Display a list of posts
+// -----------------------
 
 ?>
 
@@ -14,7 +13,7 @@
   </header>
   <?php 
   	if ( have_posts() ) {
-  		// When is a list of posts this helps to organize them into columns
+  		// This helps organizing posts into columns
   		$count = 1;          
     	while ( have_posts() ) : the_post();		    
       	include 'article.php';                

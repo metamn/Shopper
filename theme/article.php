@@ -1,7 +1,28 @@
 <?php
 
 // Displaying an article
-// - either if will be wrapped into a single post, or into a list of posts (archives)
+// - either it will be wrapped into a single post, or into a list of posts (archives)
+
+// Decide if it is single page or index page
+  if (is_single()) {
+    $klass = '';
+    // $title = get_the_title();
+  } else {
+    $klass = $view;
+    // $title = $product->title;
+  } 
+  
+  // See if this is the first product in a list or not
+  if (isset($count)) {
+  	if ($count > 1) {
+			$klass .= ' not-first';
+			if ($count % 2 == 1 ) {
+				$klass .= ' odd';
+			}
+		}
+		// Identify posts with a number / counter
+  	$klass .= " count-$count"; 	
+ }  
 
 ?>
 
@@ -11,7 +32,7 @@
 ?>
 
 
-<article <?php post_class(); ?>>
+<article <?php post_class($klass); ?>>
 	<header>
 		<h1>
 		  <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute() ?>" rel="bookmark">
@@ -24,10 +45,11 @@
       <?php echo make_responsive_image($product->images[0], get_the_title()); ?>
     </div>	  
     <div class="thumbs">
-      <?php if (is_single()) { echo display_product_thumbs($product->images); } ?>
+    	<div class='thumb first'>&#8674;</div>
+      <?php echo display_product_thumbs($product->images); ?>
     </div>	  
 	  <div class="shopping">
-	    Add To cart
+	    <div id="widget">Add to cart</div>
 	  </div>
 	  <div class="excerpt">
 	    <?php the_excerpt(); ?>					
@@ -36,5 +58,12 @@
 	    <?php if (is_single()) { the_content(); } ?>
 	  </div>
 	</div>
+	<footer>
+		<h1>
+		  <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute() ?>" rel="bookmark">
+		    <?php the_title(); ?>
+		  </a>
+		</h1>
+	</footer>
 </article>
 

@@ -7,51 +7,95 @@ html {
       #content {        
         article {      
         	header {
-        		@include block;
-        		display: block;
+        		@include hidden;
         	}
           .entry {
-            .featured-image {
-              @include box-shadow;
-            }
-            .thumbs {
-              @include block;
-              display: block;
-              
-              .item {
-                @include thumbnail;
-              }
-            }
-            .shopping {
-              position: relative;
-              top: -35em;
-              left: 15%;
-            }
-            .excerpt {
-              @include hidden;
-            }
-            .body {
-              @include block;
-              display: block;
-              
-              @include article-body;
-            }
-          }    
+          	@include block;
+          	
+          	.featured-image {
+        			text-align: right;
+          	}
+          	
+          	.thumbs {
+          		@include col($major*0.9, 0, 0);
+          		margin: 0 0 0 $minor;
+          		
+          		position: absolute;
+          		bottom: 0;
+          		
+          		background: $color-background;
+          		opacity: .8;
+          		
+          		.thumb {
+          			@include col(7%, 0, 0);
+          			
+          			margin: $pad/2 $pad/2 $pad/2 0;
+          			padding: $pad/4;
+          			border: 1px solid $color-text-light;
+          		}
+          		.thumb.first {
+          			@include text-action-1;
+          			text-align: center;
+          			font-size: 2em;
+          			margin-top: $pad/4;
+          		}
+          	}
+          	
+          	.shopping {
+          		@include col($major, $minor*1.02, 0);
+          		@include text-cart;
+          		
+          		
+          		div {
+          			padding: $pad;
+          		}
+          	}
+          	
+          	.excerpt, .body {
+          		@include col($minor, 0, 0);
+          	}
+          	
+          	.excerpt {
+          		font-size: 2em;
+          		@include font-text;
+          		font-style: italic;
+          		color: $color-text-light; 
+          		padding: $pad/2;
+          		padding-left: 0;
+          	}
+          	
+          	.body {
+          		h3 {
+          			display: block;
+          		}
+          		.pane {
+          			@include hidden;
+          		}
+          		.pane.active {
+          			display: block;
+          		}
+          	}
+          
+          }
+          footer {
+          	@include col($minor, 0, 0);
+          	
+          	display: block;
+          	padding: 0;
+          	border: none;
+          	
+          	position: absolute;
+          	bottom: $pad;
+          	
+          	h1 {
+          		@include color-text-inverted;
+          		padding: $pad;
+          		
+          		opacity: .9;
+          	}
+          }
         }
       }  
-      
-      #shopping-info {
-        @include col(20%, 0, 0);
-        display: block;
-      }
-      
-      .product-scroller {
-        @include hidden;
-      }
-      
-      #sidebar {
-        @include hidden;
-      }
     }
   }
 }

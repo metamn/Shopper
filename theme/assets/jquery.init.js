@@ -1,5 +1,20 @@
 jQuery(document).ready(function() {
 
+	
+	// Product
+	// -----------------------------------------------
+	
+	// Display the firs pane in product description
+	jQuery(".single #content .entry .body .pane").removeClass('active');
+	jQuery(".single #content .entry .body .pane").first().addClass('active');
+	
+	// Click on content headers
+	jQuery(".single #content .entry .body h3").click(function() {
+		jQuery(this).next().slideToggle('slow');
+	});
+	
+	
+	
 	// Archive
 	// -----------------------------------------------
 	

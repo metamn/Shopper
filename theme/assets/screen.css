@@ -249,8 +249,26 @@ body .container h1, body .container h2, body .container h3, body .container h4, 
 */
 /* Single Post
 */
-html body.single .container header {
-  display: none;
+html body.single .container header hgroup {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
+html body.single .container header hgroup #logo {
+  height: 2.1875em;
+  width: 7.34375em;
+  /* an extra space must be add */
+}
+html body.single .container header hgroup #logo .cell {
+  width: 0.3125em;
+  height: 0.3125em;
+  float: left;
+}
+html body.single .container header hgroup #logo .small {
+  width: 0.15625em;
+}
+html body.single .container header hgroup #logo .set {
+  background: #1a1a1a;
 }
 
 /* Archive
@@ -433,6 +451,10 @@ html body .container header #menu article#services dl dd div#c2 {
   background: #1a1a1a;
   position: relative;
   top: -2em;
+}
+html body .container header #menu article#services dl dd div#c2 a, html body .container header #menu article#services dl dd div#c2 a:visited, html body .container header #menu article#services dl dd div#c2 a:active {
+  color: white;
+  text-decoration: none;
 }
 html body .container header #menu article#services dl dd div#c2 a, html body .container header #menu article#services dl dd div#c2 a:visited, html body .container header #menu article#services dl dd div#c2 a:active {
   color: white;
@@ -686,6 +708,10 @@ html .container #intro article#services dl dd div#c2 a, html .container #intro a
   color: white;
   text-decoration: none;
 }
+html .container #intro article#services dl dd div#c2 a, html .container #intro article#services dl dd div#c2 a:visited, html .container #intro article#services dl dd div#c2 a:active {
+  color: white;
+  text-decoration: none;
+}
 html .container #intro article#services dl dd div#c2 p {
   padding: 0.3125em;
   text-align: center;
@@ -772,18 +798,10 @@ html .container #intro article#premium ul li span a, html .container #intro arti
   color: #ffff33;
 }
 
-html body .container #sidebar {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
-}
-html body .container #sidebar h3 {
-  display: none;
-}
 html body .container #content {
-  width: 62.5%;
-  margin: 0 0 0 0;
+  width: 100%;
   float: left;
+  margin: 1.25em 0;
 }
 html body .container #content h3 {
   display: none;
@@ -792,62 +810,100 @@ html body .container #content h3 {
 /* Single article
 */
 html body.single .container #content article header {
-  width: 100%;
-  float: left;
-  display: block;
-}
-html body.single .container #content article .entry .featured-image {
-  background: white;
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-}
-html body.single .container #content article .entry .thumbs {
-  width: 100%;
-  float: left;
-  display: block;
-}
-html body.single .container #content article .entry .thumbs .item {
-  width: 100px;
-  height: 100px;
-  float: left;
-  margin: 0 0.3125em 0.625em 0;
-  border: 1px solid;
-}
-html body.single .container #content article .entry .shopping {
-  position: relative;
-  top: -35em;
-  left: 15%;
-}
-html body.single .container #content article .entry .excerpt {
   display: none;
 }
-html body.single .container #content article .entry .body {
+html body.single .container #content article .entry {
   width: 100%;
   float: left;
-  display: block;
+}
+html body.single .container #content article .entry .featured-image {
+  text-align: right;
+}
+html body.single .container #content article .entry .thumbs {
+  width: 56.25%;
+  margin: 0 0 0 0;
+  float: left;
+  margin: 0 0 0 37.5%;
+  position: absolute;
+  bottom: 0;
+  background: white;
+  opacity: .8;
+}
+html body.single .container #content article .entry .thumbs .thumb {
+  width: 7%;
+  margin: 0 0 0 0;
+  float: left;
+  margin: 0.625em 0.625em 0.625em 0;
+  padding: 0.3125em;
+  border: 1px solid #999999;
+}
+html body.single .container #content article .entry .thumbs .thumb.first {
+  background: #9173ff;
+  color: white;
+  font-family: "Lekton", sans-serif;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 0.3125em;
+}
+html body.single .container #content article .entry .thumbs .thumb.first a, html body.single .container #content article .entry .thumbs .thumb.first a:visited, html body.single .container #content article .entry .thumbs .thumb.first a:hover {
+  text-decoration: underline;
+}
+html body.single .container #content article .entry .shopping {
+  width: 62.5%;
+  margin: 0 0 0 38.25%;
+  float: left;
+  background: #ff3333;
+  color: white;
+}
+html body.single .container #content article .entry .shopping a, html body.single .container #content article .entry .shopping a:visited, html body.single .container #content article .entry .shopping a:hover {
+  text-decoration: underline;
+  color: white;
+}
+html body.single .container #content article .entry .shopping div {
+  padding: 1.25em;
+}
+html body.single .container #content article .entry .excerpt, html body.single .container #content article .entry .body {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
+html body.single .container #content article .entry .excerpt {
+  font-size: 2em;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-style: italic;
+  color: #999999;
+  padding: 0.625em;
+  padding-left: 0;
 }
 html body.single .container #content article .entry .body h3 {
-  margin-bottom: 0.625em;
-  padding-bottom: 0.625em;
-  border-bottom: 1px solid;
-  cursor: pointer;
   display: block;
 }
 html body.single .container #content article .entry .body .pane {
   display: none;
 }
-html body.single .container #shopping-info {
-  width: 20%;
+html body.single .container #content article .entry .body .pane.active {
+  display: block;
+}
+html body.single .container #content article footer {
+  width: 37.5%;
   margin: 0 0 0 0;
   float: left;
   display: block;
+  padding: 0;
+  border: none;
+  position: absolute;
+  bottom: 1.25em;
 }
-html body.single .container .product-scroller {
-  display: none;
+html body.single .container #content article footer h1 {
+  color: white;
+  background: #1a1a1a;
+  padding: 1.25em;
+  opacity: .9;
 }
-html body.single .container #sidebar {
-  display: none;
+html body.single .container #content article footer h1 a, html body.single .container #content article footer h1 a:visited, html body.single .container #content article footer h1 a:active {
+  color: white;
+  text-decoration: none;
 }
 
 /* Articles on index page

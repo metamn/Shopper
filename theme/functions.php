@@ -123,10 +123,19 @@ function get_post_attachments($post_id) {
   return $attachments;
 }
 
+
 // Display product thumbs
 // - returns HTML
 function display_product_thumbs($images) {
-	return '';
+	$ret = '';
+	
+	foreach ($images as $image) {
+		$ret .= "<div class='thumb'>";
+		$ret .= "<img src='" . $image->thumbnail . "' />";
+		$ret .= "</div>";
+	}
+	
+	return $ret;
 }
 
 

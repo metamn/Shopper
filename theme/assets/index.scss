@@ -1,17 +1,9 @@
 html {
   body {
     .container {
-    	
-      #sidebar {
-        @include col($minor, 0, 0);
-        
-        h3 {
-          @include hidden;
-        }
-      }
-      
       #content {
-        @include col($major, 0, 0);
+        @include block;
+        margin: $pad 0;
         
         h3 {
           @include hidden;

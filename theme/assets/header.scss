@@ -5,7 +5,13 @@ html {
 	body.single {
 		.container {
 			header {
-				@include hidden;
+				hgroup {
+        	@include col($minor, 0, 0);
+        
+        	#logo {
+        		@include logo($pad/4);
+        	}
+        }
 			}
 		}
 	}
