@@ -1228,23 +1228,17 @@ html body.single .container #content #shopping-incentives {
   width: 100%;
   float: left;
   margin: 5em 0;
+  padding: 2.5em 0;
+  background: transparent url(stripe.png);
 }
 html body.single .container #content #shopping-incentives #incentives {
   width: 62.5%;
   margin: 0 0 0 0;
   float: left;
-  background: #1a1a1a;
-  color: white;
-  font-family: "Lekton", sans-serif;
-}
-html body.single .container #content #shopping-incentives #incentives a, html body.single .container #content #shopping-incentives #incentives a:visited, html body.single .container #content #shopping-incentives #incentives a:hover {
-  text-decoration: underline;
-  color: #ffff33;
 }
 html body.single .container #content #shopping-incentives #incentives ul {
   list-style-type: none;
   padding: 0;
-  padding-bottom: 2.5em;
 }
 html body.single .container #content #shopping-incentives #incentives ul li {
   font-size: 2em;
@@ -1265,7 +1259,11 @@ html body.single .container #content #shopping-incentives #incentives ul li span
   color: #ffff33;
 }
 html body.single .container #content #shopping-incentives #incentives ul li {
-  font-size: 1.5em;
+  font-size: medium;
+  background: white;
+}
+html body.single .container #content #shopping-incentives #incentives ul li span {
+  font-weight: normal;
 }
 html body.single .container #content #shopping-incentives #action {
   width: 37.5%;

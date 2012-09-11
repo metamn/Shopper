@@ -6,16 +6,21 @@ html {
 				#shopping-incentives {
 					@include block;
 					margin: $pad*4 0;
+					padding: $pad*2 0;
+					
+					background: transparent url(stripe.png);
 					
 					#incentives {
 						@include col($major, 0, 0);
-						@include text-action;
-						
 						ul {
 							@include list-premium;
-							padding-bottom: $pad*2;
 							li {
-								font-size: 1.5em;
+								font-size: medium;
+								background: $color-background;
+								
+								span {
+									font-weight: normal;
+								}
 							}
 						}
 					}
