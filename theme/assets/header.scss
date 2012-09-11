@@ -6,13 +6,15 @@ html {
 		.container {
 			header {
 				hgroup {
-        	@include col($minor, 0, 0);
-        
         	#logo {
         		@include logo($pad/4);
         		
         		position: fixed;
         	}
+        }
+        
+        #menu {
+        	@include col($major, $minor, 0);
         }
         
         #cart-and-info {
@@ -33,8 +35,6 @@ html {
 		.container {
       header {
         hgroup {
-        	@include col($minor, 0, 0);
-        
         	#logo {
         		@include logo($pad/4);
         	}
@@ -52,8 +52,6 @@ html {
         }
         
         #menu {
-        	@include col($major, 0, 0);
-        	
         	header, nav, aside {
         		@include hidden;
         	}
@@ -98,7 +96,7 @@ html {
         }
         
         #menu {
-        	@include col($major, $minor, 0);
+        	@include col($major, 0, 0);
         	
         	nav {
         		@include block;
@@ -200,6 +198,9 @@ html {
         	top: $pad;
         	right: $pad;
         	width: 11%; /* otherwise the italic on hover is moving the entire ul */
+        	
+        	background: $color-background;
+        	opacity: .9;
         	
         	ul {
         		font-size: smaller;

@@ -4,19 +4,18 @@ html {
 			#content {
 				#shopping-incentives {
 					@include block;
+					margin: $pad*4 0;
 					
-					margin: $pad*2 0;
-					
-					dl {
+					#incentives {
 						@include col($major, 0, 0);
-						@include dlist;
-						
 						background: $color-background-light;
 						
-						dd {
-							ol, p {
-								padding-left: $pad;
-								padding-right: $pad;
+						ul {
+							@include list-premium;
+							padding-bottom: $pad*2;
+							
+							li {
+								font-size: 1.5em;
 							}
 						}
 					}
@@ -26,6 +25,7 @@ html {
 						
 						h2 {
 							padding: $pad;
+							@include font-heading('Ostrich Bold');
 						}
 						
 						#add-to-cart {

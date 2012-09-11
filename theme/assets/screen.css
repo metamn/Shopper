@@ -184,17 +184,28 @@ body .container strong {
 /* block element -- expand something full size inside a container
 */
 /* Colors
+/* ------------------------------------------------------
 */
-/* Text */
+/* Text 
+*/
 /* invert color with background */
-/* Highlight */
+/* Highlight 
+*/
 /* FF3, Kuler, Mono */
-/* Action */
+.highlight {
+  background: #ffff33;
+  padding: 0.3125em;
+}
+
+/* Action 
+*/
 /* FF3, Kuler, Compound */
-/* Cart */
+/* Cart 
+*/
 /* Links
 */
 /* Fonts
+/* ------------------------------------------------------
 */
 @font-face {
   font-family: "Ostrich Black";
@@ -239,21 +250,23 @@ body .container h1, body .container h2, body .container h3, body .container h4, 
 }
 
 /* Lists
+/* ------------------------------------------------------
 */
-/* Home > Menu list item */
-/* List arrow, trigger */
-/* A simple list firts used at Intro > Premium */
-/* A simple list first used at Intro > Categories */
-/* A dynamic list first used at Intro > Services */
+/* Home > Menu list item 
+*/
+/* List arrow, trigger 
+*/
+/* A simple list first used at Intro > Premium 
+*/
+/* A simple list first used at Intro > Categories 
+*/
+/* A dynamic list first used at Intro > Services 
+*/
 /* Logo
+/* ------------------------------------------------------
 */
 /* Single Post
 */
-html body.single .container header hgroup {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
-}
 html body.single .container header hgroup #logo {
   height: 2.1875em;
   width: 7.34375em;
@@ -271,17 +284,17 @@ html body.single .container header hgroup #logo .small {
 html body.single .container header hgroup #logo .set {
   background: #1a1a1a;
 }
+html body.single .container header #menu {
+  width: 62.5%;
+  margin: 0 0 0 37.5%;
+  float: left;
+}
 html body.single .container header #cart-and-info {
   position: fixed;
 }
 
 /* Archive
 */
-html body.archive .container header hgroup {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
-}
 html body.archive .container header hgroup #logo {
   height: 2.1875em;
   width: 7.34375em;
@@ -308,11 +321,6 @@ html body.archive .container header #archive-title h3:after {
   content: "\21E3";
   font-size: smaller;
   color: #999999;
-}
-html body.archive .container header #menu {
-  width: 62.5%;
-  margin: 0 0 0 0;
-  float: left;
 }
 html body.archive .container header #menu header, html body.archive .container header #menu nav, html body.archive .container header #menu aside {
   display: none;
@@ -360,7 +368,7 @@ html body .container header hgroup #logo .set {
 }
 html body .container header #menu {
   width: 62.5%;
-  margin: 0 0 0 37.5%;
+  margin: 0 0 0 0;
   float: left;
 }
 html body .container header #menu nav {
@@ -559,6 +567,8 @@ html body .container header #cart-and-info {
   right: 1.25em;
   width: 11%;
   /* otherwise the italic on hover is moving the entire ul */
+  background: white;
+  opacity: .9;
 }
 html body .container header #cart-and-info ul {
   font-size: smaller;
@@ -1141,75 +1151,35 @@ html body .container #content #product-scroll-right.large {
 html body.single .container #content #shopping-incentives {
   width: 100%;
   float: left;
-  margin: 2.5em 0;
+  margin: 5em 0;
 }
-html body.single .container #content #shopping-incentives dl {
+html body.single .container #content #shopping-incentives #incentives {
   width: 62.5%;
   margin: 0 0 0 0;
   float: left;
-  cursor: default;
   background: #f2f2f2;
 }
-html body.single .container #content #shopping-incentives dl dt {
-  text-transform: none;
+html body.single .container #content #shopping-incentives #incentives ul {
+  list-style-type: none;
+  padding: 0;
+}
+html body.single .container #content #shopping-incentives #incentives ul li {
   font-size: 2em;
   font-weight: normal;
-  padding: 1.25em;
-}
-html body.single .container #content #shopping-incentives dl dd {
-  width: 100%;
-  float: left;
-  padding-bottom: 0.625em;
-  margin: 0;
-}
-html body.single .container #content #shopping-incentives dl dd div#c1 {
-  width: 62.5%;
-  margin: 0 0 0 0;
-  float: left;
-}
-html body.single .container #content #shopping-incentives dl dd div#c1 h5, html body.single .container #content #shopping-incentives dl dd div#c1 h6 {
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  font-size: medium;
-  padding: 0.3125em 0;
-  margin-left: 1.25em;
-}
-html body.single .container #content #shopping-incentives dl dd div#c1 h5 {
-  text-transform: none;
-  font-variant: small-caps;
+  font-style: italic;
+  padding: 0.625em;
   border-bottom: 1px dotted;
 }
-html body.single .container #content #shopping-incentives dl dd div#c1 h6 {
-  font-variant: normal;
-  font-style: italic;
-  margin-left: 1.5em;
-}
-html body.single .container #content #shopping-incentives dl dd div#c2 {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
+html body.single .container #content #shopping-incentives #incentives ul li span {
   font-weight: bold;
-  color: white;
   background: #1a1a1a;
-  position: relative;
-  top: -2em;
-}
-html body.single .container #content #shopping-incentives dl dd div#c2 a, html body.single .container #content #shopping-incentives dl dd div#c2 a:visited, html body.single .container #content #shopping-incentives dl dd div#c2 a:active {
   color: white;
-  text-decoration: none;
-}
-html body.single .container #content #shopping-incentives dl dd div#c2 a, html body.single .container #content #shopping-incentives dl dd div#c2 a:visited, html body.single .container #content #shopping-incentives dl dd div#c2 a:active {
-  color: white;
-  text-decoration: none;
-}
-html body.single .container #content #shopping-incentives dl dd div#c2 p {
+  font-family: "Lekton", sans-serif;
   padding: 0.3125em;
-  text-align: center;
-  font-size: 4em;
 }
-html body.single .container #content #shopping-incentives dl dd ol, html body.single .container #content #shopping-incentives dl dd p {
-  padding-left: 1.25em;
-  padding-right: 1.25em;
+html body.single .container #content #shopping-incentives #incentives ul li span a, html body.single .container #content #shopping-incentives #incentives ul li span a:visited, html body.single .container #content #shopping-incentives #incentives ul li span a:hover {
+  text-decoration: underline;
+  color: #ffff33;
 }
 html body.single .container #content #shopping-incentives #action {
   width: 37.5%;
@@ -1218,6 +1188,9 @@ html body.single .container #content #shopping-incentives #action {
 }
 html body.single .container #content #shopping-incentives #action h2 {
   padding: 1.25em;
+  font-family: "Ostrich Bold";
+  letter-spacing: .1em;
+  font-size: 2em;
 }
 html body.single .container #content #shopping-incentives #action #add-to-cart {
   margin: 2.5em;

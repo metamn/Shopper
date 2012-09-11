@@ -1,8 +1,10 @@
 /* Colors
+/* ------------------------------------------------------
 */
 
 
-/* Text */
+/* Text 
+*/
 $color-background: white;
 $color-background-light: darken($color-background, 5%); 
 
@@ -20,11 +22,20 @@ $color-text-light: lighten($color-text, 50%);
   }
 }
 
-/* Highlight */
+
+/* Highlight 
+*/
 $color-highlight: lighten(yellow, 10%);
 $color-highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
 
-/* Action */
+.highlight {
+	background: $color-highlight;
+	padding: $pad/4;
+}
+
+
+/* Action 
+*/
 $color-action: #9173FF; /* FF3, Kuler, Compound */
 
 @mixin text-action-1 {
@@ -48,7 +59,9 @@ $color-action: #9173FF; /* FF3, Kuler, Compound */
 	}
 }
 
-/* Cart */
+
+/* Cart 
+*/
 $color-cart-background: lighten(red, 10%);
 
 @mixin text-cart {
@@ -64,6 +77,7 @@ $color-cart-background: lighten(red, 10%);
 	}
 }
 
+
 /* Links
 */
 
@@ -78,7 +92,9 @@ $color-cart-background: lighten(red, 10%);
 }
 
 
+
 /* Fonts
+/* ------------------------------------------------------
 */
 
 
@@ -115,10 +131,14 @@ body {
 }
 
 
+
 /* Lists
+/* ------------------------------------------------------
 */
 
-/* Home > Menu list item */
+
+/* Home > Menu list item 
+*/
 @mixin list-item-main-menu {
 	li {
 		cursor: pointer;
@@ -134,14 +154,18 @@ body {
 	}
 }
 
-/* List arrow, trigger */
+
+/* List arrow, trigger 
+*/
 @mixin list-item-arrow {
 	content: "\21E3";
 	font-size: smaller;
 	color: $color-text-light;
 }
 
-/* A simple list firts used at Intro > Premium */
+
+/* A simple list first used at Intro > Premium 
+*/
 @mixin list-premium {
 	list-style-type: none;
 	padding: 0;
@@ -162,7 +186,9 @@ body {
 	}
 }
 
-/* A simple list first used at Intro > Categories */
+
+/* A simple list first used at Intro > Categories 
+*/
 @mixin list-categories {
 	padding: $pad*2 0;
 	list-style-type: none;
@@ -189,7 +215,8 @@ body {
 }
 
 
-/* A dynamic list first used at Intro > Services */
+/* A dynamic list first used at Intro > Services 
+*/
 @mixin dlist {
 	cursor: default;
 	
@@ -251,6 +278,7 @@ body {
 
 
 /* Logo
+/* ------------------------------------------------------
 */
 
 @mixin logo($size) {
