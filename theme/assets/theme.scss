@@ -121,6 +121,13 @@ $color-cart: lighten(red, 10%);
 	font-family: "Lekton", sans-serif;
 }
 
+@mixin font-reset {
+	font-weight: normal;
+	font-size: medium;
+	text-transform: normal;
+	font-variant: deafult;
+}
+
 
 body {
 	.container {

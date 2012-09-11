@@ -2,6 +2,51 @@ html {
 	body.single {
 		.container {
 			#content {
+			
+				aside#comments {
+					@include block;
+					margin: $pad 0;
+					
+					h2 {
+						@include hidden;
+					}
+					
+					ol {
+						li {
+							@include col(20%, 0, 5%);
+							
+							a, a:visited, a:active {
+								@include link-neutral;
+							}
+							
+							.comment-body {
+								p {
+									font-size: larger;
+									margin: $pad 0;
+								}
+								
+								.comment-author .fn {
+									font-size: 2em;
+								}
+								.comment-author .says {
+									@include hidden;
+								}
+								.comment-meta { 
+									a {
+										color: $color-text-light;
+										border-bottom: 1px solid;
+										padding-bottom: $pad/4;
+									}
+									a.comment-edit-link {
+										@include hidden;
+									}
+								}
+							}
+							
+							
+						}
+					}
+				}
 				
 				#shopping-incentives {
 					@include block;

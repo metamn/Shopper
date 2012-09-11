@@ -1148,6 +1148,41 @@ html body .container #content #product-scroll-right.large {
   left: 96%;
 }
 
+html body.single .container #content aside#comments {
+  width: 100%;
+  float: left;
+  margin: 1.25em 0;
+}
+html body.single .container #content aside#comments h2 {
+  display: none;
+}
+html body.single .container #content aside#comments ol li {
+  width: 20%;
+  margin: 0 5% 0 0;
+  float: left;
+}
+html body.single .container #content aside#comments ol li a, html body.single .container #content aside#comments ol li a:visited, html body.single .container #content aside#comments ol li a:active {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+html body.single .container #content aside#comments ol li .comment-body p {
+  font-size: larger;
+  margin: 1.25em 0;
+}
+html body.single .container #content aside#comments ol li .comment-body .comment-author .fn {
+  font-size: 2em;
+}
+html body.single .container #content aside#comments ol li .comment-body .comment-author .says {
+  display: none;
+}
+html body.single .container #content aside#comments ol li .comment-body .comment-meta a {
+  color: #999999;
+  border-bottom: 1px solid;
+  padding-bottom: 0.3125em;
+}
+html body.single .container #content aside#comments ol li .comment-body .comment-meta a.comment-edit-link {
+  display: none;
+}
 html body.single .container #content #shopping-incentives {
   width: 100%;
   float: left;
