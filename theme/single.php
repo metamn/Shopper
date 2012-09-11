@@ -14,10 +14,14 @@
 	if (have_posts()) { 
 		while ( have_posts() ) : the_post();    
     	include 'article.php';
+    	
     	include '_shopping_incentives.php';
+    	
+    	include '_add_to_cart.php';
     	include '_add_to_wishlist.php';
     	include '_subscribe_to_newsletter.php';
     	include '_share.php';
+    	
     	include '_browse_products.php';
     	
     	$klass = 'intro';

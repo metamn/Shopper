@@ -42,7 +42,7 @@ html {
 					}
 				}
 				
-				#add-to-wishlist, #subscribe-to-newsletter {
+				#add-to-cart, #add-to-wishlist, #subscribe-to-newsletter {
 					@include block;
 					
 					#incentives {
@@ -65,9 +65,30 @@ html {
 					#action {
 						@include col($minor, 0, 0);
 						
-						font-size: 10em;
+						font-size: $pad*8;
 						color: $color-cart;
 						text-align: center;
+					}
+				}
+				
+				#add-to-cart {
+					#action {
+						#cart-logo {
+							display: inline-block;
+							font-size: medium;
+							text-align: center;
+							width: $pad*8;
+							height: $pad*8;
+							border-radius: $pad*4;
+							
+							@include text-cart-inverted;
+							
+							span {
+								font-size: 2em;
+								display: block;
+								margin-top: $pad/2;
+							}
+						}
 					}
 				}
 				

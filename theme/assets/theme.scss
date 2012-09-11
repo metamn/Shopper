@@ -77,6 +77,20 @@ $color-cart: lighten(red, 10%);
 	}
 }
 
+@mixin text-cart-inverted {
+	background: $color-cart;
+	color: $color-background;
+	
+	@include font-text;
+	font-style: italic;
+	
+	a, a:visited, a:hover {
+		text-decoration: underline;
+		color: $color-background;
+	}
+}
+
+
 
 /* Links
 */
