@@ -62,10 +62,10 @@ $color-action: #9173FF; /* FF3, Kuler, Compound */
 
 /* Cart 
 */
-$color-cart-background: lighten(red, 10%);
+$color-cart: lighten(red, 10%);
 
 @mixin text-cart {
-	background: $color-cart-background;
+	background: $color-cart;
 	color: $color-text;
 	
 	@include font-text;
