@@ -99,6 +99,72 @@ html {
           			margin: $pad*2 0;
           		}
           		
+          		.pane {
+          		
+          			/* Comments
+          			*/
+								#comments-title {
+									@include hidden;
+								}
+								
+								ol.commentlist {
+									@include list-premium;
+									
+									li {
+										font-size: medium;
+										margin-bottom: $pad*2;
+										
+										a, a:visited, a:active {
+											@include link-neutral;
+										}
+			
+										.comment-body {
+											p {
+												font-size: larger;
+												margin: $pad 0;
+											}
+			
+											.comment-author .fn {
+												font-size: 2em;
+												margin: 0 $pad/4;
+												font-weight: bold;
+												@include text-action;
+												padding: $pad/4;
+											}
+											.comment-author .says {
+												@include hidden;
+											}
+											.comment-meta { 
+												position: relative;
+												top: -$pad*2;
+												float: right;
+												
+												a {
+													color: $color-text-light;
+													border-bottom: 1px solid;
+													padding-bottom: $pad/4;
+												}
+												a.comment-edit-link {
+													@include hidden;
+												}
+											}
+										}
+			
+									}
+									
+								}
+								
+								#respond {
+									h3 {
+										display: block;
+									}
+									
+									.form-allowed-tags {
+										@include hidden;
+									}
+								}
+          		}
+          		
           	}
           
           }

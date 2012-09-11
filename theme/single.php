@@ -14,7 +14,6 @@
 	if (have_posts()) { 
 		while ( have_posts() ) : the_post();    
     	include 'article.php';
-    	include '_comments.php';
     	include '_shopping_incentives.php';
     	include '_add_to_wishlist.php';
     	include '_subscribe_to_newsletter.php';

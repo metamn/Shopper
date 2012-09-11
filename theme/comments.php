@@ -12,7 +12,7 @@
  * @since Twenty Eleven 1.0
  */
 ?>
-	<div id="comments">
+	
 	<?php if ( post_password_required() ) : ?>
 		<p class="nopassword"><?php _e( 'This post is password protected. Enter the password to view any comments.', 'twentyeleven' ); ?></p>
 	</div><!-- #comments -->
@@ -28,12 +28,12 @@
 	<?php // You can start editing here -- including this comment! ?>
 
 	<?php if ( have_comments() ) : ?>
-		<h2 id="comments-title">
+		<h3 id="comments-title">
 			<?php
 				printf( _n( 'O reactie la &ldquo;%2$s&rdquo;', '%1$s reactii la &ldquo;%2$s&rdquo;', get_comments_number(), 'twentyeleven' ),
 					number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
 			?>
-		</h2>
+		</h3>
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 		<nav id="comment-nav-above">
@@ -72,6 +72,8 @@
 		<p class="nocomments"><?php _e( 'Comments are closed.', 'twentyeleven' ); ?></p>
 	<?php endif; ?>
 
-	<?php comment_form(); ?>
+	<?php comment_form(array(
+		'title_reply' => 'Parerea Dvs.'
+	)); ?>
 
-</div><!-- #comments -->
+

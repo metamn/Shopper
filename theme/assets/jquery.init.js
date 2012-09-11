@@ -4,13 +4,21 @@ jQuery(document).ready(function() {
 	// Product
 	// -----------------------------------------------
 	
-	// Display the firs pane in product description
+	// Display the firs pane in Product Description
 	jQuery(".single #content .entry .body .pane").removeClass('active');
 	jQuery(".single #content .entry .body .pane").first().addClass('active');
 	
-	// Click on content headers
+	
+	// Click on Product Description content headers
 	jQuery(".single #content .entry .body h3").click(function() {
 		jQuery(this).next().slideToggle('slow');
+	});
+	
+	
+	// Click on close comments
+	jQuery(".single #content #comments .close").click(function() {
+		jQuery(this).html('Vizualizare comentarii');
+		jQuery(".single #content #comments").slideToggle('slow');
 	});
 	
 	

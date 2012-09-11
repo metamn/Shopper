@@ -57,7 +57,14 @@
       <?php echo display_product_thumbs($product->images); ?>
     </div>	 
 	  <div class="body">
-	    <?php if (is_single()) { the_content(); } ?>
+	    <?php if (is_single()) { 
+	    	the_content(); ?>
+	    	
+	    	<h3>Comentarii</h3>
+				<div class="pane">
+					<?php comments_template(); ?>
+				</div>
+			<?php } ?>
 	  </div>
 	</div>
 	<footer>
