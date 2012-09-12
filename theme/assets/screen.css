@@ -299,6 +299,7 @@ html body.archive .container header hgroup #logo {
   height: 2.1875em;
   width: 7.34375em;
   /* an extra space must be add */
+  position: fixed;
 }
 html body.archive .container header hgroup #logo .cell {
   width: 0.3125em;
@@ -313,6 +314,10 @@ html body.archive .container header hgroup #logo .set {
 }
 html body.archive .container header #archive-title {
   cursor: pointer;
+  position: fixed;
+  width: 62.5%;
+  margin: 0 0 0 37.5%;
+  float: left;
 }
 html body.archive .container header #archive-title h3 {
   padding: 0;
@@ -327,6 +332,9 @@ html body.archive .container header #menu header, html body.archive .container h
 }
 html body.archive .container header #menu article {
   display: none;
+}
+html body.archive .container header #cart-and-info {
+  position: fixed;
 }
 
 /* General
@@ -814,12 +822,51 @@ html .container #intro article#premium ul li span a, html .container #intro arti
 
 /* Displays an Article whenever is single or in archive
 	--------------------------------------------------------
-		
 */
-html body.single .container #content article header {
+/* Archive
+
+	- Overrides for the single article style
+
+*/
+html body.archive .container #content article.list {
+  width: 100%;
+  float: left;
+}
+html body.archive .container #content article.list footer {
+  position: relative;
+  bottom: auto;
+  top: -25em;
+}
+html body.archive .container #content article.list .entry .featured-image {
+  width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+  float: right;
+}
+html body.archive .container #content article.list .entry .thumbs {
   display: none;
 }
-html body.single .container #content article footer {
+html body.archive .container #content article.list .entry .shopping, html body.archive .container #content article.list .entry .more {
+  position: relative;
+  bottom: auto;
+}
+html body.archive .container #content article.list .entry .more {
+  top: -5em;
+}
+html body.archive .container #content article.list .entry .excerpt {
+  position: relative;
+  top: -30em;
+}
+
+/* Single
+
+	- This is the default, archive styles are overwriting this
+
+*/
+html body .container #content article.post header {
+  display: none;
+}
+html body .container #content article.post footer {
   width: 37.5%;
   margin: 0 0 0 0;
   float: left;
@@ -829,27 +876,27 @@ html body.single .container #content article footer {
   position: absolute;
   bottom: 1.25em;
 }
-html body.single .container #content article footer h1 {
+html body .container #content article.post footer h1 {
   color: white;
   background: #1a1a1a;
   padding: 1.25em;
   opacity: .9;
 }
-html body.single .container #content article footer h1 a, html body.single .container #content article footer h1 a:visited, html body.single .container #content article footer h1 a:active {
+html body .container #content article.post footer h1 a, html body .container #content article.post footer h1 a:visited, html body .container #content article.post footer h1 a:active {
   color: white;
   text-decoration: none;
 }
-html body.single .container #content article footer .shopping {
+html body .container #content article.post footer .shopping {
   display: none;
 }
-html body.single .container #content article .entry {
+html body .container #content article.post .entry {
   width: 100%;
   float: left;
 }
-html body.single .container #content article .entry .featured-image {
+html body .container #content article.post .entry .featured-image {
   text-align: right;
 }
-html body.single .container #content article .entry .shopping {
+html body .container #content article.post .entry .shopping {
   width: 37.5%;
   margin: 0 0 0 37.5%;
   float: left;
@@ -861,14 +908,14 @@ html body.single .container #content article .entry .shopping {
   position: absolute;
   bottom: 1.25em;
 }
-html body.single .container #content article .entry .shopping a, html body.single .container #content article .entry .shopping a:visited, html body.single .container #content article .entry .shopping a:hover {
+html body .container #content article.post .entry .shopping a, html body .container #content article.post .entry .shopping a:visited, html body .container #content article.post .entry .shopping a:hover {
   text-decoration: underline;
   color: #1a1a1a;
 }
-html body.single .container #content article .entry .shopping div {
+html body .container #content article.post .entry .shopping div {
   padding: 1.25em;
 }
-html body.single .container #content article .entry .more {
+html body .container #content article.post .entry .more {
   width: 18.75%;
   margin: 0 0 0 75%;
   float: left;
@@ -878,12 +925,12 @@ html body.single .container #content article .entry .more {
   background: white;
   padding: 1.25em;
 }
-html body.single .container #content article .entry .thumbs {
+html body .container #content article.post .entry .thumbs {
   width: 62.5%;
   margin: 0 0 0 0;
   float: left;
 }
-html body.single .container #content article .entry .thumbs .thumb {
+html body .container #content article.post .entry .thumbs .thumb {
   width: 18.75%;
   margin: 0 0 0 0;
   float: left;
@@ -891,12 +938,12 @@ html body.single .container #content article .entry .thumbs .thumb {
   padding: 0.3125em;
   border: 1px solid #999999;
 }
-html body.single .container #content article .entry .excerpt {
+html body .container #content article.post .entry .excerpt {
   width: 37.5%;
   margin: 0 0 0 0;
   float: left;
 }
-html body.single .container #content article .entry .excerpt p {
+html body .container #content article.post .entry .excerpt p {
   font-size: 2em;
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
@@ -904,68 +951,68 @@ html body.single .container #content article .entry .excerpt p {
   color: #999999;
   padding: 1.25em;
 }
-html body.single .container #content article .entry .body {
+html body .container #content article.post .entry .body {
   width: 62.5%;
   margin: 0 0 0 38.25%;
   float: left;
 }
-html body.single .container #content article .entry .body h3 {
+html body .container #content article.post .entry .body h3 {
   display: block;
   padding-bottom: 0.3125em;
   border-bottom: 1px solid;
   cursor: pointer;
 }
-html body.single .container #content article .entry .body h3:after {
+html body .container #content article.post .entry .body h3:after {
   content: "\21E3";
   font-size: smaller;
   color: #999999;
 }
-html body.single .container #content article .entry .body h3 + .pane {
+html body .container #content article.post .entry .body h3 + .pane {
   display: none;
   margin: 2.5em 0;
 }
-html body.single .container #content article .entry .body .pane {
+html body .container #content article.post .entry .body .pane {
   /* Comments
   */
 }
-html body.single .container #content article .entry .body .pane #comments-title {
+html body .container #content article.post .entry .body .pane #comments-title {
   display: none;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist {
+html body .container #content article.post .entry .body .pane ol.commentlist {
   list-style-type: none;
   padding: 0;
   font-size: smaller;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li {
+html body .container #content article.post .entry .body .pane ol.commentlist li {
   font-size: 2em;
   font-weight: normal;
   font-style: italic;
   padding: 0.625em;
   border-bottom: 1px dotted;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li span {
+html body .container #content article.post .entry .body .pane ol.commentlist li span {
   font-weight: bold;
   background: #1a1a1a;
   color: white;
   font-family: "Lekton", sans-serif;
   padding: 0.3125em;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li span a, html body.single .container #content article .entry .body .pane ol.commentlist li span a:visited, html body.single .container #content article .entry .body .pane ol.commentlist li span a:hover {
+html body .container #content article.post .entry .body .pane ol.commentlist li span a, html body .container #content article.post .entry .body .pane ol.commentlist li span a:visited, html body .container #content article.post .entry .body .pane ol.commentlist li span a:hover {
   text-decoration: underline;
   color: #ffff33;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li {
+html body .container #content article.post .entry .body .pane ol.commentlist li {
   font-size: medium;
   margin-bottom: 2.5em;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li a, html body.single .container #content article .entry .body .pane ol.commentlist li a:visited, html body.single .container #content article .entry .body .pane ol.commentlist li a:active {
+html body .container #content article.post .entry .body .pane ol.commentlist li a, html body .container #content article.post .entry .body .pane ol.commentlist li a:visited, html body .container #content article.post .entry .body .pane ol.commentlist li a:active {
   color: #1a1a1a;
   text-decoration: none;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body p {
+html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body p {
   margin: 1.25em 0;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-author .fn {
+html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-author .fn {
   font-size: larger;
   margin: 0 0.3125em;
   font-weight: bold;
@@ -976,30 +1023,30 @@ html body.single .container #content article .entry .body .pane ol.commentlist l
   position: relative;
   top: -0.625em;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-author .fn a, html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-author .fn a:visited, html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-author .fn a:hover {
+html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-author .fn a, html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-author .fn a:visited, html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-author .fn a:hover {
   text-decoration: underline;
   color: #ffff33;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-author .says {
+html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-author .says {
   display: none;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-meta {
+html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-meta {
   position: relative;
   top: -2.5em;
   float: right;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-meta a {
+html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-meta a {
   color: #999999;
   border-bottom: 1px solid;
   padding-bottom: 0.3125em;
 }
-html body.single .container #content article .entry .body .pane ol.commentlist li .comment-body .comment-meta a.comment-edit-link {
+html body .container #content article.post .entry .body .pane ol.commentlist li .comment-body .comment-meta a.comment-edit-link {
   display: none;
 }
-html body.single .container #content article .entry .body .pane #respond h3 {
+html body .container #content article.post .entry .body .pane #respond h3 {
   display: block;
 }
-html body.single .container #content article .entry .body .pane #respond .form-allowed-tags {
+html body .container #content article.post .entry .body .pane #respond .form-allowed-tags {
   display: none;
 }
 

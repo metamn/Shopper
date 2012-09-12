@@ -2,17 +2,74 @@
 
 /* Displays an Article whenever is single or in archive
 	--------------------------------------------------------
-		
 */
 
 
+/* Archive
+
+	- Overrides for the single article style
+
+*/
 
 html {
-	body.single {
+	body.archive {
+		.container {
+			#content {
+				article.list {
+					@include block;
+				
+					footer {
+          	position: relative;
+          	bottom: auto;
+          	
+          	top: -25em;
+					}
+					
+					.entry {
+						.featured-image {
+							@include col($major, 0, 0);
+							float: right;
+						}
+						
+						.thumbs {
+							@include hidden;
+						}
+						
+						.shopping, .more {
+							position: relative;
+          		bottom: auto;
+						}
+						
+						.more {
+							top: -$pad*4;
+						}
+						
+						.excerpt {
+							position: relative;
+							top: -30em;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+/* Single
+
+	- This is the default, archive styles are overwriting this
+
+*/
+
+html {
+	body {
 		.container {
 			#content {
 
-				article {      
+				article.post {      
         	header {
         		@include hidden;
         	}
