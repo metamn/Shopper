@@ -43,29 +43,31 @@ html {
 				}
 				
 				#add-to-cart, #add-to-wishlist, #subscribe-to-newsletter {
-					@include block;
+					@include col($major + $minor/2, $minor/4, 0);
 					
 					#incentives {
-						@include col($major, 0, 0);
+						@include col($major, 0, $minor/4);
 						border-bottom: 1px solid;
 					
 						dl {
 							@include dlist;
+							margin: 0;
 							
 							dt {
 								padding-bottom: 0;
+								font-size: 1.5em;
 							}
 							
 							dd {
-								margin: 0 $pad*2;
+								margin: 0 $pad+ $pad/2;
 							}
 						}
 					}
 					
 					#action {
-						@include col($minor, 0, 0);
+						@include col($minor/1.5, 0, 0);
 						
-						font-size: $pad*8;
+						font-size: $pad*6;
 						color: $color-cart;
 						text-align: center;
 					}
@@ -77,14 +79,14 @@ html {
 							display: inline-block;
 							font-size: medium;
 							text-align: center;
-							width: $pad*8;
-							height: $pad*8;
+							width: $pad*6;
+							height: $pad*6;
 							border-radius: $pad*4;
 							
 							@include text-cart-inverted;
 							
 							span {
-								font-size: 2em;
+								font-size: 1.5em;
 								display: block;
 								margin-top: $pad/2;
 							}

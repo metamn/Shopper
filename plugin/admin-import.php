@@ -498,15 +498,25 @@ function shopper_import_posts() {
   
   // Drop existing data
   shopper_import_drop_old_posts();
+  
+  for ($i=1; $i<=10; $i++) {
+  
+  	$limit = $i*100;
+  	$offset = ($i-1)*100;
 
   // Get all published posts
+  $posts = array();
   $posts = $old->get_results(
-    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' AND post_status = 'publish'"
+    "SELECT * FROM wp_cp53mf_posts WHERE post_type = 'post' AND post_status = 'publish' LIMIT " . $limit . " OFFSET " . $offset
   );
   
-  echo "Importing " . count($posts) . " posts<br/";
+  echo "Importing " . count($posts) . " posts<br/>";
   
+  $cccc = 0;
   foreach ($posts as $post) {
+    
+    $cccc += 1;
+    echo "<br>CCCC: $cccc</br>";
     
     // Check if it is a product
     $meta = $old->get_results(
@@ -533,6 +543,7 @@ function shopper_import_posts() {
       
       // Images
       $attach = shopper_import_get_attachments($post->ID);
+      //$attach = array();
       
       // Comments
       $comms = shopper_import_get_comments2($post->ID);
@@ -540,10 +551,14 @@ function shopper_import_posts() {
       // Save
       $id = shopper_import_save_post($post, $product, $vars, $content, $attach, $comms); 
       echo "<br/>... post saved, id=$id";
-      
-      
+    } else {
+    	echo "<br>No product id ... $post->ID<br/>";
     }
   }
+  
+  }
+  
+  
 }
 
 
@@ -556,6 +571,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
   
   
   global $old;
+  global $wpdb;
   $old = new wpdb('cs','cs','ujsmuff','localhost');
   $old->show_errors();
   $wpdb->show_errors();
@@ -627,6 +643,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
   	//add_post_meta($aid, '_wp_attached_file', get_post_meta($a->ID, '_wp_attached_file', true));
   	//add_post_meta($aid, '_wp_attachment_metadata', get_post_meta($a->ID, '_wp_attachment_metadata', true));
     
+    
     $meta = $old->get_results(
 			"SELECT * FROM wp_cp53mf_postmeta WHERE post_id = " . $a_original . 
 			" AND meta_key = '_wp_attached_file'"
@@ -640,7 +657,9 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
 		);
 		add_post_meta($aid, '_wp_attachment_metadata', $meta[0]->meta_value); 
     
+    
     echo "<br/>... Attachment: $aid";
+    
   }
   
   // Comments

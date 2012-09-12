@@ -1292,17 +1292,19 @@ html body.single .container #content #shopping-incentives #action #add-to-cart a
   color: #1a1a1a;
 }
 html body.single .container #content #add-to-cart, html body.single .container #content #add-to-wishlist, html body.single .container #content #subscribe-to-newsletter {
-  width: 100%;
+  width: 81.25%;
+  margin: 0 0 0 9.375%;
   float: left;
 }
 html body.single .container #content #add-to-cart #incentives, html body.single .container #content #add-to-wishlist #incentives, html body.single .container #content #subscribe-to-newsletter #incentives {
   width: 62.5%;
-  margin: 0 0 0 0;
+  margin: 0 9.375% 0 0;
   float: left;
   border-bottom: 1px solid;
 }
 html body.single .container #content #add-to-cart #incentives dl, html body.single .container #content #add-to-wishlist #incentives dl, html body.single .container #content #subscribe-to-newsletter #incentives dl {
   cursor: default;
+  margin: 0;
 }
 html body.single .container #content #add-to-cart #incentives dl dt, html body.single .container #content #add-to-wishlist #incentives dl dt, html body.single .container #content #subscribe-to-newsletter #incentives dl dt {
   text-transform: none;
@@ -1363,15 +1365,16 @@ html body.single .container #content #add-to-cart #incentives dl dd div#c2 p, ht
 }
 html body.single .container #content #add-to-cart #incentives dl dt, html body.single .container #content #add-to-wishlist #incentives dl dt, html body.single .container #content #subscribe-to-newsletter #incentives dl dt {
   padding-bottom: 0;
+  font-size: 1.5em;
 }
 html body.single .container #content #add-to-cart #incentives dl dd, html body.single .container #content #add-to-wishlist #incentives dl dd, html body.single .container #content #subscribe-to-newsletter #incentives dl dd {
-  margin: 0 2.5em;
+  margin: 0 1.875em;
 }
 html body.single .container #content #add-to-cart #action, html body.single .container #content #add-to-wishlist #action, html body.single .container #content #subscribe-to-newsletter #action {
-  width: 37.5%;
+  width: 25%;
   margin: 0 0 0 0;
   float: left;
-  font-size: 10em;
+  font-size: 7.5em;
   color: #ff3333;
   text-align: center;
 }
@@ -1379,8 +1382,8 @@ html body.single .container #content #add-to-cart #action #cart-logo {
   display: inline-block;
   font-size: medium;
   text-align: center;
-  width: 10em;
-  height: 10em;
+  width: 7.5em;
+  height: 7.5em;
   border-radius: 5em;
   background: #ff3333;
   color: white;
@@ -1393,7 +1396,7 @@ html body.single .container #content #add-to-cart #action #cart-logo a, html bod
   color: white;
 }
 html body.single .container #content #add-to-cart #action #cart-logo span {
-  font-size: 2em;
+  font-size: 1.5em;
   display: block;
   margin-top: 0.625em;
 }
