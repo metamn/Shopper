@@ -209,38 +209,38 @@ body .container strong {
 */
 @font-face {
   font-family: "Ostrich Black";
-  src: url('/ostrich/ostrich-black-webfont.eot');
-  src: url('/ostrich/ostrich-black-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-black-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-black-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-black-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-black-webfont.eot');
+  src: url('fonts/ostrich/ostrich-black-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-black-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-black-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-black-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Light";
-  src: url('/ostrich/ostrich-light-webfont.eot');
-  src: url('/ostrich/ostrich-light-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-light-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-light-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-light-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-light-webfont.eot');
+  src: url('fonts/ostrich/ostrich-light-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-light-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-light-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-light-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Bold";
-  src: url('/ostrich/ostrich-bold-webfont.eot');
-  src: url('/ostrich/ostrich-bold-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-bold-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-bold-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-bold-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-bold-webfont.eot');
+  src: url('fonts/ostrich/ostrich-bold-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-bold-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-bold-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-bold-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Dashed";
-  src: url('/ostrich/ostrich-dashed-webfont.eot');
-  src: url('/ostrich/ostrich-dashed-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-dashed-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-dashed-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-dashed-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-dashed-webfont.eot');
+  src: url('fonts/ostrich/ostrich-dashed-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-dashed-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-dashed-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-dashed-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Regular";
-  src: url('/ostrich/ostrich-regular-webfont.eot');
-  src: url('/ostrich/ostrich-regular-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-regular-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-regular-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-regular-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-regular-webfont.eot');
+  src: url('fonts/ostrich/ostrich-regular-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-regular-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-regular-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-regular-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Rounded";
-  src: url('/ostrich/ostrich-rounded-webfont.eot');
-  src: url('/ostrich/ostrich-rounded-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-rounded-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-rounded-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-rounded-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-rounded-webfont.eot');
+  src: url('fonts/ostrich/ostrich-rounded-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-rounded-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-rounded-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-rounded-webfont.svg') format('svg');
 }
 
 body .container h1, body .container h2, body .container h3, body .container h4, body .container h5, body .container h6 {
@@ -899,8 +899,6 @@ html body.archive .container #content article.list footer {
   display: none;
 }
 
-/* Single article
-*/
 html body.single .container #content article header {
   display: none;
 }
@@ -1087,7 +1085,6 @@ html body.single .container #content article .entry .body .pane #respond h3 {
 html body.single .container #content article .entry .body .pane #respond .form-allowed-tags {
   display: none;
 }
-
 html body.single .container #content #shopping-incentives {
   width: 100%;
   float: left;
