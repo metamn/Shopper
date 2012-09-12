@@ -209,38 +209,38 @@ body .container strong {
 */
 @font-face {
   font-family: "Ostrich Black";
-  src: url('fonts/ostrich/ostrich-black-webfont.eot');
-  src: url('fonts/ostrich/ostrich-black-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-black-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-black-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-black-webfont.svg') format('svg');
+  src: url('/ostrich/ostrich-black-webfont.eot');
+  src: url('/ostrich/ostrich-black-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-black-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-black-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-black-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Light";
-  src: url('fonts/ostrich/ostrich-light-webfont.eot');
-  src: url('fonts/ostrich/ostrich-light-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-light-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-light-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-light-webfont.svg') format('svg');
+  src: url('/ostrich/ostrich-light-webfont.eot');
+  src: url('/ostrich/ostrich-light-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-light-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-light-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-light-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Bold";
-  src: url('fonts/ostrich/ostrich-bold-webfont.eot');
-  src: url('fonts/ostrich/ostrich-bold-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-bold-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-bold-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-bold-webfont.svg') format('svg');
+  src: url('/ostrich/ostrich-bold-webfont.eot');
+  src: url('/ostrich/ostrich-bold-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-bold-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-bold-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-bold-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Dashed";
-  src: url('fonts/ostrich/ostrich-dashed-webfont.eot');
-  src: url('fonts/ostrich/ostrich-dashed-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-dashed-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-dashed-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-dashed-webfont.svg') format('svg');
+  src: url('/ostrich/ostrich-dashed-webfont.eot');
+  src: url('/ostrich/ostrich-dashed-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-dashed-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-dashed-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-dashed-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Regular";
-  src: url('fonts/ostrich/ostrich-regular-webfont.eot');
-  src: url('fonts/ostrich/ostrich-regular-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-regular-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-regular-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-regular-webfont.svg') format('svg');
+  src: url('/ostrich/ostrich-regular-webfont.eot');
+  src: url('/ostrich/ostrich-regular-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-regular-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-regular-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-regular-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Rounded";
-  src: url('fonts/ostrich/ostrich-rounded-webfont.eot');
-  src: url('fonts/ostrich/ostrich-rounded-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-rounded-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-rounded-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-rounded-webfont.svg') format('svg');
+  src: url('/ostrich/ostrich-rounded-webfont.eot');
+  src: url('/ostrich/ostrich-rounded-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-rounded-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-rounded-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-rounded-webfont.svg') format('svg');
 }
 
 body .container h1, body .container h2, body .container h3, body .container h4, body .container h5, body .container h6 {
@@ -812,93 +812,10 @@ html .container #intro article#premium ul li span a, html .container #intro arti
   color: #ffff33;
 }
 
-/* Articles on index page
+/* Displays an Article whenever is single or in archive
+	--------------------------------------------------------
+		
 */
-/* List */
-html body.archive .container #content {
-  width: 100%;
-  float: left;
-  margin: 2.5em 0;
-}
-html body.archive .container #content header h3 {
-  display: none;
-}
-html body.archive .container #content aside {
-  width: 100%;
-  float: left;
-}
-html body.archive .container #content aside #description {
-  width: 100%;
-  float: left;
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-  font-size: larger;
-  color: #999999;
-  text-align: center;
-}
-html body.archive .container #content aside #search {
-  width: 100%;
-  float: left;
-  margin: 1.25em 0;
-}
-html body.archive .container #content aside #search #fields, html body.archive .container #content aside #search ul#search-price-list {
-  margin: 0 auto !important;
-  text-align: center;
-}
-html body.archive .container #content aside #search #fields {
-  width: 62.5%;
-}
-html body.archive .container #content aside #search input {
-  font-size: larger;
-}
-html body.archive .container #content aside #search input[type='text'] {
-  width: 62.5%;
-}
-html body.archive .container #content aside #search input[type='submit'] {
-  width: auto;
-}
-html body.archive .container #content aside #search ul#search-price-list {
-  width: 81.25%;
-  font-size: smaller;
-  display: block;
-  margin: 0;
-}
-html body.archive .container #content aside #search ul#search-price-list li {
-  display: inline-block;
-  list-style-type: none;
-  margin-left: 0;
-}
-html body.archive .container #content article.list {
-  width: 100%;
-  float: left;
-}
-html body.archive .container #content article.list header {
-  width: 62.5%;
-  margin: 0 0 0 0;
-  float: left;
-  float: right;
-}
-html body.archive .container #content article.list header h1 {
-  font-family: "Old Standard TT", serif;
-  letter-spacing: normal;
-}
-html body.archive .container #content article.list .entry {
-  width: 37.5%;
-  margin: 0 0 0 0;
-  float: left;
-}
-html body.archive .container #content article.list .entry .thumbs, html body.archive .container #content article.list .entry .excerpt, html body.archive .container #content article.list .entry .more, html body.archive .container #content article.list .entry .shopping, html body.archive .container #content article.list .entry .body {
-  position: relative;
-  left: 100%;
-  top: -10em;
-}
-html body.archive .container #content article.list .entry .thumbs, html body.archive .container #content article.list .entry .body {
-  display: none;
-}
-html body.archive .container #content article.list footer {
-  display: none;
-}
-
 html body.single .container #content article header {
   display: none;
 }
@@ -1085,6 +1002,73 @@ html body.single .container #content article .entry .body .pane #respond h3 {
 html body.single .container #content article .entry .body .pane #respond .form-allowed-tags {
   display: none;
 }
+
+/* Displays what is on an Archive page beside the articles
+	--------------------------------------------------------
+	
+	The article is styled in article.scss
+	
+*/
+html body.archive .container #content {
+  width: 100%;
+  float: left;
+  margin: 2.5em 0;
+}
+html body.archive .container #content header h3 {
+  display: none;
+}
+html body.archive .container #content aside {
+  width: 100%;
+  float: left;
+}
+html body.archive .container #content aside #description {
+  width: 100%;
+  float: left;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-size: larger;
+  color: #999999;
+  text-align: center;
+}
+html body.archive .container #content aside #search {
+  width: 100%;
+  float: left;
+  margin: 1.25em 0;
+}
+html body.archive .container #content aside #search #fields, html body.archive .container #content aside #search ul#search-price-list {
+  margin: 0 auto !important;
+  text-align: center;
+}
+html body.archive .container #content aside #search #fields {
+  width: 62.5%;
+}
+html body.archive .container #content aside #search input {
+  font-size: larger;
+}
+html body.archive .container #content aside #search input[type='text'] {
+  width: 62.5%;
+}
+html body.archive .container #content aside #search input[type='submit'] {
+  width: auto;
+}
+html body.archive .container #content aside #search ul#search-price-list {
+  width: 81.25%;
+  font-size: smaller;
+  display: block;
+  margin: 0;
+}
+html body.archive .container #content aside #search ul#search-price-list li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 0;
+}
+
+/* Displays what is on a Single page beside the post
+	--------------------------------------------------------
+	
+	The post is styled in article.scss
+	
+*/
 html body.single .container #content #shopping-incentives {
   width: 100%;
   float: left;

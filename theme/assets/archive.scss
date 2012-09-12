@@ -1,8 +1,13 @@
-/* Articles on index page
+
+
+/* Displays what is on an Archive page beside the articles
+	--------------------------------------------------------
+	
+	The article is styled in article.scss
+	
 */
 
 
-/* List */
 html {
   body.archive {
     .container {
@@ -14,7 +19,6 @@ html {
       		h3 {
       			@include hidden;
       		}
-      	
       	}
       
       	aside {
@@ -61,37 +65,7 @@ html {
       		}
       	}
       
-        article.list {
-          @include block;
-          
-          header {
-          	@include col($major, 0, 0);
-          	float: right;
-          	
-          	h1 {
-              @include font-text;
-            }
-          }
-          
-          .entry {
-          	@include col($minor, 0, 0);
-          	
-          	.thumbs, .excerpt, .more, .shopping, .body {
-          		position: relative;
-          		left: 100%;
-          		top: -10em;
-          	}
-          	
-          	.thumbs, .body {
-          		@include hidden;
-          	}
-            
-          }
-          
-          footer {
-          	display: none;
-          }
-        }
+        
       }
     }
   }

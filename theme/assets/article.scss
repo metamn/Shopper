@@ -1,13 +1,18 @@
 
 
-/* Single article
+/* Displays an Article whenever is single or in archive
+	--------------------------------------------------------
+		
 */
 
+
+
 html {
-  body.single {
-    .container {
-      #content {        
-        article {      
+	body.single {
+		.container {
+			#content {
+
+				article {      
         	header {
         		@include hidden;
         	}
@@ -177,14 +182,9 @@ html {
           	}
           
           }
-          
         }
-      }  
-    }
-  }
+			
+			}
+		}
+	}
 }
-
-
-
-
-

@@ -1,180 +1,19 @@
+
+
+/* Displays what is on a Single page beside the post
+	--------------------------------------------------------
+	
+	The post is styled in article.scss
+	
+*/
+
+
+
 html {
 	body.single {
 		.container {
 			#content {
 			
-				article {      
-        	header {
-        		@include hidden;
-        	}
-        	footer {
-          	@include col($minor, 0, 0);
-          	
-          	display: block;
-          	padding: 0;
-          	border: none;
-          	
-          	position: absolute;
-          	bottom: $pad;
-          	
-          	h1 {
-          		@include color-text-inverted;
-          		padding: $pad;
-          		
-          		opacity: .9;
-          	}
-          	
-          	.shopping {
-          		display: none;
-          	}
-          }
-          .entry {
-          	@include block;
-          	
-          	.featured-image {
-        			text-align: right;
-          	}
-          	
-          	.shopping {
-          		@include col($minor, $minor, 0);
-          		@include text-cart;
-          		
-          		position: absolute;
-          		bottom: $pad;
-          		
-          		div {
-          			padding: $pad;
-          		}
-          	}
-          	
-          	.more {
-          		@include col($minor/2, $minor*2, 0);
-          		
-          		position: absolute;
-          		bottom: $pad;
-          		
-          		opacity: .9;
-          		background: $color-background;
-          		padding: $pad;
-          	}
-          	
-          	.thumbs {
-          		@include col($major, 0, 0);
-          		
-          		.thumb {
-          			@include col($minor/2, 0, 0);
-          			
-          			margin: $pad*2 $pad/2 0 0;
-          			padding: $pad/4;
-          			border: 1px solid $color-text-light;
-          		}
-          	}
-          	
-          	.excerpt {
-          		@include col($minor, 0, 0);
-          		
-          		p {
-          			font-size: 2em;
-								@include font-text;
-								font-style: italic;
-								color: $color-text-light; 
-								padding: $pad;
-							}
-          	}
-          	
-          	.body {
-          		@include col($major, $minor*1.02, 0);
-          		
-          		h3 {
-          			display: block;
-          			padding-bottom: $pad/4;
-          			border-bottom: 1px solid;
-          			
-          			cursor: pointer;
-          		}
-          		h3:after {
-          			@include list-item-arrow;
-          		}
-          		h3 + .pane {
-          			@include hidden;
-          			
-          			margin: $pad*2 0;
-          		}
-          		
-          		.pane {
-          		
-          			/* Comments
-          			*/
-								#comments-title {
-									@include hidden;
-								}
-								
-								ol.commentlist {
-									@include list-premium;
-									font-size: smaller;
-									
-									li {
-										font-size: medium;
-										margin-bottom: $pad*2;
-										
-										a, a:visited, a:active {
-											@include link-neutral;
-										}
-			
-										.comment-body {
-											p {
-												margin: $pad 0;
-											}
-			
-											.comment-author .fn {
-												font-size: larger;
-												margin: 0 $pad/4;
-												font-weight: bold;
-												@include text-action;
-												padding: $pad/4;
-												
-												position: relative;
-												top: -$pad/2;
-											}
-											.comment-author .says {
-												@include hidden;
-											}
-											.comment-meta { 
-												position: relative;
-												top: -$pad*2;
-												float: right;
-												
-												a {
-													color: $color-text-light;
-													border-bottom: 1px solid;
-													padding-bottom: $pad/4;
-												}
-												a.comment-edit-link {
-													@include hidden;
-												}
-											}
-										}
-			
-									}
-									
-								}
-								
-								#respond {
-									h3 {
-										display: block;
-									}
-									
-									.form-allowed-tags {
-										@include hidden;
-									}
-								}
-          		}
-          		
-          	}
-          
-          }
-        }
-				
 				#shopping-incentives {
 					@include block;
 					margin: $pad*4 0;
