@@ -27,7 +27,7 @@ if ($found_posts > 1) {
   
 	<aside>
 		<div id="description"><?php echo $this_page->description ?></div>
-		<?php include 'search.php' ?>
+		<div id="search"><?php include 'search.php' ?></div>
 	</aside>
   	
   <?php

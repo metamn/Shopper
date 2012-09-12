@@ -812,44 +812,91 @@ html .container #intro article#premium ul li span a, html .container #intro arti
   color: #ffff33;
 }
 
-html body .container #content {
+/* Articles on index page
+*/
+/* List */
+html body.archive .container #content {
+  width: 100%;
+  float: left;
+  margin: 2.5em 0;
+}
+html body.archive .container #content header h3 {
+  display: none;
+}
+html body.archive .container #content aside {
+  width: 100%;
+  float: left;
+}
+html body.archive .container #content aside #description {
+  width: 100%;
+  float: left;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  font-size: larger;
+  color: #999999;
+  text-align: center;
+}
+html body.archive .container #content aside #search {
   width: 100%;
   float: left;
   margin: 1.25em 0;
 }
-html body .container #content h3 {
-  display: none;
+html body.archive .container #content aside #search #fields, html body.archive .container #content aside #search ul#search-price-list {
+  margin: 0 auto !important;
+  text-align: center;
 }
-
-/* Articles on index page
-*/
-/* List */
-html body .container #content article.list {
-  width: 45%;
-  margin: 0 5% 0 0;
-  float: left;
-  height: 20em;
+html body.archive .container #content aside #search #fields {
+  width: 62.5%;
 }
-html body .container #content article.list header {
-  display: none;
+html body.archive .container #content aside #search input {
+  font-size: larger;
 }
-html body .container #content article.list .entry {
+html body.archive .container #content aside #search input[type='text'] {
+  width: 62.5%;
+}
+html body.archive .container #content aside #search input[type='submit'] {
+  width: auto;
+}
+html body.archive .container #content aside #search ul#search-price-list {
+  width: 81.25%;
+  font-size: smaller;
+  display: block;
+  margin: 0;
+}
+html body.archive .container #content aside #search ul#search-price-list li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 0;
+}
+html body.archive .container #content article.list {
   width: 100%;
   float: left;
 }
-html body .container #content article.list .entry .thumbs, html body .container #content article.list .entry .body, html body .container #content article.list .entry .excerpt, html body .container #content article.list .entry .more, html body .container #content article.list .entry .shopping {
-  display: none;
+html body.archive .container #content article.list header {
+  width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+  float: right;
 }
-html body .container #content article.list footer {
-  display: none;
-  margin: 1.25em 0 0;
-  padding: 0;
-}
-html body .container #content article.list footer h1 {
-  font-size: medium;
+html body.archive .container #content article.list header h1 {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
-  height: 2.5em;
+}
+html body.archive .container #content article.list .entry {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+}
+html body.archive .container #content article.list .entry .thumbs, html body.archive .container #content article.list .entry .excerpt, html body.archive .container #content article.list .entry .more, html body.archive .container #content article.list .entry .shopping, html body.archive .container #content article.list .entry .body {
+  position: relative;
+  left: 100%;
+  top: -10em;
+}
+html body.archive .container #content article.list .entry .thumbs, html body.archive .container #content article.list .entry .body {
+  display: none;
+}
+html body.archive .container #content article.list footer {
+  display: none;
 }
 
 /* Single article
@@ -1039,184 +1086,6 @@ html body.single .container #content article .entry .body .pane #respond h3 {
 }
 html body.single .container #content article .entry .body .pane #respond .form-allowed-tags {
   display: none;
-}
-
-/* List */
-html body .container #content article.list {
-  width: 60%;
-  height: 31em;
-  margin: 0 0 5em;
-  float: left;
-  background: white;
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-}
-html body .container #content article.list header {
-  position: relative;
-  left: 105%;
-  width: 70%;
-  float: left;
-}
-html body .container #content article.list header h1 {
-  padding-left: 0.3125em;
-}
-html body .container #content article.list .entry .featured-image {
-  text-align: center;
-}
-html body .container #content article.list .entry .featured-image img {
-  max-height: 20em;
-}
-html body .container #content article.list .entry .shopping {
-  position: relative;
-  left: 105%;
-  top: -3.75em;
-  width: 70%;
-  float: left;
-}
-html body .container #content article.list .entry .excerpt {
-  position: relative;
-  left: 105%;
-  top: -25em;
-  width: 70%;
-  float: left;
-}
-html body .container #content .product-scroller.list {
-  display: none;
-}
-
-/* Mixed */
-html body .container #content article.mixed {
-  width: 60%;
-  height: 31em;
-  margin-right: 2%;
-  float: left;
-  background: white;
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-}
-html body .container #content article.mixed header {
-  position: relative;
-  z-index: 1;
-  top: 24.6em;
-  background: #eee;
-  opacity: .7;
-}
-html body .container #content article.mixed header h1 {
-  padding-left: 0.3125em;
-}
-html body .container #content article.mixed .entry {
-  position: relative;
-  top: -6.4em;
-}
-html body .container #content article.mixed .entry .shopping {
-  position: relative;
-  top: 6em;
-  float: right;
-  margin-right: 0.625em;
-  z-index: 2;
-  background: #eee;
-  opacity: .7;
-}
-html body .container #content article.mixed .entry .excerpt {
-  position: relative;
-  top: 5em;
-  padding-left: 0.625em;
-}
-html body .container #content article.mixed.not-first {
-  width: 15%;
-  height: auto;
-  float: left;
-  padding: 1%;
-  margin: 0 2% 5% 0;
-}
-html body .container #content article.mixed.not-first header {
-  display: none;
-}
-html body .container #content article.mixed.not-first .entry {
-  top: 0;
-}
-html body .container #content article.mixed.not-first .entry .shopping {
-  display: none;
-}
-html body .container #content article.mixed.not-first .entry .excerpt {
-  display: none;
-}
-html body .container #content article.mixed.odd {
-  margin-right: 0;
-}
-html body .container #content article.mixed.count-8,
-html body .container #content article.mixed.count-9,
-html body .container #content article.mixed.count-10 {
-  display: none;
-}
-html body .container #content .product-scroller.mixed {
-  font-size: 4em;
-  position: relative;
-  cursor: pointer;
-  width: 10%;
-  height: 0;
-}
-html body .container #content #product-scroll-left.mixed {
-  left: 68%;
-}
-html body .container #content #product-scroll-right.mixed {
-  left: 88%;
-}
-
-/* Large */
-html body .container #content article.large {
-  height: 40em;
-  background: white;
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-  -webkit-box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.698), 0 1px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1) inset;
-}
-html body .container #content article.large header {
-  position: relative;
-  z-index: 1;
-  top: 33.6em;
-  background: #eee;
-  opacity: .7;
-}
-html body .container #content article.large header h1 {
-  padding-left: 0.3125em;
-}
-html body .container #content article.large .entry {
-  position: relative;
-  top: -2em;
-}
-html body .container #content article.large .entry .shopping {
-  position: relative;
-  top: -2.85em;
-  float: right;
-  margin-right: 0.625em;
-  z-index: 2;
-  background: #eee;
-  opacity: .7;
-}
-html body .container #content article.large .entry .excerpt {
-  position: relative;
-  top: -1.25em;
-  padding-left: 0.625em;
-}
-html body .container #content article.large.not-first {
-  display: none;
-}
-html body .container #content .product-scroller.large {
-  font-size: 4em;
-  position: relative;
-  top: -6em;
-  cursor: pointer;
-  width: 10%;
-  height: 0;
-}
-html body .container #content #product-scroll-left.large {
-  left: 1%;
-}
-html body .container #content #product-scroll-right.large {
-  left: 96%;
 }
 
 html body.single .container #content #shopping-incentives {

@@ -1,6 +1,8 @@
 <form method="get" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<input type="text" class="field" name="s" id="s" placeholder="Peste 300 de cadouri" />
-	<input type="submit" class="submit" name="submit" id="searchsubmit" value="Cautare" />
+	<div id="fields">
+		<input type="text" class="field" name="s" id="s" placeholder="Peste 300 de cadouri" />
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Cautare" />
+	</div>
 	<ul id="search-price-list">
     <li><input id="search-price" type="radio" name="price" value="0-100000" checked/>Cautare fara pret</li>
     <li><input id="search-price" type="radio" name="price" value="0-100"/>< 100 RON</li>

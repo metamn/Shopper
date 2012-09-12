@@ -126,7 +126,7 @@ $color-cart: lighten(red, 10%);
 	font-size: 2em;
 }
 
-@mixin font-text() {
+@mixin font-text {
 	font-family: "Old Standard TT", serif;
 	letter-spacing: normal;
 }
