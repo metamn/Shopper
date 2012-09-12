@@ -103,7 +103,7 @@ function get_product_image($id) {
 	// Get medium snd thumbnail
 	$m = unserialize(get_post_meta($id, '_wp_attachment_metadata', true));
 	$ret->thumbnail = $url . $m['sizes']['thumbnail']['file'];
-	$ret->medium = $url . $m['sizes']['medium']['file'];
+	if (isset($m['sizes']['medium'])) { $ret->medium = $url . $m['sizes']['medium']['file']; }
 	
 	return $ret;
 }
@@ -146,28 +146,36 @@ function display_product_thumbs($images) {
 
 // Determine what kind of content is displayed
 // - like search, archive etc ...
-// - if necessary the title is displayed, else will stay hidden
-// - this is first of all for the HTML5 Outliner
-function get_content_title() {  
+// - returns page title and description (for taxonomy)
+function get_current_page_properties() {  
+	$ret = new stdClass();
+	$ret->description = '';
+	
   // By default title is derived from body_class
   $body_class = get_body_class();
   if ($body_class) {
-    $title = ucfirst($body_class[0]);
+    $ret->title = ucfirst($body_class[0]);
   } else {
-    $title = "Content";
+    $ret->title = "Content";
   }
   
   if (is_category()) {
-    $hidden = '';
-    $title = single_cat_title('', false);
+  	$cat = get_category(get_query_var('cat'), false);
+  	
+    $ret->title = single_cat_title('', false);
+    $ret->description = $cat->description; 
+  }
+  
+  if (is_tag()) {
+  	$ret->title = 'tag';
+    $ret->description = 'description'; 
   }
   
   if (is_search()) {
-    $hidden = '';
-    $title = "Search for " . get_search_query();
+    $ret->title = get_search_query();
   }
   
-  return $title;
+  return $ret;
 }
 
 

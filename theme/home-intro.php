@@ -8,7 +8,7 @@
 
 <section id="<?php echo $klass ?>"> 
   <header>
-    <h3><?php echo get_content_title(); ?></h3>
+    <h3><?php // echo get_content_title(); ?></h3>
   </header>
   
   <nav>
@@ -68,7 +68,8 @@
 					foreach ($cadouri as $c) {
 						// Marke the current category if it is an Archive page
         		$current = '';
-        		if ($c->title == get_content_title()) {
+        		$this_page = get_current_page_properties();
+        		if ($c->title == $this_page->title) {
         			$current = ' selected';
         		}
 						echo "<li class='" . $current . "' data-link='" . $c->link . "' data-count='" . $c->count . "' data-description='" . $c->description . "' data-img='" . $c->image->full . "'>";

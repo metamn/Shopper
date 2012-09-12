@@ -2,6 +2,7 @@
 
 // Displaying an article
 // - either it will be wrapped into a single post, or into a list of posts (archives)
+// - $view: the different post views in the archive
 
 // Decide if it is single page or index page
   if (is_single()) {
@@ -73,6 +74,10 @@
 		    <?php the_title(); ?>
 		  </a>
 		</h1>
+		
+		<div class="shopping">
+	    <div id="add-to-cart">Nume variatie &mdash; 1250 RON &nbsp;&nbsp;&nbsp; [Adauga la cos]</div>
+	  </div>
 	</footer>
 </article>
 

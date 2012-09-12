@@ -1,3 +1,51 @@
+/* Articles on index page
+*/
+
+
+/* List */
+html {
+  body {
+    .container {
+      #content { 
+        article.list {
+          @include col(45%, 0, 5%);
+          height: 20em;
+          
+          header {
+          	@include hidden;
+          }
+          
+          .entry {
+          	@include block;
+          	
+            .thumbs, .body, .excerpt, .more, .shopping {
+            	@include hidden;
+            }
+          }
+          
+          footer {
+          	display: none;
+          	
+          	margin: $pad 0 0;
+          	padding: 0;
+          	
+            h1 {
+              font-size: medium;
+              @include font-text;
+              height: $pad*2;
+            }
+          }
+        }
+      }
+    }
+  }
+}   
+
+
+
+
+
+
 /* Single article
 */
 
@@ -24,6 +72,10 @@ html {
           		padding: $pad;
           		
           		opacity: .9;
+          	}
+          	
+          	.shopping {
+          		display: none;
           	}
           }
           .entry {
@@ -179,68 +231,6 @@ html {
 }
 
 
-
-
-
-/* Articles on index page
-*/
-
-
-/* Icons */
-html {
-  body {
-    .container {
-      #content { 
-        article.icons {
-          width: 20%;
-          height: 13em;
-          margin: 0 5% 20em 0;
-          float: left;
-          
-          @include box-shadow;
-          
-          header {
-            position: relative;
-            top: 13em;
-            h1 {
-              font-size: 100%;
-            }
-          }
-          
-          .entry {
-            position: relative;
-            top: -2em;
-          
-            .featured-image {
-              text-align: center;
-              
-              img {
-                max-height: 7em;
-              }
-            }
-            .thumbs {
-            
-            }
-            .shopping {
-              position: relative;
-              top: 8em;
-            }
-            .excerpt {
-              display: none;
-            }
-            .body {
-            
-            }
-          }
-        }
-          
-        .product-scroller.icons {
-          @include hidden;
-        }        
-      }
-    }
-  }
-}   
 
 
 
