@@ -22,7 +22,7 @@
     	include '_subscribe_to_newsletter.php';
     	include '_share.php';
     	
-    	include '_browse_products.php';
+    	include '_product_browser.php';
     	
     	$klass = 'intro';
     	include 'home-intro.php';
