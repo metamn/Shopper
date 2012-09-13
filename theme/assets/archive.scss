@@ -30,6 +30,7 @@ html {
       			
       			ul {
       				@include font-text;
+      				list-style-type: none;
       				
       				li {
       					padding-bottom: $pad/4;
@@ -54,8 +55,7 @@ html {
       			}
       			
       			ul {
-      				list-style-type: none;
-      				margin: $pad 0 $pad;
+      				margin: $pad 0;
       			}
       		}
       		

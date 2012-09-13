@@ -145,6 +145,51 @@ body .container em {
 body .container strong {
   font-weight: bold;
 }
+body .container input, body .container textarea {
+  border: none;
+  outline: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: medium;
+  font-family: monospace;
+}
+body .container input[type='text'] {
+  border-bottom: 1px solid;
+  font-style: italic;
+  color: gray;
+}
+body .container input[type='text']:focus {
+  color: black;
+  font-style: normal;
+}
+body .container input[type='submit'] {
+  background: black;
+  color: lightgray;
+  padding: 0.625em;
+}
+body .container input[type='submit']:hover {
+  cursor: pointer;
+  color: white;
+}
+body .container input[type='radio']:after {
+  content: '\2610';
+  margin-right: 0.625em;
+}
+body .container input[type='radio']:checked:after {
+  content: '\25a3';
+}
+body .container input[type='checkbox']:after {
+  content: '\272A';
+  margin-right: 0.3125em;
+  font-size: 200%;
+  line-height: .5;
+  vertical-align: top;
+  color: lightgray;
+}
+body .container input[type='checkbox']:checked:after {
+  color: black;
+}
 
 /* Site specific mixins
 */
@@ -1079,6 +1124,7 @@ html body.archive .container #content aside #description, html body.archive .con
 html body.archive .container #content aside #description ul, html body.archive .container #content aside #search ul, html body.archive .container #content aside #navigation ul {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
+  list-style-type: none;
 }
 html body.archive .container #content aside #description ul li, html body.archive .container #content aside #search ul li, html body.archive .container #content aside #navigation ul li {
   padding-bottom: 0.3125em;
@@ -1098,8 +1144,7 @@ html body.archive .container #content aside #search input[type='text'] {
   float: left;
 }
 html body.archive .container #content aside #search ul {
-  list-style-type: none;
-  margin: 1.25em 0 1.25em;
+  margin: 1.25em 0;
 }
 html body.archive .container #content aside #navigation {
   margin-right: 0;

@@ -23,10 +23,10 @@ $found_posts = $wp_query->found_posts;
 		<div id="navigation">
 			<h5>Filtrare rezultate</h5>
 			<ul>
-				<li>Cadouri noi</li>
-				<li>Recomandari speciale pentru mine</li>
-				<li>Bestsellers</li>
-				<li>Reduceri</li>
+				<li><input id="filter-products" type="checkbox" name="latest" value="latest" />Cadouri noi</li>
+				<li><input id="filter-products" type="checkbox" name="recommended" value="recommended" />Recomandari speciale pentru mine</li>
+				<li><input id="filter-products" type="checkbox" name="bestsellers" value="bestsellers" />Bestsellers</li>
+				<li><input id="filter-products" type="checkbox" name="sales" value="sales" />Reduceri</li>
 			</ul>
 		</div>
 		<div id="thumbs"></div>

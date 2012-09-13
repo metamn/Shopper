@@ -109,6 +109,7 @@ body {
 		}
 		
 		
+		
 		// Tables
 		// -----------------------------------------------
 		
@@ -149,6 +150,74 @@ body {
 		
 		strong {
 			font-weight: bold;
+		}
+		
+		
+		
+		
+		// Forms
+		// -----------------------------------------------
+		
+		
+		// Reset browser defaults
+		input, textarea {
+			border: none;
+			outline: 0;
+			
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			
+			font-size: medium;
+			font-family: monospace;
+		}
+		
+		// Text
+		input[type='text'] {
+			border-bottom: 1px solid;
+			font-style: italic;
+			color: gray;
+		}
+		input[type='text']:focus {
+			color: black;
+			font-style: normal;
+		}
+		
+		// Button
+		input[type='submit'] {		
+			background: black;
+			color: lightgray;
+			padding: $pad/2;
+		}
+		input[type='submit']:hover {
+			cursor: pointer;
+			color: white;
+		}
+		
+		
+		// Radio
+		input[type='radio']:after {
+			content: '\2610';
+			margin-right: $pad/2;
+		}
+		input[type='radio']:checked:after {
+			content: '\25a3';
+		}
+		
+		// Checkbox 
+		input[type='checkbox']:after {
+			content: '\272A';
+			margin-right: $pad/4;
+			
+			// This glyph is too small, so grow it
+			font-size: 200%;
+			line-height: .5;
+			vertical-align: top;
+			
+			color: lightgray;
+		}
+		input[type='checkbox']:checked:after {
+			color: black;
 		}
 	
 	}
