@@ -204,6 +204,8 @@ body .container strong {
 */
 /* Links
 */
+/* Backgrounds
+*/
 /* Fonts
 /* ------------------------------------------------------
 */
@@ -1059,7 +1061,7 @@ html body .container #content article.post .entry .body .pane #respond .form-all
 html body.archive .container #content {
   width: 100%;
   float: left;
-  margin: 2.5em 0;
+  margin: 3.75em 0;
 }
 html body.archive .container #content header h3 {
   display: none;
@@ -1083,7 +1085,7 @@ html body.archive .container #content aside #search {
   margin: 1.25em 0;
 }
 html body.archive .container #content aside #search #fields, html body.archive .container #content aside #search ul#search-price-list {
-  margin: 0 auto !important;
+  margin: 0 auto;
   text-align: center;
 }
 html body.archive .container #content aside #search #fields {
@@ -1100,6 +1102,7 @@ html body.archive .container #content aside #search input[type='submit'] {
 }
 html body.archive .container #content aside #search ul#search-price-list {
   width: 81.25%;
+  margin: 0.625em auto !important;
   font-size: smaller;
   display: block;
   margin: 0;
@@ -1108,6 +1111,53 @@ html body.archive .container #content aside #search ul#search-price-list li {
   display: inline-block;
   list-style-type: none;
   margin-left: 0;
+}
+html body.archive .container #content aside #thumbs {
+  width: 100%;
+  float: left;
+  background: transparent url(stripe.png);
+  padding: 2.5em 0;
+}
+html body.archive .container #content aside #thumbs #thumb {
+  width: 5em;
+  margin: 0 0 0 0;
+  float: left;
+  margin: 0 1.25em 1.25em;
+  cursor: pointer;
+}
+html body.archive .container #content aside #thumbs #thumb img {
+  width: 100px;
+  border: 1px solid #999999;
+}
+html body.archive .container #content #trigger {
+  width: 100%;
+  float: left;
+  text-align: center;
+  border-top: 2px solid;
+  margin-bottom: 25em;
+}
+html body.archive .container #content #trigger span {
+  font-size: 2em;
+  text-align: center;
+  cursor: pointer;
+  background: #ffff33;
+  padding: 0.3125em;
+}
+html body.archive .container #content #trigger span.down {
+  display: none;
+}
+html body.archive .container #content #trigger span.up {
+  display: inline-block;
+}
+html body.archive .container #content #trigger.closed {
+  border-top: 1px dotted #999999;
+  position: fixed;
+}
+html body.archive .container #content #trigger.closed span.up {
+  display: none;
+}
+html body.archive .container #content #trigger.closed span.down {
+  display: inline-block;
 }
 
 /* Displays what is on a Single page beside the post

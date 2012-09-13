@@ -35,8 +35,25 @@ jQuery(document).ready(function() {
 		jQuery(".archive header #menu article").slideToggle('slow');
 	});
 	
+	// Display the thumbs of all found posts
+	jQuery(".archive #content article").each(function(i) {
+		var title = jQuery(this).find("header h1 a").html();
+		var image = jQuery(this).find(".entry .featured-image noscript ").attr('data-small');
+		var item = "<div id='thumb'><img title='" + title + "' src='" + image + "' /></div>";
+		
+		jQuery(".archive #content aside #thumbs").append(item);
+	});
 	
-	// Home
+	// Toggle navigation
+	jQuery(".archive #content #trigger").click(function () {
+		jQuery(".archive #content aside").slideToggle('slow');
+		jQuery(this).toggleClass('closed');
+	});
+	
+	
+	
+	
+	// Home / Startpage
 	// -----------------------------------------------
 	
 	// Intro

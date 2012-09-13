@@ -20,7 +20,12 @@ $found_posts = $wp_query->found_posts;
 	<aside>
 		<div id="description"><?php echo $this_page->description ?></div>
 		<div id="search"><?php include 'search.php' ?></div>
+		<div id="thumbs"></div>
 	</aside>
+	<div id="trigger">
+		<span class='up'>&#8673;</span>
+		<span class='down'>&#8675;</span>
+	</div>
   
   <?php
   	if (have_posts()) {

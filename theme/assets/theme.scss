@@ -106,6 +106,15 @@ $color-cart: lighten(red, 10%);
 }
 
 
+/* Backgrounds
+*/
+
+@mixin background-stripe {
+	background: transparent url(stripe.png);
+}
+
+
+
 
 /* Fonts
 /* ------------------------------------------------------

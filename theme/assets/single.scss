@@ -19,7 +19,7 @@ html {
 					margin: $pad*4 0;
 					padding: $pad*2 0;
 					
-					background: transparent url(stripe.png);
+					@include background-stripe;
 					
 					#incentives {
 						@include col($major, 0, 0);
