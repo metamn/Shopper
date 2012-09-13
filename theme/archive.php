@@ -18,8 +18,17 @@ $found_posts = $wp_query->found_posts;
   </header>
   
 	<aside>
-		<div id="description"><?php echo $this_page->description ?></div>
+		<div id="description"><p><?php echo $this_page->description ?></p></div>
 		<div id="search"><?php include 'search.php' ?></div>
+		<div id="navigation">
+			<h5>Filtrare rezultate</h5>
+			<ul>
+				<li>Cadouri noi</li>
+				<li>Recomandari speciale pentru mine</li>
+				<li>Bestsellers</li>
+				<li>Reduceri</li>
+			</ul>
+		</div>
 		<div id="thumbs"></div>
 	</aside>
 	<div id="trigger">

@@ -24,44 +24,47 @@ html {
       	aside {
       		@include block;
       		
-      		#description {
-      			@include block;
+      		#description, #search, #navigation {
+      			@include col(30%, 0, 5%);
+      			margin-top: $pad;
       			
-      			@include font-text;
-      			font-size: larger;
-      			color: $color-text-light;
-      			text-align: center;
+      			ul {
+      				@include font-text;
+      				
+      				li {
+      					padding-bottom: $pad/4;
+      					margin-bottom: $pad/4;
+      					border-bottom: 1px dotted;
+      				}
+      			}
+      		}
+      		
+      		#description {
+      			background: $color-highlight;
+      			@include font-highlight;
+      			
+      			p {
+      				padding: $pad;
+      			}
       		}
       		
       		#search {
-      			@include block;
-      			margin: $pad 0;
-      			
-      			#fields, ul#search-price-list {
-      				margin: 0 auto;
-      				text-align: center;
-      			}
-      			
-      			#fields {
-      				width: $major;
-      			}
-      			input {
-      				font-size: larger;
-      			}
       			input[type='text'] {
-      				width: $major;
-      			}
-      			input[type='submit'] {
-      				width: auto;
+      				@include col($major, 0, 5%);
       			}
       			
-      			ul#search-price-list {
-      				width: $major + $minor/2;
-      				margin: $pad/2 auto !important;
-      				
-      				font-size: smaller;
-      				@include list-inline;
-      			}      			
+      			ul {
+      				list-style-type: none;
+      				margin: $pad 0 $pad;
+      			}
+      		}
+      		
+      		#navigation {
+      			margin-right: 0;
+      			
+      			h5 {
+      				padding: 0;
+      			}
       		}
       		
       		#thumbs {
@@ -87,7 +90,7 @@ html {
 					@include block;
 					text-align: center;
 					
-      		border-top: 2px solid;
+      		border-top: 1px solid;
       		margin-bottom: $pad*20;
 					
 					span {

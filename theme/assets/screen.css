@@ -1070,47 +1070,42 @@ html body.archive .container #content aside {
   width: 100%;
   float: left;
 }
-html body.archive .container #content aside #description {
-  width: 100%;
+html body.archive .container #content aside #description, html body.archive .container #content aside #search, html body.archive .container #content aside #navigation {
+  width: 30%;
+  margin: 0 5% 0 0;
   float: left;
+  margin-top: 1.25em;
+}
+html body.archive .container #content aside #description ul, html body.archive .container #content aside #search ul, html body.archive .container #content aside #navigation ul {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
-  font-size: larger;
-  color: #999999;
-  text-align: center;
 }
-html body.archive .container #content aside #search {
-  width: 100%;
-  float: left;
-  margin: 1.25em 0;
+html body.archive .container #content aside #description ul li, html body.archive .container #content aside #search ul li, html body.archive .container #content aside #navigation ul li {
+  padding-bottom: 0.3125em;
+  margin-bottom: 0.3125em;
+  border-bottom: 1px dotted;
 }
-html body.archive .container #content aside #search #fields, html body.archive .container #content aside #search ul#search-price-list {
-  margin: 0 auto;
-  text-align: center;
+html body.archive .container #content aside #description {
+  background: #ffff33;
+  font-family: "Lekton", sans-serif;
 }
-html body.archive .container #content aside #search #fields {
-  width: 62.5%;
-}
-html body.archive .container #content aside #search input {
-  font-size: larger;
+html body.archive .container #content aside #description p {
+  padding: 1.25em;
 }
 html body.archive .container #content aside #search input[type='text'] {
   width: 62.5%;
+  margin: 0 5% 0 0;
+  float: left;
 }
-html body.archive .container #content aside #search input[type='submit'] {
-  width: auto;
-}
-html body.archive .container #content aside #search ul#search-price-list {
-  width: 81.25%;
-  margin: 0.625em auto !important;
-  font-size: smaller;
-  display: block;
-  margin: 0;
-}
-html body.archive .container #content aside #search ul#search-price-list li {
-  display: inline-block;
+html body.archive .container #content aside #search ul {
   list-style-type: none;
-  margin-left: 0;
+  margin: 1.25em 0 1.25em;
+}
+html body.archive .container #content aside #navigation {
+  margin-right: 0;
+}
+html body.archive .container #content aside #navigation h5 {
+  padding: 0;
 }
 html body.archive .container #content aside #thumbs {
   width: 100%;
@@ -1133,7 +1128,7 @@ html body.archive .container #content #trigger {
   width: 100%;
   float: left;
   text-align: center;
-  border-top: 2px solid;
+  border-top: 1px solid;
   margin-bottom: 25em;
 }
 html body.archive .container #content #trigger span {
