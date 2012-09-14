@@ -1,6 +1,18 @@
 <?php
 
 
+// Wordpress functions
+//
+
+
+// Query for multiple posts
+// - the query string has the syntax of the query_posts WP function
+function query_posts2($query_string) {
+  $q = new WP_Query($query_string);
+  return $q;
+}
+
+
 // Category functions
 //
 

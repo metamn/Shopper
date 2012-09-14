@@ -167,6 +167,20 @@ body {
 */
 
 
+/* Product filters
+*/
+
+@mixin list-filters {
+	@include font-text;
+	list-style-type: none;
+	
+	li {
+		padding-bottom: $pad/4;
+		margin-bottom: $pad/4;
+		border-bottom: 1px dotted;
+	}
+}
+
 /* Home > Menu list item 
 */
 @mixin list-item-main-menu {
@@ -302,6 +316,20 @@ body {
 				font-size: 4em;
 			}
 		}
+	}
+}
+
+
+
+
+/* Search
+/* ------------------------------------------------------
+*/
+
+
+@mixin search {
+	input[type='text'] {
+		@include col($major, 0, 5%);
 	}
 }
 

@@ -299,6 +299,8 @@ body .container h1, body .container h2, body .container h3, body .container h4, 
 /* Lists
 /* ------------------------------------------------------
 */
+/* Product filters
+*/
 /* Home > Menu list item 
 */
 /* List arrow, trigger 
@@ -308,6 +310,9 @@ body .container h1, body .container h2, body .container h3, body .container h4, 
 /* A simple list first used at Intro > Categories 
 */
 /* A dynamic list first used at Intro > Services 
+*/
+/* Search
+/* ------------------------------------------------------
 */
 /* Logo
 /* ------------------------------------------------------
@@ -870,6 +875,46 @@ html .container #intro article#premium ul li span a, html .container #intro arti
 /* Displays an Article whenever is single or in archive
 	--------------------------------------------------------
 */
+/* Product Browser
+*/
+html body .container #content #products article {
+  display: none;
+  padding: 2.5em;
+}
+html body .container #content #products article header {
+  display: block;
+}
+html body .container #content #products article header h1 {
+  padding: 0;
+  text-align: center;
+}
+html body .container #content #products article header h1 a {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+html body .container #content #products article footer {
+  display: none;
+}
+html body .container #content #products article .entry {
+  width: 100%;
+  float: left;
+}
+html body .container #content #products article .entry .more, html body .container #content #products article .entry .thumbs, html body .container #content #products article .entry .excerpt, html body .container #content #products article .entry .body {
+  display: none;
+}
+html body .container #content #products article .entry .shopping {
+  width: 62.5%;
+  margin: 0 0 0 0;
+  float: left;
+  margin: 0;
+  position: relative;
+  bottom: auto;
+  top: -1.25em;
+}
+html body .container #content #products article.active {
+  display: block;
+}
+
 /* Archive
 
 	- Overrides for the single article style
@@ -907,7 +952,7 @@ html body.archive .container #content article.list .entry .excerpt {
 
 /* Single
 
-	- This is the default, archive styles are overwriting this
+	- This is the default, other styles are overwriting this
 
 */
 html body .container #content article.post header {
@@ -959,7 +1004,10 @@ html body .container #content article.post .entry .shopping a, html body .contai
   text-decoration: underline;
   color: #1a1a1a;
 }
-html body .container #content article.post .entry .shopping div {
+html body .container #content article.post .entry .shopping #add-to-cart {
+  width: 100%;
+  float: left;
+  margin: 0;
   padding: 1.25em;
 }
 html body .container #content article.post .entry .more {
@@ -1115,18 +1163,18 @@ html body.archive .container #content aside {
   width: 100%;
   float: left;
 }
-html body.archive .container #content aside #description, html body.archive .container #content aside #search, html body.archive .container #content aside #navigation {
+html body.archive .container #content aside #description, html body.archive .container #content aside #search, html body.archive .container #content aside #filters {
   width: 30%;
   margin: 0 5% 0 0;
   float: left;
   margin-top: 1.25em;
 }
-html body.archive .container #content aside #description ul, html body.archive .container #content aside #search ul, html body.archive .container #content aside #navigation ul {
+html body.archive .container #content aside #description ul, html body.archive .container #content aside #search ul, html body.archive .container #content aside #filters ul {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   list-style-type: none;
 }
-html body.archive .container #content aside #description ul li, html body.archive .container #content aside #search ul li, html body.archive .container #content aside #navigation ul li {
+html body.archive .container #content aside #description ul li, html body.archive .container #content aside #search ul li, html body.archive .container #content aside #filters ul li {
   padding-bottom: 0.3125em;
   margin-bottom: 0.3125em;
   border-bottom: 1px dotted;
@@ -1146,10 +1194,10 @@ html body.archive .container #content aside #search input[type='text'] {
 html body.archive .container #content aside #search ul {
   margin: 1.25em 0;
 }
-html body.archive .container #content aside #navigation {
+html body.archive .container #content aside #filters {
   margin-right: 0;
 }
-html body.archive .container #content aside #navigation h5 {
+html body.archive .container #content aside #filters h5 {
   padding: 0;
 }
 html body.archive .container #content aside #thumbs {
@@ -1200,7 +1248,7 @@ html body.archive .container #content #trigger.closed span.down {
   display: inline-block;
 }
 
-/* Displays what is on a Single page beside the post
+/* Displays what is on a Single page beside the post / article
 	--------------------------------------------------------
 	
 	The post is styled in article.scss
@@ -1379,6 +1427,69 @@ html body.single .container #content #add-to-cart #action #cart-logo span {
   font-size: 1.5em;
   display: block;
   margin-top: 0.625em;
+}
+html body.single .container #content #product-browser {
+  width: 100%;
+  float: left;
+  margin: 5em 0;
+}
+html body.single .container #content #product-browser aside {
+  width: 37.5%;
+  margin: 0 0 0 0;
+  float: left;
+  margin-top: 1.25em;
+}
+html body.single .container #content #product-browser aside ul {
+  font-family: "Old Standard TT", serif;
+  letter-spacing: normal;
+  list-style-type: none;
+  margin: 0;
+}
+html body.single .container #content #product-browser aside ul li {
+  padding-bottom: 0.3125em;
+  margin-bottom: 0.3125em;
+  border-bottom: 1px dotted;
+}
+html body.single .container #content #product-browser aside ul li span {
+  font-style: italic;
+}
+html body.single .container #content #product-browser aside #search input[type='text'] {
+  width: 62.5%;
+  margin: 0 5% 0 0;
+  float: left;
+}
+html body.single .container #content #product-browser aside #search div {
+  margin: 2.5em 0;
+}
+html body.single .container #content #product-browser #products {
+  width: 61.875%;
+  margin: 0 0 0 0;
+  float: left;
+  border: 1px dotted;
+}
+html body.single .container #content #product-browser #scroller {
+  width: 18.75%;
+  margin: 0 0 0 0;
+  float: left;
+  position: relative;
+  top: -5em;
+  right: 1.25em;
+  float: right;
+}
+html body.single .container #content #product-browser #scroller ul {
+  margin: 0;
+  display: block;
+  margin: 0;
+}
+html body.single .container #content #product-browser #scroller ul li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 0;
+}
+html body.single .container #content #product-browser #scroller ul li {
+  font-size: 2em;
+  padding: 0.3125em;
+  background: #ffff33;
 }
 html body.single .container #content #intro {
   position: relative;

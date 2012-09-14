@@ -14,8 +14,8 @@
 	if (have_posts()) { 
 		while ( have_posts() ) : the_post();    
   		$product = get_product($post->ID); 
-			$article_view = '';
 			
+			$article_view = 'single';
 			include 'article.php';
 			
     	include '_shopping_incentives.php';
@@ -25,6 +25,7 @@
     	include '_subscribe_to_newsletter.php';
     	include '_share.php';
     	
+    	$category_name = 'Gadgeturi';
     	include '_product_browser.php';
     	
     	$klass = 'intro';

@@ -5,6 +5,69 @@
 */
 
 
+
+/* Product Browser
+*/
+
+
+html {
+	body {
+		.container {
+			#content {
+				#products {
+					article {
+						@include hidden;
+						
+						padding: $pad*2;
+						
+						header {
+							display: block;
+							
+							h1 {
+								padding: 0;
+								text-align: center;
+								
+								a {
+									@include link-neutral;
+								}
+							}
+						}
+						
+						footer {
+							@include hidden;
+						}
+						
+						.entry {
+							@include block;
+							
+							.more, .thumbs, .excerpt, .body {
+								@include hidden;
+							}
+							
+							.shopping {
+								@include col($major, 0, 0);
+								margin: 0;
+								
+								position: relative;
+								bottom: auto;
+								top: -$pad;
+							}
+							
+						}
+					}
+					article.active {
+						display: block;
+					}
+					
+				}
+			}
+		}
+	}
+}
+
+
+
+
 /* Archive
 
 	- Overrides for the single article style
@@ -60,7 +123,7 @@ html {
 
 /* Single
 
-	- This is the default, archive styles are overwriting this
+	- This is the default, other styles are overwriting this
 
 */
 
@@ -108,7 +171,10 @@ html {
           		position: absolute;
           		bottom: $pad;
           		
-          		div {
+          		#add-to-cart {
+          			@include block;
+          			margin: 0;
+          			
           			padding: $pad;
           		}
           	}

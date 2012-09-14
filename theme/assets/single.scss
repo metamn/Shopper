@@ -1,6 +1,6 @@
 
 
-/* Displays what is on a Single page beside the post
+/* Displays what is on a Single page beside the post / article
 	--------------------------------------------------------
 	
 	The post is styled in article.scss
@@ -100,6 +100,61 @@ html {
 								font-size: 1.5em;
 								display: block;
 								margin-top: $pad/2;
+							}
+						}
+					}
+				}
+				
+				#product-browser {
+					@include block;
+					margin: $pad*4 0;
+					
+					aside {
+						@include col($minor, 0, 0);
+						margin-top: $pad;
+						
+						ul {
+							@include list-filters;
+							margin: 0;
+							
+							li {
+								span {
+									font-style: italic;
+								}
+							}
+						}
+						
+						#search {
+							@include search;
+							
+							div {
+								margin: $pad*2 0;
+							}
+						}
+					
+					}
+					
+					#products {
+						@include col($major*.99, 0, 0);
+						border: 1px dotted;
+					}
+					
+					#scroller {
+						@include col($minor/2, 0, 0);
+						
+						position: relative;
+						top: -$pad*4;
+						right: $pad;
+						float: right;
+						
+						ul {
+							margin: 0;
+							@include list-inline;
+							
+							li {
+								font-size: 2em;
+								padding: $pad/4;
+								background: $color-highlight;
 							}
 						}
 					}

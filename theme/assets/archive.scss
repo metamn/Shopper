@@ -24,19 +24,12 @@ html {
       	aside {
       		@include block;
       		
-      		#description, #search, #navigation {
+      		#description, #search, #filters {
       			@include col(30%, 0, 5%);
       			margin-top: $pad;
       			
       			ul {
-      				@include font-text;
-      				list-style-type: none;
-      				
-      				li {
-      					padding-bottom: $pad/4;
-      					margin-bottom: $pad/4;
-      					border-bottom: 1px dotted;
-      				}
+      				@include list-filters;
       			}
       		}
       		
@@ -50,16 +43,14 @@ html {
       		}
       		
       		#search {
-      			input[type='text'] {
-      				@include col($major, 0, 5%);
-      			}
+      			@include search;
       			
       			ul {
       				margin: $pad 0;
       			}
       		}
       		
-      		#navigation {
+      		#filters {
       			margin-right: 0;
       			
       			h5 {

@@ -13,13 +13,20 @@ jQuery(document).ready(function() {
 	jQuery(".single #content .entry .body h3").click(function() {
 		jQuery(this).next().slideToggle('slow');
 	});
-	
+
 	
 	// Click on close comments
 	jQuery(".single #content #comments .close").click(function() {
 		jQuery(this).html('Vizualizare comentarii');
 		jQuery(".single #content #comments").slideToggle('slow');
 	});
+	
+	// Product Browser
+	
+	// - hide all articles
+	jQuery(".single #content #product-browser article").removeClass('active');
+	// - show the first
+	jQuery(".single #content #product-browser article").first().addClass('active');
 	
 	
 	
