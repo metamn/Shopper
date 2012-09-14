@@ -74,6 +74,26 @@ html {
 
 
 
+
+/* Home
+*/
+
+
+html {
+	body.home {
+		.container {
+			header {
+				#menu {
+					@include hidden;
+				}
+				
+			}
+		}
+	}
+}
+
+
+
 /* General
 */
 

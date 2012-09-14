@@ -162,6 +162,22 @@ html {
 				
 				#intro {
 					position: relative;
+					margin: 0 0 $pad*4;
+					
+					aside {
+						height: 30em;
+						margin-top: 0;
+					}
+					
+					article {
+						margin-top: 0;
+					}
+					
+					#gifts {
+						#image {
+							height: 30em;
+						}
+					}
 				}
 			}		
 		}

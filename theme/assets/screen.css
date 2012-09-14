@@ -195,10 +195,6 @@ body .container input[type='checkbox']:checked:after {
 */
 /* startpage main div
 */
-/* display post thumbnails 
-*/
-/* display post description
-*/
 /* General mixins
 */
 /* set z-index
@@ -387,6 +383,12 @@ html body.archive .container header #menu article {
 }
 html body.archive .container header #cart-and-info {
   position: fixed;
+}
+
+/* Home
+*/
+html body.home .container header #menu {
+  display: none;
 }
 
 /* General
@@ -664,6 +666,7 @@ html body .container footer ul li {
 html .container #intro {
   width: 100%;
   float: left;
+  margin-top: 5em;
 }
 html .container #intro header h3 {
   display: none;
@@ -709,6 +712,7 @@ html .container #intro aside {
   position: absolute;
   top: 14.0625%;
   left: 37.5%;
+  margin-top: 5em;
   background-color: #ffff33;
   opacity: .97;
 }
@@ -722,7 +726,7 @@ html .container #intro article {
   top: 14.0625%;
   left: 37.5%;
   z-index: 1;
-  margin: 0;
+  margin: 5em 0 0;
 }
 html .container #intro article a, html .container #intro article a:visited, html .container #intro article a:active {
   color: #1a1a1a;
@@ -1493,6 +1497,17 @@ html body.single .container #content #product-browser #scroller ul li {
 }
 html body.single .container #content #intro {
   position: relative;
+  margin: 0 0 5em;
+}
+html body.single .container #content #intro aside {
+  height: 30em;
+  margin-top: 0;
+}
+html body.single .container #content #intro article {
+  margin-top: 0;
+}
+html body.single .container #content #intro #gifts #image {
+  height: 30em;
 }
 
 html body .container #content article.page {

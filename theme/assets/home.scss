@@ -2,6 +2,7 @@ html {
 	.container {
 		#intro {
 			@include block;
+			margin-top: $pad*4;
 			
 			header {
 				h3 {
@@ -49,6 +50,8 @@ html {
 			
 			aside {
 				@include startpage-main-div;
+				margin-top: $pad*4;
+				
 				background-color: $color-highlight;
 				opacity: .97;
 			}
@@ -59,7 +62,7 @@ html {
 				
 				@include startpage-main-div;
 				z-index: 1;
-				margin: 0;
+				margin: $pad*4 0 0;
 				
 				a, a:visited, a:active {
 					@include link-neutral;
