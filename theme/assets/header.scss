@@ -101,7 +101,7 @@ html {
 	body {
 		.container {
 			width: 98%;
-      margin: 0 auto;
+      margin: $pad auto 0;
       
       header {
         @include block;
@@ -221,7 +221,7 @@ html {
         
         #cart-and-info {
         	position: absolute;
-        	top: $pad;
+        	top: $pad/2;
         	right: $pad;
         	width: 11%; /* otherwise the italic on hover is moving the entire ul */
         	

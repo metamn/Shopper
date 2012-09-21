@@ -395,7 +395,7 @@ html body.home .container header #menu {
 */
 html body .container {
   width: 98%;
-  margin: 0 auto;
+  margin: 1.25em auto 0;
 }
 html body .container header {
   width: 100%;
@@ -625,7 +625,7 @@ html body .container header #menu article#premium ul li span {
 }
 html body .container header #cart-and-info {
   position: absolute;
-  top: 1.25em;
+  top: 0.625em;
   right: 1.25em;
   width: 11%;
   /* otherwise the italic on hover is moving the entire ul */
