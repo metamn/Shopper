@@ -107,15 +107,28 @@ function get_product_image($id) {
 	$a = wp_get_attachment_image_src($id, 'full');
 	$ret->full = $a[0];
 	
+	$a = wp_get_attachment_image_src($id, 'medium');
+	$ret->medium = $a[0];
+	
+	$a = wp_get_attachment_image_src($id, 'thumbnail');
+	$ret->thumbnail = $a[0];
+	
+	
+	/*
+	
 	// Get image folder
 	$x = explode("/", $ret->full);
 	$l = get_last_explode($x);
 	$url = str_replace($l, "", $ret->full);
 	
-	// Get medium snd thumbnail
+	// Get medium and thumbnail
 	$m = unserialize(get_post_meta($id, '_wp_attachment_metadata', true));
+	print_r($m);
+	echo "m: $m";
 	$ret->thumbnail = $url . $m['sizes']['thumbnail']['file'];
 	if (isset($m['sizes']['medium'])) { $ret->medium = $url . $m['sizes']['medium']['file']; }
+	
+	*/
 	
 	return $ret;
 }
