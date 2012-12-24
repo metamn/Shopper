@@ -1,0 +1,185 @@
+
+
+/* Displays what is on a Single page beside the post / article
+	--------------------------------------------------------
+	
+	The post is styled in article.scss
+	
+*/
+
+
+
+html {
+	body.single {
+		.container {
+			#content {
+			
+				#shopping-incentives {
+					@include block;
+					margin: $pad*4 0;
+					padding: $pad*2 0;
+					
+					@include background-stripe;
+					
+					#incentives {
+						@include col($major, 0, 0);
+						ul {
+							@include list-premium;
+							li {
+								font-size: medium;
+								background: $color-background;
+								
+								span {
+									font-weight: normal;
+								}
+							}
+						}
+					}
+					
+					#action {
+						@include col($minor, 0, 0);
+						
+						h2 {
+							padding: $pad;
+							@include font-heading('Ostrich Bold');
+						}
+						
+						#add-to-cart {
+							margin: $pad*2;
+							padding: $pad;
+							
+							@include text-cart;
+						}
+					}
+				}
+				
+				#add-to-cart, #add-to-wishlist, #subscribe-to-newsletter {
+					@include col($major + $minor/2, $minor/4, 0);
+					
+					#incentives {
+						@include col($major, 0, $minor/4);
+						border-bottom: 1px solid;
+					
+						dl {
+							@include dlist;
+							margin: 0;
+							
+							dt {
+								padding-bottom: 0;
+								font-size: 1.5em;
+							}
+							
+							dd {
+								margin: 0 $pad+ $pad/2;
+							}
+						}
+					}
+					
+					#action {
+						@include col($minor/1.5, 0, 0);
+						
+						font-size: $pad*6;
+						color: $color-cart;
+						text-align: center;
+					}
+				}
+				
+				#add-to-cart {
+					#action {
+						#cart-logo {
+							display: inline-block;
+							font-size: medium;
+							text-align: center;
+							width: $pad*6;
+							height: $pad*6;
+							border-radius: $pad*4;
+							
+							@include text-cart-inverted;
+							
+							span {
+								font-size: 1.5em;
+								display: block;
+								margin-top: $pad/2;
+							}
+						}
+					}
+				}
+				
+				#product-browser {
+					@include block;
+					margin: $pad*4 0;
+					
+					aside {
+						@include col($minor, 0, 0);
+						margin-top: $pad;
+						
+						ul {
+							@include list-filters;
+							margin: 0;
+							
+							li {
+								span {
+									font-style: italic;
+								}
+							}
+						}
+						
+						#search {
+							@include search;
+							
+							div {
+								margin: $pad*2 0;
+							}
+						}
+					
+					}
+					
+					#products {
+						@include col($major*.99, 0, 0);
+						border: 1px dotted;
+					}
+					
+					#scroller {
+						@include col($minor/2, 0, 0);
+						
+						position: relative;
+						top: -$pad*4;
+						right: $pad;
+						float: right;
+						
+						ul {
+							margin: 0;
+							@include list-inline;
+							
+							li {
+								font-size: 2em;
+								padding: $pad/4;
+								background: $color-highlight;
+							}
+						}
+					}
+				}
+				
+				#intro {
+					position: relative;
+					margin: 0 0 $pad*4;
+					
+					aside {
+						height: 30em;
+						margin-top: 0;
+					}
+					
+					article {
+						margin-top: 0;
+					}
+					
+					#gifts {
+						#image {
+							height: 30em;
+						}
+					}
+				}
+			}		
+		}
+	}
+}

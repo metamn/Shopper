@@ -1,0 +1,262 @@
+/* Single Post
+*/
+
+html {
+	body.single {
+		.container {
+			header {
+				hgroup {
+        	#logo {
+        		@include logo($pad/4);
+        		position: fixed;
+        	}
+        }
+        
+        #menu {
+        	@include col($major, $minor, 0);
+        }
+        
+        #cart-and-info {
+        	position: fixed;
+        }
+			}
+		}
+	}
+}
+
+
+
+/* Archive
+*/
+
+html {
+	body.archive {
+		.container {
+      header {
+        hgroup {
+        	#logo {
+        		@include logo($pad/4);
+        		position: fixed;
+        	}
+        }
+        
+        #archive-title {
+        	cursor: pointer;
+        	position: fixed;
+        	@include col($major, $minor, 0);
+        	
+        	h3 {
+        		padding: 0;
+        	}
+        	h3:after {
+        		@include list-item-arrow;
+        	}
+        }
+        
+        #menu {
+        	header, nav, aside {
+        		@include hidden;
+        	}
+        	
+        	article {
+        		@include hidden
+        	}
+
+        }
+        
+        #cart-and-info {
+        	position: fixed;
+        }
+      }
+		}
+	}
+}
+
+
+
+
+/* Home
+*/
+
+
+html {
+	body.home {
+		.container {
+			header {
+				#menu {
+					@include hidden;
+				}
+				
+			}
+		}
+	}
+}
+
+
+
+/* General
+*/
+
+html {
+	body {
+		.container {
+			width: 98%;
+      margin: $pad auto 0;
+      
+      header {
+        @include block;
+        
+        hgroup {
+        	@include col($minor, 0, 0);
+        	
+        	h1 {
+            @include hidden;
+          }
+          h2 {
+            @include hidden;
+          }
+          
+          #logo {
+            @include logo($pad/2);
+          }
+        }
+        
+        #menu {
+        	@include col($major, 0, 0);
+        	
+        	nav {
+        		@include block;
+        		
+        		ul {
+        			@include list-inline;
+        			@include font-heading("Ostrich Rounded");
+        			
+        			@include list-item-main-menu;
+        			
+        			li.active {
+        				@include col (33%, 0, 0);
+        			}
+        		}
+        	}
+        	
+        	header {
+        		h3 {
+        			@include hidden;
+        		}
+        	}
+        	
+        	article {
+        		@include hidden;
+        		@include col (33%, 0, 0);
+        		
+        		@include font-text;
+        	}
+        	
+        	article#services {
+        		dl {
+        			@include dlist;
+        			
+        			dt {
+        				padding: 0;
+        			}
+        			
+        			dd {
+        				margin-bottom: $pad + $pad/2;
+        				
+        				#c1 {
+        					h6 {
+        						@include hidden;
+        					}
+        				}
+        				#c2 {
+        					@include hidden;
+        				}
+        			}
+        		}
+        	}
+        	
+        	article#gifts {
+        		dl {
+        			ul {
+        				@include list-categories;
+        				
+        				margin: 0;
+        				padding: 0;
+        			}
+        			
+        			#image {
+        				@include hidden;
+        			}
+        			
+        			#description {
+        				margin: $pad 0;
+								padding: $pad;
+								
+								@include text-action;
+								opacity: .9;
+        				
+        				#action {
+        					@include hidden;
+        				}
+        			}
+        		}
+        	}
+        	
+        	article#premium {
+        		ul {
+        			@include list-premium;
+        			
+        			li {
+        				font-size: medium;
+        				
+        				span {
+        					font-weight: normal;
+        					margin: $pad/8 0;
+        					display: inline-block;
+        				}
+        			}
+        		}
+        	}
+        }
+        
+        #cart-and-info {
+        	position: absolute;
+        	top: $pad/2;
+        	right: $pad;
+        	width: 11%; /* otherwise the italic on hover is moving the entire ul */
+        	
+        	background: $color-background;
+        	opacity: .9;
+        	
+        	ul {
+        		font-size: smaller;
+        		margin: $pad/2;
+        		
+        		li {
+        			cursor: pointer;
+        			
+        			ul {
+        				display: none;
+        			}
+        		}
+        		li:hover {
+        			font-style: italic;
+        		}
+        	}
+        }
+      }
+      
+      footer {
+        @include block;    
+        @include hidden;
+        margin: $pad*4 0 $pad*2;
+        padding: $pad 0;
+        border-top: 1px solid;
+        
+        ul {
+          @include list-inline;          
+        }
+      }
+		}
+	}
+}

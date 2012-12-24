@@ -1,0 +1,121 @@
+
+
+/* Displays what is on an Archive page beside the articles
+	--------------------------------------------------------
+	
+	The article is styled in article.scss
+	
+*/
+
+
+html {
+  body.archive {
+    .container {
+      #content { 
+      	@include block;
+      	margin: $pad*3 0;
+      	
+      	header {
+      		h3 {
+      			@include hidden;
+      		}
+      	}
+      	
+      	aside {
+      		@include block;
+      		
+      		#description, #search, #filters {
+      			@include col(30%, 0, 5%);
+      			margin-top: $pad;
+      			
+      			ul {
+      				@include list-filters;
+      			}
+      		}
+      		
+      		#description {
+      			background: $color-highlight;
+      			@include font-highlight;
+      			
+      			p {
+      				padding: $pad;
+      			}
+      		}
+      		
+      		#search {
+      			@include search;
+      			
+      			ul {
+      				margin: $pad 0;
+      			}
+      		}
+      		
+      		#filters {
+      			margin-right: 0;
+      			
+      			h5 {
+      				padding: 0;
+      			}
+      		}
+      		
+      		#thumbs {
+      			@include block;
+      			@include background-stripe;
+      			
+      			padding: $pad*2 0;
+      			
+      			#thumb {
+      				@include col(5em, 0, 0);
+      				margin: 0 $pad $pad;
+      				cursor: pointer;
+      				
+      				img {
+      					width: 100px;
+      					border: 1px solid $color-text-light;
+      				}
+      			}
+      		}	
+      	}
+      
+        #trigger {
+					@include block;
+					text-align: center;
+					
+      		border-top: 1px solid;
+      		margin-bottom: $pad*20;
+					
+					span {
+						font-size: 2em;
+						text-align: center;
+						cursor: pointer;
+						
+						background: $color-highlight;
+						padding: $pad/4;
+					}
+					span.down {
+						@include hidden;
+					}
+					span.up {
+						display: inline-block;
+					}
+				}
+				#trigger.closed {
+					border-top: 1px dotted $color-text-light;
+					position: fixed;
+					
+					span.up {
+						@include hidden;
+					}
+					span.down {
+						display: inline-block;
+					}
+				}
+				
+      }
+    }
+  }
+}   
+
+
+
+

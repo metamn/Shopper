@@ -1,0 +1,359 @@
+/* Colors
+/* ------------------------------------------------------
+*/
+
+
+/* Text 
+*/
+$color-background: white;
+$color-background-light: darken($color-background, 5%); 
+
+$color-text: lighten(black, 10%);
+$color-text-light: lighten($color-text, 50%); 
+
+/* invert color with background */
+@mixin color-text-inverted {
+  color: $color-background;
+  background: $color-text;
+  
+  a, a:visited, a:active {
+  	color: $color-background;
+  	text-decoration: none;
+  }
+}
+
+
+/* Highlight 
+*/
+$color-highlight: lighten(yellow, 10%);
+$color-highlight-light: #7F7F3F; /* FF3, Kuler, Mono */
+
+.highlight {
+	background: $color-highlight;
+	padding: $pad/4;
+}
+
+
+/* Action 
+*/
+$color-action: #9173FF; /* FF3, Kuler, Compound */
+
+@mixin text-action-1 {
+	background: $color-action;
+	color: $color-background;
+	@include font-highlight;
+
+	a, a:visited, a:hover {
+		text-decoration: underline;
+	}
+}
+
+@mixin text-action {
+	background: $color-text;
+	color: $color-background;
+	@include font-highlight;
+
+	a, a:visited, a:hover {
+		text-decoration: underline;
+		color: $color-highlight;
+	}
+}
+
+
+/* Cart 
+*/
+$color-cart: lighten(red, 10%);
+
+@mixin text-cart {
+	background: $color-cart;
+	color: $color-text;
+	
+	@include font-text;
+	font-style: italic;
+	
+	a, a:visited, a:hover {
+		text-decoration: underline;
+		color: $color-text;
+	}
+}
+
+@mixin text-cart-inverted {
+	background: $color-cart;
+	color: $color-background;
+	
+	@include font-text;
+	font-style: italic;
+	
+	a, a:visited, a:hover {
+		text-decoration: underline;
+		color: $color-background;
+	}
+}
+
+
+
+/* Links
+*/
+
+@mixin link-neutral {
+	color: $color-text;
+	text-decoration: none;
+}
+
+@mixin link-neutral-inverted {
+	color: $color-background;
+	text-decoration: none;
+}
+
+
+/* Backgrounds
+*/
+
+@mixin background-stripe {
+	background: transparent url(stripe.png);
+}
+
+
+
+
+/* Fonts
+/* ------------------------------------------------------
+*/
+
+
+@include font-face("Ostrich Black", font-files("ostrich/ostrich-black-webfont.woff", "ostrich/ostrich-black-webfont.ttf", "ostrich/ostrich-black-webfont.svg"), "ostrich/ostrich-black-webfont.eot");
+@include font-face("Ostrich Light", font-files("ostrich/ostrich-light-webfont.woff", "ostrich/ostrich-light-webfont.ttf", "ostrich/ostrich-light-webfont.svg"), "ostrich/ostrich-light-webfont.eot");
+@include font-face("Ostrich Bold", font-files("ostrich/ostrich-bold-webfont.woff", "ostrich/ostrich-bold-webfont.ttf", "ostrich/ostrich-bold-webfont.svg"), "ostrich/ostrich-bold-webfont.eot");
+@include font-face("Ostrich Dashed", font-files("ostrich/ostrich-dashed-webfont.woff", "ostrich/ostrich-dashed-webfont.ttf", "ostrich/ostrich-dashed-webfont.svg"), "ostrich/ostrich-dashed-webfont.eot");
+@include font-face("Ostrich Regular", font-files("ostrich/ostrich-regular-webfont.woff", "ostrich/ostrich-regular-webfont.ttf", "ostrich/ostrich-regular-webfont.svg"), "ostrich/ostrich-regular-webfont.eot");
+@include font-face("Ostrich Rounded", font-files("ostrich/ostrich-rounded-webfont.woff", "ostrich/ostrich-rounded-webfont.ttf", "ostrich/ostrich-rounded-webfont.svg"), "ostrich/ostrich-rounded-webfont.eot");
+
+
+@mixin font-heading($variant) {
+	font-family: $variant;
+	letter-spacing: .1em;
+	font-size: 2em;
+}
+
+@mixin font-text {
+	font-family: "Old Standard TT", serif;
+	letter-spacing: normal;
+}
+
+@mixin font-highlight {
+	font-family: "Lekton", sans-serif;
+}
+
+@mixin font-reset {
+	font-weight: normal;
+	font-size: medium;
+	text-transform: normal;
+	font-variant: deafult;
+}
+
+
+body {
+	.container {
+		h1, h2, h3, h4, h5, h6 {
+			@include font-heading("Ostrich Rounded");
+		}
+	}
+}
+
+
+
+/* Lists
+/* ------------------------------------------------------
+*/
+
+
+/* Product filters
+*/
+
+@mixin list-filters {
+	@include font-text;
+	list-style-type: none;
+	
+	li {
+		padding-bottom: $pad/4;
+		margin-bottom: $pad/4;
+		border-bottom: 1px dotted;
+	}
+}
+
+/* Home > Menu list item 
+*/
+@mixin list-item-main-menu {
+	li {
+		cursor: pointer;
+		
+		span {
+			@include font-text;
+			font-style: italic;
+			font-weight: normal;
+		}
+	}
+	li:after {
+		@include list-item-arrow;
+	}
+}
+
+
+/* List arrow, trigger 
+*/
+@mixin list-item-arrow {
+	content: "\21E3";
+	font-size: smaller;
+	color: $color-text-light;
+}
+
+
+/* A simple list first used at Intro > Premium 
+*/
+@mixin list-premium {
+	list-style-type: none;
+	padding: 0;
+	
+	li {
+		font-size: 2em;
+		font-weight: normal;
+		font-style: italic;
+		
+		padding: $pad/2;
+		border-bottom: 1px dotted;
+		
+		span {
+			font-weight: bold;
+			@include text-action;
+			padding: $pad/4;
+		}
+	}
+}
+
+
+/* A simple list first used at Intro > Categories 
+*/
+@mixin list-categories {
+	padding: $pad*2 0;
+	list-style-type: none;
+	
+	li {
+		font-size: medium;
+		@include font-text;
+		color: $color-text;
+		
+		cursor: pointer;
+		
+		padding: $pad/4 $pad;
+		border-bottom: none;
+	}
+	li.active {
+		cursor: default;
+		font-style: italic;
+		font-size: 130%;
+		padding: $pad/2 $pad;
+	}
+	li.hover {
+		font-style: italic;
+	}
+}
+
+
+/* A dynamic list first used at Intro > Services 
+*/
+@mixin dlist {
+	cursor: default;
+	
+	dt {
+		text-transform: none;
+		font-size: 2em;
+		font-weight: normal;
+		padding: $pad;
+	}
+	
+	dd {
+		@include block;
+		padding-bottom: $pad/2;
+		margin: 0;
+	
+		div#c1 {
+			@include col($major, 0, 0);
+				
+			h5, h6 {
+				@include font-text;
+				font-size: medium;
+				padding: $pad/4 0;
+				margin-left: $pad;
+			}
+			h5 {
+				text-transform: none;
+				font-variant: small-caps;
+				border-bottom: 1px dotted;
+			}
+			h6 {
+				font-variant: normal;
+				font-style: italic;
+				margin-left: $pad*1.2;
+			}
+		}
+		
+		div#c2 {
+			@include col($minor, 0, 0);
+		
+			font-weight: bold;
+			@include color-text-inverted;		
+			
+			position: relative;
+			top: -2em;
+			
+			a, a:visited, a:active {
+				@include link-neutral-inverted;
+			}
+			
+			p {
+				padding: $pad/4;
+				text-align: center;
+				font-size: 4em;
+			}
+		}
+	}
+}
+
+
+
+
+/* Search
+/* ------------------------------------------------------
+*/
+
+
+@mixin search {
+	input[type='text'] {
+		@include col($major, 0, 5%);
+	}
+}
+
+
+
+/* Logo
+/* ------------------------------------------------------
+*/
+
+@mixin logo($size) {
+	height: $size * 7;
+	width: $size * 24 - $size/2; /* an extra space must be add */
+	.cell {
+		width: $size;
+		height: $size;
+		float: left;
+	}
+	.small {
+		width: $size / 2;
+	}
+	.set {
+		background: $color-text;
+	}
+}
+
+
+
