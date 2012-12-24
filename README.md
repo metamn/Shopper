@@ -1,3 +1,14 @@
+# Database / Images Import
+
+## Localhost & Heroku
+
+- on localhost all's fine with the Wordpress Importer
+- on Heroku Importer will time out and not upload images only posts and other data
+- images can be uploaded manually but on server restart they will be lost
+
+
+
+
 # Install
 
 ## Localhost & Heroku
