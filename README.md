@@ -18,4 +18,6 @@
 This means you need to do all plugin installations and updates from your local environment, and deploy the changes."
 - on localhost: cd Sites; ln -s work/drop-o-folio drop-o-folio; create local db in mamp, edit wp-config ... and done
 - granting permissions: http://ardeearam.com/solved-wordpress-asking-for-ftp-credentials-when-upgrading/ aka sudo chown -R www-data wordpress/
+- permalinks in .htaccess are not compatible with localhost and heroku. in localhost the site is in a subfolder 'shopper' and on heroku it is in the '/'. uploading local .htaccess breaks heroku, or vice versa. the solution is to regenerate permalinks on heroku every time
+
 
