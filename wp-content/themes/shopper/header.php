@@ -51,7 +51,21 @@
     <script type="text/javascript" src="<?php bloginfo('stylesheet_directory')?>/assets/jquery.init.js"></script>
     
     <?php wp_head(); ?>
+    
+    <?php 
+      // Global variables
+      
+      global $site_name, $site_description, $site_title, $site_url;
+      
+      $site_name = get_bloginfo('name', 'display');
+      $site_description = get_bloginfo('description', 'display');
+      $site_title = $site_name . ' | ' . $site_description;
+      $site_url = home_url('/');
+    ?>
   </head>
+  
+  
+  
   
   <body <?php body_class(); ?>>     
     
@@ -60,13 +74,13 @@
       <header>
         <hgroup>
           <h1>
-            <?php bloginfo( 'name' ); ?>
+            <?php echo $site_name; ?>
           </h1>
           <h2>
-            <?php bloginfo( 'description' ); ?>
+            <?php echo $site_description; ?>
           </h2> 
          
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+          <a href="<?php echo $site_url; ?>" title="<?php echo $site_title; ?>" rel="home">
             <div id="logo"></div>       
           </a>
         </hgroup>  

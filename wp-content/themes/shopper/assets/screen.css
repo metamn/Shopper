@@ -59,14 +59,86 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+/* Vertical rhythm
+*/
+/* The grid
+*/
+/* The Responsive Mixin
+ - http://thesassway.com/intermediate/responsive-web-design-part-1
+ - screen sizes: http://www.responsinator.com/
+ 
+ ------------------------------------------------------------------------------
+*/
+@media only screen and (max-width: 600px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+  }
+}
+img {
+  max-width: 100%;
+}
+
+/* Logo
+------------------------------------------------------------------------------
+*/
+/* Site specific mixins
+*/
+/* startpage main div
+*/
+/* General mixins
+------------------------------------------------------------------------------
+*/
+/* set z-index
+
+- parent must have set 'position'
+- this element must have set weight
+- http://www.tjkdesign.com/articles/z-index/teach_yourself_how_elements_stack.asp
+
+*/
+/* rotate
+*/
+/* underline a text with padding and margin
+*/
+/* make cursor to be pointer
+*/
+/* list, inline 
+*/
+/* table, simple
+*/
+/* make a column 
+*/
+/* box-shadow
+*/
+/* make image fit within container
+*/
+/* hide an element 
+*/
+/* block element -- expand something full size inside a container
+*/
 body {
+  /* Use Serif for long text */
   font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
   font-size: 100%;
   line-height: 1.25;
 }
 body .container {
-  width: 50%;
-  margin: 0 auto;
+  /* Use Sans serif for non-long text */
+  /* Headings
+   -----------------------------------------------
+  */
 }
 body .container h1, body .container h2, body .container h3, body .container h4, body .container h5, body .container h6 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -191,39 +263,6 @@ body .container input[type='checkbox']:checked:after {
   color: black;
 }
 
-/* Site specific mixins
-*/
-/* startpage main div
-*/
-/* General mixins
-*/
-/* set z-index
-
-- parent must have set 'position'
-- this element must have set weight
-- http://www.tjkdesign.com/articles/z-index/teach_yourself_how_elements_stack.asp
-
-*/
-/* rotate
-*/
-/* underline a text with padding and margin
-*/
-/* make cursor to be pointer
-*/
-/* list, inline 
-*/
-/* table, simple
-*/
-/* make a column 
-*/
-/* box-shadow
-*/
-/* make image fit within container
-*/
-/* hide an element 
-*/
-/* block element -- expand something full size inside a container
-*/
 /* Colors
 /* ------------------------------------------------------
 */
@@ -252,38 +291,38 @@ body .container input[type='checkbox']:checked:after {
 */
 @font-face {
   font-family: "Ostrich Black";
-  src: url('/ostrich/ostrich-black-webfont.eot');
-  src: url('/ostrich/ostrich-black-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-black-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-black-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-black-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-black-webfont.eot');
+  src: url('fonts/ostrich/ostrich-black-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-black-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-black-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-black-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Light";
-  src: url('/ostrich/ostrich-light-webfont.eot');
-  src: url('/ostrich/ostrich-light-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-light-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-light-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-light-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-light-webfont.eot');
+  src: url('fonts/ostrich/ostrich-light-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-light-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-light-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-light-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Bold";
-  src: url('/ostrich/ostrich-bold-webfont.eot');
-  src: url('/ostrich/ostrich-bold-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-bold-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-bold-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-bold-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-bold-webfont.eot');
+  src: url('fonts/ostrich/ostrich-bold-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-bold-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-bold-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-bold-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Dashed";
-  src: url('/ostrich/ostrich-dashed-webfont.eot');
-  src: url('/ostrich/ostrich-dashed-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-dashed-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-dashed-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-dashed-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-dashed-webfont.eot');
+  src: url('fonts/ostrich/ostrich-dashed-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-dashed-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-dashed-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-dashed-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Regular";
-  src: url('/ostrich/ostrich-regular-webfont.eot');
-  src: url('/ostrich/ostrich-regular-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-regular-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-regular-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-regular-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-regular-webfont.eot');
+  src: url('fonts/ostrich/ostrich-regular-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-regular-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-regular-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-regular-webfont.svg') format('svg');
 }
 
 @font-face {
   font-family: "Ostrich Rounded";
-  src: url('/ostrich/ostrich-rounded-webfont.eot');
-  src: url('/ostrich/ostrich-rounded-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-rounded-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-rounded-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-rounded-webfont.svg') format('svg');
+  src: url('fonts/ostrich/ostrich-rounded-webfont.eot');
+  src: url('fonts/ostrich/ostrich-rounded-webfont.eot?#iefix') format('eot'), url('fonts/ostrich/ostrich-rounded-webfont.woff') format('woff'), url('fonts/ostrich/ostrich-rounded-webfont.ttf') format('truetype'), url('fonts/ostrich/ostrich-rounded-webfont.svg') format('svg');
 }
 
 body .container h1, body .container h2, body .container h3, body .container h4, body .container h5, body .container h6 {
@@ -310,27 +349,10 @@ body .container h1, body .container h2, body .container h3, body .container h4, 
 /* Search
 /* ------------------------------------------------------
 */
-/* Logo
-/* ------------------------------------------------------
-*/
 /* Single Post
 */
 html body.single .container header hgroup #logo {
-  height: 2.1875em;
-  width: 7.34375em;
-  /* an extra space must be add */
   position: fixed;
-}
-html body.single .container header hgroup #logo .cell {
-  width: 0.3125em;
-  height: 0.3125em;
-  float: left;
-}
-html body.single .container header hgroup #logo .small {
-  width: 0.15625em;
-}
-html body.single .container header hgroup #logo .set {
-  background: #1a1a1a;
 }
 html body.single .container header #menu {
   width: 62.5%;
@@ -344,21 +366,7 @@ html body.single .container header #cart-and-info {
 /* Archive
 */
 html body.archive .container header hgroup #logo {
-  height: 2.1875em;
-  width: 7.34375em;
-  /* an extra space must be add */
   position: fixed;
-}
-html body.archive .container header hgroup #logo .cell {
-  width: 0.3125em;
-  height: 0.3125em;
-  float: left;
-}
-html body.archive .container header hgroup #logo .small {
-  width: 0.15625em;
-}
-html body.archive .container header hgroup #logo .set {
-  background: #1a1a1a;
 }
 html body.archive .container header #archive-title {
   cursor: pointer;
@@ -387,6 +395,22 @@ html body.archive .container header #cart-and-info {
 
 /* Home
 */
+html body.home .container header hgroup #logo {
+  height: 4.375em;
+  width: 14.6875em;
+  /* an extra space must be added */
+}
+html body.home .container header hgroup #logo .cell {
+  width: 0.625em;
+  height: 0.625em;
+  float: left;
+}
+html body.home .container header hgroup #logo .small {
+  width: 0.3125em;
+}
+html body.home .container header hgroup #logo .set {
+  background: #1a1a1a;
+}
 html body.home .container header #menu {
   display: none;
 }
@@ -395,7 +419,7 @@ html body.home .container header #menu {
 */
 html body .container {
   width: 98%;
-  margin: 1.25em auto 0;
+  margin: 0 auto;
 }
 html body .container header {
   width: 100%;
@@ -413,17 +437,17 @@ html body .container header hgroup h2 {
   display: none;
 }
 html body .container header hgroup #logo {
-  height: 4.375em;
-  width: 14.6875em;
-  /* an extra space must be add */
+  height: 2.1875em;
+  width: 7.34375em;
+  /* an extra space must be added */
 }
 html body .container header hgroup #logo .cell {
-  width: 0.625em;
-  height: 0.625em;
+  width: 0.3125em;
+  height: 0.3125em;
   float: left;
 }
 html body .container header hgroup #logo .small {
-  width: 0.3125em;
+  width: 0.15625em;
 }
 html body .container header hgroup #logo .set {
   background: #1a1a1a;
@@ -625,25 +649,24 @@ html body .container header #menu article#premium ul li span {
 }
 html body .container header #cart-and-info {
   position: absolute;
-  top: 0.625em;
   right: 1.25em;
-  width: 11%;
-  /* otherwise the italic on hover is moving the entire ul */
   background: white;
   opacity: .9;
+  font-size: smaller;
 }
 html body .container header #cart-and-info ul {
-  font-size: smaller;
-  margin: 0.625em;
+  margin: 0;
 }
 html body .container header #cart-and-info ul li {
   cursor: pointer;
+  border-bottom: 1px dotted white;
 }
 html body .container header #cart-and-info ul li ul {
   display: none;
+  margin: 0.625em;
 }
 html body .container header #cart-and-info ul li:hover {
-  font-style: italic;
+  border-color: #1a1a1a;
 }
 html body .container footer {
   width: 100%;
@@ -1167,18 +1190,24 @@ html body.archive .container #content aside {
   width: 100%;
   float: left;
 }
-html body.archive .container #content aside #description, html body.archive .container #content aside #search, html body.archive .container #content aside #filters {
-  width: 30%;
+html body.archive .container #content aside #description {
+  width: 32.5%;
   margin: 0 5% 0 0;
+  float: left;
+}
+html body.archive .container #content aside #search, html body.archive .container #content aside #filters {
+  width: 31.25%;
+  margin: 0 0 0 0;
   float: left;
   margin-top: 1.25em;
 }
-html body.archive .container #content aside #description ul, html body.archive .container #content aside #search ul, html body.archive .container #content aside #filters ul {
+html body.archive .container #content aside #search ul, html body.archive .container #content aside #filters ul {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   list-style-type: none;
+  width: 90%;
 }
-html body.archive .container #content aside #description ul li, html body.archive .container #content aside #search ul li, html body.archive .container #content aside #filters ul li {
+html body.archive .container #content aside #search ul li, html body.archive .container #content aside #filters ul li {
   padding-bottom: 0.3125em;
   margin-bottom: 0.3125em;
   border-bottom: 1px dotted;
@@ -1522,11 +1551,4 @@ html body .container #checkout {
   margin: 0 0 0 0;
   float: left;
   display: block;
-}
-
-/* Generally available settings
-*/
-img {
-  max-width: 100%;
-  height: auto;
 }

@@ -9,12 +9,12 @@
 @import "compass/css3";
 
 @import "metrics";
-
-@import "typography";
-@import "responsive";
 @import "mixins";
+@import "typography";
+
 
 @import "theme";
+
 
 @import "header";
 @import "home";
@@ -24,11 +24,6 @@
 @import "page";
 
 
-/* Generally available settings
-*/
-img {
-  @include image-full-width;
-}
 
 
 

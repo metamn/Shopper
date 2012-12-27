@@ -5,6 +5,9 @@
 - on localhost all's fine with the Wordpress Importer
 - on Heroku Importer will time out and not upload images only posts and other data
 - images can be uploaded manually but on server restart they will be lost
+- images will be added manually and stored to Amazon AWS S3 via the WP Read Only plugin
+- therefore on Heroku only a few posts will be shown
+ 
 
 
 

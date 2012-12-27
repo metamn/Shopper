@@ -1,3 +1,110 @@
+/* The Responsive Mixin
+ - http://thesassway.com/intermediate/responsive-web-design-part-1
+ - screen sizes: http://www.responsinator.com/
+ 
+ ------------------------------------------------------------------------------
+*/
+
+
+
+$mobile: 380px;
+$mobile-landscape: 600px;
+$tablet: 1024px;
+$desktop: 1440px;
+
+
+@mixin respond-to($media) {
+	
+	/* handhelds to iPhone 3,4*/
+  @if $media == mobile {
+    @media only screen and (max-width: $mobile) { @content; }
+  }
+  
+  /* smartphones and iPhone landscape mode, up to Kindle or maybe iPad Mini */
+  @else if $media == mobile-landscape {
+    @media only screen and (min-width: $mobile + 1) and (max-width: $mobile-landscape) { @content; }
+  }
+  
+  /* a collector mode, combining all above */
+  @if $media == all-mobile {
+    @media only screen and (max-width: $mobile-landscape) { @content; }
+  }
+  
+  /* something between 601px and 1023px, usually a tablet in portrait mode */
+  @else if $media == tablet {
+    @media only screen and (min-width: $mobile-landscape + 1) and (max-width: $tablet - 1) { @content; }
+  }
+  
+  /* a collector mode, combining smartphones in landscape mode & tablets */
+  @if $media == all-tablet {
+    @media only screen and (max-width: $tablet - 1) { @content; }
+  }
+  
+  /* 1024 - 1440, or tablet in landscape mode */
+  @else if $media == desktop {
+    @media only screen and (min-width: $tablet) and (max-width: $desktop) { @content; }
+  }
+  
+  /* 1440 + */
+  @else if $media == large {
+    @media only screen and (min-width: $desktop + 1) { @content; }
+  }
+}
+
+
+@media only screen and (max-width: $mobile-landscape) { 
+	.mobile {
+		display: block;
+	}
+	.desktop {
+		display: none;
+	}
+}
+@media only screen and (min-width: $mobile-landscape + 1) {
+	.mobile {
+		display: none;
+	}
+	.desktop {
+		display: block;
+	}
+}
+
+
+
+// Responisive, fluid Images
+
+img {
+	max-width: 100%;
+}
+
+
+
+
+/* Logo
+------------------------------------------------------------------------------
+*/
+
+@mixin logo($size) {
+	height: $size * 7;
+	width: $size * 24 - $size/2; /* an extra space must be added */
+	
+	.cell {
+		width: $size;
+		height: $size;
+		float: left;
+	}
+	
+	.small {
+		width: $size / 2;
+	}
+	
+	.set {
+		background: $color-text;
+	}
+}
+
+
+
 /* Site specific mixins
 */
 
@@ -17,6 +124,7 @@
 
 
 /* General mixins
+------------------------------------------------------------------------------
 */
 
 
@@ -48,8 +156,8 @@
 /* underline a text with padding and margin
 */
 @mixin text-underlined {
-  margin-bottom: $pad2;
-  padding-bottom: $pad2;
+  margin-bottom: $pad/2;
+  padding-bottom: $pad/2;
   border-bottom: 1px solid;
 }
 

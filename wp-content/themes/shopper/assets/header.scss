@@ -7,7 +7,6 @@ html {
 			header {
 				hgroup {
         	#logo {
-        		@include logo($pad/4);
         		position: fixed;
         	}
         }
@@ -35,7 +34,6 @@ html {
       header {
         hgroup {
         	#logo {
-        		@include logo($pad/4);
         		position: fixed;
         	}
         }
@@ -83,6 +81,11 @@ html {
 	body.home {
 		.container {
 			header {
+			  hgroup {
+			    #logo {
+			      @include logo($pad/2);
+			    }
+			  }
 				#menu {
 					@include hidden;
 				}
@@ -101,7 +104,7 @@ html {
 	body {
 		.container {
 			width: 98%;
-      margin: $pad auto 0;
+      margin: 0 auto;
       
       header {
         @include block;
@@ -117,7 +120,7 @@ html {
           }
           
           #logo {
-            @include logo($pad/2);
+            @include logo($pad/4);
           }
         }
         
@@ -221,26 +224,27 @@ html {
         
         #cart-and-info {
         	position: absolute;
-        	top: $pad/2;
         	right: $pad;
-        	width: 11%; /* otherwise the italic on hover is moving the entire ul */
         	
         	background: $color-background;
         	opacity: .9;
         	
+        	font-size: smaller;
+        	
         	ul {
-        		font-size: smaller;
-        		margin: $pad/2;
+        		margin: 0;
         		
         		li {
         			cursor: pointer;
+        			border-bottom: 1px dotted $color-background;
         			
         			ul {
         				display: none;
+        				margin: $pad/2;
         			}
         		}
         		li:hover {
-        			font-style: italic;
+        			border-color: $color-text;
         		}
         	}
         }

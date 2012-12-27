@@ -1,18 +1,15 @@
 
 body {
-	// Use Serif for long text
+	/* Use Serif for long text */
 	font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 	
-	// Set vertical rhythm
-	// - from http://lamb.cc/typograph/ 
+	
 	font-size: 100%;
 	line-height: 1.25;
 	
 	.container {
-		width: 50%;
-		margin: 0 auto;
-	
-		// Use Sans serif for non-long text
+		
+		/* Use Sans serif for non-long text */
 		h1, h2, h3, h4, h5, h6 {
 			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		}
@@ -20,9 +17,9 @@ body {
 		
 		
 		
-		// Headings
-		// -----------------------------------------------
-		
+		/* Headings
+		 -----------------------------------------------
+		*/
 		
 		// Headings dont differ by size but by decoration
 		// - vertical rhythm is maintained by padding
@@ -104,7 +101,7 @@ body {
 				text-transform: uppercase;
 			}
 			dd {
-				margin: $pad2 $pad ($pad + $pad2);
+				margin: $pad/2 $pad ($pad + $pad/2);
 			}
 		}
 		

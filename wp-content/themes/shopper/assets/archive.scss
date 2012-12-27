@@ -24,12 +24,17 @@ html {
       	aside {
       		@include block;
       		
-      		#description, #search, #filters {
-      			@include col(30%, 0, 5%);
+      		#description {
+      		  @include col($minor - 5%, 0, 5%);
+      		}
+      		
+      		#search, #filters {
+      			@include col($major/2, 0, 0);
       			margin-top: $pad;
       			
       			ul {
       				@include list-filters;
+      				width: 90%;
       			}
       		}
       		

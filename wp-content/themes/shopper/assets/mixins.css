@@ -1,8 +1,40 @@
+/* The Responsive Mixin
+ - http://thesassway.com/intermediate/responsive-web-design-part-1
+ - screen sizes: http://www.responsinator.com/
+ 
+ ------------------------------------------------------------------------------
+*/
+@media only screen and (max-width: 600px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+  }
+}
+img {
+  max-width: 100%;
+}
+
+/* Logo
+------------------------------------------------------------------------------
+*/
 /* Site specific mixins
 */
 /* startpage main div
 */
 /* General mixins
+------------------------------------------------------------------------------
 */
 /* set z-index
 
