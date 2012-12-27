@@ -1,6 +1,9 @@
 <section id="product-browser">
+  <h3>Lista produse</h3>
 	<aside>
+	  <h3>Navigare categorii produse</h3>
 		<nav id="filters">
+		  <h3>Filtrare produse</h3>
 			<ul>
 				<li><input id="filter-products" type="checkbox" name="from_category" value="from_category" checked />Alte cadouri din <span><?php echo $category_name ?></span></li>
 				<li><input id="filter-products" type="checkbox" name="latest" value="latest" />Cadouri similare</li>

@@ -71,7 +71,7 @@
     
     <div class="container">
     
-      <header>
+      <header id="header">
         <hgroup>
           <h1>
             <?php echo $site_name; ?>
@@ -90,7 +90,8 @@
         	include 'home-intro.php' 
         ?>
         
-        <section id="cart-and-info">
+        <nav id="cart-and-info">
+          <h3>Cos cumparaturi si informatii</h3>
         	<ul>
         		<li>Cos cumparaturi
         			<ul>
@@ -102,7 +103,7 @@
         		<li>Informatii</li>
         	</ul>
         </section>
-      </header>
+      </nav>
     
     	
   

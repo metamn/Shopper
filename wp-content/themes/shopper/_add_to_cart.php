@@ -1,4 +1,5 @@
 <aside id="add-to-cart">
+  <h3>Adauga la cos</h3>
 	<div id="incentives">
 		<dl>
 			<dt>Cumpar acest cadou</dt>

@@ -13,6 +13,10 @@ html {
 	body.single {
 		.container {
 			#content {
+			  
+			  h3 {
+			    @include hidden;
+			  }
 			
 				#shopping-incentives {
 					@include block;
@@ -55,6 +59,10 @@ html {
 				
 				#add-to-cart, #add-to-wishlist, #subscribe-to-newsletter {
 					@include col($major + $minor/2, $minor/4, 0);
+					
+					h3 {
+					  @include hidden;
+					}
 					
 					#incentives {
 						@include col($major, 0, $minor/4);
@@ -108,6 +116,11 @@ html {
 				#product-browser {
 					@include block;
 					margin: $pad*4 0;
+					
+					h3 {
+					  @include hidden;
+					}
+					
 					
 					aside {
 						@include col($minor, 0, 0);

@@ -421,81 +421,81 @@ html body .container {
   width: 98%;
   margin: 0 auto;
 }
-html body .container header {
+html body .container #header {
   width: 100%;
   float: left;
 }
-html body .container header hgroup {
+html body .container #header hgroup {
   width: 37.5%;
   margin: 0 0 0 0;
   float: left;
 }
-html body .container header hgroup h1 {
+html body .container #header hgroup h1 {
   display: none;
 }
-html body .container header hgroup h2 {
+html body .container #header hgroup h2 {
   display: none;
 }
-html body .container header hgroup #logo {
+html body .container #header hgroup #logo {
   height: 2.1875em;
   width: 7.34375em;
   /* an extra space must be added */
 }
-html body .container header hgroup #logo .cell {
+html body .container #header hgroup #logo .cell {
   width: 0.3125em;
   height: 0.3125em;
   float: left;
 }
-html body .container header hgroup #logo .small {
+html body .container #header hgroup #logo .small {
   width: 0.15625em;
 }
-html body .container header hgroup #logo .set {
+html body .container #header hgroup #logo .set {
   background: #1a1a1a;
 }
-html body .container header #menu {
+html body .container #header #menu {
   width: 62.5%;
   margin: 0 0 0 0;
   float: left;
 }
-html body .container header #menu nav {
+html body .container #header #menu h3 {
+  display: none;
+}
+html body .container #header #menu nav {
   width: 100%;
   float: left;
 }
-html body .container header #menu nav ul {
+html body .container #header #menu nav ul {
   display: block;
   margin: 0;
   font-family: "Ostrich Rounded";
   letter-spacing: .1em;
   font-size: 2em;
 }
-html body .container header #menu nav ul li {
+html body .container #header #menu nav ul li {
   display: inline-block;
   list-style-type: none;
   margin-left: 0;
 }
-html body .container header #menu nav ul li {
+html body .container #header #menu nav ul li {
   cursor: pointer;
 }
-html body .container header #menu nav ul li span {
+html body .container #header #menu nav ul li span {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   font-style: italic;
   font-weight: normal;
 }
-html body .container header #menu nav ul li:after {
+html body .container #header #menu nav ul li:after {
   content: "\21E3";
   font-size: smaller;
   color: #999999;
 }
-html body .container header #menu nav ul li.active {
+html body .container #header #menu nav ul li.active {
   width: 33%;
   margin: 0 0 0 0;
   float: left;
 }
-html body .container header #menu header h3 {
-  display: none;
-}
-html body .container header #menu article {
+html body .container #header #menu article {
   display: none;
   width: 33%;
   margin: 0 0 0 0;
@@ -503,44 +503,44 @@ html body .container header #menu article {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
 }
-html body .container header #menu article#services dl {
+html body .container #header #menu article#services dl {
   cursor: default;
 }
-html body .container header #menu article#services dl dt {
+html body .container #header #menu article#services dl dt {
   text-transform: none;
   font-size: 2em;
   font-weight: normal;
   padding: 1.25em;
 }
-html body .container header #menu article#services dl dd {
+html body .container #header #menu article#services dl dd {
   width: 100%;
   float: left;
   padding-bottom: 0.625em;
   margin: 0;
 }
-html body .container header #menu article#services dl dd div#c1 {
+html body .container #header #menu article#services dl dd div#c1 {
   width: 62.5%;
   margin: 0 0 0 0;
   float: left;
 }
-html body .container header #menu article#services dl dd div#c1 h5, html body .container header #menu article#services dl dd div#c1 h6 {
+html body .container #header #menu article#services dl dd div#c1 h5, html body .container #header #menu article#services dl dd div#c1 h6 {
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
   font-size: medium;
   padding: 0.3125em 0;
   margin-left: 1.25em;
 }
-html body .container header #menu article#services dl dd div#c1 h5 {
+html body .container #header #menu article#services dl dd div#c1 h5 {
   text-transform: none;
   font-variant: small-caps;
   border-bottom: 1px dotted;
 }
-html body .container header #menu article#services dl dd div#c1 h6 {
+html body .container #header #menu article#services dl dd div#c1 h6 {
   font-variant: normal;
   font-style: italic;
   margin-left: 1.5em;
 }
-html body .container header #menu article#services dl dd div#c2 {
+html body .container #header #menu article#services dl dd div#c2 {
   width: 37.5%;
   margin: 0 0 0 0;
   float: left;
@@ -550,38 +550,38 @@ html body .container header #menu article#services dl dd div#c2 {
   position: relative;
   top: -2em;
 }
-html body .container header #menu article#services dl dd div#c2 a, html body .container header #menu article#services dl dd div#c2 a:visited, html body .container header #menu article#services dl dd div#c2 a:active {
+html body .container #header #menu article#services dl dd div#c2 a, html body .container #header #menu article#services dl dd div#c2 a:visited, html body .container #header #menu article#services dl dd div#c2 a:active {
   color: white;
   text-decoration: none;
 }
-html body .container header #menu article#services dl dd div#c2 a, html body .container header #menu article#services dl dd div#c2 a:visited, html body .container header #menu article#services dl dd div#c2 a:active {
+html body .container #header #menu article#services dl dd div#c2 a, html body .container #header #menu article#services dl dd div#c2 a:visited, html body .container #header #menu article#services dl dd div#c2 a:active {
   color: white;
   text-decoration: none;
 }
-html body .container header #menu article#services dl dd div#c2 p {
+html body .container #header #menu article#services dl dd div#c2 p {
   padding: 0.3125em;
   text-align: center;
   font-size: 4em;
 }
-html body .container header #menu article#services dl dt {
+html body .container #header #menu article#services dl dt {
   padding: 0;
 }
-html body .container header #menu article#services dl dd {
+html body .container #header #menu article#services dl dd {
   margin-bottom: 1.875em;
 }
-html body .container header #menu article#services dl dd #c1 h6 {
+html body .container #header #menu article#services dl dd #c1 h6 {
   display: none;
 }
-html body .container header #menu article#services dl dd #c2 {
+html body .container #header #menu article#services dl dd #c2 {
   display: none;
 }
-html body .container header #menu article#gifts dl ul {
+html body .container #header #menu article#gifts dl ul {
   padding: 2.5em 0;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-html body .container header #menu article#gifts dl ul li {
+html body .container #header #menu article#gifts dl ul li {
   font-size: medium;
   font-family: "Old Standard TT", serif;
   letter-spacing: normal;
@@ -590,19 +590,19 @@ html body .container header #menu article#gifts dl ul li {
   padding: 0.3125em 1.25em;
   border-bottom: none;
 }
-html body .container header #menu article#gifts dl ul li.active {
+html body .container #header #menu article#gifts dl ul li.active {
   cursor: default;
   font-style: italic;
   font-size: 130%;
   padding: 0.625em 1.25em;
 }
-html body .container header #menu article#gifts dl ul li.hover {
+html body .container #header #menu article#gifts dl ul li.hover {
   font-style: italic;
 }
-html body .container header #menu article#gifts dl #image {
+html body .container #header #menu article#gifts dl #image {
   display: none;
 }
-html body .container header #menu article#gifts dl #description {
+html body .container #header #menu article#gifts dl #description {
   margin: 1.25em 0;
   padding: 1.25em;
   background: #1a1a1a;
@@ -610,63 +610,69 @@ html body .container header #menu article#gifts dl #description {
   font-family: "Lekton", sans-serif;
   opacity: .9;
 }
-html body .container header #menu article#gifts dl #description a, html body .container header #menu article#gifts dl #description a:visited, html body .container header #menu article#gifts dl #description a:hover {
+html body .container #header #menu article#gifts dl #description a, html body .container #header #menu article#gifts dl #description a:visited, html body .container #header #menu article#gifts dl #description a:hover {
   text-decoration: underline;
   color: #ffff33;
 }
-html body .container header #menu article#gifts dl #description #action {
+html body .container #header #menu article#gifts dl #description #action {
   display: none;
 }
-html body .container header #menu article#premium ul {
+html body .container #header #menu article#premium ul {
   list-style-type: none;
   padding: 0;
 }
-html body .container header #menu article#premium ul li {
+html body .container #header #menu article#premium ul li {
   font-size: 2em;
   font-weight: normal;
   font-style: italic;
   padding: 0.625em;
   border-bottom: 1px dotted;
 }
-html body .container header #menu article#premium ul li span {
+html body .container #header #menu article#premium ul li span {
   font-weight: bold;
   background: #1a1a1a;
   color: white;
   font-family: "Lekton", sans-serif;
   padding: 0.3125em;
 }
-html body .container header #menu article#premium ul li span a, html body .container header #menu article#premium ul li span a:visited, html body .container header #menu article#premium ul li span a:hover {
+html body .container #header #menu article#premium ul li span a, html body .container #header #menu article#premium ul li span a:visited, html body .container #header #menu article#premium ul li span a:hover {
   text-decoration: underline;
   color: #ffff33;
 }
-html body .container header #menu article#premium ul li {
+html body .container #header #menu article#premium ul li {
   font-size: medium;
 }
-html body .container header #menu article#premium ul li span {
+html body .container #header #menu article#premium ul li span {
   font-weight: normal;
   margin: 0.15625em 0;
   display: inline-block;
 }
-html body .container header #cart-and-info {
+html body .container #header #cart-and-info {
   position: absolute;
   right: 1.25em;
   background: white;
   opacity: .9;
   font-size: smaller;
 }
-html body .container header #cart-and-info ul {
+html body .container #header #cart-and-info h3 {
+  display: none;
+}
+html body .container #header #cart-and-info ul {
   margin: 0;
 }
-html body .container header #cart-and-info ul li {
+html body .container #header #cart-and-info ul li {
   cursor: pointer;
   border-bottom: 1px dotted white;
 }
-html body .container header #cart-and-info ul li ul {
+html body .container #header #cart-and-info ul li ul {
   display: none;
   margin: 0.625em;
 }
-html body .container header #cart-and-info ul li:hover {
+html body .container #header #cart-and-info ul li:hover {
   border-color: #1a1a1a;
+}
+html body .container #intro h3 {
+  display: none;
 }
 html body .container footer {
   width: 100%;
@@ -729,7 +735,7 @@ html .container #intro nav ul li.active:after {
 html .container #intro nav ul li.hover {
   color: #1a1a1a;
 }
-html .container #intro aside {
+html .container #intro #background {
   width: 62.5%;
   height: 62.5%;
   position: absolute;
@@ -1287,6 +1293,9 @@ html body.archive .container #content #trigger.closed span.down {
 	The post is styled in article.scss
 	
 */
+html body.single .container #content h3 {
+  display: none;
+}
 html body.single .container #content #shopping-incentives {
   width: 100%;
   float: left;
@@ -1356,6 +1365,9 @@ html body.single .container #content #add-to-cart, html body.single .container #
   width: 81.25%;
   margin: 0 0 0 9.375%;
   float: left;
+}
+html body.single .container #content #add-to-cart h3, html body.single .container #content #add-to-wishlist h3, html body.single .container #content #subscribe-to-newsletter h3 {
+  display: none;
 }
 html body.single .container #content #add-to-cart #incentives, html body.single .container #content #add-to-wishlist #incentives, html body.single .container #content #subscribe-to-newsletter #incentives {
   width: 62.5%;
@@ -1465,6 +1477,9 @@ html body.single .container #content #product-browser {
   width: 100%;
   float: left;
   margin: 5em 0;
+}
+html body.single .container #content #product-browser h3 {
+  display: none;
 }
 html body.single .container #content #product-browser aside {
   width: 37.5%;

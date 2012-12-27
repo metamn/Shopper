@@ -106,7 +106,7 @@ html {
 			width: 98%;
       margin: 0 auto;
       
-      header {
+      #header {
         @include block;
         
         hgroup {
@@ -127,6 +127,10 @@ html {
         #menu {
         	@include col($major, 0, 0);
         	
+        	h3 {
+      			@include hidden;
+      		}
+        	
         	nav {
         		@include block;
         		
@@ -142,11 +146,6 @@ html {
         		}
         	}
         	
-        	header {
-        		h3 {
-        			@include hidden;
-        		}
-        	}
         	
         	article {
         		@include hidden;
@@ -231,6 +230,10 @@ html {
         	
         	font-size: smaller;
         	
+        	h3 {
+      			@include hidden;
+      		}
+        	
         	ul {
         		margin: 0;
         		
@@ -248,6 +251,12 @@ html {
         		}
         	}
         }
+      }
+      
+      #intro {
+        h3 {
+    			@include hidden;
+    		}
       }
       
       footer {

@@ -1,4 +1,5 @@
 <aside id="subscribe-to-newsletter">
+  <h3>Inscrie-te la newsletter</h3>
 	<div id="incentives">
 		<dl>
 			<dt>Ma abonez la stirile despre acest produs</dt>

@@ -11,6 +11,7 @@ $color-background-light: darken($color-background, 5%);
 $color-text: lighten(black, 10%);
 $color-text-light: lighten($color-text, 50%); 
 
+
 /* invert color with background */
 @mixin color-text-inverted {
   color: $color-background;
@@ -180,6 +181,7 @@ body {
 		border-bottom: 1px dotted;
 	}
 }
+
 
 /* Home > Menu list item 
 */

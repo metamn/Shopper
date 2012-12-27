@@ -7,11 +7,10 @@
 
 
 <section id="<?php echo $klass ?>"> 
-  <header>
-    <h3><?php // echo get_content_title(); ?></h3>
-  </header>
+  <h3>Sectiunea Meniul principal</h3>
   
   <nav>
+    <h3>Meniul principal</h3>
 		<ul>
 			<li data-content="services">Servicii</li>
 			<li data-content="gifts"><span>de</span> Cadouri</li>
@@ -20,12 +19,13 @@
 	</nav>
 	
 	<!-- the background for articles -->
-	<aside></aside>
+	<div id="background"></div>
 	
 	<!-- On the archive page just the title is displayed, no menu at all. And this is the placeholder -->
 	<div id="archive-title"></div>
 	
 	<article id="services">
+	  <h3>Servicii</h3>
 		<dl>
 			<dt><a href="<?php bloginfo('home')?>/servicii/giftshopper" title="Giftshopper | Te ajutam sa alegi cadoul perfect"><em>gift</em> Shopper</a></dt>
 			<dd>
@@ -59,6 +59,7 @@
 	</article>
 	
 	<article id="gifts">
+	  <h3>Cadouri</h3>
 		<?php 
 			$cadouri = get_category_list('Cadouri'); 
 		?>
@@ -91,6 +92,7 @@
 	</article>
 	
 	<article id="premium">
+	  <h3>Premium</h3>
 		<ul>
 			<li><span>
 				<?php 

@@ -1,4 +1,5 @@
 <aside id="add-to-wishlist">
+  <h3>Adauga la wishlist</h3>
 	<div id="incentives">
 		<dl>
 			<dt>Adaug la lista mea de dorinte</dt>
