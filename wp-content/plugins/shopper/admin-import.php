@@ -18,6 +18,13 @@
 
 
 
+// Wordpress importer
+// - it would be ideal to use the Worpdress Import/Export plugin but it does not works.
+// - after a while it says the import file does not exists ...
+
+
+
+
 if ($_POST) {
   if ($_POST['import'] == 'posts') { shopper_import_posts(); }
   if ($_POST['import'] == 'orders') { shopper_import_orders(); }
@@ -493,7 +500,7 @@ function shopper_import_order_customer($id) {
 // Does the import, really
 function shopper_import_posts() {
   global $old;
-  $old = new wpdb('cs','cs','ujsmuff','localhost');
+  $old = new wpdb('cs','cs-33','ujsmuff','localhost');
   $old->show_errors();
   
   // Drop existing data
@@ -572,7 +579,7 @@ function shopper_import_save_post($post, $product, $vars, $content, $attach, $co
   
   global $old;
   global $wpdb;
-  $old = new wpdb('cs','cs','ujsmuff','localhost');
+  $old = new wpdb('cs','cs-33','ujsmuff','localhost');
   $old->show_errors();
   $wpdb->show_errors();
   
@@ -717,7 +724,7 @@ function shopper_import_drop_old_posts() {
 // - used to understand the real import
 function shopper_import_display_posts() {
   global $old;
-  $old = new wpdb('cs','cs','ujsmuff','localhost');
+  $old = new wpdb('cs','cs-33','ujsmuff','localhost');
   
   
   $posts = $old->get_results(

@@ -127,7 +127,6 @@ function get_product_image($id) {
 	
 	// Get medium and thumbnail
 	$m = unserialize(get_post_meta($id, '_wp_attachment_metadata', true));
-	print_r($m);
 	
 	$ret->thumbnail = $url . $m['sizes']['thumbnail']['file'];
 	if (isset($m['sizes']['medium'])) { $ret->medium = $url . $m['sizes']['medium']['file']; }
