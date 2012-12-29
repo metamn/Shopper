@@ -21,8 +21,9 @@ body {
 		 -----------------------------------------------
 		*/
 		
-		// Headings dont differ by size but by decoration
-		// - vertical rhythm is maintained by padding
+		/* Headings dont differ by size but by decoration
+		 - vertical rhythm is maintained by padding
+		*/
 		
 		h1, h2, h3, h4, h5, h6 {
 			font-size: 2em;
@@ -31,10 +32,10 @@ body {
 			margin-top: 0; 
 			margin-bottom: 0;
 		}
-		// Lower headings are like body text but upper cased
+		/* Lower headings are like body text but upper cased */
 		h4, h5, h6 {
 			font-size: 1em;
-			// small caps is not enough to distinguish header from body text
+			/* small caps is not enough to distinguish header from body text */
 			// font-variant: small-caps;
 			text-transform: uppercase;
 		}
@@ -55,16 +56,16 @@ body {
 		
 		
 		
-		// Block level elements
+		/* Block level elements
 		// -----------------------------------------------
+		*/
 		
-		
-		// the second <p> has a top margin
+		/* the second <p> has a top margin */
 		p + p {
 			margin-top: $pad;
 		}
 		
-		// blockquote is simply indented, enlarged
+		/* blockquote is simply indented, enlarged */
 		q, blockquote {
 			margin: $pad;
 			
@@ -75,14 +76,15 @@ body {
 			font-size: larger;
 		}
 		
-		// address is small caps
+		/* address is small caps */
 		address {
 			font-variant: small-caps;
 		}
 		
 		
-		// Lists
+		/* Lists
 		// -----------------------------------------------
+		*/
 		
 		ul, menu, dir, ol {
 			margin: $pad;
@@ -107,8 +109,9 @@ body {
 		
 		
 		
-		// Tables
+		/* Tables
 		// -----------------------------------------------
+		*/
 		
 		table {
 			margin: $pad 0;
@@ -138,9 +141,10 @@ body {
 		
 		
 		
-		// Text styles
+		/* Text styles
 		// -----------------------------------------------
-	
+	  */
+	  
 		em {
 			font-style: italic;
 		}
@@ -152,11 +156,12 @@ body {
 		
 		
 		
-		// Forms
+		/* Forms
 		// -----------------------------------------------
+		*/
 		
 		
-		// Reset browser defaults
+		/* Reset browser defaults */
 		input, textarea {
 			border: none;
 			outline: 0;
@@ -169,7 +174,7 @@ body {
 			font-family: monospace;
 		}
 		
-		// Text
+		/* Text */
 		input[type='text'] {
 			border-bottom: 1px solid;
 			font-style: italic;
@@ -180,7 +185,7 @@ body {
 			font-style: normal;
 		}
 		
-		// Button
+		/* Button */
 		input[type='submit'] {		
 			background: black;
 			color: lightgray;
@@ -192,17 +197,29 @@ body {
 		}
 		
 		
-		// Radio
-		input[type='radio']:after {
+		/* Cross browser compatible styling: http://www.inserthtml.com/2012/06/custom-form-radio-checkbox/
+		  - the checkbox and radio button is not displayed
+		  - instead a label is displayed which can be styled with 'content' 
+		*/
+		
+		input[type='radio'], input[type='checkbox'] {
+		  display: none;
+		}
+		input[type='radio'] + label, input[type='checkbox'] + label {
+		  display: inline-block;
+		}
+		
+		/* Radio */
+		input[type='radio'] + label:after {
 			content: '\2610';
 			margin-right: $pad/2;
 		}
-		input[type='radio']:checked:after {
+		input[type='radio']:checked + label:after {
 			content: '\25a3';
 		}
 		
-		// Checkbox 
-		input[type='checkbox']:after {
+		/* Checkbox */ 
+		input[type='checkbox'] + label:after {
 			content: '\272A';
 			margin-right: $pad/4;
 			
@@ -213,7 +230,7 @@ body {
 			
 			color: lightgray;
 		}
-		input[type='checkbox']:checked:after {
+		input[type='checkbox']:checked + label:after {
 			color: black;
 		}
 	

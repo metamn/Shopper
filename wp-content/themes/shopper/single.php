@@ -30,7 +30,7 @@
     	include '_product_browser.php';
     	
     	$klass = 'intro';
-    	include 'home-intro.php';
+    	include '_menu.php';
   	endwhile; 
 	} else { 
 		include 'not_found.php';

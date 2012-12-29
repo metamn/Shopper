@@ -8,7 +8,7 @@
 
 <?php 
 	$klass = 'intro';
-	include 'home-intro.php' 
+	include '_menu.php' 
 ?>
 
 

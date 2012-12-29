@@ -1,102 +1,3 @@
-/* Single Post
-*/
-
-html {
-	body.single {
-		.container {
-			header {
-				hgroup {
-        	#logo {
-        		position: fixed;
-        	}
-        }
-        
-        #menu {
-        	@include col($major, $minor, 0);
-        }
-        
-        #cart-and-info {
-        	position: fixed;
-        }
-			}
-		}
-	}
-}
-
-
-
-/* Archive
-*/
-
-html {
-	body.archive {
-		.container {
-      header {
-        hgroup {
-        	#logo {
-        		position: fixed;
-        	}
-        }
-        
-        #archive-title {
-        	cursor: pointer;
-        	position: fixed;
-        	@include col($major, $minor, 0);
-        	
-        	h3 {
-        		padding: 0;
-        	}
-        	h3:after {
-        		@include list-item-arrow;
-        	}
-        }
-        
-        #menu {
-        	header, nav, aside {
-        		@include hidden;
-        	}
-        	
-        	article {
-        		@include hidden
-        	}
-
-        }
-        
-        #cart-and-info {
-        	position: fixed;
-        }
-      }
-		}
-	}
-}
-
-
-
-
-/* Home
-*/
-
-
-html {
-	body.home {
-		.container {
-			header {
-			  hgroup {
-			    #logo {
-			      @include logo($pad/2);
-			    }
-			  }
-				#menu {
-					@include hidden;
-				}
-				
-			}
-		}
-	}
-}
-
-
-
 /* General
 */
 
@@ -224,6 +125,7 @@ html {
         #cart-and-info {
         	position: absolute;
         	right: $pad;
+        	width: 10%; /* To make list not flipping when mouse over, due to marking active list item with italic */
         	
         	background: $color-background;
         	opacity: .9;
@@ -233,6 +135,7 @@ html {
         	h3 {
       			@include hidden;
       		}
+        	
         	
         	ul {
         		margin: 0;
@@ -247,7 +150,7 @@ html {
         			}
         		}
         		li:hover {
-        			border-color: $color-text;
+        			font-style: italic;
         		}
         	}
         }
@@ -273,3 +176,106 @@ html {
 		}
 	}
 }
+
+
+/* Single Post
+*/
+
+html {
+	body.single {
+		.container {
+			#header {
+				hgroup {
+        	#logo {
+        		position: fixed;
+        	}
+        }
+        
+        #menu {
+        	@include col($major, $minor, 0);
+        }
+        
+        #cart-and-info {
+        	position: fixed;
+        }
+			}
+		}
+	}
+}
+
+
+
+/* Archive
+*/
+
+html {
+	body.archive {
+		.container {
+      #header {
+        hgroup {
+        	#logo {
+        		position: fixed;
+        	}
+        }
+        
+        #archive-title {
+        	cursor: pointer;
+        	position: fixed;
+        	@include col($major, $minor, 0);
+        	
+        	h3 {
+        		padding: 0;
+        		display: block;
+        	}
+        	h3:after {
+        		@include list-item-arrow;
+        	}
+        }
+        
+        #menu {
+        	header, nav, aside {
+        		@include hidden;
+        	}
+        	
+        	article {
+        		@include hidden;
+        	}
+
+        }
+        
+        #cart-and-info {
+        	position: fixed;
+        }
+      }
+		}
+	}
+}
+
+
+
+
+/* Home
+*/
+
+
+html {
+	body.home {
+		.container {
+			#header {
+			  hgroup {
+			    #logo {
+			      @include logo($pad/2);
+			    }
+			  }
+				#menu {
+					@include hidden;
+				}
+				
+			}
+		}
+	}
+}
+
+
+
+

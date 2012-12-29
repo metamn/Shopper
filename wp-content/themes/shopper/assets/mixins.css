@@ -22,17 +22,11 @@
     display: block;
   }
 }
+/* Responisive, fluid Images */
 img {
   max-width: 100%;
 }
 
-/* Logo
-------------------------------------------------------------------------------
-*/
-/* Site specific mixins
-*/
-/* startpage main div
-*/
 /* General mixins
 ------------------------------------------------------------------------------
 */

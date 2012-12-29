@@ -87,7 +87,7 @@
         
         <?php 
         	$klass = 'menu';
-        	include 'home-intro.php' 
+        	include '_menu.php' 
         ?>
         
         <nav id="cart-and-info">
@@ -102,8 +102,8 @@
         		<li>Contul meu</li>
         		<li>Informatii</li>
         	</ul>
-        </section>
-      </nav>
+        </nav>
+       </header>
     
     	
   
