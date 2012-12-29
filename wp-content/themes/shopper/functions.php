@@ -107,14 +107,18 @@ function get_product_image($id) {
 	$a = wp_get_attachment_image_src($id, 'full');
 	$ret->full = $a[0];
 	
+	/*
+	This works with properly imported attachments
+	
 	$a = wp_get_attachment_image_src($id, 'medium');
 	$ret->medium = $a[0];
 	
 	$a = wp_get_attachment_image_src($id, 'thumbnail');
 	$ret->thumbnail = $a[0];
 	
+	*/
 	
-	/*
+	
 	
 	// Get image folder
 	$x = explode("/", $ret->full);
@@ -124,11 +128,10 @@ function get_product_image($id) {
 	// Get medium and thumbnail
 	$m = unserialize(get_post_meta($id, '_wp_attachment_metadata', true));
 	print_r($m);
-	echo "m: $m";
+	
 	$ret->thumbnail = $url . $m['sizes']['thumbnail']['file'];
 	if (isset($m['sizes']['medium'])) { $ret->medium = $url . $m['sizes']['medium']['file']; }
 	
-	*/
 	
 	return $ret;
 }

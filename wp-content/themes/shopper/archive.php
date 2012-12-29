@@ -14,7 +14,7 @@ $found_posts = $wp_query->found_posts;
 
 <section id="content"> 
   <header>
-  	<h3><?php echo $this_page->title ?> (<?php echo $found_posts ?>)</h3>
+  	<h3 title="Click pentru toate categoriile"><?php echo $this_page->title ?> (<?php echo $found_posts ?>)</h3>
   </header>
   
 	<aside>
@@ -27,8 +27,8 @@ $found_posts = $wp_query->found_posts;
 		<div id="thumbs"></div>
 	</aside>
 	<div id="trigger">
-		<span class='up'>&#8673;</span>
-		<span class='down'>&#8675;</span>
+		<span title="Click pentru a inchide imaginile mici si sectiunea de cautare" class='up'>&#8673;</span>
+		<span title="Click pentru imaginile mici si seactiunea de cautare" class='down'>&#8675;</span>
 	</div>
   
   <?php

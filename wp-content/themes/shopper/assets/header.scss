@@ -221,7 +221,7 @@ html {
         #archive-title {
         	cursor: pointer;
         	position: fixed;
-        	@include col($major, $minor, 0);
+        	@include col($major, $minor - 0.5, 0); /* To perfectly align to the search box below */
         	
         	h3 {
         		padding: 0;

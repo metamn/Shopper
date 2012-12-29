@@ -689,8 +689,9 @@ html body.archive .container #header #archive-title {
   cursor: pointer;
   position: fixed;
   width: 62.5%;
-  margin: 0 0 0 37.5%;
+  margin: 0 0 0 37%;
   float: left;
+  /* To perfectly align to the search box below */
 }
 html body.archive .container #header #archive-title h3 {
   padding: 0;
