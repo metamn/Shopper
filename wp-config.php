@@ -34,7 +34,7 @@
     define('DB_USER', 'cs');
 
     /** MySQL database password */
-    define('DB_PASSWORD', 'cs-33');
+    define('DB_PASSWORD', '');
 
     /** MySQL hostname */
     define('DB_HOST', 'localhost');
